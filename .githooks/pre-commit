@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+set -e
+# core.quotePath=false, or git escapes umlaut paths and the anchored patterns below miss them.
+staged=$(git -c core.quotePath=false diff --cached --name-only --diff-filter=ACMRD)
+docs_re='^(src/content/|\.claude/|README\.md$|CLAUDE\.md$)'
+
+if echo "$staged" | grep -Ev "$docs_re" | grep -q .; then
+  echo "[pre-commit] app code changed -> bun run check"
+  bun run check
+elif echo "$staged" | grep -Eq '^src/content/'; then
+  echo "[pre-commit] content changed -> validating bios against the schema"
+  bun run typecheck
+fi
