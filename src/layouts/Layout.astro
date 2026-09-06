@@ -1,0 +1,45 @@
+---
+import ThemeToggle from "../components/ThemeToggle.astro";
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+}
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title} | hackers&wizards</title>
+    <link rel="icon" type="image/png" href="/hw-emoji.png" />
+    {/* Applied before first paint, or the wrong theme flashes. */}
+    <script is:inline>
+      const theme =
+        localStorage.getItem("theme") ||
+        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      document.documentElement.setAttribute("data-theme", theme);
+    </script>
+  </head>
+  <body>
+    <header class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur">
+      <div class="h-[3px] bg-gradient-to-r from-accent to-accent-secondary"></div>
+      <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+        <a href="/" class="flex items-center gap-2 font-semibold" aria-label="hackers&wizards">
+          <img src="/hw-emoji.png" alt="" class="h-7 w-7" />
+          <span class="font-mono text-sm font-bold tracking-tight">
+            <span class="text-[#1a7285]">hackers</span><span class="text-[#7c849c]">&amp;</span
+            ><span class="text-[#9333ea]">wizards</span>
+          </span>
+          <span class="text-sm font-normal">{title}</span>
+        </a>
+        <ThemeToggle />
+      </div>
+    </header>
+    <main class="mx-auto w-full max-w-6xl flex-1 px-4 pb-16">
+      <slot />
+    </main>
+  </body>
+</html>

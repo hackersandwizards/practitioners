@@ -1,0 +1,70 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
+
+/* The website's brand tokens. */
+:root,
+html[data-theme="light"] {
+  --background: #f7f9fa;
+  --foreground: #19283a;
+  --accent: #1a7285;
+  --accent-secondary: #9333ea;
+  --muted: color-mix(in srgb, #19283a 7%, #f7f9fa);
+  --border: #d0d2d8;
+}
+
+html[data-theme="dark"] {
+  --background: #0c1220;
+  --foreground: #e2e8f0;
+  --accent: #a855f7;
+  --accent-secondary: #2db5d4;
+  --muted: #1a2438;
+  --border: #2a3650;
+}
+
+/* Self-hosted: the app makes no third-party request for a font. */
+@font-face {
+  font-family: "Inter Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../assets/fonts/inter-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "JetBrains Mono Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 800;
+  src: url("../assets/fonts/jetbrains-mono-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@theme inline {
+  --font-sans: "Inter Variable", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, monospace;
+  /* Headings share the mono face by brand design, as on the website. */
+  --font-heading: var(--font-mono);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-accent: var(--accent);
+  --color-accent-secondary: var(--accent-secondary);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply flex min-h-svh flex-col bg-background font-sans text-foreground;
+  }
+}
+
+.prose-content {
+  @apply prose max-w-none;
+  --tw-prose-body: color-mix(in srgb, var(--foreground) 90%, transparent);
+  --tw-prose-links: var(--accent);
+  --tw-prose-bold: var(--foreground);
+}

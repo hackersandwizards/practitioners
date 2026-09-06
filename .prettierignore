@@ -1,0 +1,8 @@
+.astro/
+.claude/
+.githooks/
+bun.lock
+dist/
+node_modules/
+public/
+src/content/
