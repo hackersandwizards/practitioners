@@ -1,5 +1,5 @@
 ---
-name: Nermin Caluk
+name: Nermin Čaluk
 photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/caluk/
 status: draft
