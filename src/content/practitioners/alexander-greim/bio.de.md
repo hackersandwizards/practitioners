@@ -1,13 +1,12 @@
-Alexander ist CTO bei YogaEasy in Hamburg und verantwortet die Video-Streaming-Plattform mit
-800.000 Nutzern von Ende zu Ende, den Rails-Code genauso wie Produkt, Marketing, CRM und
-Buchhaltung, die sie bedient. Eine technische Entscheidung liest er zuerst von der
-Management-Seite, was sie kostet und wer damit leben muss, und er liefert jeden Tag
-Produktionscode mit Coding-Agenten. Die Management-Hälfte stammt aus dreizehn Jahren bei XING,
-die letzten zehn als Director of Engineering, wo seine Plattform-Teams über hundert Entwickler in
-gut zwanzig Domänen-Teams befähigt haben, einheitliche Apps an 13 Millionen Nutzer auszuliefern.
-Bei h&w liefert er zweitägige Trainings für Entwickler- und QA-Teams, führt
-Train-the-Trainer-Kohorten durch und begleitet Engineering-Leads als Mentor. Seine Räume sind oft
-gemischt, Architekten, Product Owner und ein Bereichsleiter an einem Tisch, deshalb bereitet er
-mehr Material vor, als ein Tag braucht, und gibt jedem eine Antwort auf die Frage, mit der er
-gekommen ist. In seiner Freizeit arbeitet er mit Agenten an Musik, von elektronischen
-Instrumenten bis zur Restaurierung historischer Originale, und spielt live mit seiner Band.
+Alexander ist CTO bei YogaEasy in Hamburg. Dort verantwortet er die Video-Streaming-Plattform mit
+800.000 Nutzern: den Rails-Code genauso wie Produkt, Marketing, CRM und Finance, die darauf
+aufbauen. Bei einer technischen Entscheidung wägt er ab, was sie für das Business bedeutet und was
+für Tech. Gleichzeitig schreibt er jeden Tag mit Coding-Agenten Code, der in Produktion geht. Den
+Blick fürs Management hat er aus dreizehn Jahren bei XING, die letzten zehn davon als Director of
+Engineering. Seine Plattform-Teams haben dort dafür gesorgt, dass über hundert Entwickler in gut
+zwanzig Domain-Teams an gemeinsamen Apps für 13 Millionen Nutzer arbeiten konnten. Bei h&w gibt er
+zweitägige Trainings für Entwickler- und QA-Teams, bildet in Train-the-Trainer-Runden neue Trainer
+aus und begleitet Engineering-Leads als Mentor. In seinen Trainings sitzen oft Architekten, Product
+Owner und Leader am selben Tisch. Deshalb passt er den Fokus an die Gruppe an. Privat
+macht er Musik, auch dort mit Agenten, und restauriert historische Instrumente. Mit seiner Band
+steht er live auf der Bühne.
