@@ -9,7 +9,7 @@ github: https://github.com/stefanmunz
 website: https://www.stefanmunz.com
 status: active
 owner: Stefan Munz
-updated: "2026-09-02"
+updated: "2026-09-07"
 ---
 
 Stefan went deep into Mac development while still at university, a niche with barely any jobs in
@@ -22,4 +22,4 @@ works out with a client where their team actually stands, what their next step i
 trainer should deliver it, and he defines what gets taught across both the Agentic Product
 Engineering and the Agentic Factory Engineering curriculum. He founded and hosts
 [Agentic Hamburg](https://agentic.hamburg), which grew from one packed meetup in July 2025 into
-Hamburg's first conference built entirely on agentic engineering practices.
+Hamburg's first conference in March 2026, built entirely on agentic engineering practices.
