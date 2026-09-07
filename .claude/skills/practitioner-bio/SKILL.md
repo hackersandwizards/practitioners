@@ -49,8 +49,8 @@ never written into a file in this repo.
    http://localhost:4321 so they see what a client sees. Confirm the new sentences are on the
    page, not that the page loaded.
 9. **Commit only after they say yes** to exactly what the commit contains. Name the three files
-   on `git commit` itself; never `git add -A`. With write access, push to main: it is their own
-   entry. Without it, `gh repo fork` first and open the pull request with `gh pr create`.
+   on `git commit` itself; never `git add -A`. Then push to main: it is their own entry. Without
+   write access, they ask Stefan or Bene for it.
 
 ## File format
 
