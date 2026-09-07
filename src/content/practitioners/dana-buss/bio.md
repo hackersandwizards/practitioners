@@ -1,5 +1,5 @@
 ---
-name: Dana Buss
+name: Dana Buß
 photo: ./photo.webp
 status: draft
 ---
