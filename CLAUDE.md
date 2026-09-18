@@ -6,8 +6,11 @@ Context for Claude Code sessions in this repo.
 
 The people behind hackersandwizards.dev/practitioners, one directory each under
 `src/content/practitioners/<slug>/`: `bio.md` (frontmatter plus the English text), `bio.de.md`
-(the German text) and `photo.webp`. The website reads this repo as a git submodule. Who is shown
-there, in which group and with which title, is the website's roster and lives only there.
+(the German text) and `photo.webp`. Optionally `bio.short.md`, a version of the English bio
+capped at 300 characters for conference CfPs and speaker forms; no collection loads it, so it is
+storage only and the website never renders it. The website reads this repo as a git submodule.
+Who is shown there, in which group and with which title, is the website's roster and lives only
+there.
 
 The one workflow is the `practitioner-bio` skill in `.claude/skills/`: it interviews a person,
 drafts both bios, shows the result at `/` and commits once they approve. A practitioner edits
