@@ -96,23 +96,21 @@ The admin API is disabled, so configuration changes require a service restart.
 Chrome resolves `.localhost` names itself. Safari and apps using the macOS system resolver may
 not resolve these names automatically. Add explicit entries so the URLs also work there.
 
-Open the hosts file with administrator privileges:
+For a fresh setup, run this single-line command once. It appends the names without replacing
+existing hosts entries and asks for your Mac password:
 
 ```sh
-sudo nano /etc/hosts
+printf '\n127.0.0.1 os.localhost website.localhost trainer-hub.localhost talks.localhost practitioners.localhost\n' | sudo tee -a /etc/hosts
 ```
 
-Keep the existing contents. Add any missing entries below, once each:
+If you already added these names, skip this command. To correct existing entries, use
+`sudo nano /etc/hosts` instead of appending duplicates.
 
-```text
-127.0.0.1 os.localhost
-127.0.0.1 website.localhost
-127.0.0.1 trainer-hub.localhost
-127.0.0.1 talks.localhost
-127.0.0.1 practitioners.localhost
-```
+If the terminal shows `heredoc>` or `>` after pasting an earlier multiline command, it is waiting
+for the closing marker. Press Ctrl+C to cancel, then paste the single-line command above.
+For a command beginning with `<<'EOF'`, typing `EOF` alone on a new line also ends the input.
 
-Save with Ctrl+O, Enter, then exit with Ctrl+X. Refresh the macOS resolver cache:
+Refresh the macOS resolver cache:
 
 ```sh
 sudo dscacheutil -flushcache
