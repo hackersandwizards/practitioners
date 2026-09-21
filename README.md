@@ -90,6 +90,8 @@ use Practitioners. They do not start or install the other apps.
 
 `bind 127.0.0.1` keeps the proxy local to your Mac. Explicit `http://` avoids certificate setup.
 The admin API is disabled, so configuration changes require a service restart.
+Saving the file or running `caddy validate` does not update a running Caddy process.
+After adding an app, follow [First aid](#first-aid) to load the new route.
 
 ### Make the names work in Safari and other macOS apps
 
@@ -162,21 +164,46 @@ The console prints its Caddy URL. For this repo, open http://practitioners.local
 The repositories set their own ports; Caddy does not choose them or launch the apps.
 Use the URL only after the app reports that it is running.
 
-### Apply changes and troubleshoot
+### First aid
 
-After editing the Caddyfile:
+For a blank page after adding an app, validate and restart Caddy. This loads the current
+Caddyfile. The restart briefly interrupts all local Caddy URLs:
 
 ```sh
-caddy validate --config "$(brew --prefix)/etc/Caddyfile"
-sudo "$(command -v brew)" services restart caddy
+caddy validate --config "$(brew --prefix)/etc/Caddyfile" && sudo "$(command -v brew)" services restart caddy
 ```
+
+Only restart if validation succeeds. Then reload the page. A Caddy process using an old
+configuration can answer an unknown hostname with HTTP 200 and an empty body.
+HTTP 200 alone does not prove the app is being served.
+
+Check both status and downloaded content, using Practitioners as an example:
+
+```sh
+curl --noproxy '*' -sS -o /dev/null -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://practitioners.localhost
+curl --noproxy '*' -sS -o /dev/null -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://127.0.0.1:4325
+```
+
+Both should return HTTP 200 with a nonempty body. For another app, use its hostname and port
+from the table above.
+
+| Symptom                                                            | First action                                                                                                                                                      |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Blank page, HTTP 200 with 0 bytes, but the direct port serves HTML | Run the validate-and-restart command above.                                                                                                                       |
+| `502 Bad Gateway` or the direct port refuses the connection        | Run `bun run dev` in the app's repo and check its port. Caddy does not start apps.                                                                                |
+| Browser cannot find the server                                     | Check `/etc/hosts`: every line containing hostnames must begin with `127.0.0.1`. Follow the Safari setup above, flush the resolver cache, and reopen the browser. |
+| Terminal waits at `heredoc>`                                       | Press Ctrl+C and use the single-line hosts command above.                                                                                                         |
+
+If the page is still blank despite a nonempty HTML response, check browser console errors;
+restarting Caddy does not repair app rendering errors.
+
+### Further diagnostics
 
 Check the service and its log:
 
 ```sh
 sudo "$(command -v brew)" services list
 tail -n 50 "$(brew --prefix)/var/log/caddy.log"
-curl --noproxy '*' -I http://practitioners.localhost
 ```
 
 A `502 Bad Gateway` usually means the app is stopped or listening on the wrong address or port.
