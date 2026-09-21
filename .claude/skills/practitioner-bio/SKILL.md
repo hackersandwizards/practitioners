@@ -46,7 +46,7 @@ never written into a file in this repo.
 7. **Draft the German bio** from the approved English one: the same content in their own German,
    not a word-by-word translation. Show it; most practitioners will edit a phrase.
 8. **Save** both files in the format below, then run `bun run dev` and show the result at
-   http://localhost:4321 so they see what a client sees. Confirm the new sentences are on the
+   http://localhost:4325 so they see what a client sees. Confirm the new sentences are on the
    page, not that the page loaded.
 9. **Commit only after they say yes** to exactly what the commit contains. Name the three files
    on `git commit` itself; never `git add -A`. Then push to main: it is their own entry. Without
