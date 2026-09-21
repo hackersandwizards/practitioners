@@ -18,7 +18,7 @@ bun run dev
 
 Open Claude Code in the repo and say "create my bio". It asks for your links and a portrait,
 interviews you for a few minutes, drafts the English and the German text, shows both at
-http://localhost:4321 and commits when you approve. Ask Stefan or Bene for write access, then
+http://localhost:4325 and commits when you approve. Ask Stefan or Bene for write access, then
 push to main.
 
 ## How it is checked
