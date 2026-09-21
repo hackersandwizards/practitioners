@@ -7,7 +7,7 @@
   },
   "scripts": {
     "postinstall": "git rev-parse --git-dir > /dev/null 2>&1 && git config core.hooksPath .githooks || true",
-    "dev": "astro dev",
+    "dev": "printf 'Caddy: http://practitioners.localhost\\n' && astro dev",
     "build": "astro build",
     "typecheck": "astro check",
     "format": "prettier --write .",
