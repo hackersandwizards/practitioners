@@ -91,6 +91,43 @@ use Practitioners. They do not start or install the other apps.
 `bind 127.0.0.1` keeps the proxy local to your Mac. Explicit `http://` avoids certificate setup.
 The admin API is disabled, so configuration changes require a service restart.
 
+### Make the names work in Safari and other macOS apps
+
+Chrome resolves `.localhost` names itself. Safari and apps using the macOS system resolver may
+not resolve these names automatically. Add explicit entries so the URLs also work there.
+
+Open the hosts file with administrator privileges:
+
+```sh
+sudo nano /etc/hosts
+```
+
+Keep the existing contents. Add any missing entries below, once each:
+
+```text
+127.0.0.1 os.localhost
+127.0.0.1 website.localhost
+127.0.0.1 trainer-hub.localhost
+127.0.0.1 talks.localhost
+127.0.0.1 practitioners.localhost
+```
+
+Save with Ctrl+O, Enter, then exit with Ctrl+X. Refresh the macOS resolver cache:
+
+```sh
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+```
+
+Quit and reopen a browser that still reports an unknown server. Verify system name resolution:
+
+```sh
+dscacheutil -q host -a name website.localhost
+```
+
+The result should include `127.0.0.1`. These entries match Caddy's IPv4 loopback binding;
+no public DNS records are needed. See the [WebKit localhost subdomain issue](https://bugs.webkit.org/show_bug.cgi?id=160504).
+
 ### Start Caddy automatically
 
 Validate the configuration before starting the service:
