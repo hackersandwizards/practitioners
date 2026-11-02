@@ -8,7 +8,7 @@ The people behind hackersandwizards.dev/practitioners, one directory each under
 `src/content/practitioners/<slug>/`: `bio.md` (frontmatter plus the English text), `bio.de.md`
 (the German text) and `photo.webp`. Optionally `bio.short.md`, a version of the English bio
 capped at 300 characters for conference CfPs and speaker forms; no collection loads it, so it is
-storage only and the website never renders it. The website reads this repo as a git submodule.
+storage only and the website never renders it. The website copies the approved bios into its own pages.
 Who is shown there, in which group and with which title, is the website's roster and lives only
 there.
 
@@ -20,7 +20,7 @@ their own entry and nobody else's.
 
 There is no CI. `src/lib/schema.ts` is the contract; `.githooks/pre-commit` runs `astro check`
 against it when a bio is staged and `bun run check` when anything else is. `bun install` enables
-the hooks per clone. The website validates the same schema again in its own build.
+the hooks per clone.
 
 ## Git
 

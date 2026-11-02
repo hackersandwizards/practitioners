@@ -2,7 +2,8 @@
 
 The people on [hackersandwizards.dev/practitioners](https://www.hackersandwizards.dev/practitioners/),
 one directory each: an English bio, a German bio, a portrait and the profile links they maintain.
-The website reads this repo as a git submodule, so a change here is what a client reads there.
+The website copies each approved bio from here into its own pages, so the text you approve here
+is the text a client reads there.
 
 Who appears on that page, in which group and with which title is the website's roster and stays
 there. This repo holds what each person says about themselves.
@@ -225,9 +226,8 @@ References: [Homebrew services](https://docs.brew.sh/Manpage#services-subcommand
 
 ## How it is checked
 
-There is no CI. `src/lib/schema.ts` says what an entry is; the pre-commit hook in `.githooks/`
-checks every staged bio against it on your machine, and the website build checks it again when it
-pulls the submodule. `bun install` enables the hook.
+There is no CI. `src/lib/schema.ts` says what an entry is, and the pre-commit hook in `.githooks/`
+checks every staged bio against it on your machine. `bun install` enables the hook.
 
 ## Layout
 
