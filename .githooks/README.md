@@ -1,8 +1,7 @@
 # Git hooks
 
 Project-scoped hooks, enabled per clone by `bun install` (`git config core.hooksPath .githooks`).
-There is no CI: the gate runs on the machine that makes the edit, and the website that consumes
-this repo validates the same schema again in its own build.
+There is no CI: the gate runs on the machine that makes the edit.
 
 | Staged                          | Gate                                          |
 | ------------------------------- | --------------------------------------------- |
