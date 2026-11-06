@@ -3,7 +3,7 @@ import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Links from "../components/Links.astro";
-import { shown } from "../lib/entry";
+import { repo, shown } from "../lib/entry";
 
 /** Preview of what hackersandwizards.dev renders from this repo: every entry, alphabetical.
  *  Grouping and roles are the website's roster, so nothing here is grouped. */
@@ -36,11 +36,8 @@ const cards = await Promise.all(
   <p class="mt-3 hw-callout max-w-2xl text-sm">
     <strong class="font-medium text-ink">How an entry gets finished:</strong> each person improves
     their own folder through a pull request, in the browser or with Claude Code, and h&w merges it.
-    Their pull request is their yes to the entry.{" "}
-    <a
-      href="https://github.com/hackersandwizards/practitioners/blob/main/CONTRIBUTING.md"
-      class="hw-link"
-    >
+    Their pull request, or their reply that it fits, is their yes.{" "}
+    <a href={`${repo}/blob/main/CONTRIBUTING.md`} class="hw-link">
       CONTRIBUTING.md
     </a>{" "}
     says how.

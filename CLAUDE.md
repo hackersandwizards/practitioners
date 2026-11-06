@@ -16,7 +16,8 @@ Each practitioner improves their own entry here by pull request (`CONTRIBUTING.m
 change is their yes to the entry. The one workflow for h&w is the `practitioner-bio` skill in
 `.claude/skills/`: it reviews and merges such a pull request, drafts the mail that asks for one, or
 interviews the person. A practitioner edits their own entry and nobody else's; an h&w colleague
-edits one only from that person's own words. No public host serves a build while an `active`
+edits one only from that person's own words and commits it after their yes to exactly that
+content. No public host serves a build while an `active`
 entry carries neither its person's own change nor their yes to its text
 (`docs/agent-work/items/practitioner-pages.md` names them).
 
@@ -28,5 +29,4 @@ the hooks per clone.
 
 ## Git
 
-Name the paths on `git commit` itself. Never `git add -A`, never a bare `git commit`. A bio change
-lands as its person's own change, or after their yes to exactly that content.
+Name the paths on `git commit` itself. Never `git add -A`, never a bare `git commit`.
