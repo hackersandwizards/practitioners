@@ -12,10 +12,13 @@ storage only and the website never renders it. The website copies the approved b
 Who is shown there, in which group and with which title, is the website's roster and lives only
 there.
 
-The one workflow is the `practitioner-bio` skill in `.claude/skills/`: it completes an entry by
-mail, the default, or by interview, and commits once the person approves the exact text. A
-practitioner edits their own entry and nobody else's; an h&w colleague edits one only from that
-person's own reply or interview.
+Each practitioner improves their own entry here by pull request (`CONTRIBUTING.md`), and that
+change is their yes to the entry. The one workflow for h&w is the `practitioner-bio` skill in
+`.claude/skills/`: it reviews and merges such a pull request, drafts the mail that asks for one, or
+interviews the person. A practitioner edits their own entry and nobody else's; an h&w colleague
+edits one only from that person's own words. No public host serves a build while an `active`
+entry carries neither its person's own change nor their yes to its text
+(`docs/agent-work/items/practitioner-pages.md` names them).
 
 ## Gate
 
@@ -25,5 +28,5 @@ the hooks per clone.
 
 ## Git
 
-Name the paths on `git commit` itself. Never `git add -A`, never a bare `git commit`. Commit a
-bio only after the person it describes has said yes to exactly that content.
+Name the paths on `git commit` itself. Never `git add -A`, never a bare `git commit`. A bio change
+lands as its person's own change, or after their yes to exactly that content.
