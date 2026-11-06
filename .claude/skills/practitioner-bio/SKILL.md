@@ -45,8 +45,8 @@ never written into a file in this repo.
    person's entry: the English and German text the website publishes for them
    (`hackersandwizards.dev/team/<slug>/`), else the text here; the portrait attached; their links;
    what the mandatory list still lacks; the consent statement. It asks for one reply: it fits as
-   it is, corrections or a new photo, or take me off. Check: the draft names and shows no other
-   person.
+   it is, corrections or a new photo, or take me off. Check: the draft shows no other person's
+   entry.
 2. **"It fits".** Save exactly the text they confirmed, set `consent` to the reply's date, `owner`
    to their name, `updated`, and `status: active` once the mandatory list is complete. One mail
    round, no confirmation mail. Commit as in step 9 below.
@@ -57,6 +57,7 @@ never written into a file in this repo.
 ## Interview
 
 1. **Ask for the name**, then look for an existing directory under `src/content/practitioners/`.
+   Without write access to this repo, take the mail route instead.
    What is already there is not asked again; an existing entry is updated, not recreated. Keep
    frontmatter you did not collect.
 2. **Collect the links**, mandatory and optional as above.
@@ -72,13 +73,12 @@ never written into a file in this repo.
 6. **Show the draft and iterate.** Their reaction is the test; expect a round or two.
 7. **Draft the German bio** from the approved English one: the same content in their own German,
    not a word-by-word translation. Show it; most practitioners will edit a phrase.
-8. **Save** both files in the format below, then run `bun run dev` and show the result at
+8. **Save** both files in the format below with `status: draft`, then run `bun run dev` and show the result at
    http://localhost:4325 so they see what a client sees. Confirm the new sentences are on the
    page, not that the page loaded.
 9. **Ask for consent**, the statement under "Mandatory and optional", and record its date.
-   **Commit only after they say yes** to exactly what the commit contains. Name the three files
-   on `git commit` itself; never `git add -A`. Then push to main. Without
-   write access, the mail route replaces this one.
+   Set `status: active` only now. **Commit only after they say yes** to exactly what the commit
+   contains. Name the three files on `git commit` itself; never `git add -A`. Then push to main.
 
 ## File format
 

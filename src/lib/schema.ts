@@ -21,8 +21,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     bookme: z.url().optional(),
     /** draft until name, both bios, LinkedIn, portrait and consent are all real. */
     status: z.enum(["draft", "active"]).default("draft"),
-    /** The day the person agreed that h&w publishes this text and portrait on its website and in
-     *  proposals until they withdraw by mail, and confirmed they may use the photo. */
+    /** The day the person said yes to the consent statement in the practitioner-bio skill. */
     consent: z.iso.date().optional(),
     owner: z.string().optional(),
     updated: z.iso.date().optional(),

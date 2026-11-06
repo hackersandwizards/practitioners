@@ -14,7 +14,8 @@ there.
 
 The one workflow is the `practitioner-bio` skill in `.claude/skills/`: it completes an entry by
 mail, the default, or by interview, and commits once the person approves the exact text and
-consents to publication. A practitioner edits their own entry and nobody else's.
+consents to publication. A practitioner edits their own entry and nobody else's; an h&w colleague
+edits one only from that person's own reply or interview.
 
 ## Gate
 
