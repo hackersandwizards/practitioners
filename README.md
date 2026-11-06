@@ -12,7 +12,7 @@ there. This repo holds what each person says about themselves.
 
 h&w sends you a mail that shows your own entry and what it still lacks. Reply that it fits, send
 corrections or a new photo, or ask to be taken off. Your entry goes live only after your yes to the
-exact text and to publishing it. You need no access to this repo for that.
+exact text. You need no access to this repo for that.
 
 With write access, you can also write it here yourself:
 
