@@ -1,0 +1,23 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { links } from "../lib/entry";
+
+interface Props {
+  data: CollectionEntry<"practitioners">["data"];
+  class?: string;
+}
+const { data, class: className } = Astro.props;
+---
+
+<ul class:list={["flex flex-wrap gap-x-6", className]}>
+  {links(data).map((l) => (
+    <li>
+      <a class="hw-arrow-link" href={l.href} target="_blank" rel="noopener noreferrer">
+        <span>{l.label}</span>
+        <span class="hw-arrow" data-external aria-hidden="true">
+          &nbsp;<span>→</span>
+        </span>
+      </a>
+    </li>
+  ))}
+</ul>

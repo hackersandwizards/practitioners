@@ -7,7 +7,8 @@
 import { getCollection, getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import { links, missing, shown } from "../lib/entry";
+import Links from "../components/Links.astro";
+import { missing, shown } from "../lib/entry";
 
 export async function getStaticPaths() {
   return (await getCollection("practitioners"))
@@ -78,17 +79,6 @@ const first = data.name.split(" ")[0];
         </div>
       </div>
     )}
-    <ul class="flex flex-wrap gap-x-6 lg:col-span-2">
-      {links(data).map((l) => (
-        <li>
-          <a class="hw-arrow-link" href={l.href} target="_blank" rel="noopener noreferrer">
-            <span>{l.label}</span>
-            <span class="hw-arrow" data-external aria-hidden="true">
-              &nbsp;<span>→</span>
-            </span>
-          </a>
-        </li>
-      ))}
-    </ul>
+    <Links data={data} class="lg:col-span-2" />
   </section>
 </Layout>

@@ -1,19 +1,18 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import { links, shown } from "../lib/entry";
+import Links from "../components/Links.astro";
+import { shown } from "../lib/entry";
 
 /** Preview of what hackersandwizards.dev renders from this repo: every entry, alphabetical.
  *  Grouping and roles are the website's roster, so nothing here is grouped. */
 const people = (await getCollection("practitioners", (e) => shown(e.data))).sort((a, b) =>
   a.data.name.localeCompare(b.data.name),
 );
-const german = new Map((await getCollection("practitionersDe")).map((e) => [e.id, e]));
-
 const cards = await Promise.all(
   people.map(async (entry) => {
-    const de = german.get(entry.id);
+    const de = await getEntry("practitionersDe", entry.id);
     return {
       entry,
       En: (await render(entry)).Content,
@@ -55,32 +54,23 @@ const cards = await Promise.all(
             {entry.data.name}
           </a>{" "}
           {entry.data.status === "draft" && (
-            <span class="ml-2 rounded border px-1.5 py-0.5 align-middle font-mono text-[10px] font-normal text-muted">
+            <span class="hw-pill ml-2 align-middle" data-variant="outline">
               draft
             </span>
           )}
         </h2>
-        <div class="prose-content mt-3 text-sm">
+        <div class="prose hw-prose mt-3 max-w-none text-sm">
           <En />
         </div>
         {De && (
-          <div class="prose-content mt-3 border-t pt-3 text-sm">
-            <span class="font-mono text-[10px] text-muted">DE</span>
+          <div lang="de" class="prose hw-prose mt-3 max-w-none border-t pt-3 text-sm">
+            <span class="hw-label" data-tone="muted">
+              DE
+            </span>
             <De />
           </div>
         )}
-        <div class="mt-auto flex flex-wrap gap-2 pt-4">
-          {links(entry.data).map((l) => (
-            <a
-              href={l.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="rounded border px-2 py-1 text-xs hover:text-teal-dark"
-            >
-              {l.label}
-            </a>
-          ))}
-        </div>
+        <Links data={entry.data} class="mt-auto pt-4" />
       </article>
     ))}
   </div>
