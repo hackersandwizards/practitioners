@@ -240,7 +240,6 @@ checks every staged bio against it on your machine. `bun install` enables the ho
 src/content/practitioners/<slug>/   bio.md, bio.de.md, photo.webp
 src/lib/schema.ts                   the contract every bio.md meets
 src/pages/index.astro               the preview, alphabetical
-scripts/check-inline-space.ts       fails on a line break that the build turns into a missing space
 .claude/skills/practitioner-bio/    the mail route and the interview
 .githooks/                          the gate
 ```

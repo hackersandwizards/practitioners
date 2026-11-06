@@ -4,5 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig({
   server: { host: "127.0.0.1", port: 4325 },
   devToolbar: { enabled: false },
+  // Compressing drops a line break between text and an inline element instead of keeping a space.
+  compressHTML: false,
   vite: { plugins: [tailwindcss() as never] },
 });
