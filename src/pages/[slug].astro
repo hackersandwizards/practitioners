@@ -1,0 +1,94 @@
+---
+// One practitioner's entry, laid out like their profile on hackersandwizards.dev/team/<slug>/:
+// night hero with portrait, the bio, the outside links. Role, topics and the lists of talks,
+// episodes and trainings are the website's own data and show only there. While the entry lacks
+// anything the practitioner-bio skill makes mandatory, a box under the hero says what and how to
+// send it; English and German stand side by side so the person checks both at once.
+import { getCollection, getEntry, render } from "astro:content";
+import { Image } from "astro:assets";
+import Layout from "../layouts/Layout.astro";
+import { links, missing, shown } from "../lib/entry";
+
+export async function getStaticPaths() {
+  return (await getCollection("practitioners"))
+    .filter((entry) => shown(entry.data))
+    .map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const de = await getEntry("practitionersDe", entry.id);
+const { Content: En } = await render(entry);
+const De = de && (await render(de)).Content;
+const lacks = missing(entry, de?.body);
+const first = data.name.split(" ")[0];
+---
+
+<Layout title={data.name} bleed>
+  <header class="bg-night text-night-ink" data-theme="dark">
+    <div class="mx-auto max-w-content px-gutter pt-6">
+      <nav class="hw-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <a href="/">Practitioners</a>
+          </li>
+          <li>
+            <span aria-current="page">{data.name}</span>
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="mx-auto grid max-w-content items-start gap-stack px-gutter py-section lg:grid-cols-[1.05fr_0.95fr]">
+      <h1 class="max-w-measure-h1 font-mono text-display font-bold text-white">{data.name}</h1>
+      <Image
+        src={data.photo}
+        alt={`Portrait of ${data.name}`}
+        width={480}
+        height={480}
+        class="size-40 rounded-brand object-cover lg:size-60 lg:justify-self-end"
+      />
+    </div>
+  </header>
+
+  {lacks.length > 0 && (
+    <div class="mx-auto max-w-content px-gutter pt-section">
+      <div class="hw-status" data-tone="warning">
+        <h2 class="font-mono text-h4 font-bold">Waiting for {first}'s yes</h2>
+        <p class="mt-2">Still missing: {lacks.join(", ")}.</p>
+        <p class="mt-2">
+          {first} replies to the mail from hackers&wizards: it fits, corrections or a new photo, or
+          take me off.
+        </p>
+      </div>
+    </div>
+  )}
+
+  <section class="mx-auto grid max-w-content gap-stack px-gutter py-section lg:grid-cols-2">
+    <div>
+      <h2 class="font-mono text-h4 font-bold">English</h2>
+      <div class="mt-4 max-w-measure space-y-4 hw-links">
+        <En />
+      </div>
+    </div>
+    {De && (
+      <div lang="de">
+        <h2 class="font-mono text-h4 font-bold">Deutsch</h2>
+        <div class="mt-4 max-w-measure space-y-4 hw-links">
+          <De />
+        </div>
+      </div>
+    )}
+    <ul class="flex flex-wrap gap-x-6 lg:col-span-2">
+      {links(data).map((l) => (
+        <li>
+          <a class="hw-arrow-link" href={l.href} target="_blank" rel="noopener noreferrer">
+            <span>{l.label}</span>
+            <span class="hw-arrow" data-external aria-hidden="true">
+              &nbsp;<span>→</span>
+            </span>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Layout>

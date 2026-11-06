@@ -3,7 +3,13 @@ name: Benedikt Stemmildt
 photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/benedikt-stemmildt/
 github: https://github.com/BeneStem
+x: https://x.com/slashBene
 website: https://benedikt.stemmildt.com
+profiles:
+  - https://gitlab.com/BeneStem
+  - https://www.xing.com/profile/Benedikt_Stemmildt
+  - https://speakerdeck.com/benestem
+  - https://www.wikidata.org/wiki/Q141956191
 status: draft
 updated: "2026-11-06"
 ---

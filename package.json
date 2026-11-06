@@ -16,6 +16,7 @@
     "check": "bun run format:check && bun scripts/check-inline-space.ts && bun run typecheck && bun run build"
   },
   "dependencies": {
+    "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.16.0",
     "@tailwindcss/typography": "0.5.20",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.4.4",
