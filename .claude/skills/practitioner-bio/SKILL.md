@@ -26,7 +26,10 @@ proposals until they withdraw it by mail, and they took the photo or may use it.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
 than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a public booking link**
-(cal.com, Calendly; `bookme` in the schema).
+(cal.com, Calendly; `bookme` in the schema), and any further public profile the person keeps
+(GitLab, Xing, Speaker Deck, Wikidata; `profiles`). A link the person already publishes, on their
+own site or their website profile, goes into the request as a proposal, never into the entry
+before their yes.
 
 Not here at all: role and group. Who appears on the website, in which section and with which
 title is the website's roster, kept by Stefan and Bina. A wish to change it is flagged to Stefan,
@@ -43,8 +46,10 @@ never written into a file in this repo.
 1. **Request.** Load the Company OS `email` skill before the first mail call. Draft one mail per
    person, in their language, never sent by you: a founder checks and sends it. It shows only this
    person's entry: the English and German text the website publishes for them
-   (`hackersandwizards.dev/team/<slug>/`), else the text here; the portrait attached; their links;
-   what the mandatory list still lacks; the consent statement. It asks for one reply: it fits as
+   on `hackersandwizards.dev/team/<slug>/`, with that link, else the text here; the portrait
+   attached; their links and the proposed ones; what the mandatory list still lacks, as the
+   entry's page at `/<slug>/` in `bun run dev` lists it; the consent statement. Never a link to
+   this repo or its pages, which show every other entry. It asks for one reply: it fits as
    it is, corrections or a new photo, or take me off. Check: the draft shows no other person's
    entry.
 2. **"It fits".** Save exactly the text they confirmed, set `consent` to the reply's date, `owner`
@@ -74,7 +79,7 @@ never written into a file in this repo.
 7. **Draft the German bio** from the approved English one: the same content in their own German,
    not a word-by-word translation. Show it; most practitioners will edit a phrase.
 8. **Save** both files in the format below with `status: draft`, then run `bun run dev` and show the result at
-   http://localhost:4325 so they see what a client sees. Confirm the new sentences are on the
+   http://localhost:4325/<slug>/ so they see their page as a client will. Confirm the new sentences are on the
    page, not that the page loaded.
 9. **Ask for consent**, the statement under "Mandatory and optional", and record its date.
    Set `status: active` only now. **Commit only after they say yes** to exactly what the commit
@@ -96,6 +101,8 @@ mastodon: <url>
 github: <url>
 website: <url>
 bookme: <url>
+profiles: # further public profiles, labelled by host
+  - <url>
 status: active # draft until every mandatory field, consent included, is real
 consent: "2026-11-06" # the day they said yes to the consent statement
 owner: <Full Name>
