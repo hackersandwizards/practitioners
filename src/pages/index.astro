@@ -1,5 +1,5 @@
 ---
-import { getCollection, getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Links from "../components/Links.astro";
@@ -10,9 +10,11 @@ import { shown } from "../lib/entry";
 const people = (await getCollection("practitioners", (e) => shown(e.data))).sort((a, b) =>
   a.data.name.localeCompare(b.data.name),
 );
+const german = new Map((await getCollection("practitionersDe")).map((e) => [e.id, e]));
+
 const cards = await Promise.all(
   people.map(async (entry) => {
-    const de = await getEntry("practitionersDe", entry.id);
+    const de = german.get(entry.id);
     return {
       entry,
       En: (await render(entry)).Content,
