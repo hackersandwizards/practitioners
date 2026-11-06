@@ -37,16 +37,17 @@ const links = (d: (typeof people)[number]["data"]) =>
 <Layout title="Practitioners">
   <h1 class="mt-8 font-heading text-2xl font-bold tracking-tight">Practitioners</h1>
   <p class="mt-2 max-w-2xl text-sm text-foreground/60">
-    Each entry is the source for
-    <a href="https://www.hackersandwizards.dev/practitioners/" class="text-accent hover:underline"
-      >hackersandwizards.dev/practitioners</a
+    Each entry is the source for{" "}
+    <a href="https://www.hackersandwizards.dev/team/" class="text-accent hover:underline"
+      >hackersandwizards.dev/team</a
     >, so what you read here is what a client reads there.
   </p>
   <p class="mt-3 max-w-2xl rounded-lg border bg-muted/30 p-4 text-sm text-foreground/70">
-    <strong class="font-medium text-foreground">Your entry is missing or stale?</strong> Open Claude in
-    this repo and say <em>"create my bio"</em>. It interviews you, collects your links and portrait,
-    drafts the English and the German text, shows you the result here, and commits once you approve.
-    Ten minutes, once.
+    <strong class="font-medium text-foreground">How an entry gets finished:</strong> each person gets
+    a mail that shows only their own entry and what it still lacks. They reply that it fits, send corrections
+    or a new photo, or ask to be taken off. The reply lands here, and an entry turns active only after
+    their yes to the exact text. To write a bio from scratch, open Claude in this repo and say{" "}
+    <em>"create my bio"</em>.
   </p>
 
   <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

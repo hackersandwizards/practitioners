@@ -19,8 +19,11 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     website: z.url().optional(),
     /** A public booking link (cal.com, Calendly), for "book a call with me". */
     bookme: z.url().optional(),
-    /** draft until name, bio, LinkedIn and portrait are all real. */
+    /** draft until name, both bios, LinkedIn, portrait and consent are all real. */
     status: z.enum(["draft", "active"]).default("draft"),
+    /** The day the person agreed that h&w publishes this text and portrait on its website and in
+     *  proposals until they withdraw by mail, and confirmed they may use the photo. */
+    consent: z.iso.date().optional(),
     owner: z.string().optional(),
     updated: z.iso.date().optional(),
   });
