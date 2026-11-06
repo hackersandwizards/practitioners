@@ -1,13 +1,17 @@
-// An Astro build (compressHTML) drops whitespace that holds a line break where text or an
-// {expression} meets an inline element, so "for\n<a>" renders as "for<a>". Write {" "} instead.
+// Astro's default compressHTML ('jsx') drops whitespace that holds a line break, so "for\n<a>"
+// renders as "for<a>". Write {" "} instead. Not seen here: a break between two {expression}s or
+// two inline tags; write {" "} there by hand where a space must render.
 import { Glob } from "bun";
 
-const inline = "a|strong|em|b|i|code|span|kbd|abbr|time|small|mark|cite|q|s|u|del|ins|sup|sub";
-const text = `[\\p{L}\\p{N},.;:!?)"'’”}](?<!\\{" "\\})`;
+const inline =
+  "a|strong|em|b|i|code|span|kbd|abbr|time|small|mark|cite|q|s|u|del|ins|sup|sub|img|button|label|svg";
+const text = `[\\p{L}\\p{N},.;:!?)\\]%*"'’”}—–-](?<!\\{" "\\})`;
+const next = `[\\p{L}\\p{N}{("'“‘—–-]`;
+const br = `[ \\t]*\\r?\\n[ \\t]*`;
 const patterns = [
-  new RegExp(`${text}[ \\t]*\\n[ \\t]*<(${inline})[\\s>]`, "gu"),
-  new RegExp(`</(${inline})>[ \\t]*\\n[ \\t]*[\\p{L}\\p{N}{]`, "gu"),
-  new RegExp(`</(${inline})\\n[ \\t]*>[ \\t]*\\n[ \\t]*[\\p{L}\\p{N}{]`, "gu"),
+  new RegExp(`${text}${br}<(${inline})[\\s>/]`, "gu"),
+  new RegExp(`</(${inline})>${br}${next}`, "gu"),
+  new RegExp(`</(${inline})${br}>${br}${next}`, "gu"),
 ];
 
 let hits = 0;
@@ -17,7 +21,7 @@ for (const file of new Glob("src/**/*.astro").scanSync()) {
     for (const match of source.matchAll(pattern)) {
       hits++;
       console.error(
-        `${file}:${source.slice(0, match.index).split("\n").length}: line break next to <${match[1] ?? "…"}>, write {" "}`,
+        `${file}:${source.slice(0, match.index).split("\n").length}: line break next to <${match[1]}>, write {" "}`,
       );
     }
 }
