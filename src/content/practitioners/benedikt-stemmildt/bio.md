@@ -10,6 +10,13 @@ profiles:
   - https://www.xing.com/profile/Benedikt_Stemmildt
   - https://speakerdeck.com/benestem
   - https://www.wikidata.org/wiki/Q141956191
+  - https://bsky.app/profile/slashbene.bsky.social
+  - https://sessionize.com/benedikt-stemmildt
+  - https://www.amazon.com/Benedikt-Stemmildt/e/B0HFCHYT6G
+  - https://huggingface.co/benestem
+  - https://stackoverflow.com/users/7014892/bene
+  - https://luma.com/user/slashbene
+  - https://www.meetup.com/members/207273743/
 status: draft
 updated: "2026-11-06"
 ---
