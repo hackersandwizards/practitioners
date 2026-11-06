@@ -79,7 +79,8 @@ never written into a file in this repo.
    http://localhost:4325/<slug>/ so they see their page as a client will. Confirm the new sentences are on the
    page, not that the page loaded.
 9. **Ask for their yes** to the page. Set `status: active` only now. **Commit only after they say
-   yes** to exactly what the commit contains. Name the three files on `git commit` itself; never `git add -A`. Then push to main.
+   yes** to exactly what the commit contains. Name the three files on `git commit` itself; never
+   `git add -A`. Then push to main.
 
 ## File format
 
