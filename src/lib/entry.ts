@@ -2,20 +2,19 @@ import type { CollectionEntry } from "astro:content";
 
 type Data = CollectionEntry<"practitioners">["data"];
 
+const host = (href: string) => new URL(href).host.replace(/^www\./, "");
+
 /** Only the profiles a practitioner actually maintains render; a dead link is worse than none. */
 export const links = (d: Data) =>
   [
     { label: "LinkedIn", href: d.linkedin },
-    { label: d.website && new URL(d.website).host.replace(/^www\./, ""), href: d.website },
+    { label: d.website && host(d.website), href: d.website },
     { label: "GitHub", href: d.github },
     { label: "Bluesky", href: d.bluesky },
     { label: "X", href: d.x },
     { label: "Threads", href: d.threads },
     { label: "Mastodon", href: d.mastodon },
-    ...(d.profiles ?? []).map((href) => ({
-      label: new URL(href).host.replace(/^www\./, ""),
-      href,
-    })),
+    ...(d.profiles ?? []).map((href) => ({ label: host(href), href })),
     { label: "Book a call", href: d.bookme },
   ].filter((l): l is { label: string; href: string } => Boolean(l.href));
 

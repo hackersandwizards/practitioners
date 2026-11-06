@@ -3,10 +3,17 @@
 @import "@hackersandwizards/brand/fonts.css";
 @import "@hackersandwizards/brand/night.css";
 @import "@hackersandwizards/brand/header.css";
-@import "@hackersandwizards/brand/elements.css";
+@import "@hackersandwizards/brand/elements/scales.css";
+@import "@hackersandwizards/brand/elements/focus.css";
+@import "@hackersandwizards/brand/elements/label.css";
+@import "@hackersandwizards/brand/elements/pill.css";
+@import "@hackersandwizards/brand/elements/callout.css";
+@import "@hackersandwizards/brand/elements/link.css";
+@import "@hackersandwizards/brand/elements/arrow-link.css";
+@import "@hackersandwizards/brand/elements/breadcrumb.css";
+@import "@hackersandwizards/brand/elements/status.css";
+@import "@hackersandwizards/brand/elements/prose.css";
 @plugin "@tailwindcss/typography";
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
   * {
@@ -15,11 +22,4 @@
   body {
     @apply flex min-h-svh flex-col bg-bg font-sans text-ink;
   }
-}
-
-.prose-content {
-  @apply prose max-w-none;
-  --tw-prose-body: color-mix(in srgb, var(--color-ink) 90%, transparent);
-  --tw-prose-links: var(--color-teal-dark);
-  --tw-prose-bold: var(--color-ink);
 }

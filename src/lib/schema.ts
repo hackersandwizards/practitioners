@@ -25,7 +25,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     /** Further public profiles the person keeps (GitLab, Xing, Speaker Deck, Wikidata), labelled
      *  by host; the website lists them with the named links in its structured data. */
     profiles: z.array(link).optional(),
-    /** draft until name, both bios, LinkedIn, portrait and consent are all real. */
+    /** draft until `missing` in entry.ts finds nothing. */
     status: z.enum(["draft", "active"]).default("draft"),
     /** The day the person said yes to the consent statement in the practitioner-bio skill. */
     consent: z.iso.date().optional(),
