@@ -1,23 +1,28 @@
 ---
 name: practitioner-bio
 description: >-
-  Interview a practitioner and save their English and German bio, portrait and profile links to
-  the practitioners collection, shown at / and rendered on hackersandwizards.dev. Use for "create
-  my bio", "practitioner bio", "my bio", "Biografie erstellen", "hilf mir eine Biografie zu
-  erstellen", "add my profile links", "update my bio".
+  Complete a practitioner's English and German bio, portrait, profile links and consent in the
+  practitioners collection, by mail or by interview, shown at / and rendered on
+  hackersandwizards.dev. Use for "create my bio", "practitioner bio", "my bio", "Biografie
+  erstellen", "hilf mir eine Biografie zu erstellen", "add my profile links", "update my bio", "ask
+  the trainers to complete their profiles", "Profil vervollständigen", and for a trainer's reply to
+  such a mail.
 ---
 
 # Practitioner Bio
 
-You interview a practitioner and save their introduction to `src/content/practitioners/<slug>/`:
+You complete a practitioner's introduction and save it to `src/content/practitioners/<slug>/`:
 `bio.md` (the frontmatter and the English text), `bio.de.md` (the German text, no frontmatter)
 and `photo.webp`. The website renders the English page from the first file and the German page
 from the second, so what you save is what a client reads.
 
 ## Mandatory and optional
 
-Mandatory: **name, bio in English and German, LinkedIn URL, portrait**. Without all of them the
-entry stays `status: draft` and you say what is missing.
+Mandatory: **name, bio in English and German, LinkedIn URL, portrait, consent**. Without all of
+them the entry stays `status: draft` and you say what is missing. Consent is the person's yes to
+one statement: hackers&wizards may publish this text and portrait on hackersandwizards.dev and in
+proposals until they withdraw it by mail, and they took the photo or may use it. Its date goes into
+`consent`.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
 than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a public booking link**
@@ -27,7 +32,29 @@ Not here at all: role and group. Who appears on the website, in which section an
 title is the website's roster, kept by Stefan and Bina. A wish to change it is flagged to Stefan,
 never written into a file in this repo.
 
-## Procedure
+## Two routes
+
+- **By mail**, the default: an h&w colleague asks the person by mail, and the person needs no
+  access to this repo and sees no other entry.
+- **Interview**: the person, or a colleague with them on a call, says "create my bio" here.
+
+## By mail
+
+1. **Request.** Load the Company OS `email` skill before the first mail call. Draft one mail per
+   person, in their language, never sent by you: a founder checks and sends it. It shows only this
+   person's entry: the English and German text the website publishes for them
+   (`hackersandwizards.dev/team/<slug>/`), else the text here; the portrait attached; their links;
+   what the mandatory list still lacks; the consent statement. It asks for one reply: it fits as
+   it is, corrections or a new photo, or take me off. Check: the draft names and shows no other
+   person.
+2. **"It fits".** Save exactly the text they confirmed, set `consent` to the reply's date, `owner`
+   to their name, `updated`, and `status: active` once the mandatory list is complete. One mail
+   round, no confirmation mail. Commit as in step 9 below.
+3. **Corrections.** Apply them under the style rules of step 5 below, then draft a reply in the
+   same thread with the whole updated entry and ask for a yes. Their yes is step 2.
+4. **"Take me off".** Delete their directory, commit, and flag it to Stefan for the website roster.
+
+## Interview
 
 1. **Ask for the name**, then look for an existing directory under `src/content/practitioners/`.
    What is already there is not asked again; an existing entry is updated, not recreated. Keep
@@ -48,9 +75,10 @@ never written into a file in this repo.
 8. **Save** both files in the format below, then run `bun run dev` and show the result at
    http://localhost:4325 so they see what a client sees. Confirm the new sentences are on the
    page, not that the page loaded.
-9. **Commit only after they say yes** to exactly what the commit contains. Name the three files
-   on `git commit` itself; never `git add -A`. Then push to main: it is their own entry. Without
-   write access, they ask Stefan or Bene for it.
+9. **Ask for consent**, the statement under "Mandatory and optional", and record its date.
+   **Commit only after they say yes** to exactly what the commit contains. Name the three files
+   on `git commit` itself; never `git add -A`. Then push to main. Without
+   write access, the mail route replaces this one.
 
 ## File format
 
@@ -68,7 +96,8 @@ mastodon: <url>
 github: <url>
 website: <url>
 bookme: <url>
-status: active # draft until name, both bios, LinkedIn and portrait are all real
+status: active # draft until every mandatory field, consent included, is real
+consent: "2026-11-06" # the day they said yes to the consent statement
 owner: <Full Name>
 updated: "2026-09-06" # quoted, or YAML makes it a Date and the schema rejects it
 ---

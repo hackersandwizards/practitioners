@@ -12,9 +12,9 @@ storage only and the website never renders it. The website copies the approved b
 Who is shown there, in which group and with which title, is the website's roster and lives only
 there.
 
-The one workflow is the `practitioner-bio` skill in `.claude/skills/`: it interviews a person,
-drafts both bios, shows the result at `/` and commits once they approve. A practitioner edits
-their own entry and nobody else's.
+The one workflow is the `practitioner-bio` skill in `.claude/skills/`: it completes an entry by
+mail, the default, or by interview, and commits once the person approves the exact text and
+consents to publication. A practitioner edits their own entry and nobody else's.
 
 ## Gate
 

@@ -1,6 +1,6 @@
 # Practitioners | hackers&wizards
 
-The people on [hackersandwizards.dev/practitioners](https://www.hackersandwizards.dev/practitioners/),
+The people on [hackersandwizards.dev/team](https://www.hackersandwizards.dev/team/),
 one directory each: an English bio, a German bio, a portrait and the profile links they maintain.
 The website copies each approved bio from here into its own pages, so the text you approve here
 is the text a client reads there.
@@ -9,6 +9,12 @@ Who appears on that page, in which group and with which title is the website's r
 there. This repo holds what each person says about themselves.
 
 ## Your entry
+
+h&w sends you a mail that shows your own entry and what it still lacks. Reply that it fits, send
+corrections or a new photo, or ask to be taken off. Your entry goes live only after your yes to the
+exact text and to publishing it. You need no access to this repo for that.
+
+With write access, you can also write it here yourself:
 
 ```bash
 git clone https://github.com/hackersandwizards/practitioners.git
@@ -19,8 +25,7 @@ bun run dev
 
 Open Claude Code in the repo and say "create my bio". It asks for your links and a portrait,
 interviews you for a few minutes, drafts the English and the German text, shows both at
-http://localhost:4325 and commits when you approve. Ask Stefan or Bene for write access, then
-push to main.
+http://localhost:4325 and commits when you approve. Then push to main.
 
 ## Local URLs with Caddy on macOS
 
@@ -235,6 +240,7 @@ checks every staged bio against it on your machine. `bun install` enables the ho
 src/content/practitioners/<slug>/   bio.md, bio.de.md, photo.webp
 src/lib/schema.ts                   the contract every bio.md meets
 src/pages/index.astro               the preview, alphabetical
-.claude/skills/practitioner-bio/    the interview
+scripts/check-inline-space.ts       fails on a line break that the build turns into a missing space
+.claude/skills/practitioner-bio/    the mail route and the interview
 .githooks/                          the gate
 ```
