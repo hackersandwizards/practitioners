@@ -2,11 +2,11 @@
 name: practitioner-bio
 description: >-
   Complete a practitioner's English and German bio, portrait and profile links in the
-  practitioners collection, by mail or by interview, shown at / and rendered on
+  practitioners collection, by their own pull request, a mail request or an interview, shown at / and rendered on
   hackersandwizards.dev. Use for "create my bio", "practitioner bio", "my bio", "Biografie
   erstellen", "hilf mir eine Biografie zu erstellen", "add my profile links", "update my bio", "ask
-  the trainers to complete their profiles", "Profil vervollständigen", and for a trainer's reply to
-  such a mail.
+  the trainers to complete their profiles", "Profil vervollständigen", "review this pull request", and for a
+  trainer's reply to such a mail.
 ---
 
 # Practitioner Bio
@@ -26,40 +26,51 @@ than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a publ
 (cal.com, Calendly; `bookme` in the schema), and any further public profile the person keeps
 (GitLab, Xing, Speaker Deck, Wikidata; `profiles`). A link the person already publishes, on their
 own site or their website profile, goes into the request as a proposal, never into the entry
-before their yes.
+before their own change or yes.
 
 Not here at all: role and group. Who appears on the website, in which section and with which
 title is the website's roster, kept by Stefan and Bina. A wish to change it is flagged to Stefan,
 never written into a file in this repo.
 
-## Two routes
+## Routes
 
-- **By mail**, the default: an h&w colleague asks the person by mail, and the person needs no
-  access to this repo and sees no other entry.
+The person's own change is their yes: a pull request or commit they made to their folder publishes
+the entry as it stands after that change. An h&w colleague edits an entry only from the person's
+own words, and commits it only after their yes to exactly that text.
+
+- **Their pull request**, the default. `CONTRIBUTING.md` tells the person how, in the browser or
+  with Claude Code.
+- **Request.** An h&w colleague asks the person by mail to look at their page and improve their
+  entry here.
 - **Interview**: the person, or a colleague with them on a call, says "create my bio" here.
 
-## By mail
+## Their pull request
 
-1. **Request.** Load the Company OS `email` skill before the first mail call. Draft one mail per
-   person, in their language, never sent by you: a founder checks and sends it. It shows only this
-   person's entry: the English and German text the website publishes for them
-   on `hackersandwizards.dev/team/<slug>/`, with that link, else the text here; the portrait
-   attached; their links and the proposed ones; what the mandatory list still lacks, as the
-   entry's page at `/<slug>/` in `bun run dev` lists it. Never a link to
-   this repo or its pages, which show every other entry. It asks for one reply: it fits as
-   it is, corrections or a new photo, or take me off. Check: the draft shows no other person's
-   entry.
-2. **"It fits".** Save exactly the text they confirmed, set `owner` to their name, `updated`, and
-   `status: active` once the mandatory list is complete. One mail
-   round, no confirmation mail. Commit as in step 9 below.
-3. **Corrections.** Apply them under the style rules of step 5 below, then draft a reply in the
-   same thread with the whole updated entry and ask for a yes. Their yes is step 2.
-4. **"Take me off".** Delete their directory, commit, and flag it to Stefan for the website roster.
+1. Check the author: the GitHub account is the person's (name, linked profiles, or a word from
+   them in the pull request or by mail), and the change touches only their folder. Otherwise
+   comment and merge nothing.
+2. `gh pr checkout <number>`, then `bun run typecheck`. An uploaded portrait under another name or
+   format becomes a 480x480 `photo.webp`, the upload removed. Asked for a German text, draft it
+   from their English as in step 7 below, push it to the pull request and merge after their yes
+   there.
+3. Style findings under step 5 below go into a review comment; their wording stays theirs.
+4. Set `owner` to their name, `updated`, and `status: active` once the mandatory list is complete,
+   commit onto the pull request branch with the paths named, and merge.
+
+## Request
+
+Load the Company OS `email` skill before the first mail call. Draft one mail per person, in their
+language, never sent by you: a founder checks and sends it. It links their page on
+`hackersandwizards.dev/team/<slug>/` where one exists, their folder on GitHub and
+`CONTRIBUTING.md`, says what the mandatory list still lacks, as the entry's page at `/<slug>/` in
+`bun run dev` lists it, and lists the proposed links. A reply with text instead of a pull request
+is a correction: apply it under the style rules of step 5 below, draft a reply in the thread with
+the whole updated entry, and commit after their yes. "Take me off": delete their directory, commit,
+and flag it to Stefan for the website roster.
 
 ## Interview
 
 1. **Ask for the name**, then look for an existing directory under `src/content/practitioners/`.
-   Without write access to this repo, take the mail route instead.
    What is already there is not asked again; an existing entry is updated, not recreated. Keep
    frontmatter you did not collect.
 2. **Collect the links**, mandatory and optional as above.
@@ -75,12 +86,13 @@ never written into a file in this repo.
 6. **Show the draft and iterate.** Their reaction is the test; expect a round or two.
 7. **Draft the German bio** from the approved English one: the same content in their own German,
    not a word-by-word translation. Show it; most practitioners will edit a phrase.
-8. **Save** both files in the format below with `status: draft`, then run `bun run dev` and show the result at
-   http://localhost:4325/<slug>/ so they see their page as a client will. Confirm the new sentences are on the
-   page, not that the page loaded.
-9. **Ask for their yes** to the page. Set `status: active` only now. **Commit only after they say
-   yes** to exactly what the commit contains. Name the three files on `git commit` itself; never
-   `git add -A`. Then push to main.
+8. **Save** both files in the format below with `status: draft`, then run `bun run dev` and show
+   the result at http://localhost:4325/<slug>/ so they see their page as a client will. Confirm the
+   new sentences are on the page, not that the page loaded.
+9. **Commit** on a branch named after the slug, the changed files named on `git commit`, push, and
+   open a pull request with `gh pr create`, which offers a fork without write access. Run by the
+   person, this is their yes. Run by a colleague with them, commit only after their yes to exactly
+   what the commit contains.
 
 ## File format
 
@@ -100,7 +112,7 @@ website: <url>
 bookme: <url>
 profiles: # further public profiles, labelled by host
   - <url>
-status: active # draft until every mandatory field is real and they said yes
+status: active # draft until every mandatory field is real and their change or yes is in
 owner: <Full Name>
 updated: "2026-09-06" # quoted, or YAML makes it a Date and the schema rejects it
 ---

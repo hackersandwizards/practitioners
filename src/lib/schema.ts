@@ -25,7 +25,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     /** Further public profiles the person keeps (GitLab, Xing, Speaker Deck, Wikidata), labelled
      *  by host; the website lists them with the named links in its structured data. */
     profiles: z.array(link).optional(),
-    /** draft until `missing` in entry.ts finds nothing and the person said yes to the page. */
+    /** draft until `missing` in entry.ts finds nothing and the person's own change or yes is in. */
     status: z.enum(["draft", "active"]).default("draft"),
     owner: z.string().optional(),
     updated: z.iso.date().optional(),

@@ -5,4 +5,4 @@ linkedin: https://www.linkedin.com/in/dat-tran-a1602320/
 status: draft
 ---
 
-Dat is a Forward Deployed Engineer in the h&w practitioner network. Seed draft: Dat, tell Seymour "create my bio" to replace it with the real one.
+Dat is a Forward Deployed Engineer in the h&w practitioner network. Seed draft: Dat, replace this text with your own bio, as CONTRIBUTING.md in this repository describes.

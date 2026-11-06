@@ -5,4 +5,4 @@ linkedin: https://www.linkedin.com/in/turkovdenis
 status: draft
 ---
 
-Denis is a Forward Deployed Leader in the h&w practitioner network. Seed draft: Denis, tell Seymour "create my bio" to replace it with the real one.
+Denis is a Forward Deployed Leader in the h&w practitioner network. Seed draft: Denis, replace this text with your own bio, as CONTRIBUTING.md in this repository describes.

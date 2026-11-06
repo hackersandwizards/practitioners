@@ -5,4 +5,4 @@ linkedin: https://www.linkedin.com/in/henningthies/
 status: draft
 ---
 
-Henning is a Forward Deployed Engineer in the h&w practitioner network. Seed draft: Henning, tell Seymour "create my bio" to replace it with the real one.
+Henning is a Forward Deployed Engineer in the h&w practitioner network. Seed draft: Henning, replace this text with your own bio, as CONTRIBUTING.md in this repository describes.
