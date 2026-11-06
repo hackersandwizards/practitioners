@@ -8,7 +8,7 @@ import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Links from "../components/Links.astro";
-import { missing, shown } from "../lib/entry";
+import { missing, repo, shown } from "../lib/entry";
 
 export async function getStaticPaths() {
   const german = new Map((await getCollection("practitionersDe")).map((e) => [e.id, e]));
@@ -23,7 +23,6 @@ const { Content: En } = await render(entry);
 const De = de && (await render(de)).Content;
 const lacks = missing(entry, de?.body);
 // "Dr. Florian Krause" is Florian.
-const repo = "https://github.com/hackersandwizards/practitioners";
 const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
 ---
 

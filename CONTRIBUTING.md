@@ -20,8 +20,9 @@ portrait. You need a free GitHub account, nothing else. Using Claude Code? Skip 
    suggests or write "Update my bio", add any note for us in the description box, and click
    **Create pull request**. Done: the page now shows your pull request.
 5. For `bio.de.md`, open your folder from the mail link again and click the pencil the same way.
-   GitHub reuses your copy. For a new portrait, open your folder and choose **Add file**, then
-   **Upload files**. Each file may open its own pull request.
+   GitHub reuses your copy. If your folder has no `bio.de.md` yet, choose **Add file**, then
+   **Create new file**, and name it `bio.de.md`. For a new portrait, open your folder and choose
+   **Add file**, then **Upload files**. Each file may open its own pull request.
 
 ## With Claude Code
 
@@ -78,4 +79,4 @@ touches only your folder. On style we comment and leave the wording to you. Afte
 copies your text to your page on `hackersandwizards.dev/team/<your-folder>/`, a separate step.
 
 Your role and the group you appear in are kept on the website, not here: mention a wish in the pull
-request. To be taken off, say so in a pull request.
+request. To be taken off, reply to the mail from h&w.

@@ -2,6 +2,8 @@ import type { CollectionEntry } from "astro:content";
 
 type Data = CollectionEntry<"practitioners">["data"];
 
+export const repo = "https://github.com/hackersandwizards/practitioners";
+
 const host = (href: string) => new URL(href).host.replace(/^www\./, "");
 
 /** Only the profiles a practitioner actually maintains render; a dead link is worse than none. */

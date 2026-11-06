@@ -2,11 +2,11 @@
 name: practitioner-bio
 description: >-
   Complete a practitioner's English and German bio, portrait and profile links in the
-  practitioners collection, by their own pull request, a mail request or an interview, shown at / and rendered on
-  hackersandwizards.dev. Use for "create my bio", "practitioner bio", "my bio", "Biografie
-  erstellen", "hilf mir eine Biografie zu erstellen", "add my profile links", "update my bio", "ask
-  the trainers to complete their profiles", "Profil vervollständigen", "review this pull request", and for a
-  trainer's reply to such a mail.
+  practitioners collection, by their own pull request, a mail request or an interview, shown at /
+  and rendered on hackersandwizards.dev. Use for "create my bio", "practitioner bio", "my bio",
+  "Biografie erstellen", "hilf mir eine Biografie zu erstellen", "add my profile links", "update my
+  bio", "ask the trainers to complete their profiles", "Profil vervollständigen", "review this pull
+  request", and for a trainer's reply to such a mail.
 ---
 
 # Practitioner Bio
@@ -46,16 +46,16 @@ own words, and commits it only after their yes to exactly that text.
 
 ## Their pull request
 
-1. Check the author: the GitHub account is the person's (name, linked profiles, or a word from
-   them in the pull request or by mail), and the change touches only their folder. Otherwise
-   comment and merge nothing.
-2. `gh pr checkout <number>`, then `bun run typecheck`. An uploaded portrait under another name or
-   format becomes a 480x480 `photo.webp`, the upload removed. Asked for a German text, draft it
-   from their English as in step 7 below, push it to the pull request and merge after their yes
-   there.
-3. Style findings under step 5 below go into a review comment; their wording stays theirs.
-4. Set `owner` to their name, `updated`, and `status: active` once the mandatory list is complete,
-   commit onto the pull request branch with the paths named, and merge.
+1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
+   it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
+   change touches only their folder. Otherwise comment and merge nothing.
+2. `gh pr checkout <number>`, then `bun run typecheck`. Style findings under step 5 below go into
+   a review comment; their wording stays theirs.
+3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a 480x480
+   `photo.webp`, the upload removed; set `owner` to their name, `updated`, and `status: active`
+   once the mandatory list is complete; commit with the paths named and push.
+4. Asked for a German text, draft it from their English as in step 7 below, show it in the pull
+   request or by mail, and commit it after their yes.
 
 ## Request
 
@@ -65,8 +65,9 @@ language, never sent by you: a founder checks and sends it. It links their page 
 `CONTRIBUTING.md`, says what the mandatory list still lacks, as the entry's page at `/<slug>/` in
 `bun run dev` lists it, and lists the proposed links. A reply with text instead of a pull request
 is a correction: apply it under the style rules of step 5 below, draft a reply in the thread with
-the whole updated entry, and commit after their yes. "Take me off": delete their directory, commit,
-and flag it to Stefan for the website roster.
+the whole updated entry, and commit after their yes. A reply confirming the entry as it stands is
+their yes: set `owner`, `updated` and `status` as in step 3 above and commit. "Take me off":
+delete their directory, commit, and flag it to Stefan for the website roster.
 
 ## Interview
 
@@ -89,10 +90,11 @@ and flag it to Stefan for the website roster.
 8. **Save** both files in the format below with `status: draft`, then run `bun run dev` and show
    the result at http://localhost:4325/<slug>/ so they see their page as a client will. Confirm the
    new sentences are on the page, not that the page loaded.
-9. **Commit** on a branch named after the slug, the changed files named on `git commit`, push, and
-   open a pull request with `gh pr create`, which offers a fork without write access. Run by the
-   person, this is their yes. Run by a colleague with them, commit only after their yes to exactly
-   what the commit contains.
+9. **Commit**, the changed files named on `git commit`. Run by the person in their fork (`origin`
+   is not `hackersandwizards/practitioners`): commit on a branch named after the slug, push it to
+   their fork and open the pull request with `gh pr create`, which is their yes and their only way
+   in. Run by an h&w colleague with them: commit on `main` only after their yes to exactly what the
+   commit contains, and push.
 
 ## File format
 
