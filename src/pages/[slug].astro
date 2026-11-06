@@ -4,21 +4,21 @@
 // episodes and trainings are the website's own data and show only there. While the entry lacks
 // anything the practitioner-bio skill makes mandatory, a box under the hero says what and how to
 // send it; English and German stand side by side so the person checks both at once.
-import { getCollection, getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Links from "../components/Links.astro";
 import { missing, shown } from "../lib/entry";
 
 export async function getStaticPaths() {
+  const german = new Map((await getCollection("practitionersDe")).map((e) => [e.id, e]));
   return (await getCollection("practitioners"))
     .filter((entry) => shown(entry.data))
-    .map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+    .map((entry) => ({ params: { slug: entry.id }, props: { entry, de: german.get(entry.id) } }));
 }
 
-const { entry } = Astro.props;
+const { entry, de } = Astro.props;
 const { data } = entry;
-const de = await getEntry("practitionersDe", entry.id);
 const { Content: En } = await render(entry);
 const De = de && (await render(de)).Content;
 const lacks = missing(entry, de?.body);
