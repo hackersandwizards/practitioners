@@ -1,7 +1,7 @@
 ---
 name: practitioner-bio
 description: >-
-  Complete a practitioner's English and German bio, portrait, profile links and consent in the
+  Complete a practitioner's English and German bio, portrait and profile links in the
   practitioners collection, by mail or by interview, shown at / and rendered on
   hackersandwizards.dev. Use for "create my bio", "practitioner bio", "my bio", "Biografie
   erstellen", "hilf mir eine Biografie zu erstellen", "add my profile links", "update my bio", "ask
@@ -18,11 +18,8 @@ from the second, so what you save is what a client reads.
 
 ## Mandatory and optional
 
-Mandatory: **name, bio in English and German, LinkedIn URL, portrait, consent**. Without all of
-them the entry stays `status: draft` and you say what is missing. Consent is the person's yes to
-one statement: hackers&wizards may publish this text and portrait on hackersandwizards.dev and in
-proposals until they withdraw it by mail, and they took the photo or may use it. Its date goes into
-`consent`.
+Mandatory: **name, bio in English and German, LinkedIn URL, portrait**. Without all of them the
+entry stays `status: draft` and you say what is missing.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
 than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a public booking link**
@@ -48,12 +45,12 @@ never written into a file in this repo.
    person's entry: the English and German text the website publishes for them
    on `hackersandwizards.dev/team/<slug>/`, with that link, else the text here; the portrait
    attached; their links and the proposed ones; what the mandatory list still lacks, as the
-   entry's page at `/<slug>/` in `bun run dev` lists it; the consent statement. Never a link to
+   entry's page at `/<slug>/` in `bun run dev` lists it. Never a link to
    this repo or its pages, which show every other entry. It asks for one reply: it fits as
    it is, corrections or a new photo, or take me off. Check: the draft shows no other person's
    entry.
-2. **"It fits".** Save exactly the text they confirmed, set `consent` to the reply's date, `owner`
-   to their name, `updated`, and `status: active` once the mandatory list is complete. One mail
+2. **"It fits".** Save exactly the text they confirmed, set `owner` to their name, `updated`, and
+   `status: active` once the mandatory list is complete. One mail
    round, no confirmation mail. Commit as in step 9 below.
 3. **Corrections.** Apply them under the style rules of step 5 below, then draft a reply in the
    same thread with the whole updated entry and ask for a yes. Their yes is step 2.
@@ -81,9 +78,8 @@ never written into a file in this repo.
 8. **Save** both files in the format below with `status: draft`, then run `bun run dev` and show the result at
    http://localhost:4325/<slug>/ so they see their page as a client will. Confirm the new sentences are on the
    page, not that the page loaded.
-9. **Ask for consent**, the statement under "Mandatory and optional", and record its date.
-   Set `status: active` only now. **Commit only after they say yes** to exactly what the commit
-   contains. Name the three files on `git commit` itself; never `git add -A`. Then push to main.
+9. **Ask for their yes** to the page. Set `status: active` only now. **Commit only after they say
+   yes** to exactly what the commit contains. Name the three files on `git commit` itself; never `git add -A`. Then push to main.
 
 ## File format
 
@@ -103,8 +99,7 @@ website: <url>
 bookme: <url>
 profiles: # further public profiles, labelled by host
   - <url>
-status: active # draft until every mandatory field, consent included, is real
-consent: "2026-11-06" # the day they said yes to the consent statement
+status: active # draft until every mandatory field is real and they said yes
 owner: <Full Name>
 updated: "2026-09-06" # quoted, or YAML makes it a Date and the schema rejects it
 ---
