@@ -22,11 +22,12 @@ const de = await getEntry("practitionersDe", entry.id);
 const { Content: En } = await render(entry);
 const De = de && (await render(de)).Content;
 const lacks = missing(entry, de?.body);
-const first = data.name.split(" ")[0];
+// "Dr. Florian Krause" is Florian.
+const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
 ---
 
 <Layout title={data.name} bleed>
-  <header class="bg-night text-night-ink" data-theme="dark">
+  <header class="bg-night text-night-ink" data-theme="dark" data-hw-night>
     <div class="mx-auto max-w-content px-gutter pt-6">
       <nav class="hw-breadcrumb" aria-label="Breadcrumb">
         <ol>

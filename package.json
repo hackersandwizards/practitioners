@@ -13,7 +13,7 @@
     "typecheck": "astro check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "check": "bun run format:check && bun scripts/check-inline-space.ts && bun run typecheck && bun run build"
+    "check": "bun run format:check && bun scripts/check-inline-space.ts && bun run typecheck && bun run build && PREVIEW=1 astro build --outDir .preview"
   },
   "dependencies": {
     "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.16.0",

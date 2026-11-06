@@ -1,11 +1,11 @@
 import type { SchemaContext } from "astro:content";
 import { z } from "zod";
 
-/** What a practitioner owns about themselves. Who is shown on hackersandwizards.dev, in which
- *  group and with which role, is the website's roster and not a field here. */
 /** https only: a link renders as an href, and z.url() alone also takes javascript: URLs. */
 const link = z.url({ protocol: /^https$/ });
 
+/** What a practitioner owns about themselves. Who is shown on hackersandwizards.dev, in which
+ *  group and with which role, is the website's roster and not a field here. */
 export const practitionerSchema = ({ image }: SchemaContext) =>
   z.object({
     name: z.string(),

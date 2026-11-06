@@ -28,7 +28,10 @@ export const missing = (entry: CollectionEntry<"practitioners">, german: string 
     !entry.data.consent && "Consent to publish",
   ].filter((m): m is string => Boolean(m));
 
-/** A build that could go public carries only entries their person approved; drafts and seeds show
- *  in the dev server alone. */
+/** A build that could go public carries only entries their person approved. Drafts and seeds show
+ *  in the dev server and in the gate's preview build (PREVIEW=1, into .preview/), which renders
+ *  every page so a broken one fails the gate. */
 export const shown = (d: Data) =>
-  import.meta.env.DEV || (d.status === "active" && Boolean(d.consent));
+  import.meta.env.DEV ||
+  process.env.PREVIEW === "1" ||
+  (d.status === "active" && Boolean(d.consent));
