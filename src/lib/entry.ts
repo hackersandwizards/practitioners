@@ -27,8 +27,9 @@ export const missing = (entry: CollectionEntry<"practitioners">, german: string 
     !entry.data.linkedin && "LinkedIn",
   ].filter((m): m is string => Boolean(m));
 
-/** A build that could go public carries only entries their person approved (status active). Drafts and seeds show
- *  in the dev server and in the gate's preview build (PREVIEW=1, into .preview/), which renders
+/** A build that could go public carries only `active` entries, the ones their person approved.
+ *  Drafts and seeds show in the dev server and in the gate's preview build (PREVIEW=1, into
+ *  .preview/), which renders
  *  every page so a broken one fails the gate. */
 export const shown = (d: Data) =>
   import.meta.env.DEV || process.env.PREVIEW === "1" || d.status === "active";
