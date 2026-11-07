@@ -22,7 +22,7 @@ const { data } = entry;
 const { Content: En } = await render(entry);
 const De = de && (await render(de)).Content;
 const lacks = missing(entry, de?.body);
-// "Dr. Florian Krause" is Florian.
+// A leading "Dr." is a title, not the first name.
 const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
 ---
 
