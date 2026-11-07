@@ -14,7 +14,7 @@
     "format": "prettier --write .",
     "check": "scaffolding check",
     "check:colours": "brand-colours",
-    "check:preview": "PREVIEW=1 astro build --outDir .preview",
+    "check:preview": "PREVIEW=1 check-lock astro build --outDir .preview",
     "check:inline-space": "bun scripts/check-inline-space.ts"
   },
   "dependencies": {
