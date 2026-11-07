@@ -2,6 +2,7 @@
 kind: review
 status: assumed
 priority: 3
+order: 690
 owner: Benedikt
 area: people
 evidence: "Blind review 07.11., 2 personas, round 1 Claude twice and Codex once each, round 2 Claude and Codex once each; screenshots at 1440 and 375 px beside hackersandwizards.dev/team/"
@@ -68,5 +69,6 @@ their labels. Round 2, the fixed page against the earlier overview (Claude, Code
 
 No reviewer named a must-fix, so the review stopped. Left as it is: every reviewer misses the
 website's one-line description under the role. The website's team page does not publish it in its
-JSON-LD, so this repo cannot show it without copying the website's data; the website brief in the
-run report asks for it. On a phone the hover cue is absent and the arrow carries the cue alone.
+JSON-LD, so this repo cannot show it without copying the website's data. No item in the
+website repository asks for it yet (checked 07.11.). On a phone the hover cue is absent and the
+arrow carries the cue alone.

@@ -2,6 +2,7 @@
 kind: decision
 status: open
 priority: 2
+order: 60
 area: people
 owner: Benedikt
 evidence: "GitHub API 06.11.: public, 3 admins and 37 collaborators with write, main unprotected, forking allowed, 0 open pull requests"
