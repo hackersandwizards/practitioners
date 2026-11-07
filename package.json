@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.10.2",
+    "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.10.3",
     "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.13.0",
     "@types/bun": "1.4.4",
     "eslint": "10.14.0",

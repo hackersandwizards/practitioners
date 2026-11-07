@@ -12,7 +12,7 @@
       },
       "devDependencies": {
         "@astrojs/check": "0.9.12",
-        "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.10.2",
+        "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.10.3",
         "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.13.0",
         "@types/bun": "1.4.4",
         "eslint": "10.14.0",
@@ -153,7 +153,7 @@
 
     "@eslint/plugin-kit": ["@eslint/plugin-kit@0.7.3", "", { "dependencies": { "@eslint/core": "^1.2.1", "levn": "^0.4.1" } }, "sha512-IkO+/KEUvwbVpiURZg+P7zF74z5Jxe0UgJxVni+RtoHQ6IZieXaO02kmadomap/q+l6bc/jdPGGqTjhuZnuz1Q=="],
 
-    "@hackersandwizards/admin": ["@hackersandwizards/admin@github:hackersandwizards/admin#7db2ada", { "peerDependencies": { "@hackersandwizards/brand": ">=1.20.0", "@hackersandwizards/scaffolding": ">=2.3.0", "@tailwindcss/typography": "^0.5.20", "@tailwindcss/vite": "^4.3.3", "astro": "^7.4.4", "tailwindcss": "^4.3.3" }, "optionalPeers": ["@hackersandwizards/brand", "@hackersandwizards/scaffolding"], "hasInstallScript": true, "bin": { "admin-serve": "bin/admin-serve.ts", "admin-check": "bin/admin-check.ts" } }, "hackersandwizards-admin-7db2ada", "sha512-wqFi773Z8ge/IGcWAshMMF68govIVg38uphv5t4LZZV0XTQuiG8Tn3maf7rg8fVI+5gGipB5aOlomPVhV7JfLw=="],
+    "@hackersandwizards/admin": ["@hackersandwizards/admin@github:hackersandwizards/admin#7cc17b1", { "peerDependencies": { "@hackersandwizards/brand": ">=1.25.0", "@hackersandwizards/scaffolding": ">=2.3.0", "@tailwindcss/typography": "^0.5.20", "@tailwindcss/vite": "^4.3.3", "astro": "^7.4.4", "tailwindcss": "^4.3.3" }, "optionalPeers": ["@hackersandwizards/brand", "@hackersandwizards/scaffolding"], "hasInstallScript": true, "bin": { "admin-serve": "bin/admin-serve.ts", "admin-check": "bin/admin-check.ts" } }, "hackersandwizards-admin-7cc17b1", "sha512-ImxQ10U51CmBTqWUPoTYJxatIvHNbyj09gd1NPTbz2Xi4SCj0npHT9WTGAzyKMjMlSOZJO/X1a4YKJhlk0ZZ1A=="],
 
     "@hackersandwizards/brand": ["@hackersandwizards/brand@github:hackersandwizards/brand#5647037", { "dependencies": { "puppeteer-core": "25.16.0" }, "hasInstallScript": true, "bin": { "brand-colours": "scan/colours.ts", "brand-copies": "scan/copies.ts", "brand-scan": "scan/components.ts", "brand-markers": "scan/markers.ts", "brand-elements": "scan/elements.ts", "brand-retired": "scan/retired.ts", "brand-linkedin-frame": "applications/linkedin-visuals/frame.ts", "brand-linkedin-terminal": "applications/linkedin-visuals/terminal.ts", "brand-linkedin-sketch-prompt": "applications/linkedin-visuals/sketch-prompt.ts", "brand-slide-sketch-prompt": "applications/slide-visuals/sketch-prompt.ts", "brand-mail-signature": "applications/mail-signature/cli.ts" } }, "hackersandwizards-brand-5647037", "sha512-s5CmaM1ciJhCgPPAt0X/i/Q30kL7RDSUHktn3Lfu089eriF4gKK2BaKzVVPGmdreL6vVc2YoB6TxqsYBEuvU8g=="],
 
