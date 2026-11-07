@@ -9,7 +9,7 @@
   "scripts": {
     "postinstall": "git rev-parse --git-dir > /dev/null 2>&1 && git config core.hooksPath .githooks || true",
     "dev": "printf 'Caddy: http://practitioners.localhost\\n' && astro dev",
-    "build": "astro build",
+    "build": "check-lock astro build",
     "typecheck": "astro check",
     "format": "prettier --write .",
     "check": "scaffolding check",
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.11.1",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.20.1",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.21.0",
     "@types/bun": "1.4.4",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
