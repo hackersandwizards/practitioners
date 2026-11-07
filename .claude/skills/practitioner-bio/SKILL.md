@@ -53,8 +53,8 @@ commit.
    change touches only their folder. Otherwise comment and merge nothing.
 2. `gh pr checkout <number>`, then `bun run check`. A confidential term other than the person's
    own name is a review comment and blocks the merge. Their own name gets one `scaffolding.allow`
-   entry in `package.json` per path and spelling the scan reports, with that spelling as `text`
-   and their folder as `src/content/practitioners/<slug>/**`, pushed to the pull request's branch
+   entry in `package.json` per path, with the name as `text` (matching ignores case; a list holds
+   other spellings) and their folder as `src/content/practitioners/<slug>/**`, pushed to the pull request's branch
    before the merge, so `main` never holds the name without its entry. Style findings under step 5
    below go into a review comment; their wording stays theirs.
 3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a 480x480
