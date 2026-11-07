@@ -26,7 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.10.7",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.19.2",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.19.3",
     "@types/bun": "1.4.4",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
@@ -41,15 +41,6 @@
   "prettier": "@hackersandwizards/scaffolding/prettier",
   "scaffolding": {
     "allow": [
-      {
-        "check": "confidential",
-        "path": "docs/agent-work/items/profile-mail-round.md",
-        "text": [
-          "Denis Turkov",
-          "Thomas Kern"
-        ],
-        "reason": "the practitioner's name in the list of whom the profile mail went to; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in this item"
-      },
       {
         "check": "confidential",
         "path": "file names",
