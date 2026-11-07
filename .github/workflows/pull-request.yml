@@ -10,6 +10,7 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-24.04
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -30,4 +31,7 @@ jobs:
           curl -fsSLo gitleaks.tgz "https://github.com/gitleaks/gitleaks/releases/download/v$VERSION/gitleaks_${VERSION}_linux_x64.tar.gz"
           echo "$SHA256  gitleaks.tgz" | sha256sum -c -
           tar -xzf gitleaks.tgz -C "$RUNNER_TEMP" gitleaks
-          "$RUNNER_TEMP/gitleaks" git --log-opts="$BASE..$HEAD" --redact --no-banner --exit-code 1
+          # The default rules, and no allowlist the pull request itself could add.
+          printf '[extend]\nuseDefault = true\n' > "$RUNNER_TEMP/gitleaks.toml"
+          "$RUNNER_TEMP/gitleaks" git --log-opts="$BASE..$HEAD" --redact --no-banner \
+            --config "$RUNNER_TEMP/gitleaks.toml" --gitleaks-ignore-path "$RUNNER_TEMP" --ignore-gitleaks-allow
