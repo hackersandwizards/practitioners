@@ -14,7 +14,8 @@
     "format": "prettier --write .",
     "check": "scaffolding check",
     "check:colours": "brand-colours",
-    "check:preview": "PREVIEW=1 astro build --outDir .preview"
+    "check:preview": "PREVIEW=1 astro build --outDir .preview",
+    "check:inline-space": "bun scripts/check-inline-space.ts"
   },
   "dependencies": {
     "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.19.2",
@@ -46,12 +47,12 @@
       {
         "check": "confidential",
         "path": "file names",
-        "reason": "a practitioner's name is this repository's published content; os's term build leaves the practitioners' bios out of its public text, so the list still carries the names not on hackersandwizards.dev"
+        "reason": "the same as the src/content/practitioners/** entry"
       },
       {
         "check": "confidential",
         "path": "docs/agent-work/items/profile-mail-round.md",
-        "reason": "a practitioner's name is this repository's published content; os's term build leaves the practitioners' bios out of its public text, so the list still carries the names not on hackersandwizards.dev"
+        "reason": "the same as the src/content/practitioners/** entry"
       }
     ],
     "typecheck": "astro check",
@@ -60,6 +61,7 @@
       "test": "no tests: src/lib/schema.ts is the contract, and the typecheck step validates every bio against it"
     },
     "check": [
+      "check:inline-space",
       "check:colours",
       "check:preview"
     ]

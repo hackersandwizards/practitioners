@@ -7,6 +7,8 @@ docs_re='^(src/content/|\.claude/|README\.md$|CLAUDE\.md$)'
 if echo "$staged" | grep -Ev "$docs_re" | grep -q .; then
   echo "[pre-commit] app code changed -> bun run check"
   bun run check
+  # The gate audits HEAD; the commit being made is scanned here.
+  bun run check-confidential --staged
 elif echo "$staged" | grep -Eq '^src/content/'; then
   echo "[pre-commit] content changed -> validating bios against the schema"
   bun run typecheck
