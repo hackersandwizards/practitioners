@@ -219,7 +219,7 @@ References: [Homebrew services](https://docs.brew.sh/Manpage#services-subcommand
 
 `src/lib/schema.ts` says what an entry is, and the pre-commit hook in `.githooks/` checks every
 staged bio against it on your machine. `bun install` enables the hook. Your pull request gets the
-same check on GitHub, plus a scan for leaked secrets.
+same bio check on GitHub, plus a scan for leaked secrets.
 
 ## Layout
 
