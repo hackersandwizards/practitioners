@@ -49,8 +49,11 @@ own words, and commits it only after their yes to exactly that text.
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
    change touches only their folder. Otherwise comment and merge nothing.
-2. `gh pr checkout <number>`, then `bun run typecheck`. Style findings under step 5 below go into
-   a review comment; their wording stays theirs.
+2. `gh pr checkout <number>`, then `bun run typecheck` and `bun run check-confidential --tree HEAD`.
+   A confidential term other than the person's own name is a review comment and blocks the merge;
+   their own name gets a `scaffolding.allow` entry in `package.json` with that spelling as `text`,
+   committed in step 3. Style findings under step 5 below go into a review comment; their wording
+   stays theirs.
 3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a 480x480
    `photo.webp`, the upload removed; set `owner` to their name, `updated`, and `status: active`
    once the mandatory list is complete; commit with the paths named and push.
