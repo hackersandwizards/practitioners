@@ -20,7 +20,7 @@ const { data } = entry;
 ---
 
 <li
-  class="hw-card person relative min-w-0 [--hw-card-pad:1rem]"
+  class="hw-card min-w-0 [--hw-card-pad:1rem]"
   data-name={data.name}
   data-draft={data.status === "draft" ? "" : undefined}
   data-unlisted={listed ? undefined : ""}
@@ -35,9 +35,9 @@ const { data } = entry;
     class="aspect-square w-full rounded-brand object-cover"
   />
   <p class="mt-4 font-medium hyphens-auto text-ink">
-    <a href={`/${entry.id}/`} class="after:absolute after:inset-0 focus-visible:outline-none">
+    <a href={`/${entry.id}/`} class="hw-card-link">
       <span>{data.name}</span>
-      <span class="hw-arrow text-teal-dark" aria-hidden="true">
+      <span class="hw-arrow" aria-hidden="true">
         &nbsp;<span>→</span>
       </span>
     </a>
@@ -46,10 +46,7 @@ const { data } = entry;
   {(data.status === "draft" || !listed) && (
     <p class="mt-3 flex flex-wrap gap-1.5">
       {data.status === "draft" && (
-        <span
-          class="hw-pill"
-          style="--hw-pill-hue: var(--color-amber-dark); --hw-pill-hue-night: var(--color-amber)"
-        >
+        <span class="hw-pill" data-state="draft">
           Draft
         </span>
       )}
@@ -61,33 +58,3 @@ const { data } = entry;
     </p>
   )}
 </li>
-
-<style>
-  /* The website's linked card in brief: the border turns teal under the pointer, and the card,
-     not the name, carries the focus ring. Brand has no linked card yet; once it
-     has one, this block goes. */
-  @media (hover: hover) {
-    .person:hover {
-      border-color: var(--color-teal);
-    }
-    .person:hover .hw-arrow > span {
-      translate: 4px 0;
-    }
-  }
-  .person:has(a:focus-visible) .hw-arrow > span {
-    translate: 4px 0;
-  }
-  .person:has(a:focus-visible) {
-    outline: 3px solid var(--color-purple);
-    outline-offset: 2px;
-  }
-  :global([data-theme="dark"]) .person .hw-arrow {
-    color: var(--color-teal-night);
-  }
-  :global([data-theme="dark"]) .person:hover {
-    border-color: var(--color-teal-night);
-  }
-  :global([data-theme="dark"]) .person:has(a:focus-visible) {
-    outline-color: var(--color-purple-night);
-  }
-</style>
