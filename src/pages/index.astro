@@ -6,26 +6,23 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import PersonCard from "../components/PersonCard.astro";
 import { repo, shown } from "../lib/entry";
-import { roster, team } from "../lib/website";
+import { nameKey, roster, team } from "../lib/website";
 
 const web = await roster();
-const people = (await getCollection("practitioners", (e) => shown(e.data))).sort((a, b) =>
-  a.data.name.localeCompare(b.data.name),
-);
-const unlisted = (name: string) => Boolean(web && !web.has(name));
+const people = (await getCollection("practitioners", (e) => shown(e.data)))
+  .sort((a, b) => a.data.name.localeCompare(b.data.name))
+  .map((entry) => ({ entry, job: web?.get(nameKey(entry.data.name)) }));
+const unlisted = ({ job }: (typeof people)[number]) => Boolean(web && job === undefined);
+// A filter that would show nobody, such as drafts in a public build, is left out.
 const filters = [
   { key: "all", label: "All", count: people.length },
-  { key: "draft", label: "Drafts", count: people.filter((e) => e.data.status === "draft").length },
-  ...(web
-    ? [
-        {
-          key: "unlisted",
-          label: "Not on the website",
-          count: people.filter((e) => unlisted(e.data.name)).length,
-        },
-      ]
-    : []),
-];
+  {
+    key: "draft",
+    label: "Drafts",
+    count: people.filter((p) => p.entry.data.status === "draft").length,
+  },
+  { key: "unlisted", label: "Not on the website", count: people.filter(unlisted).length },
+].filter((f) => f.key === "all" || f.count > 0);
 ---
 
 <Layout title="Practitioners" bleed>
@@ -76,15 +73,8 @@ const filters = [
     </div>
 
     <ul class="mt-6 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4" id="people">
-      {people.map((e) => (
-        <PersonCard
-          entry={e}
-          job={web?.get(e.data.name)}
-          listed={!unlisted(e.data.name)}
-          data-name={e.data.name.toLowerCase()}
-          data-draft={e.data.status === "draft" ? "" : undefined}
-          data-unlisted={unlisted(e.data.name) ? "" : undefined}
-        />
+      {people.map((p) => (
+        <PersonCard entry={p.entry} job={p.job} listed={!unlisted(p)} />
       ))}
     </ul>
     <p class="mt-6 text-muted" id="none" hidden>
@@ -98,12 +88,15 @@ const filters = [
   const find = document.querySelector<HTMLInputElement>("#find")!;
   const buttons = [...document.querySelectorAll<HTMLButtonElement>("[data-filter]")];
   const cards = [...document.querySelectorAll<HTMLElement>("#people > [data-name]")];
+  // "caluk" finds Čaluk and "buss" finds Buß.
+  const fold = (s: string) =>
+    s.normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss").toLowerCase();
   let filter = "all";
   const apply = () => {
-    const q = find.value.trim().toLowerCase();
+    const q = fold(find.value.trim());
     for (const card of cards)
       card.hidden =
-        !card.dataset.name!.includes(q) || (filter !== "all" && !(filter in card.dataset));
+        !fold(card.dataset.name!).includes(q) || (filter !== "all" && !(filter in card.dataset));
     document.querySelector<HTMLElement>("#none")!.hidden = cards.some((card) => !card.hidden);
   };
   find.addEventListener("input", apply);
@@ -114,4 +107,6 @@ const filters = [
       apply();
     });
   document.querySelector<HTMLElement>("#controls")!.hidden = false;
+  // The browser restores a typed search on back or reload after this script runs.
+  addEventListener("pageshow", apply);
 </script>
