@@ -1,0 +1,85 @@
+---
+// One person as the website's team grid shows them: portrait, name, the website's role. The whole
+// card opens the detail page through the name's link, stretched over the card, so the card holds
+// one link named by the person; its arrow says the card opens something (blind review 07.11.).
+// The hub adds what the website never shows: a draft, and someone the website does not list yet.
+import type { CollectionEntry } from "astro:content";
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"li"> {
+  entry: CollectionEntry<"practitioners">;
+  /** The website's role line; undefined when the website does not list the person. */
+  job?: string;
+  /** False when the website's team page was read and does not list the person. */
+  listed: boolean;
+}
+const { entry, job, listed, ...attrs } = Astro.props;
+const { data } = entry;
+---
+
+<li class="hw-card person relative min-w-0 [--hw-card-pad:1rem]" {...attrs}>
+  <Image
+    src={data.photo}
+    alt=""
+    width={480}
+    height={480}
+    loading="lazy"
+    class="aspect-square w-full rounded-brand object-cover"
+  />
+  <p class="mt-4 font-medium hyphens-auto text-ink">
+    <a href={`/${entry.id}/`} class="after:absolute after:inset-0 focus-visible:outline-none">
+      <span>{data.name}</span>
+      <span class="hw-arrow text-teal-dark" aria-hidden="true">
+        &nbsp;<span>→</span>
+      </span>
+    </a>
+  </p>
+  {job && <p class="mt-1 text-small text-muted">{job}</p>}
+  {(data.status === "draft" || !listed) && (
+    <p class="mt-3 flex flex-wrap gap-1.5">
+      {data.status === "draft" && (
+        <span
+          class="hw-pill"
+          style="--hw-pill-hue: var(--color-amber-dark); --hw-pill-hue-night: var(--color-amber)"
+        >
+          Draft
+        </span>
+      )}
+      {!listed && (
+        <span class="hw-pill" data-variant="outline">
+          Not on the website
+        </span>
+      )}
+    </p>
+  )}
+</li>
+
+<style>
+  /* The website's linked card in brief: the border turns teal under the pointer, and the card,
+     not the name, carries the focus ring. Brand has no linked card yet (report, brand brief). */
+  .person {
+    cursor: pointer;
+  }
+  @media (hover: hover) {
+    .person:hover {
+      border-color: var(--color-teal);
+    }
+    .person:hover .hw-arrow > span {
+      translate: 4px 0;
+    }
+  }
+  .person:has(a:focus-visible) {
+    outline: 3px solid var(--color-purple);
+    outline-offset: 2px;
+  }
+  :global([data-theme="dark"]) .person .hw-arrow {
+    color: var(--color-teal-night);
+  }
+  :global([data-theme="dark"]) .person:hover {
+    border-color: var(--color-teal-night);
+  }
+  :global([data-theme="dark"]) .person:has(a:focus-visible) {
+    outline-color: var(--color-purple-night);
+  }
+</style>
