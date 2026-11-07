@@ -5,10 +5,8 @@ import "../styles/global.css";
 
 interface Props {
   title: string;
-  /** A page whose content runs edge to edge, such as a profile with its night hero. */
-  bleed?: boolean;
 }
-const { title, bleed = false } = Astro.props;
+const { title } = Astro.props;
 ---
 
 <!doctype html>
@@ -31,7 +29,7 @@ const { title, bleed = false } = Astro.props;
     <AppHeader product="Practitioners">
       <ThemeToggle />
     </AppHeader>
-    <main class:list={["w-full flex-1", !bleed && "hw-container pb-16"]}>
+    <main class="w-full flex-1">
       <slot />
     </main>
   </body>

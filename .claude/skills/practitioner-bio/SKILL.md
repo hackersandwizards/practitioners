@@ -136,4 +136,3 @@ updated: "2026-09-06" # quoted, or YAML makes it a Date and the schema rejects i
 ## Boundaries
 
 - Name no client without public coverage of the work; describe the work instead.
-- Role and group are the website's roster. Flag a wish, do not write it here.

@@ -4,7 +4,7 @@ Context for Claude Code sessions in this repo.
 
 ## What Is This
 
-The people behind hackersandwizards.dev/practitioners, one directory each under
+The people behind hackersandwizards.dev/team, one directory each under
 `src/content/practitioners/<slug>/`: `bio.md` (frontmatter plus the English text), `bio.de.md`
 (the German text) and `photo.webp`. Optionally `bio.short.md`, a version of the English bio
 capped at 300 characters for conference CfPs and speaker forms; no collection loads it, so it is
@@ -24,9 +24,5 @@ entry carries neither its person's own change nor their yes to its text
 ## Gate
 
 There is no CI. `src/lib/schema.ts` is the contract; `.githooks/pre-commit` runs `astro check`
-against it when a bio is staged and `bun run check` when anything else is. `bun install` enables
-the hooks per clone.
-
-## Git
-
-Name the paths on `git commit` itself. Never `git add -A`, never a bare `git commit`.
+against it when a bio is staged, and `.githooks/README.md` lists what else it runs for which path.
+`bun install` enables the hooks per clone.

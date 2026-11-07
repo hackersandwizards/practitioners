@@ -1,15 +1,20 @@
 #!/usr/bin/env bash
 set -e
 # core.quotePath=false, or git escapes umlaut paths and the anchored patterns below miss them.
-staged=$(git -c core.quotePath=false diff --cached --name-only --diff-filter=ACMRD)
+# --no-renames lists a moved file's old path too, so moving a file out of app code runs the gate.
+staged=$(git -c core.quotePath=false diff --cached --name-only --no-renames --diff-filter=ACMD)
+content_re='^src/content/'
 docs_re='^(src/content/|\.claude/|README\.md$|CLAUDE\.md$)'
 
 if echo "$staged" | grep -Ev "$docs_re" | grep -q .; then
   echo "[pre-commit] app code changed -> bun run check"
   bun run check
-  # The gate audits HEAD; the commit being made is scanned here.
-  bun run check-confidential --staged
-elif echo "$staged" | grep -Eq '^src/content/'; then
+elif echo "$staged" | grep -Eq "$content_re"; then
   echo "[pre-commit] content changed -> validating bios against the schema"
   bun run typecheck
+fi
+# Only h&w commits outside src/content/, and only h&w can fetch the confidential list. The gate
+# audits HEAD; the commit being made is scanned here.
+if echo "$staged" | grep -Ev "$content_re" | grep -q .; then
+  bun run check-confidential --staged
 fi
