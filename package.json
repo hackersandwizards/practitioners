@@ -158,12 +158,6 @@
       },
       {
         "check": "confidential",
-        "path": "src/content/practitioners/marco-kopcke/**",
-        "text": "Marco Köpcke",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
         "path": "src/content/practitioners/matthias-bargmann/**",
         "text": "matthias bargmann",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
