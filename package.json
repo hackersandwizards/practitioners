@@ -41,19 +41,7 @@
       {
         "check": "confidential",
         "path": "docs/agent-work/items/profile-mail-round.md",
-        "text": "Danny Busch",
-        "reason": "the practitioner's name in the list of whom the profile mail went to; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in this item"
-      },
-      {
-        "check": "confidential",
-        "path": "docs/agent-work/items/profile-mail-round.md",
         "text": "Denis Turkov",
-        "reason": "the practitioner's name in the list of whom the profile mail went to; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in this item"
-      },
-      {
-        "check": "confidential",
-        "path": "docs/agent-work/items/profile-mail-round.md",
-        "text": "Ivan Petkovic",
         "reason": "the practitioner's name in the list of whom the profile mail went to; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in this item"
       },
       {
