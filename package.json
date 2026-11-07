@@ -26,7 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.9.1",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.12.0",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.13.0",
     "@types/bun": "1.4.4",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
@@ -41,331 +41,65 @@
       {
         "check": "confidential",
         "path": "docs/agent-work/items/profile-mail-round.md",
-        "text": "Denis Turkov",
-        "reason": "the practitioner's name in the list of whom the profile mail went to; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in this item"
-      },
-      {
-        "check": "confidential",
-        "path": "docs/agent-work/items/profile-mail-round.md",
-        "text": "Marco Köpcke",
-        "reason": "the practitioner's name in the list of whom the profile mail went to; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in this item"
-      },
-      {
-        "check": "confidential",
-        "path": "docs/agent-work/items/profile-mail-round.md",
-        "text": "Thomas Kern",
+        "text": [
+          "Denis Turkov",
+          "Marco Köpcke",
+          "Thomas Kern"
+        ],
         "reason": "the practitioner's name in the list of whom the profile mail went to; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in this item"
       },
       {
         "check": "confidential",
         "path": "file names",
-        "text": "anastasia karavdina",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "daniel moll",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "danny busch",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "dat tran",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "denis turkov",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "fabian wesner",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "florian krause",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "henning thies",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "ivan petkovic",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "jonathan stemmildt",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "matthias bargmann",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "ole wendland",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "robert glaser",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "steffen heilmann",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "thomas kern",
-        "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
-      },
-      {
-        "check": "confidential",
-        "path": "file names",
-        "text": "verena traub",
+        "text": [
+          "anastasia karavdina",
+          "daniel moll",
+          "danny busch",
+          "dat tran",
+          "denis turkov",
+          "fabian wesner",
+          "florian krause",
+          "henning thies",
+          "ivan petkovic",
+          "jonathan stemmildt",
+          "matthias bargmann",
+          "ole wendland",
+          "robert glaser",
+          "steffen heilmann",
+          "thomas kern",
+          "verena traub"
+        ],
         "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
       },
       {
         "check": "confidential",
         "path": "package.json",
-        "text": "anastasia karavdina",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Anastasia Karavdina",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "daniel moll",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Daniel Moll",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "danny busch",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Danny Busch",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "dat tran",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Dat Tran",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "denis turkov",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Denis Turkov",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "fabian wesner",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Fabian Wesner",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "florian krause",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Florian Krause",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "henning thies",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Henning Thies",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "ivan petkovic",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Ivan Petkovic",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "jonathan stemmildt",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Jonathan Stemmildt",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Marco Köpcke",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "matthias bargmann",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Matthias Bargmann",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "ole wendland",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Ole Wendland",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "robert glaser",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Robert Glaser",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "steffen heilmann",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Steffen Heilmann",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Sven Christian Andrä",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "thomas kern",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Thomas Kern",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "verena traub",
-        "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
-      },
-      {
-        "check": "confidential",
-        "path": "package.json",
-        "text": "Verena Traub",
+        "text": [
+          "anastasia karavdina",
+          "daniel moll",
+          "danny busch",
+          "dat tran",
+          "denis turkov",
+          "fabian wesner",
+          "florian krause",
+          "henning thies",
+          "ivan petkovic",
+          "jonathan stemmildt",
+          "Marco Köpcke",
+          "matthias bargmann",
+          "ole wendland",
+          "robert glaser",
+          "steffen heilmann",
+          "Sven Christian Andrä",
+          "thomas kern",
+          "verena traub"
+        ],
         "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
       },
       {
         "check": "confidential",
         "path": "src/content/practitioners/anastasia-karavdina/**",
         "text": "anastasia karavdina",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/anastasia-karavdina/**",
-        "text": "Anastasia Karavdina",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
@@ -382,20 +116,8 @@
       },
       {
         "check": "confidential",
-        "path": "src/content/practitioners/danny-busch/**",
-        "text": "Danny Busch",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
         "path": "src/content/practitioners/dat-tran/**",
         "text": "dat tran",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/dat-tran/**",
-        "text": "Dat Tran",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
@@ -412,20 +134,8 @@
       },
       {
         "check": "confidential",
-        "path": "src/content/practitioners/dr-florian-krause/**",
-        "text": "Florian Krause",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
         "path": "src/content/practitioners/fabian-wesner/**",
         "text": "fabian wesner",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/fabian-wesner/**",
-        "text": "Fabian Wesner",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
@@ -460,20 +170,8 @@
       },
       {
         "check": "confidential",
-        "path": "src/content/practitioners/matthias-bargmann/**",
-        "text": "Matthias Bargmann",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
         "path": "src/content/practitioners/ole-wendland/**",
         "text": "ole wendland",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/ole-wendland/**",
-        "text": "Ole Wendland",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
@@ -502,20 +200,8 @@
       },
       {
         "check": "confidential",
-        "path": "src/content/practitioners/thomas-kern/**",
-        "text": "Thomas Kern",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
         "path": "src/content/practitioners/verena-traub/**",
         "text": "verena traub",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/verena-traub/**",
-        "text": "Verena Traub",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       }
     ],
