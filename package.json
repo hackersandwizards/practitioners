@@ -18,7 +18,7 @@
     "check:inline-space": "bun scripts/check-inline-space.ts"
   },
   "dependencies": {
-    "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.19.2",
+    "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.20.0",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.4.4",
     "tailwindcss": "4.3.3"
@@ -26,7 +26,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.9.1",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.11.7",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.12.0",
     "@types/bun": "1.4.4",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
