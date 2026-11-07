@@ -26,12 +26,12 @@ export const missing = (entry: CollectionEntry<"practitioners">, german: string 
   [
     (!entry.body?.trim() || entry.body.includes("Seed draft")) && "English bio",
     !german?.trim() && "German bio",
-    !entry.data.linkedin && "LinkedIn",
+    // Reachy, the familiar, has no LinkedIn (schema.ts).
+    !entry.data.linkedin && entry.id !== "reachy" && "LinkedIn",
   ].filter((m): m is string => Boolean(m));
 
 /** A build that could go public carries only `active` entries, the ones their person approved.
  *  Drafts and seeds show in the dev server and in the gate's preview build (PREVIEW=1, into
- *  .preview/), which renders
- *  every page so a broken one fails the gate. */
+ *  .preview/), which renders every page so a broken one fails the gate. */
 export const shown = (d: Data) =>
   import.meta.env.DEV || process.env.PREVIEW === "1" || d.status === "active";

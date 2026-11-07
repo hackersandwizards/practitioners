@@ -26,7 +26,7 @@ const lacks = missing(entry, de?.body);
 const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
 ---
 
-<Layout title={data.name} bleed>
+<Layout title={data.name}>
   <header class="bg-night text-night-ink" data-theme="dark" data-hw-night>
     <div class="mx-auto max-w-content px-gutter pt-6">
       <nav class="hw-breadcrumb" aria-label="Breadcrumb">
@@ -47,6 +47,7 @@ const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
         alt={`Portrait of ${data.name}`}
         width={480}
         height={480}
+        priority
         class="size-40 rounded-brand object-cover lg:size-60 lg:justify-self-end"
       />
     </div>

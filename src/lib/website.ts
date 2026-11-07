@@ -31,5 +31,16 @@ async function load(): Promise<Map<string, string> | undefined> {
 }
 
 let cached: ReturnType<typeof load> | undefined;
-/** Fetched once per process: the dev server renders the overview on every request. */
-export const roster = () => (cached ??= load());
+/** Fetched once per process: the dev server renders the overview on every request. An unreachable
+ *  or failing page is asked again on the next request, so a dev server started offline recovers. */
+export const roster = () =>
+  (cached ??= load().then(
+    (r) => {
+      if (!r) cached = undefined;
+      return r;
+    },
+    (e) => {
+      cached = undefined;
+      throw e;
+    },
+  ));
