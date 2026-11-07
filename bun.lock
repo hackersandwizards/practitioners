@@ -5,7 +5,7 @@
     "": {
       "name": "practitioners",
       "dependencies": {
-        "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.19.2",
+        "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.20.0",
         "@tailwindcss/vite": "4.3.3",
         "astro": "7.4.4",
         "tailwindcss": "4.3.3",
@@ -13,7 +13,7 @@
       "devDependencies": {
         "@astrojs/check": "0.9.12",
         "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.9.1",
-        "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.11.7",
+        "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.12.0",
         "@types/bun": "1.4.4",
         "eslint": "10.14.0",
         "eslint-plugin-astro": "3.2.1",
@@ -155,9 +155,9 @@
 
     "@hackersandwizards/admin": ["@hackersandwizards/admin@github:hackersandwizards/admin#3389b2c", { "peerDependencies": { "@hackersandwizards/brand": ">=1.15.0", "@hackersandwizards/scaffolding": ">=2.3.0", "@tailwindcss/typography": "^0.5.20", "@tailwindcss/vite": "^4.3.3", "astro": "^7.4.4", "tailwindcss": "^4.3.3" }, "optionalPeers": ["@hackersandwizards/brand", "@hackersandwizards/scaffolding"], "hasInstallScript": true, "bin": { "admin-serve": "bin/admin-serve.ts", "admin-check": "bin/admin-check.ts" } }, "hackersandwizards-admin-3389b2c", "sha512-8tT0PBWQJXskyaVnLyhtiuPcTDXnygePajkkluaie8IMASPpzxsVpcfW9+qepS5Y0l6KcsQS9k09oKnaWzqWQg=="],
 
-    "@hackersandwizards/brand": ["@hackersandwizards/brand@github:hackersandwizards/brand#5bcdfc6", { "dependencies": { "puppeteer-core": "25.16.0" }, "hasInstallScript": true, "bin": { "brand-colours": "scan/colours.ts", "brand-copies": "scan/copies.ts", "brand-scan": "scan/components.ts", "brand-markers": "scan/markers.ts", "brand-elements": "scan/elements.ts", "brand-retired": "scan/retired.ts", "brand-linkedin-frame": "applications/linkedin-visuals/frame.ts", "brand-linkedin-terminal": "applications/linkedin-visuals/terminal.ts", "brand-linkedin-sketch-prompt": "applications/linkedin-visuals/sketch-prompt.ts", "brand-slide-sketch-prompt": "applications/slide-visuals/sketch-prompt.ts", "brand-mail-signature": "applications/mail-signature/cli.ts" } }, "hackersandwizards-brand-5bcdfc6", "sha512-hnuiusNeR6b/DaN4oGbDD3DReb8O8k/pBf5VwDCkVAj1eefOtnJ8UIPyceCELGZ35yXaOwHjE9tyX+fOtdzDrQ=="],
+    "@hackersandwizards/brand": ["@hackersandwizards/brand@github:hackersandwizards/brand#31e4d6d", { "dependencies": { "puppeteer-core": "25.16.0" }, "hasInstallScript": true, "bin": { "brand-colours": "scan/colours.ts", "brand-copies": "scan/copies.ts", "brand-scan": "scan/components.ts", "brand-markers": "scan/markers.ts", "brand-elements": "scan/elements.ts", "brand-retired": "scan/retired.ts", "brand-linkedin-frame": "applications/linkedin-visuals/frame.ts", "brand-linkedin-terminal": "applications/linkedin-visuals/terminal.ts", "brand-linkedin-sketch-prompt": "applications/linkedin-visuals/sketch-prompt.ts", "brand-slide-sketch-prompt": "applications/slide-visuals/sketch-prompt.ts", "brand-mail-signature": "applications/mail-signature/cli.ts" } }, "hackersandwizards-brand-31e4d6d", "sha512-9CBpUmSGWbJaprILr3aIqBu0gvXjJbdUV7aBGlnuzwiY/Ivz8VXHWu9UVMxSZSzRM0CaYc/nkghJcyZm5Y+MGw=="],
 
-    "@hackersandwizards/scaffolding": ["@hackersandwizards/scaffolding@github:hackersandwizards/scaffolding#b353b8a", { "dependencies": { "@eslint/js": "10.0.1", "eslint-config-prettier": "10.1.8", "globals": "17.14.0", "postcss-html": "2.0.0", "prettier-plugin-astro": "1.1.2", "stylelint-value-no-unknown-custom-properties": "6.1.1", "typescript-eslint": "8.72.1" }, "peerDependencies": { "astro": ">=7", "astrobook": ">=0.13", "eslint": ">=10", "eslint-plugin-astro": ">=1", "prettier": ">=3", "stylelint": ">=16", "typescript": ">=5" }, "optionalPeers": ["astro", "astrobook", "eslint", "eslint-plugin-astro", "prettier", "stylelint", "typescript"], "hasInstallScript": true, "bin": { "scaffold": "bin/scaffold.ts", "check-structure": "bin/check-structure.ts", "check-confidential": "bin/check-confidential.ts", "check-staged": "bin/check-staged.ts", "scaffolding": "bin/scaffolding.ts" } }, "hackersandwizards-scaffolding-b353b8a", "sha512-3yzSdSVaw7FXkh7vxF2/NLmNsntaouu2uqR5Oa5esyZFWqQPIAk8YfAZ7IhrYhbIFBxG9AMbAUGSi2lTqj4Z0g=="],
+    "@hackersandwizards/scaffolding": ["@hackersandwizards/scaffolding@github:hackersandwizards/scaffolding#5db0fcf", { "dependencies": { "@eslint/js": "10.0.1", "eslint-config-prettier": "10.1.8", "globals": "17.14.0", "postcss-html": "2.0.0", "prettier-plugin-astro": "1.1.2", "stylelint-value-no-unknown-custom-properties": "6.1.1", "typescript-eslint": "8.72.1" }, "peerDependencies": { "astro": ">=7", "astrobook": ">=0.13", "eslint": ">=10", "eslint-plugin-astro": ">=1", "prettier": ">=3", "stylelint": ">=16", "typescript": ">=5" }, "optionalPeers": ["astro", "astrobook", "eslint", "eslint-plugin-astro", "prettier", "stylelint", "typescript"], "hasInstallScript": true, "bin": { "scaffold": "bin/scaffold.ts", "check-structure": "bin/check-structure.ts", "check-confidential": "bin/check-confidential.ts", "check-staged": "bin/check-staged.ts", "scaffolding": "bin/scaffolding.ts" } }, "hackersandwizards-scaffolding-5db0fcf", "sha512-LSP+fI+2FGjLEfHhao5DSAhIclPnQN/7XDW5nQ5ns1iDQzPKoAXmLKn/YkWSUx1xwozz7jvjG4bSmQ2aqL65Cg=="],
 
     "@humanfs/core": ["@humanfs/core@0.19.2", "", { "dependencies": { "@humanfs/types": "^0.15.0" } }, "sha512-UhXNm+CFMWcbChXywFwkmhqjs3PRCmcSa/hfBgLIb7oQ5HNb1wS0icWsGtSAUNgefHeI+eBrA8I1fxmbHsGdvA=="],
 
