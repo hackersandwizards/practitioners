@@ -13,6 +13,7 @@
 @import "@hackersandwizards/brand/elements/arrow-link.css";
 @import "@hackersandwizards/brand/elements/breadcrumb.css";
 @import "@hackersandwizards/brand/elements/status.css";
+@import "@hackersandwizards/brand/elements/focus.css";
 
 @layer base {
   * {
