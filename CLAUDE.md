@@ -23,6 +23,7 @@ entry carries neither its person's own change nor their yes to its text
 
 ## Gate
 
-There is no CI. `src/lib/schema.ts` is the contract; `.githooks/pre-commit` runs `astro check`
-against it when a bio is staged, and `.githooks/README.md` lists what else it runs for which path.
-`bun install` enables the hooks per clone.
+`src/lib/schema.ts` is the contract; `.githooks/pre-commit` runs `astro check` against it when a
+bio is staged, and `.githooks/README.md` lists what else it runs for which path. `bun install`
+enables the hooks per clone. A pull request skips them, so `.github/workflows/pull-request.yml`
+runs `astro check` and gitleaks over its commits; that is the only CI.
