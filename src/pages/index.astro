@@ -1,81 +1,117 @@
 ---
-import { getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
+// Everyone in this repo as hackersandwizards.dev/team/ shows them, alphabetical, each card opening
+// the person's page. Grouping is the website's roster, so nothing here is grouped; the website's
+// published team page says who it lists and with which role (lib/website.ts).
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
-import Links from "../components/Links.astro";
+import PersonCard from "../components/PersonCard.astro";
 import { repo, shown } from "../lib/entry";
+import { roster, team } from "../lib/website";
 
-/** Preview of what hackersandwizards.dev renders from this repo: every entry, alphabetical.
- *  Grouping and roles are the website's roster, so nothing here is grouped. */
+const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data))).sort((a, b) =>
   a.data.name.localeCompare(b.data.name),
 );
-const german = new Map((await getCollection("practitionersDe")).map((e) => [e.id, e]));
-
-const cards = await Promise.all(
-  people.map(async (entry) => {
-    const de = german.get(entry.id);
-    return {
-      entry,
-      En: (await render(entry)).Content,
-      De: de ? (await render(de)).Content : undefined,
-    };
-  }),
-);
+const unlisted = (name: string) => Boolean(web && !web.has(name));
+const filters = [
+  { key: "all", label: "All", count: people.length },
+  { key: "draft", label: "Drafts", count: people.filter((e) => e.data.status === "draft").length },
+  ...(web
+    ? [
+        {
+          key: "unlisted",
+          label: "Not on the website",
+          count: people.filter((e) => unlisted(e.data.name)).length,
+        },
+      ]
+    : []),
+];
 ---
 
-<Layout title="Practitioners">
-  <h1 class="mt-8 font-mono text-2xl font-bold tracking-tight">Practitioners</h1>
-  <p class="mt-2 max-w-2xl text-sm text-muted">
-    Each entry is the source for{" "}
-    <a href="https://www.hackersandwizards.dev/team/" class="hw-link">
-      hackersandwizards.dev/team
-    </a>
-    , so what you read here is what a client reads there.
-  </p>
-  <p class="mt-3 hw-callout max-w-2xl text-sm">
-    <strong class="font-medium text-ink">How an entry gets finished:</strong> each person improves
-    their own folder through a pull request, in the browser or with Claude Code, and h&w merges it.
-    Their pull request, or their reply that it fits, is their yes.{" "}
-    <a href={`${repo}/blob/main/CONTRIBUTING.md`} class="hw-link">
-      CONTRIBUTING.md
-    </a>{" "}
-    says how.
-  </p>
+<Layout title="Practitioners" bleed>
+  <div class="mx-auto w-full max-w-content px-gutter pb-section">
+    <h1 class="mt-8 font-mono text-h2 font-bold tracking-tight">Practitioners</h1>
+    <p class="mt-2 max-w-measure text-muted">
+      Each card shows a person as{" "}
+      <a href={team} class="hw-link">
+        hackersandwizards.dev/team
+      </a>{" "}
+      shows them. Open a card to read and check the full entry.
+    </p>
+    <p class="mt-3 max-w-measure text-small text-muted">
+      Each person improves their own entry by pull request, as{" "}
+      <a href={`${repo}/blob/main/CONTRIBUTING.md`} class="hw-link">
+        CONTRIBUTING.md
+      </a>{" "}
+      describes.
+    </p>
+    {!web && (
+      <p class="mt-3 hw-callout max-w-measure text-small">
+        The website's team page could not be read when this page was built, so roles and who is not
+        on the website yet are missing.
+      </p>
+    )}
 
-  <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {cards.map(({ entry, En, De }) => (
-      <article class="flex flex-col rounded-brand border p-5">
-        <Image
-          src={entry.data.photo}
-          alt={entry.data.name}
-          width={480}
-          height={480}
-          class="aspect-square w-full rounded-brand object-cover"
+    <div class="mt-8 flex flex-wrap items-center gap-4" id="controls" hidden>
+      <input
+        type="search"
+        id="find"
+        class="hw-field w-full sm:w-72"
+        placeholder="Find a name"
+        aria-label="Find a name"
+        aria-controls="people"
+      />
+      <div class="hw-segmented max-sm:flex max-sm:w-full" role="group" aria-label="Show">
+        {filters.map((f) => (
+          <button
+            type="button"
+            class="max-sm:grow"
+            data-filter={f.key}
+            aria-pressed={f.key === "all" ? "true" : "false"}
+          >
+            {f.label} {f.count}
+          </button>
+        ))}
+      </div>
+    </div>
+
+    <ul class="mt-6 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4" id="people">
+      {people.map((e) => (
+        <PersonCard
+          entry={e}
+          job={web?.get(e.data.name)}
+          listed={!unlisted(e.data.name)}
+          data-name={e.data.name.toLowerCase()}
+          data-draft={e.data.status === "draft" ? "" : undefined}
+          data-unlisted={unlisted(e.data.name) ? "" : undefined}
         />
-        <h2 class="mt-4 font-mono font-bold">
-          <a href={`/${entry.id}/`} class="hover:text-teal-dark">
-            {entry.data.name}
-          </a>{" "}
-          {entry.data.status === "draft" && (
-            <span class="hw-pill ml-2 align-middle" data-variant="outline">
-              draft
-            </span>
-          )}
-        </h2>
-        <div class="prose hw-prose mt-3 max-w-none text-sm">
-          <En />
-        </div>
-        {De && (
-          <div lang="de" class="prose hw-prose mt-3 max-w-none border-t pt-3 text-sm">
-            <span class="hw-label" data-tone="muted">
-              DE
-            </span>
-            <De />
-          </div>
-        )}
-        <Links data={entry.data} class="mt-auto pt-4" />
-      </article>
-    ))}
+      ))}
+    </ul>
+    <p class="mt-6 text-muted" id="none" hidden>
+      Nobody matches.
+    </p>
   </div>
 </Layout>
+
+<script>
+  // The filters need script, so they show only where it runs; without it the full grid stays.
+  const find = document.querySelector<HTMLInputElement>("#find")!;
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>("[data-filter]")];
+  const cards = [...document.querySelectorAll<HTMLElement>("#people > [data-name]")];
+  let filter = "all";
+  const apply = () => {
+    const q = find.value.trim().toLowerCase();
+    for (const card of cards)
+      card.hidden =
+        !card.dataset.name!.includes(q) || (filter !== "all" && !(filter in card.dataset));
+    document.querySelector<HTMLElement>("#none")!.hidden = cards.some((card) => !card.hidden);
+  };
+  find.addEventListener("input", apply);
+  for (const button of buttons)
+    button.addEventListener("click", () => {
+      filter = button.dataset.filter!;
+      for (const b of buttons) b.setAttribute("aria-pressed", String(b === button));
+      apply();
+    });
+  document.querySelector<HTMLElement>("#controls")!.hidden = false;
+</script>

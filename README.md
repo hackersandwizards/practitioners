@@ -225,7 +225,8 @@ checks every staged bio against it on your machine. `bun install` enables the ho
 ```
 src/content/practitioners/<slug>/   bio.md, bio.de.md, photo.webp
 src/lib/schema.ts                   the contract every bio.md meets
-src/pages/index.astro               the preview, alphabetical
+src/pages/index.astro               the preview, alphabetical, as the website's team grid
+src/lib/website.ts                  who hackersandwizards.dev/team/ lists, read from its JSON-LD
 scripts/check-inline-space.ts       fails on a line break that the build turns into a missing space
 .claude/skills/practitioner-bio/    reviewing a pull request, the mail and the interview
 .githooks/                          the gate
