@@ -4,7 +4,6 @@
 @import "@hackersandwizards/brand/night.css";
 @import "@hackersandwizards/brand/header.css";
 @import "@hackersandwizards/brand/elements/scales.css";
-@import "@hackersandwizards/brand/elements/label.css";
 @import "@hackersandwizards/brand/elements/pill.css";
 @import "@hackersandwizards/brand/elements/callout.css";
 @import "@hackersandwizards/brand/elements/card.css";
@@ -14,8 +13,6 @@
 @import "@hackersandwizards/brand/elements/arrow-link.css";
 @import "@hackersandwizards/brand/elements/breadcrumb.css";
 @import "@hackersandwizards/brand/elements/status.css";
-@import "@hackersandwizards/brand/elements/prose.css";
-@plugin "@tailwindcss/typography";
 
 @layer base {
   * {

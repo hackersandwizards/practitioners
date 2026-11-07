@@ -6,7 +6,6 @@
       "name": "practitioners",
       "dependencies": {
         "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.19.2",
-        "@tailwindcss/typography": "0.5.20",
         "@tailwindcss/vite": "4.3.3",
         "astro": "7.4.4",
         "tailwindcss": "4.3.3",
