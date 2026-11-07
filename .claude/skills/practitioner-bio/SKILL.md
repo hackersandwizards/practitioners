@@ -36,7 +36,9 @@ never written into a file in this repo.
 
 The person's own change is their yes: a pull request or commit they made to their folder publishes
 the entry as it stands after that change. An h&w colleague edits an entry only from the person's
-own words, and commits it only after their yes to exactly that text.
+own words, and commits it only after their yes to exactly that text, and after
+`bun run check-confidential --staged` passes: the hook runs no confidential scan on a bio-only
+commit.
 
 - **Their pull request**, the default. `CONTRIBUTING.md` tells the person how, in the browser or
   with Claude Code.
@@ -49,10 +51,10 @@ own words, and commits it only after their yes to exactly that text.
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
    change touches only their folder. Otherwise comment and merge nothing.
-2. `gh pr checkout <number>`, then `bun run typecheck` and `bun run check-confidential --tree HEAD`.
-   A confidential term other than the person's own name is a review comment and blocks the merge;
-   their own name gets a `scaffolding.allow` entry in `package.json` with that spelling as `text`,
-   committed in step 3. Style findings under step 5 below go into a review comment; their wording
+2. `gh pr checkout <number>`, then `bun run check`. A confidential term other than the person's
+   own name is a review comment and blocks the merge; their own name gets one `scaffolding.allow`
+   entry in `package.json` per spelling the scan reports, with that spelling as `text`, committed
+   in step 3. Style findings under step 5 below go into a review comment; their wording
    stays theirs.
 3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a 480x480
    `photo.webp`, the upload removed; set `owner` to their name, `updated`, and `status: active`
