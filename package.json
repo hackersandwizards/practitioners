@@ -40,18 +40,173 @@
     "allow": [
       {
         "check": "confidential",
-        "path": "src/content/practitioners/**",
-        "reason": "a practitioner's name is this repository's published content; os's term build leaves the practitioners' bios out of its public text, so the list still carries the names not on hackersandwizards.dev"
+        "text": "anastasia karavdina",
+        "reason": "a practitioner's own name, published in their entry; os's term build leaves the practitioners' bios out of its public text, so the list still carries the names not on hackersandwizards.dev. One entry per spelling the scan reports, so any other term, a client's name included, still fails"
       },
       {
         "check": "confidential",
-        "path": "file names",
-        "reason": "the same as the src/content/practitioners/** entry"
+        "text": "Anastasia Karavdina",
+        "reason": "the same as the \"anastasia karavdina\" entry"
       },
       {
         "check": "confidential",
-        "path": "docs/agent-work/items/profile-mail-round.md",
-        "reason": "the same as the src/content/practitioners/** entry"
+        "text": "daniel moll",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Daniel Moll",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "danny busch",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Danny Busch",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "dat tran",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Dat Tran",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "denis turkov",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Denis Turkov",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "fabian wesner",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Fabian Wesner",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "florian krause",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Florian Krause",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "henning thies",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Henning Thies",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "ivan petkovic",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Ivan Petkovic",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "jonathan stemmildt",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Jonathan Stemmildt",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Marco Köpcke",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "matthias bargmann",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Matthias Bargmann",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "ole wendland",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Ole Wendland",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "robert glaser",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Robert Glaser",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "steffen heilmann",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Steffen Heilmann",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Sven Christian Andrä",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "thomas kern",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Thomas Kern",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "verena traub",
+        "reason": "the same as the \"anastasia karavdina\" entry"
+      },
+      {
+        "check": "confidential",
+        "text": "Verena Traub",
+        "reason": "the same as the \"anastasia karavdina\" entry"
       }
     ],
     "typecheck": "astro check",
