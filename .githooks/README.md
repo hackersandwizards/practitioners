@@ -1,7 +1,8 @@
 # Git hooks
 
 Project-scoped hooks, enabled per clone by `bun install` (`git config core.hooksPath .githooks`).
-There is no CI: the gate runs on the machine that makes the edit.
+The gate runs on the machine that makes the edit. A pull request skips it, so
+`.github/workflows/pull-request.yml` runs `astro check` and gitleaks over its commits.
 
 | Staged                                                        | Gate                                                                        |
 | ------------------------------------------------------------- | --------------------------------------------------------------------------- |
