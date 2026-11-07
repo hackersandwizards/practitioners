@@ -65,11 +65,14 @@ commit.
 
 ## Request
 
-Load the Company OS `email` skill before the first mail call. Draft one mail per person, in their
-language, never sent by you: a founder checks and sends it. It links their page on
-`hackersandwizards.dev/team/<slug>/` where one exists, their folder on GitHub and
-`CONTRIBUTING.md`, says what the mandatory list still lacks, as the entry's page at `/<slug>/` in
-`bun run dev` lists it, and lists the proposed links. A reply with text instead of a pull request
+Load the Company OS `email` skill before the first mail call. Draft one mail per person who still
+has something to do, in their language, never sent by you: a founder checks and sends it. A founder
+gets none, nor does a person whose complete `active` entry they committed themselves. The mail does
+one thing: it opens with the ask as a question, links their page on
+`hackersandwizards.dev/team/<slug>/` where one exists, lists only what the mandatory list still
+lacks, as the entry's page at `/<slug>/` in `bun run dev` lists it, and the proposed links, one
+bullet each where there are two or more, then their folder on GitHub, `CONTRIBUTING.md` and one line
+offering the reply by mail. About 80 words without the links. A reply with text instead of a pull request
 is a correction: apply it under the style rules of step 5 below, draft a reply in the thread with
 the whole updated entry, and commit after their yes. A reply confirming the entry as it stands is
 their yes: set `owner`, `updated` and `status` as in step 3 above and commit. "Take me off":
