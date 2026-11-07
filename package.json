@@ -12,11 +12,12 @@
     "build": "astro build",
     "typecheck": "astro check",
     "format": "prettier --write .",
-    "format:check": "prettier --check .",
-    "check": "bun run format:check && bun scripts/check-inline-space.ts && bun run typecheck && bun run build && PREVIEW=1 astro build --outDir .preview"
+    "check": "scaffolding check",
+    "check:colours": "brand-colours",
+    "check:preview": "PREVIEW=1 astro build --outDir .preview"
   },
   "dependencies": {
-    "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.16.0",
+    "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.19.2",
     "@tailwindcss/typography": "0.5.20",
     "@tailwindcss/vite": "4.3.3",
     "astro": "7.4.4",
@@ -24,10 +25,43 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.9.1",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.11.7",
     "@types/bun": "1.4.4",
+    "eslint": "10.14.0",
+    "eslint-plugin-astro": "3.2.1",
     "prettier": "3.9.10",
-    "prettier-plugin-astro": "1.1.2",
+    "stylelint": "17.16.0",
     "typescript": "6.0.3",
     "zod": "4.6.7"
+  },
+  "prettier": "@hackersandwizards/scaffolding/prettier",
+  "scaffolding": {
+    "allow": [
+      {
+        "check": "confidential",
+        "path": "src/content/practitioners/**",
+        "reason": "a practitioner's name is this repository's published content; os's term build leaves the practitioners' bios out of its public text, so the list still carries the names not on hackersandwizards.dev"
+      },
+      {
+        "check": "confidential",
+        "path": "file names",
+        "reason": "a practitioner's name is this repository's published content; os's term build leaves the practitioners' bios out of its public text, so the list still carries the names not on hackersandwizards.dev"
+      },
+      {
+        "check": "confidential",
+        "path": "docs/agent-work/items/profile-mail-round.md",
+        "reason": "a practitioner's name is this repository's published content; os's term build leaves the practitioners' bios out of its public text, so the list still carries the names not on hackersandwizards.dev"
+      }
+    ],
+    "typecheck": "astro check",
+    "skip": {
+      "structure": "the skeleton would replace .githooks/pre-commit with check-staged, so a practitioner committing their own bio would need gitleaks, the confidential-terms list and macOS OCR; the bio-only commit stays astro check (CLAUDE.md, Gate)",
+      "test": "no tests: src/lib/schema.ts is the contract, and the typecheck step validates every bio against it"
+    },
+    "check": [
+      "check:colours",
+      "check:preview"
+    ]
   }
 }

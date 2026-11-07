@@ -45,13 +45,13 @@ const cards = await Promise.all(
 
   <div class="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
     {cards.map(({ entry, En, De }) => (
-      <article class="flex flex-col rounded-lg border p-5">
+      <article class="flex flex-col rounded-brand border p-5">
         <Image
           src={entry.data.photo}
           alt={entry.data.name}
           width={480}
           height={480}
-          class="aspect-square w-full rounded-lg object-cover"
+          class="aspect-square w-full rounded-brand object-cover"
         />
         <h2 class="mt-4 font-mono font-bold">
           <a href={`/${entry.id}/`} class="hover:text-teal-dark">
