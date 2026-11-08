@@ -67,8 +67,9 @@ commit.
    other spellings) and their folder as `src/content/practitioners/<slug>/**`, pushed to the pull request's branch
    before the merge, so `main` never holds the name without its entry. Style findings under step 6
    below go into a review comment; their wording stays theirs.
-3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a 480x480
-   `photo.webp`, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active`
+3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a square
+   `photo.webp` at its own size up to 1024 px (below `MIN_WIDTH` in `src/lib/photo-size.test.ts`,
+   its `AWAITING_ORIGINAL` comment says what to do), the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active`
    once the mandatory list is complete; commit with the paths named and push. A value they wished
    for a profile list: add it with its label to the list in `src/lib/schema.ts` and to their entry,
    in the same commit, unless an existing value already means it; then tell them which.
@@ -99,8 +100,9 @@ delete their directory, commit, and flag it to Stefan for the website roster.
    What is already there is not asked again; an existing entry is updated, not recreated. Keep
    frontmatter you did not collect.
 2. **Collect the links**, mandatory and optional as above.
-3. **Ask for the portrait**: a file path to a photo they like, roughly square, at least 480x480.
-   Convert it to a 480x480 `photo.webp` in their directory.
+3. **Ask for the portrait**: a file path to a photo they like, roughly square, at least
+   `MIN_WIDTH` in `src/lib/photo-size.test.ts` on each side. Convert it to a square `photo.webp`
+   at its own size up to 1024 px in their directory.
 4. **Interview for substance**, a few questions rather than a form: what they work on right now,
    the two or three stations or projects that shaped them, what they deliver with h&w, and one
    concrete thing that makes them memorable (a niche, a stack, a first).

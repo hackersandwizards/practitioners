@@ -7,7 +7,7 @@ const aaron = (await entry("aaron-spring")).data;
 const portrait = (data: typeof aaron) => ({
   data,
   alt: "",
-  widths: [240],
+  widths: [240, 480],
   sizes: "240px",
   class: "size-60",
 });
