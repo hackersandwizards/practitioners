@@ -5,7 +5,8 @@ your folder in this repository. You change it here yourself and send the change 
 request: a request for us to take it over. We check it and merge it. Change only your own folder.
 
 Your entry needs five things: your name, your LinkedIn link, an English bio, a German bio and a
-portrait. You need a free GitHub account, nothing else. Using Claude Code? Skip to
+portrait. A profile for matching is optional and helps us offer you the right trainings
+([Your profile for matching](#your-profile-for-matching)). You need a free GitHub account, nothing else. Using Claude Code? Skip to
 [With Claude Code](#with-claude-code).
 
 ## In the browser
@@ -70,6 +71,45 @@ client only where the work is public.
 
 **The portrait:** roughly square, at least 480 by 480 pixels. Upload it as a JPEG, PNG or WebP under
 any name and leave `photo.webp` in place; we crop the new one and put it in its place.
+
+## Your profile for matching
+
+Below your links, an optional profile tells us which client training fits you. We match trainers to
+a client's language, format, room and stack from these fields, so each one you fill in brings you
+work that suits you. Fill in what is true, leave the rest out. Each field takes values from a fixed
+list in [`src/lib/schema.ts`](src/lib/schema.ts). Missing a value? Name it in the pull request and
+we add it to the list.
+
+```yaml
+topics: [agentic-coding, testing-and-quality] # what you train on
+formats: [training, workshop] # also talk, coaching, hackathon, assessment
+delivery: [onsite, remote]
+audiences: [developers, qa] # who sat in your rooms
+room_levels: [using, mixed] # how far those rooms were with AI: starting, using, agentic, mixed
+group_max: 16 # the largest group you trained alone
+languages:
+  - { code: de, level: native, trains: true } # CEFR level; trains: you run trainings in it
+stack:
+  - { name: TypeScript, depth: shipped }
+ai_tools:
+  - { name: Claude Code, depth: leads, teaches: true }
+domains: [insurance] # industries you worked in
+roles: [engineer, tech-lead] # roles you held
+since: 2008 # the year of your first job in software or product
+certifications:
+  - { name: Certified Kubernetes Administrator, year: 2024 }
+public_work: # books, products, talks, articles, podcasts, courses, open source, communities
+  - { kind: talk, title: Agents in a legacy codebase, year: 2025, url: https://example.com }
+```
+
+**Depth** says what you did, so you rate nothing: `used` at work, `shipped` production work with
+it, `leads` when you set it up for a team and chose its conventions. Each step includes the one
+before. Add `teaches: true` where you have taught it to a team. Write each name as its maker spells
+it, so "Claude Code" in two profiles matches.
+
+**Public only.** This repository is public. Rates, availability, travel plans, your home town and
+contact details stay out: we keep them in our own records. Leave out an industry or a technology
+that would point to a single client under NDA.
 
 ## After your pull request
 
