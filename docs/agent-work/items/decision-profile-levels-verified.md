@@ -16,7 +16,7 @@ options:
     label: Self-declared, with a public mark where h&w has seen it
     detail: "Like Toptal's verified expert badge. Needs a public field per value and a public statement about each trainer's past deliveries."
 priority: 3
-order: 1605
+order: 1603
 ---
 
 # Who vouches for the depth and topics on a public profile
