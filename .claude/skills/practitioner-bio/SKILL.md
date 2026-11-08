@@ -68,7 +68,7 @@ commit.
    before the merge, so `main` never holds the name without its entry. Style findings under step 6
    below go into a review comment; their wording stays theirs.
 3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a 480x480
-   `photo.webp`, the upload removed; set `owner` to their name, `updated`, and `status: active`
+   `photo.webp`, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active`
    once the mandatory list is complete; commit with the paths named and push. A value they wished
    for a profile list: add it with its label to the list in `src/lib/schema.ts` and to their entry,
    in the same commit, unless an existing value already means it; then tell them which.
@@ -133,7 +133,8 @@ delete their directory, commit, and flag it to Stefan for the website roster.
 ```markdown
 ---
 name: <Full Name>
-photo: ./photo.webp
+photo: ./photo.webp # absent on a seed until the portrait arrives
+affiliation: freelance # or the company's name as it writes it; only as the person states it
 linkedin: <url>
 bluesky: <url> # optional fields only where a living profile exists
 x: <url>

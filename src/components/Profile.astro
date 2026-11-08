@@ -23,7 +23,11 @@ const facts: Fact[] = [
   {
     label: "Works for",
     pills: d.affiliation
-      ? [v.ownAffiliations[d.affiliation as keyof typeof v.ownAffiliations] ?? d.affiliation]
+      ? [
+          Object.hasOwn(v.ownAffiliations, d.affiliation)
+            ? v.ownAffiliations[d.affiliation as keyof typeof v.ownAffiliations]
+            : d.affiliation,
+        ]
       : undefined,
   },
   { label: "Trains on", pills: names(v.topics, d.topics) },

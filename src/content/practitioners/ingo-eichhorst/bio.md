@@ -1,7 +1,6 @@
 ---
 name: Ingo Eichhorst
 photo: ./photo.webp
-affiliation: IONOS
 linkedin: https://www.linkedin.com/in/ingo-eichhorst/
 github: https://github.com/ingo-eichhorst
 website: https://www.ingo-eichhorst.de

@@ -1,7 +1,6 @@
 ---
 name: Johann Laur
 photo: ./photo.webp
-affiliation: Tudock
 linkedin: https://www.linkedin.com/in/johann-laur
 github: https://github.com/johann-lr
 status: active

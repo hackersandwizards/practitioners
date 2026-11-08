@@ -30,7 +30,11 @@ const byGroup = Map.groupBy(
     (a.entry.data.affiliation ?? "").localeCompare(b.entry.data.affiliation ?? ""),
   ),
   ({ entry: { data } }) =>
-    !data.affiliation ? "none" : data.affiliation in ownAffiliations ? data.affiliation : "company",
+    !data.affiliation
+      ? "none"
+      : Object.hasOwn(ownAffiliations, data.affiliation)
+        ? data.affiliation
+        : "company",
 );
 const groups = [
   { key: "hackers&wizards", label: ownAffiliations["hackers&wizards"] },
