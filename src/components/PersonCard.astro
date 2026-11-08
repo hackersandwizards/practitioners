@@ -3,8 +3,9 @@
 // card opens the detail page through the name's link, stretched over the card, so the card holds
 // one link named by the person; its arrow says the card opens something.
 // The hub adds what the website never shows: a draft, and someone the website does not list yet.
-// data-name, data-draft and data-unlisted are what the overview's filter reads.
+// The data-filter-* attributes are what the overview's list filter reads (brand's ListFilter).
 import type { CollectionEntry } from "astro:content";
+import type { FilterItem } from "@hackersandwizards/brand/elements/list-filter.ts";
 import Portrait from "./Portrait.astro";
 
 interface Props {
@@ -15,20 +16,23 @@ interface Props {
   company?: string;
   /** False when the website's team page was read and does not list the person. */
   listed: boolean;
+  /** The card as the overview's list filter reads it, and its place on the page. */
+  filter?: { item: FilterItem; order: number };
   /** The card's rendered width, from the grid that places it. */
   sizes: string;
   /** The first card holds the largest paint above the fold, so its portrait loads first. */
   priority?: boolean;
 }
-const { entry, job, company, listed, sizes, priority } = Astro.props;
+const { entry, job, company, listed, filter, sizes, priority } = Astro.props;
 const { data } = entry;
 ---
 
 <li
   class="hw-card min-w-0 [--hw-card-pad:1rem]"
-  data-name={data.name}
-  data-draft={data.status === "draft" ? "" : undefined}
-  data-unlisted={listed ? undefined : ""}
+  data-filter-item={filter && ""}
+  data-filter-text={filter?.item.text}
+  data-filter-facets={filter && JSON.stringify(filter.item.facets)}
+  data-filter-order={filter?.order}
 >
   <Portrait
     data={data}
@@ -40,7 +44,7 @@ const { data } = entry;
   />
   <p class="mt-4 font-medium hyphens-auto text-ink">
     <a href={`/${entry.id}/`} class="hw-card-link">
-      <span>{data.name}</span>
+      <span data-filter-title>{data.name}</span>
       <span class="hw-arrow" aria-hidden="true">
         &nbsp;<span>→</span>
       </span>

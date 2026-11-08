@@ -5,14 +5,17 @@
     "card",
     "pill",
     "callout",
-    "segmented",
     "field",
+    "search",
     "link",
     "arrow-link",
     "breadcrumb",
     "status",
     "focus-ring",
     "label",
-    "facts"
+    "facts",
+    "choice",
+    "button",
+    "form-field"
   ]
 }
