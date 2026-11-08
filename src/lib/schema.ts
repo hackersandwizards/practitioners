@@ -236,4 +236,25 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       updated: z.iso.date().optional(),
     })
     // A seed may wait for its portrait; an entry the person approved may not.
-    .refine((d) => d.status === "draft" || d.photo, { message: "an active entry needs a photo" });
+    .refine((d) => d.status === "draft" || d.photo, { message: "an active entry needs a photo" })
+    // The website labels staff by their title and a partner's trainer by their firm.
+    .refine((d) => d.relation !== "staff" || d.job, { message: "staff need a job", path: ["job"] })
+    .refine((d) => d.relation !== "partner" || d.affiliation, {
+      message: "a partner's trainer needs an affiliation",
+      path: ["affiliation"],
+    });
+
+type Data = z.output<ReturnType<typeof practitionerSchema>>;
+
+/** One folder's entry.json (`./practitioners/<slug>/entry.json`, scripts/export.ts writes it): the
+ *  frontmatter as the schema parses it, the portrait as the package export subpath, and the bios
+ *  as Markdown. The union carries the schema's rules on `relation`. */
+export type EntryJson = Omit<Data, "photo" | "relation" | "job" | "affiliation"> & {
+  slug: string;
+  photo?: string;
+  bio: { en: string; de: string };
+} & (
+    | { relation: "staff"; job: Data["job"] & {}; affiliation?: string }
+    | { relation: "partner"; job?: Data["job"]; affiliation: string }
+    | { relation?: "freelance" | "guest"; job?: Data["job"]; affiliation?: string }
+  );
