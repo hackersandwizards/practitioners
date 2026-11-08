@@ -1,6 +1,7 @@
 ---
 name: Steffen Heilmann
 photo: ./photo.webp
+affiliation: SDA
 linkedin: https://www.linkedin.com/in/steffenheilmann
 status: draft
 ---

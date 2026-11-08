@@ -1,6 +1,7 @@
 ---
 name: Dana Buß
 photo: ./photo.webp
+affiliation: "hackers&wizards"
 status: draft
 ---
 

@@ -1,6 +1,7 @@
 ---
 name: Christian Tietze
 photo: ./photo.webp
+affiliation: freelance
 linkedin: https://www.linkedin.com/in/christiantietze/
 mastodon: https://mastodon.social/@ctietze
 github: https://github.com/DivineDominion

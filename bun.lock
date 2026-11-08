@@ -9,6 +9,7 @@
         "@tailwindcss/vite": "4.3.5",
         "astro": "7.4.7",
         "tailwindcss": "4.3.5",
+        "zod": "4.6.7",
       },
       "devDependencies": {
         "@astrojs/check": "0.9.12",
@@ -21,7 +22,6 @@
         "prettier": "3.9.10",
         "stylelint": "18.0.0",
         "typescript": "6.0.3",
-        "zod": "4.6.7",
       },
     },
   },

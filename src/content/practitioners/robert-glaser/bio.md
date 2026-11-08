@@ -1,6 +1,7 @@
 ---
 name: Robert Glaser
 photo: ./photo.webp
+affiliation: Exxeta
 linkedin: https://www.linkedin.com/in/robertglaser1/
 status: draft
 ---

@@ -20,6 +20,12 @@ const language = new Intl.DisplayNames(["en"], { type: "language" });
 
 type Fact = { label: string; pills?: string[]; skills?: { text: string; note: string }[] };
 const facts: Fact[] = [
+  {
+    label: "Works for",
+    pills: d.affiliation
+      ? [d.affiliation === "freelance" ? "Freelance" : d.affiliation]
+      : undefined,
+  },
   { label: "Trains on", pills: names(v.topics, d.topics) },
   { label: "Formats", pills: names(v.formats, d.formats) },
   { label: "Delivers", pills: names(v.deliveries, d.delivery) },
@@ -49,27 +55,29 @@ const work = [
 {(facts.length > 0 || work.length > 0) && (
   <div class={className}>
     <h2 class="font-mono text-h4 font-bold">Profile</h2>
-    <dl class="hw-facts mt-4 grid gap-x-stack gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
-      {facts.map((f) => (
-        <div>
-          <dt class="hw-label" data-tone="muted">
-            {f.label}
-          </dt>
-          <dd class="flex flex-wrap gap-2">
-            {f.pills?.map((p) => (
-              <span class="hw-pill" data-tone="neutral">
-                {p}
-              </span>
-            ))}
-            {f.skills?.map((s) => (
-              <span class="hw-pill" data-tone="neutral">
-                {s.text} · {s.note.toLowerCase()}
-              </span>
-            ))}
-          </dd>
-        </div>
-      ))}
-    </dl>
+    <div class="mt-4">
+      <dl class="hw-facts grid gap-x-stack gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+        {facts.map((f) => (
+          <div>
+            <dt class="hw-label" data-tone="muted">
+              {f.label}
+            </dt>
+            <dd class="flex flex-wrap gap-2">
+              {f.pills?.map((p) => (
+                <span class="hw-pill" data-tone="neutral">
+                  {p}
+                </span>
+              ))}
+              {f.skills?.map((s) => (
+                <span class="hw-pill" data-tone="neutral">
+                  {s.text} · {s.note.toLowerCase()}
+                </span>
+              ))}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
     {work.length > 0 && (
       <>
         <h3 class="hw-label mt-8" data-tone="muted">

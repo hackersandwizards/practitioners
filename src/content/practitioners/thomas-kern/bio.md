@@ -1,6 +1,7 @@
 ---
 name: Thomas Kern
 photo: ./photo.webp
+affiliation: freelance
 linkedin: https://www.linkedin.com/in/thomas-kern-pm/
 status: draft
 ---

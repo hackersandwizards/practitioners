@@ -70,7 +70,8 @@ you: what you work on now, the roles or projects that shaped you, what you do wi
 client only where the work is public.
 
 **The portrait:** roughly square, at least 480 by 480 pixels. Upload it as a JPEG, PNG or WebP under
-any name and leave `photo.webp` in place; we crop the new one and put it in its place.
+any name and leave `photo.webp` in place, if your folder has one; we crop the new one and put it
+in its place.
 
 ## Your profile for matching
 
@@ -81,6 +82,7 @@ list in [`src/lib/schema.ts`](src/lib/schema.ts). Missing a value? Name it in th
 we add it to the list.
 
 ```yaml
+affiliation: freelance # or the company you work for, as it writes its name
 topics: [agentic-coding, testing-and-quality] # what you train on
 formats: [training, workshop] # also talk, coaching, hackathon, assessment
 delivery: [onsite, remote]

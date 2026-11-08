@@ -1,7 +1,12 @@
 {
   "name": "practitioners",
+  "version": "1.0.0",
   "private": true,
   "type": "module",
+  "exports": {
+    "./schema": "./src/lib/schema.ts",
+    "./practitioners/*": "./src/content/practitioners/*"
+  },
   "engines": {
     "bun": ">=1.3.0"
   },
@@ -26,7 +31,8 @@
     "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.38.0",
     "@tailwindcss/vite": "4.3.5",
     "astro": "7.4.7",
-    "tailwindcss": "4.3.5"
+    "tailwindcss": "4.3.5",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
@@ -38,8 +44,7 @@
     "eslint-plugin-astro": "3.2.1",
     "prettier": "3.9.10",
     "stylelint": "18.0.0",
-    "typescript": "6.0.3",
-    "zod": "4.6.7"
+    "typescript": "6.0.3"
   },
   "overrides": {
     "minimatch": "11.0.5"
@@ -62,11 +67,17 @@
           "ivan petkovic",
           "jonathan stemmildt",
           "matthias bargmann",
+          "michael van engelshoven",
+          "mike sperber",
           "ole wendland",
+          "pini reznik",
           "robert glaser",
+          "romy koitzsch wagener",
           "steffen heilmann",
           "thomas kern",
-          "verena traub"
+          "tom breitfeld",
+          "verena traub",
+          "young jin kim"
         ],
         "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
       },
@@ -86,12 +97,20 @@
           "jonathan stemmildt",
           "Marco Köpcke",
           "matthias bargmann",
+          "Matthias Lübken",
+          "Michael Müller",
+          "Michael van Engelshoven",
+          "Mike Sperber",
           "ole wendland",
+          "Pini Reznik",
           "robert glaser",
+          "Romy Koitzsch Wagener",
           "steffen heilmann",
           "Sven Christian Andrä",
           "thomas kern",
-          "verena traub"
+          "Tom Breitfeld",
+          "verena traub",
+          "Young Jin Kim"
         ],
         "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
       },
@@ -163,14 +182,50 @@
       },
       {
         "check": "confidential",
+        "path": "src/content/practitioners/matthias-luebken/**",
+        "text": "Matthias Lübken",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
+        "path": "src/content/practitioners/michael-mueller/**",
+        "text": "Michael Müller",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
+        "path": "src/content/practitioners/michael-van-engelshoven/**",
+        "text": "Michael van Engelshoven",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
+        "path": "src/content/practitioners/mike-sperber/**",
+        "text": "Mike Sperber",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
         "path": "src/content/practitioners/ole-wendland/**",
         "text": "ole wendland",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
         "check": "confidential",
+        "path": "src/content/practitioners/pini-reznik/**",
+        "text": "Pini Reznik",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
         "path": "src/content/practitioners/robert-glaser/**",
         "text": "Robert Glaser",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
+        "path": "src/content/practitioners/romy-koitzsch-wagener/**",
+        "text": "Romy Koitzsch Wagener",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
@@ -193,8 +248,20 @@
       },
       {
         "check": "confidential",
+        "path": "src/content/practitioners/tom-breitfeld/**",
+        "text": "Tom Breitfeld",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
         "path": "src/content/practitioners/verena-traub/**",
         "text": "verena traub",
+        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
+      },
+      {
+        "check": "confidential",
+        "path": "src/content/practitioners/young-jin-kim/**",
+        "text": "Young Jin Kim",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       }
     ],

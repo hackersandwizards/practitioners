@@ -28,6 +28,7 @@ export const missing = (entry: CollectionEntry<"practitioners">, german: string 
     !german?.trim() && "German bio",
     // Reachy, the familiar, has no LinkedIn (schema.ts).
     !entry.data.linkedin && entry.id !== "reachy" && "LinkedIn",
+    !entry.data.photo && "Portrait",
   ].filter((m): m is string => Boolean(m));
 
 /** The dev server and the gate's preview build (PREVIEW=1, into .preview/), which renders every

@@ -11,6 +11,8 @@
     "arrow-link",
     "breadcrumb",
     "status",
-    "focus-ring"
+    "focus-ring",
+    "label",
+    "facts"
   ]
 }

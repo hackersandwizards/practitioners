@@ -6,9 +6,9 @@
 // draft or lacks anything the practitioner-bio skill makes mandatory, a box under the hero says
 // what and where to change it; English and German stand side by side so the person checks both at once.
 import { getCollection, render } from "astro:content";
-import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Links from "../components/Links.astro";
+import Portrait from "../components/Portrait.astro";
 import Profile from "../components/Profile.astro";
 import { missing, repo, shown } from "../lib/entry";
 
@@ -47,15 +47,13 @@ const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
     </div>
     <div class="mx-auto grid max-w-content items-start gap-stack px-gutter py-section lg:grid-cols-[1.05fr_0.95fr]">
       <h1 class="max-w-measure-h1 font-mono text-display font-bold text-white">{data.name}</h1>
-      <Image
-        src={data.photo}
+      <Portrait
+        data={data}
         alt={`Portrait of ${data.name}`}
-        width={480}
-        height={480}
         widths={[160, 240, 320, 480]}
         sizes="(min-width: 1024px) 240px, 160px"
         priority
-        class="size-40 rounded-brand object-cover lg:size-60 lg:justify-self-end"
+        class="size-40 lg:size-60 lg:justify-self-end"
       />
     </div>
   </header>

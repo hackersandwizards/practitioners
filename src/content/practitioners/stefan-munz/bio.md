@@ -1,6 +1,7 @@
 ---
 name: Stefan Munz
 photo: ./photo.webp
+affiliation: "hackers&wizards"
 linkedin: https://www.linkedin.com/in/stefanmunz
 bluesky: https://bsky.app/profile/stefanmunz.bsky.social
 threads: https://www.threads.com/@stefanmunz
