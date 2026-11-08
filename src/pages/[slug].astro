@@ -26,7 +26,10 @@ const lacks = missing(entry, de?.body);
 const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
 ---
 
-<Layout title={data.name}>
+<Layout
+  title={data.name}
+  description={`${data.name}: bio in English and German, and profile links.`}
+>
   <header class="bg-night text-night-ink" data-theme="dark" data-hw-night>
     <div class="mx-auto max-w-content px-gutter pt-6">
       <nav class="hw-breadcrumb" aria-label="Breadcrumb">
@@ -47,6 +50,8 @@ const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
         alt={`Portrait of ${data.name}`}
         width={480}
         height={480}
+        widths={[160, 240, 320, 480]}
+        sizes="(min-width: 1024px) 240px, 160px"
         priority
         class="size-40 rounded-brand object-cover lg:size-60 lg:justify-self-end"
       />
