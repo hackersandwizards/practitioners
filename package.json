@@ -1,6 +1,7 @@
 {
   "name": "practitioners",
   "version": "1.0.3",
+  "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "type": "module",
   "exports": {
@@ -74,7 +75,6 @@
           "romy koitzsch wagener",
           "steffen heilmann",
           "thomas kern",
-          "tom breitfeld",
           "young jin kim"
         ],
         "reason": "the practitioner's name in their own folder's path; os keeps the names not on hackersandwizards.dev on the list, so only this spelling passes in file names"
@@ -105,7 +105,6 @@
           "steffen heilmann",
           "Sven Christian Andrä",
           "thomas kern",
-          "Tom Breitfeld",
           "Young Jin Kim"
         ],
         "reason": "the allow entries in this file name each spelling they allow, so only those spellings pass here"
@@ -234,12 +233,6 @@
         "check": "confidential",
         "path": "src/content/practitioners/thomas-kern/**",
         "text": "thomas kern",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/tom-breitfeld/**",
-        "text": "Tom Breitfeld",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
