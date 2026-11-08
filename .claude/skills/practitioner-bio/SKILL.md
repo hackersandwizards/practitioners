@@ -70,8 +70,10 @@ folder's `entry.json` too: the website reads that file, and only `bun run check`
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
    change touches only their folder. Otherwise comment and merge nothing.
-2. `gh pr checkout <number>`, then `bun run check`. A confidential term other than the person's
-   own name is a review comment and blocks the merge. Their own name gets one `scaffolding.allow`
+2. `gh pr checkout <number>`, then `bun run check`, and `gh pr checks <number>`: the pull-request
+   workflow runs what the person's push skipped locally, and a failing or pending check blocks the
+   merge. A confidential term other than the person's own name is a review comment and blocks the
+   merge. Their own name gets one `scaffolding.allow`
    entry in `package.json` per path, with the name as `text` (matching ignores case; a list holds
    other spellings) and their folder as `src/content/practitioners/<slug>/**`, pushed to the pull request's branch
    before the merge, so `main` never holds the name without its entry. Style findings under step 6
