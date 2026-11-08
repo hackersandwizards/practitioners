@@ -1,6 +1,8 @@
 ---
 import AppHeader from "@hackersandwizards/brand/expert/components/AppHeader.astro";
 import ThemeToggle from "@hackersandwizards/brand/expert/components/ThemeToggle.astro";
+import faviconIco from "@hackersandwizards/brand/logos/favicon.ico?url";
+import faviconSvg from "@hackersandwizards/brand/logos/favicon.svg?url";
 import "../styles/global.css";
 
 interface Props {
@@ -16,7 +18,8 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="noindex" />
     <title>{title} | hackers&wizards</title>
-    <link rel="icon" type="image/png" href="/hw-emoji.png" />
+    <link rel="icon" href={faviconIco} sizes="32x32" />
+    <link rel="icon" href={faviconSvg} type="image/svg+xml" />
     {/* Applied before first paint, or the wrong theme flashes. */}
     <script is:inline>
       const theme =
