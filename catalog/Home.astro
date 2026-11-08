@@ -46,20 +46,43 @@ const reachy = await card("reachy");
       <p class="text-small text-muted">Callout: the website's team page could not be read</p>
       <p class="hw-callout text-small">The website's team page could not be read.</p>
     </li>
-    <li class="grid content-start gap-3" data-hw-tile="segmented" data-hw-version={version}>
-      <p class="text-small text-muted">Segmented control: the overview's filter</p>
-      <div class="hw-segmented justify-self-start" role="group" aria-label="Show">
-        <button type="button" aria-pressed="true">
-          All
-        </button>
-        <button type="button" aria-pressed="false">
-          Drafts
-        </button>
+    <li class="grid content-start gap-3" data-hw-tile="field" data-hw-version={version}>
+      <p class="text-small text-muted">Field: the text field inside the search</p>
+      <input type="text" class="hw-field" placeholder="Find a name" aria-label="Find a name" />
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="search" data-hw-version={version}>
+      <p class="text-small text-muted">Search field: find a name</p>
+      <div class="hw-search">
+        <input type="search" class="hw-field" placeholder="Find a name" aria-label="Find a name" />
       </div>
     </li>
-    <li class="grid content-start gap-3" data-hw-tile="field" data-hw-version={version}>
-      <p class="text-small text-muted">Field: find a name</p>
-      <input type="search" class="hw-field" placeholder="Find a name" aria-label="Find a name" />
+    <li class="grid content-start gap-3" data-hw-tile="button" data-hw-version={version}>
+      <p class="text-small text-muted">Button: send the search without JavaScript</p>
+      <button type="button" class="hw-button justify-self-start" data-variant="secondary">
+        Search
+      </button>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="form-field" data-hw-version={version}>
+      <p class="text-small text-muted">Form field: the filter's legend over its values</p>
+      <fieldset class="hw-form-field">
+        <legend class="hw-form-label">Show</legend>
+        <p class="text-small text-muted">All, drafts, or not on the website</p>
+      </fieldset>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="choice" data-hw-version={version}>
+      <p class="text-small text-muted">
+        Choice: one value of the overview's filter, with its count
+      </p>
+      <div class="hw-choices" role="group" aria-label="Show">
+        <label class="hw-choice">
+          <input type="radio" name="show" value="" checked />
+          All <span class="hw-choice-count">63</span>
+        </label>
+        <label class="hw-choice">
+          <input type="radio" name="show" value="draft" />
+          Drafts <span class="hw-choice-count">47</span>
+        </label>
+      </div>
     </li>
     <li class="grid content-start gap-3" data-hw-tile="link" data-hw-version={version}>
       <p class="text-small text-muted">Link in running text: a bio's links</p>

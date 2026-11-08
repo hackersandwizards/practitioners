@@ -5,6 +5,7 @@
 // (lib/website.ts).
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import ListFilter from "@hackersandwizards/brand/expert/components/ListFilter.astro";
 import PersonCard from "../components/PersonCard.astro";
 import { repo, shown } from "../lib/entry";
 import { ownAffiliations } from "../lib/schema";
@@ -14,16 +15,21 @@ const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data)))
   .sort((a, b) => a.data.name.localeCompare(b.data.name))
   .map((entry) => ({ entry, ...listing(web, entry.data.name) }));
-// A filter that would show nobody, such as drafts in a public build, is left out.
-const filters = [
-  { key: "all", label: "All", count: people.length },
-  {
-    key: "draft",
-    label: "Drafts",
-    count: people.filter((p) => p.entry.data.status === "draft").length,
+const show = [
+  { value: "draft", label: "Drafts" },
+  { value: "unlisted", label: "Not on the website" },
+];
+// "caluk" finds Čaluk and "buss" finds Buß: the text holds the name as written and folded.
+const fold = (s: string) =>
+  s.normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss").toLowerCase();
+const item = (p: (typeof people)[number]) => ({
+  text: `${p.entry.data.name.toLowerCase()} ${fold(p.entry.data.name)}`,
+  facets: {
+    show: [p.entry.data.status === "draft" && "draft", !p.listed && "unlisted"].filter(
+      (v): v is string => Boolean(v),
+    ),
   },
-  { key: "unlisted", label: "Not on the website", count: people.filter((p) => !p.listed).length },
-].filter((f) => f.key === "all" || f.count > 0);
+});
 // Sorted by affiliation, which keeps the names in order within one company.
 const byGroup = Map.groupBy(
   people.toSorted((a, b) =>
@@ -44,6 +50,12 @@ const groups = [
 ]
   .map((g) => ({ ...g, people: byGroup.get(g.key) ?? [] }))
   .filter((g) => g.people.length);
+// The rows in the page's order, which the filter restores once a search is cleared.
+const placed = groups.flatMap((g) => g.people);
+const items = placed.map(item);
+const order = new Map(placed.map((p, i) => [p, i]));
+// A value that would show nobody, such as drafts in a public build, is left out.
+const options = show.filter((o) => items.some((i) => i.facets.show.includes(o.value)));
 ---
 
 <Layout
@@ -73,91 +85,47 @@ const groups = [
       </p>
     )}
 
-    <div class="mt-8 flex flex-wrap items-center gap-4" id="controls">
-      <input
-        type="search"
+    <div class="mt-8">
+      <ListFilter
         id="find"
-        class="hw-field w-full sm:w-72"
-        placeholder="Find a name"
-        aria-label="Find a name"
-        aria-controls="people"
-      />
-      <div class="hw-segmented max-sm:flex max-sm:w-full" role="group" aria-label="Show">
-        {filters.map((f) => (
-          <button
-            type="button"
-            class="max-sm:grow"
-            data-filter={f.key}
-            aria-pressed={f.key === "all" ? "true" : "false"}
-          >
-            {f.label} {f.count}
-          </button>
+        action="/"
+        label="Find a name"
+        items={items}
+        state={{ q: "", facets: { show: "" } }}
+        facet={{
+          param: "show",
+          legend: "Show",
+          options,
+        }}
+        count="{shown} of {total} people"
+        copy={{
+          all: "All",
+          clear: "Clear all",
+          empty: "Nobody matches.",
+          submit: "Search",
+          filters: "Filters",
+        }}
+      >
+        {groups.map((g, i) => (
+          <section class="mt-10 first:mt-4" data-filter-group>
+            {/* No count here: it would not follow the search, and the filter's count line does. */}
+            <h2 class="font-mono text-h4 font-bold">{g.label}</h2>
+            <ul class="mt-4 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4">
+              {g.people.map((p, j) => (
+                <PersonCard
+                  entry={p.entry}
+                  job={p.job}
+                  company={g.key === "company" ? p.entry.data.affiliation : undefined}
+                  listed={p.listed}
+                  filter={{ item: items[order.get(p)!]!, order: order.get(p)! }}
+                  sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
+                  priority={i === 0 && j === 0}
+                />
+              ))}
+            </ul>
+          </section>
         ))}
-      </div>
+      </ListFilter>
     </div>
-
-    <div id="people">
-      {groups.map((g, i) => (
-        <section class="mt-10">
-          <h2 class="font-mono text-h4 font-bold">
-            {g.label} <span class="text-muted">{g.people.length}</span>
-          </h2>
-          <ul class="mt-4 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4">
-            {g.people.map((p, j) => (
-              <PersonCard
-                entry={p.entry}
-                job={p.job}
-                company={g.key === "company" ? p.entry.data.affiliation : undefined}
-                listed={p.listed}
-                sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
-                priority={i === 0 && j === 0}
-              />
-            ))}
-          </ul>
-        </section>
-      ))}
-    </div>
-    <p class="mt-6 text-muted" id="none" hidden>
-      Nobody matches.
-    </p>
   </div>
 </Layout>
-
-<script>
-  const find = document.querySelector<HTMLInputElement>("#find")!;
-  const buttons = [...document.querySelectorAll<HTMLButtonElement>("[data-filter]")];
-  const cards = [...document.querySelectorAll<HTMLElement>("#people [data-name]")];
-  const sections = [...document.querySelectorAll<HTMLElement>("#people > section")];
-  // "caluk" finds Čaluk and "buss" finds Buß.
-  const fold = (s: string) =>
-    s.normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss").toLowerCase();
-  let filter = "all";
-  const apply = () => {
-    const q = fold(find.value.trim());
-    for (const card of cards)
-      card.hidden =
-        !fold(card.dataset.name!).includes(q) || (filter !== "all" && !(filter in card.dataset));
-    for (const section of sections)
-      section.hidden = !section.querySelector("[data-name]:not([hidden])");
-    document.querySelector<HTMLElement>("#none")!.hidden = cards.some((card) => !card.hidden);
-  };
-  find.addEventListener("input", apply);
-  for (const button of buttons)
-    button.addEventListener("click", () => {
-      filter = button.dataset.filter!;
-      for (const b of buttons) b.setAttribute("aria-pressed", String(b === button));
-      apply();
-    });
-  // The browser restores a typed search on back or reload after this script runs.
-  addEventListener("pageshow", apply);
-</script>
-
-<style>
-  /* The filters render visible, so the grid never shifts when the script starts. They need the
-     script, so a browser without it hides them. */
-  @media (scripting: none) {
-    #controls {
-      display: none;
-    }
-  }
-</style>
