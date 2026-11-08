@@ -1,6 +1,7 @@
 ---
 name: Ralf Hüller
 photo: ./photo.webp
+affiliation: freelance
 linkedin: https://www.linkedin.com/in/hit-services/
 github: https://github.com/rhueller/
 website: https://hit-services.de/

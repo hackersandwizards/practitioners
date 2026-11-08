@@ -1,6 +1,7 @@
 ---
 name: Hendrik Hemken
 photo: ./photo.webp
+affiliation: Beyond7.ai
 linkedin: https://www.linkedin.com/in/hendrikhemken/
 status: draft
 ---

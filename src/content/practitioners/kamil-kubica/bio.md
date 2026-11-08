@@ -1,6 +1,7 @@
 ---
 name: Kamil Kubica
 photo: ./photo.webp
+affiliation: nice solutions
 linkedin: https://www.linkedin.com/in/kamil-kubica/
 status: draft
 ---

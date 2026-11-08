@@ -1,6 +1,7 @@
 ---
 name: Malte Burkert
 photo: ./photo.webp
+affiliation: WAPP
 linkedin: https://www.linkedin.com/in/malte-burkert/
 status: draft
 ---

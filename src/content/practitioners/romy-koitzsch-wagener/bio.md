@@ -1,0 +1,8 @@
+---
+name: Romy Koitzsch-Wagener
+affiliation: freelance
+linkedin: https://www.linkedin.com/in/romy-koitzsch-wagener
+status: draft
+---
+
+Romy works freelance as an agile and AI consultant. Seed draft: Romy, replace this text with your own bio, as CONTRIBUTING.md in this repository describes.

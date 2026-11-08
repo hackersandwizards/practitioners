@@ -1,6 +1,7 @@
 ---
 name: Dr. Florian Krause
 photo: ./photo.webp
+affiliation: Etribes
 linkedin: https://www.linkedin.com/in/dr-florian-krause/
 status: draft
 ---

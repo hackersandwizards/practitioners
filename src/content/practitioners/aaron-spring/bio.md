@@ -1,6 +1,7 @@
 ---
 name: Aaron Spring
 photo: ./photo.webp
+affiliation: freelance
 linkedin: https://www.linkedin.com/in/springaaron/
 github: https://github.com/aaronspring
 website: https://aaronspring.github.io/

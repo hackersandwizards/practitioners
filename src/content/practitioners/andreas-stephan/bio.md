@@ -1,6 +1,7 @@
 ---
 name: Andreas Stephan
 photo: ./photo.webp
+affiliation: freelance
 linkedin: https://www.linkedin.com/in/andreasstephan/
 status: draft
 updated: "2026-11-06"

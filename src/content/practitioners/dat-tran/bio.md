@@ -1,6 +1,7 @@
 ---
 name: Dat Tran
 photo: ./photo.webp
+affiliation: DATANOMIQ
 linkedin: https://www.linkedin.com/in/dat-tran-a1602320/
 status: draft
 ---

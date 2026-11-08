@@ -1,6 +1,7 @@
 ---
 name: Matthias Lau
 photo: ./photo.webp
+affiliation: Heureka Labs
 linkedin: https://www.linkedin.com/in/matthiaslau/
 status: draft
 ---

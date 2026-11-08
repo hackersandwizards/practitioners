@@ -1,0 +1,8 @@
+---
+name: Michael Müller
+affiliation: "re:cinq"
+linkedin: https://www.linkedin.com/in/michael-mueller-cn
+status: draft
+---
+
+Michael is CTO and co-founder of re:cinq. Seed draft: Michael, replace this text with your own bio, as CONTRIBUTING.md in this repository describes.

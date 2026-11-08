@@ -1,6 +1,7 @@
 ---
 name: Bastian Weinlich
 photo: ./photo.webp
+affiliation: WPS
 linkedin: https://www.linkedin.com/in/b-weinlich/
 status: draft
 ---

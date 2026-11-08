@@ -1,6 +1,7 @@
 ---
 name: Ole Wendland
 photo: ./photo.webp
+affiliation: INNOQ
 linkedin: https://www.linkedin.com/in/ole-wendland-42613135a/
 status: draft
 ---

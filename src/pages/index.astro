@@ -1,11 +1,14 @@
 ---
-// Everyone in this repo as hackersandwizards.dev/team/ shows them, alphabetical, each card opening
-// the person's page. Grouping is the website's roster, so nothing here is grouped; the website's
-// published team page says who it lists and with which role (lib/website.ts).
+// Everyone in this repo as hackersandwizards.dev/team/ shows them, each card opening the person's
+// page, grouped by who they work for: h&w itself, a company (sorted by it, so colleagues stand
+// together), freelance, or not stated yet. The website's own grouping and roles stay the website's
+// (lib/website.ts).
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import PersonCard from "../components/PersonCard.astro";
 import { repo, shown } from "../lib/entry";
+
+const hw = "hackers&wizards";
 import { listing, roster, team } from "../lib/website";
 
 const web = await roster();
@@ -22,6 +25,22 @@ const filters = [
   },
   { key: "unlisted", label: "Not on the website", count: people.filter((p) => !p.listed).length },
 ].filter((f) => f.key === "all" || f.count > 0);
+const kind = (a?: string) => (!a ? "none" : a === "freelance" || a === hw ? a : "company");
+const groups = [
+  { key: hw, label: hw },
+  { key: "company", label: "At a company" },
+  { key: "freelance", label: "Freelance" },
+  { key: "none", label: "Not stated yet" },
+]
+  .map((g) => ({
+    ...g,
+    people: people
+      .filter((p) => kind(p.entry.data.affiliation) === g.key)
+      .sort((a, b) =>
+        (a.entry.data.affiliation ?? "").localeCompare(b.entry.data.affiliation ?? ""),
+      ),
+  }))
+  .filter((g) => g.people.length);
 ---
 
 <Layout
@@ -74,17 +93,27 @@ const filters = [
       </div>
     </div>
 
-    <ul class="mt-6 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4" id="people">
-      {people.map((p, i) => (
-        <PersonCard
-          entry={p.entry}
-          job={p.job}
-          listed={p.listed}
-          sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
-          priority={i === 0}
-        />
+    <div id="people">
+      {groups.map((g, i) => (
+        <section class="mt-10">
+          <h2 class="font-mono text-h4 font-bold">
+            {g.label} <span class="text-muted">{g.people.length}</span>
+          </h2>
+          <ul class="mt-4 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4">
+            {g.people.map((p, j) => (
+              <PersonCard
+                entry={p.entry}
+                job={p.job}
+                company={g.key === "company" ? p.entry.data.affiliation : undefined}
+                listed={p.listed}
+                sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
+                priority={i === 0 && j === 0}
+              />
+            ))}
+          </ul>
+        </section>
       ))}
-    </ul>
+    </div>
     <p class="mt-6 text-muted" id="none" hidden>
       Nobody matches.
     </p>
@@ -94,7 +123,8 @@ const filters = [
 <script>
   const find = document.querySelector<HTMLInputElement>("#find")!;
   const buttons = [...document.querySelectorAll<HTMLButtonElement>("[data-filter]")];
-  const cards = [...document.querySelectorAll<HTMLElement>("#people > [data-name]")];
+  const cards = [...document.querySelectorAll<HTMLElement>("#people [data-name]")];
+  const sections = [...document.querySelectorAll<HTMLElement>("#people > section")];
   // "caluk" finds Čaluk and "buss" finds Buß.
   const fold = (s: string) =>
     s.normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss").toLowerCase();
@@ -104,6 +134,8 @@ const filters = [
     for (const card of cards)
       card.hidden =
         !fold(card.dataset.name!).includes(q) || (filter !== "all" && !(filter in card.dataset));
+    for (const section of sections)
+      section.hidden = !section.querySelector("[data-name]:not([hidden])");
     document.querySelector<HTMLElement>("#none")!.hidden = cards.some((card) => !card.hidden);
   };
   find.addEventListener("input", apply);

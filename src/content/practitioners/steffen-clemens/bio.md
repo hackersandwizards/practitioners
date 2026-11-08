@@ -1,6 +1,7 @@
 ---
 name: Steffen Clemens
 photo: ./photo.webp
+affiliation: Tudock
 linkedin: https://www.linkedin.com/in/steffenclemens/
 status: draft
 ---

@@ -1,6 +1,7 @@
 ---
 name: Benedikt Stemmildt
 photo: ./photo.webp
+affiliation: "hackers&wizards"
 linkedin: https://www.linkedin.com/in/benedikt-stemmildt/
 github: https://github.com/BeneStem
 x: https://x.com/slashBene
