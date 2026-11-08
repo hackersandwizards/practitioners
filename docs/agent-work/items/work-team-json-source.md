@@ -2,6 +2,7 @@
 kind: work
 status: open
 priority: 3
+order: 50
 owner: Ada
 evidence: "website 4028ca4b..d987f3d1 (07.11.) publish /team.json; on 07.11. 19:57 the live URL still answered 404. The website ships only with its daily 06:00 schedule or a manual `pages` job, so the earliest is 08.11. 06:00."
 ---
