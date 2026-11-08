@@ -23,7 +23,7 @@ const facts: Fact[] = [
   {
     label: "Works for",
     pills: d.affiliation
-      ? [d.affiliation === "freelance" ? "Freelance" : d.affiliation]
+      ? [v.ownAffiliations[d.affiliation as keyof typeof v.ownAffiliations] ?? d.affiliation]
       : undefined,
   },
   { label: "Trains on", pills: names(v.topics, d.topics) },
@@ -55,6 +55,7 @@ const work = [
 {(facts.length > 0 || work.length > 0) && (
   <div class={className}>
     <h2 class="font-mono text-h4 font-bold">Profile</h2>
+    {/* The gap sits on a wrapper: brand's hw-facts keeps a zero margin (check:elements). */}
     <div class="mt-4">
       <dl class="hw-facts grid gap-x-stack gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
         {facts.map((f) => (

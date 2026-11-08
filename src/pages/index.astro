@@ -7,8 +7,7 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import PersonCard from "../components/PersonCard.astro";
 import { repo, shown } from "../lib/entry";
-
-const hw = "hackers&wizards";
+import { ownAffiliations } from "../lib/schema";
 import { listing, roster, team } from "../lib/website";
 
 const web = await roster();
@@ -25,21 +24,21 @@ const filters = [
   },
   { key: "unlisted", label: "Not on the website", count: people.filter((p) => !p.listed).length },
 ].filter((f) => f.key === "all" || f.count > 0);
-const kind = (a?: string) => (!a ? "none" : a === "freelance" || a === hw ? a : "company");
+// Sorted by affiliation, which keeps the names in order within one company.
+const byGroup = Map.groupBy(
+  people.toSorted((a, b) =>
+    (a.entry.data.affiliation ?? "").localeCompare(b.entry.data.affiliation ?? ""),
+  ),
+  ({ entry: { data } }) =>
+    !data.affiliation ? "none" : data.affiliation in ownAffiliations ? data.affiliation : "company",
+);
 const groups = [
-  { key: hw, label: hw },
+  { key: "hackers&wizards", label: ownAffiliations["hackers&wizards"] },
   { key: "company", label: "At a company" },
-  { key: "freelance", label: "Freelance" },
+  { key: "freelance", label: ownAffiliations.freelance },
   { key: "none", label: "Not stated yet" },
 ]
-  .map((g) => ({
-    ...g,
-    people: people
-      .filter((p) => kind(p.entry.data.affiliation) === g.key)
-      .sort((a, b) =>
-        (a.entry.data.affiliation ?? "").localeCompare(b.entry.data.affiliation ?? ""),
-      ),
-  }))
+  .map((g) => ({ ...g, people: byGroup.get(g.key) ?? [] }))
   .filter((g) => g.people.length);
 ---
 

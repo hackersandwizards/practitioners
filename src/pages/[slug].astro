@@ -10,7 +10,7 @@ import Layout from "../layouts/Layout.astro";
 import Links from "../components/Links.astro";
 import Portrait from "../components/Portrait.astro";
 import Profile from "../components/Profile.astro";
-import { missing, repo, shown } from "../lib/entry";
+import { bareName, missing, repo, shown } from "../lib/entry";
 
 export async function getStaticPaths() {
   const german = new Map((await getCollection("practitionersDe")).map((e) => [e.id, e]));
@@ -24,8 +24,7 @@ const { data } = entry;
 const { Content: En } = await render(entry);
 const De = de && (await render(de)).Content;
 const lacks = missing(entry, de?.body);
-// A leading "Dr." is a title, not the first name.
-const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
+const first = bareName(data.name).split(" ")[0];
 ---
 
 <Layout
