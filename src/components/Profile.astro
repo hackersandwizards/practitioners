@@ -11,7 +11,7 @@ interface Props {
 const { data: d, class: className } = Astro.props;
 
 const names = (labels: Record<string, string>, keys?: string[]) => keys?.map((k) => labels[k]);
-const skills = (list?: { name: string; depth: keyof typeof v.depths; teaches?: boolean }[]) =>
+const skills = (list: typeof d.stack) =>
   list?.map((s) => ({
     text: s.name,
     note: `${v.depths[s.depth]}${s.teaches ? ", teaches it" : ""}`,
@@ -62,7 +62,7 @@ const work = [
               </span>
             ))}
             {f.skills?.map((s) => (
-              <span class="hw-pill" data-tone="neutral" title={s.note}>
+              <span class="hw-pill" data-tone="neutral">
                 {s.text} · {s.note.toLowerCase()}
               </span>
             ))}

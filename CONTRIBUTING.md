@@ -74,7 +74,7 @@ any name and leave `photo.webp` in place; we crop the new one and put it in its 
 
 ## Your profile for matching
 
-Below your links, an optional profile tells us which client training fits you. We match trainers to
+Under your bio, an optional profile tells us which client training fits you. We match trainers to
 a client's language, format, room and stack from these fields, so each one you fill in brings you
 work that suits you. Fill in what is true, leave the rest out. Each field takes values from a fixed
 list in [`src/lib/schema.ts`](src/lib/schema.ts). Missing a value? Name it in the pull request and

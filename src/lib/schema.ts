@@ -121,6 +121,8 @@ export const kinds = {
   community: "Community",
 };
 
+const year = z.int().min(1960).max(new Date().getFullYear());
+
 /** A technology or tool as its maker spells it ("TypeScript", "Claude Code"), so the same name
  *  in two entries matches. */
 const skill = z.object({
@@ -163,7 +165,10 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     languages: z
       .array(
         z.object({
-          code: z.string().regex(/^[a-z]{2}$/),
+          code: z
+            .string()
+            .regex(/^[a-z]{2}$/)
+            .refine((c) => new Intl.DisplayNames(["en"], { type: "language" }).of(c) !== c),
           level: vocab(languageLevels),
           trains: z.boolean().optional(),
         }),
@@ -174,12 +179,12 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     domains: z.array(vocab(domains)).optional(),
     roles: z.array(vocab(roles)).optional(),
     /** The year of their first professional job in software or product. */
-    since: z.int().min(1960).max(2100).optional(),
+    since: year.optional(),
     certifications: z
       .array(
         z.object({
           name: z.string().min(1),
-          year: z.int().min(1960).max(2100).optional(),
+          year: year.optional(),
           url: link.optional(),
         }),
       )
@@ -190,7 +195,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
         z.object({
           kind: vocab(kinds),
           title: z.string().min(1),
-          year: z.int().min(1960).max(2100).optional(),
+          year: year.optional(),
           url: link.optional(),
         }),
       )
