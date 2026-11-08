@@ -5,6 +5,7 @@
 // (lib/website.ts).
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
+import type { FilterItem } from "@hackersandwizards/brand/elements/list-filter.ts";
 import ListFilter from "@hackersandwizards/brand/expert/components/ListFilter.astro";
 import PersonCard from "../components/PersonCard.astro";
 import { repo, shown } from "../lib/entry";
@@ -15,17 +16,9 @@ const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data)))
   .sort((a, b) => a.data.name.localeCompare(b.data.name))
   .map((entry) => ({ entry, ...listing(web, entry.data.name) }));
-const show = [
-  { value: "draft", label: "Drafts" },
-  { value: "unlisted", label: "Not on the website" },
-];
-const item = (p: (typeof people)[number]) => ({
+const item = (p: (typeof people)[number]): FilterItem => ({
   text: p.entry.data.name.toLowerCase(),
-  facets: {
-    show: [p.entry.data.status === "draft" && "draft", !p.listed && "unlisted"].filter(
-      (v): v is string => Boolean(v),
-    ),
-  },
+  facets: { entry: [p.entry.data.status], web: [p.listed ? "listed" : "unlisted"] },
 });
 // Sorted by affiliation, which keeps the names in order within one company.
 const byGroup = Map.groupBy(
@@ -50,8 +43,29 @@ const groups = [
 // The rows in the page's order: the filter's counts read them in it.
 const placed = groups.flatMap((g) => g.people);
 const items = placed.map(item);
-// A value that would show nobody, such as drafts in a public build, is left out.
-const options = show.filter((o) => items.some((i) => i.facets.show.includes(o.value)));
+// Whether someone's entry is done and whether the website lists them are separate questions, so
+// each is its own facet and a person counts once in each. A value that would show nobody is left
+// out, and a facet left with one value, such as the entry in a public build, splits nothing.
+const present = (param: "entry" | "web", values: { value: string; label: string }[]) =>
+  values.filter((o) => items.some((i) => i.facets[param]!.includes(o.value)));
+const facets = [
+  {
+    param: "entry",
+    legend: "Entry",
+    options: present("entry", [
+      { value: "draft", label: "Draft" },
+      { value: "active", label: "Approved by the person" },
+    ]),
+  },
+  {
+    param: "web",
+    legend: "On the website",
+    options: present("web", [
+      { value: "listed", label: "On the website" },
+      { value: "unlisted", label: "Not on the website" },
+    ]),
+  },
+].filter((f) => f.options.length > 1);
 ---
 
 <Layout
@@ -87,12 +101,9 @@ const options = show.filter((o) => items.some((i) => i.facets.show.includes(o.va
         action="/"
         label="Find a name"
         items={items}
-        state={{ q: "", facets: { show: "" } }}
-        facet={{
-          param: "show",
-          legend: "Show",
-          options,
-        }}
+        state={{ q: "", facets: { entry: "", web: "" } }}
+        facet={facets[0] ?? { param: "entry", legend: "Entry", options: [] }}
+        select={facets[1]}
         count="{shown} of {total} people"
         copy={{
           all: "All",
