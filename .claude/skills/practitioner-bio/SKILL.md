@@ -23,7 +23,8 @@ entry stays `status: draft` and you say what is missing.
 
 The portrait is `photo.webp`, cropped square, its side the source's shorter side, never
 upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px slot on the
-website needs more. Then run `bun test src/lib/photo-size.test.ts`: it fails on a side below
+website needs more (`--size`). Make it with `bun run portrait <source> <folder>/photo.webp`,
+adding `--crop x,y,side` where the automatic square cuts the head. Then run `bun test src/lib/photo-size.test.ts`: it fails on a side below
 `MIN_WIDTH`, and the comment on `AWAITING_ORIGINAL` there says what to do.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse

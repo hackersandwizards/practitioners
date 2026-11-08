@@ -1,6 +1,6 @@
 import { expect, test } from "bun:test";
 import { Glob } from "bun";
-import { base, generate } from "../../scripts/export";
+import { base, generate, schema } from "../../scripts/export";
 import pkg from "../../package.json";
 
 const files = await generate();
@@ -23,4 +23,14 @@ test("the package exports every entry.json and portrait under the path it names"
   );
   const missing = photos.filter((_: string, i: number) => !exists[i]);
   expect(missing).toEqual([]);
+});
+
+test("staff need a job and a partner's trainer an affiliation", () => {
+  const job = { en: "CFO", de: "CFO" };
+  const ok = (d: object) => schema.safeParse({ name: "A B", ...d }).success;
+  expect(ok({ relation: "staff" })).toBe(false);
+  expect(ok({ relation: "staff", job })).toBe(true);
+  expect(ok({ relation: "partner" })).toBe(false);
+  expect(ok({ relation: "partner", affiliation: "WPS" })).toBe(true);
+  expect(ok({ relation: "freelance" })).toBe(true);
 });

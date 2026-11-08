@@ -7,12 +7,12 @@ import type { SchemaContext } from "astro:content";
 import { join } from "node:path";
 import { Glob } from "bun";
 import { z } from "zod";
-import { practitionerSchema } from "../src/lib/schema";
+import { practitionerSchema, type EntryJson } from "../src/lib/schema";
 
 export const base = join(import.meta.dir, "../src/content/practitioners");
 
 // The photo field holds a path; the website resolves it, so the schema checks a string here.
-const schema = practitionerSchema({ image: () => z.string() } as unknown as SchemaContext);
+export const schema = practitionerSchema({ image: () => z.string() } as unknown as SchemaContext);
 
 const split = (text: string) => {
   const lf = text.replace(/\r\n/g, "\n");
@@ -47,7 +47,7 @@ export async function generate() {
         en: paragraphs(body),
         de: (await de.exists()) ? paragraphs(split(await de.text()).body) : "",
       },
-    };
+    } as EntryJson;
     files.set(`${base}/${slug}/entry.json`, `${JSON.stringify(entry, null, 2)}\n`);
   }
   return files;
