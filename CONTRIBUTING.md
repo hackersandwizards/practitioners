@@ -69,7 +69,7 @@ profiles:
 you: what you work on now, the roles or projects that shaped you, what you do with h&w. Name a
 client only where the work is public.
 
-**The portrait:** roughly square, at least 480 by 480 pixels. Upload it as a JPEG, PNG or WebP under
+**The portrait:** roughly square, at least 918 by 918 pixels. Upload it as a JPEG, PNG or WebP under
 any name and leave `photo.webp` in place, if your folder has one; we crop the new one and put it
 in its place.
 
