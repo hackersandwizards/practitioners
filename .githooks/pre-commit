@@ -14,7 +14,7 @@ elif echo "$staged" | grep -Eq "$content_re"; then
   bun run typecheck
 fi
 # Only h&w commits outside src/content/, and only h&w can fetch the confidential list. The gate
-# audits HEAD; the commit being made is scanned here.
+# checks the index, but runs only for app code; this scan covers every commit outside src/content/.
 if echo "$staged" | grep -Ev "$content_re" | grep -q .; then
   bun run check-confidential --staged
 fi

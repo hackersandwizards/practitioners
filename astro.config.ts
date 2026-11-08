@@ -19,7 +19,7 @@ export default defineConfig({
           home: "./catalog/Home.astro",
           admin: true,
           serverOnly: true,
-          previewStates: ["approved", "many"],
+          previewStates: ["approved", "many", "filled"],
         }),
       ]
     : [],

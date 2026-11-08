@@ -28,7 +28,7 @@
     "check:retired": "brand-retired .preview"
   },
   "dependencies": {
-    "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.38.0",
+    "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.42.0",
     "@tailwindcss/vite": "4.3.5",
     "astro": "7.4.7",
     "tailwindcss": "4.3.5",
@@ -36,8 +36,8 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
-    "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.11.4",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.21.2",
+    "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.12.0",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v3.0.0",
     "@types/bun": "1.4.4",
     "astrobook": "0.13.3",
     "eslint": "10.14.0",
@@ -71,7 +71,6 @@
           "mike sperber",
           "ole wendland",
           "pini reznik",
-          "robert glaser",
           "romy koitzsch wagener",
           "steffen heilmann",
           "thomas kern",
@@ -102,7 +101,6 @@
           "Mike Sperber",
           "ole wendland",
           "Pini Reznik",
-          "robert glaser",
           "Romy Koitzsch Wagener",
           "steffen heilmann",
           "Sven Christian Andrä",
@@ -212,12 +210,6 @@
         "check": "confidential",
         "path": "src/content/practitioners/pini-reznik/**",
         "text": "Pini Reznik",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/robert-glaser/**",
-        "text": "Robert Glaser",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {

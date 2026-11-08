@@ -1,7 +1,7 @@
 ---
 // A story's ground. `state` renders a state rather than describing it: the script copies every
 // :hover or :focus-visible rule with the pseudo-class swapped for [data-force] and marks the first
-// link, and for hover its ancestors too.
+// link, and for hover its ancestors too. The catalog's tile draws the data-hw-preview element alone.
 interface Props {
   grid?: boolean;
   state?: "hover" | "focus";
@@ -11,7 +11,7 @@ const List = grid ? "ul" : "div";
 ---
 
 <div class="p-6" data-force-state={state}>
-  <List class:list={[grid && "grid max-w-60"]}>
+  <List class:list={[grid && "grid max-w-60"]} data-hw-preview>
     <slot />
   </List>
 </div>
