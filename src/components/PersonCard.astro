@@ -13,10 +13,12 @@ interface Props {
   job?: string;
   /** False when the website's team page was read and does not list the person. */
   listed: boolean;
+  /** The card's rendered width, from the grid that places it. */
+  sizes: string;
   /** The first card holds the largest paint above the fold, so its portrait loads first. */
   priority?: boolean;
 }
-const { entry, job, listed, priority } = Astro.props;
+const { entry, job, listed, sizes, priority } = Astro.props;
 const { data } = entry;
 ---
 
@@ -32,7 +34,7 @@ const { data } = entry;
     width={480}
     height={480}
     widths={[240, 320, 480]}
-    sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
+    sizes={sizes}
     priority={priority}
     class="aspect-square w-full rounded-brand object-cover"
   />
