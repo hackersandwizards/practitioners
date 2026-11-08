@@ -30,8 +30,9 @@ export const missing = (entry: CollectionEntry<"practitioners">, german: string 
     !entry.data.linkedin && entry.id !== "reachy" && "LinkedIn",
   ].filter((m): m is string => Boolean(m));
 
-/** A build that could go public carries only `active` entries, the ones their person approved.
- *  Drafts and seeds show in the dev server and in the gate's preview build (PREVIEW=1, into
- *  .preview/), which renders every page so a broken one fails the gate. */
-export const shown = (d: Data) =>
-  import.meta.env.DEV || process.env.PREVIEW === "1" || d.status === "active";
+/** The dev server and the gate's preview build (PREVIEW=1, into .preview/), which renders every
+ *  page so a broken one fails the gate. Only they carry drafts and the catalog (astro.config.ts). */
+export const review = import.meta.env.DEV || process.env.PREVIEW === "1";
+
+/** A build that could go public carries only `active` entries, the ones their person approved. */
+export const shown = (d: Data) => review || d.status === "active";

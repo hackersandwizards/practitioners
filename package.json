@@ -15,7 +15,12 @@
     "check": "scaffolding check",
     "check:colours": "brand-colours",
     "check:preview": "PREVIEW=1 check-lock astro build --outDir .preview",
-    "check:inline-space": "bun scripts/check-inline-space.ts"
+    "check:inline-space": "bun scripts/check-inline-space.ts",
+    "catalog": "bun run dev --open /catalog/",
+    "test": "bun test",
+    "check:elements": "brand-elements",
+    "check:copies": "brand-copies",
+    "check:retired": "brand-retired .preview"
   },
   "dependencies": {
     "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v1.38.0",
@@ -28,6 +33,7 @@
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.11.4",
     "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v2.21.2",
     "@types/bun": "1.4.4",
+    "astrobook": "0.13.3",
     "eslint": "10.14.0",
     "eslint-plugin-astro": "3.2.1",
     "prettier": "3.9.10",
@@ -194,13 +200,20 @@
     ],
     "typecheck": "astro check",
     "skip": {
-      "structure": "the skeleton would replace .githooks/pre-commit with check-staged, so a practitioner committing their own bio would need gitleaks, the confidential-terms list and macOS OCR; the bio-only commit stays astro check (CLAUDE.md, Gate)",
-      "test": "no tests: src/lib/schema.ts is the contract, and the typecheck step validates every bio against it"
+      "structure": "the skeleton would replace .githooks/pre-commit with check-staged, so a practitioner committing their own bio would need gitleaks, the confidential-terms list and macOS OCR; the bio-only commit stays astro check (CLAUDE.md, Gate)"
     },
     "check": [
       "check:inline-space",
-      "check:colours",
-      "check:preview"
-    ]
+      [
+        "check:colours",
+        "check:copies"
+      ],
+      "check:preview",
+      [
+        "check:elements",
+        "check:retired"
+      ]
+    ],
+    "test": "test"
   }
 }

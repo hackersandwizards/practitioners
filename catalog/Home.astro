@@ -1,0 +1,94 @@
+---
+// The catalog's home: the tiles of the components, then one tile per brand element the pages use,
+// drawn by the hub's own component where one exists. brand-elements.json lists the elements;
+// brand-elements measures every tile against brand's own rule and fails on a used element
+// without a tile.
+import Home from "@hackersandwizards/scaffolding/catalog/Home.astro";
+import ThemeToggle from "@hackersandwizards/brand/expert/components/ThemeToggle.astro";
+import { version } from "@hackersandwizards/brand/package.json";
+import Links from "../src/components/Links.astro";
+import PersonCard from "../src/components/PersonCard.astro";
+import { card, entry } from "./stories/entries";
+
+const reachy = await card("reachy");
+---
+
+<Home>
+  <ThemeToggle slot="nav" />
+  <h3>Brand elements</h3>
+  <p>
+    Each element as a page of this hub draws it, from brand {version}. A part of its own fails the
+    gate's element check.
+  </p>
+  <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+    <li class="grid content-start gap-3" data-hw-tile="card" data-hw-version={version}>
+      <p class="text-small text-muted">Card: one person on the overview</p>
+      <ul class="max-w-60">
+        <PersonCard {...reachy} />
+      </ul>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="pill" data-hw-version={version}>
+      <p class="text-small text-muted">Pill: a draft, someone the website does not list</p>
+      <p class="flex flex-wrap gap-1.5">
+        <span class="hw-pill" data-state="draft">
+          Draft
+        </span>
+        <span class="hw-pill" data-variant="outline">
+          Not on the website
+        </span>
+      </p>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="arrow-link" data-hw-version={version}>
+      <p class="text-small text-muted">Arrow link: a profile outside</p>
+      <Links data={(await entry("bastian-weinlich")).data} />
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="callout" data-hw-version={version}>
+      <p class="text-small text-muted">Callout: the website's team page could not be read</p>
+      <p class="hw-callout text-small">The website's team page could not be read.</p>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="segmented" data-hw-version={version}>
+      <p class="text-small text-muted">Segmented control: the overview's filter</p>
+      <div class="hw-segmented justify-self-start" role="group" aria-label="Show">
+        <button type="button" aria-pressed="true">
+          All
+        </button>
+        <button type="button" aria-pressed="false">
+          Drafts
+        </button>
+      </div>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="field" data-hw-version={version}>
+      <p class="text-small text-muted">Field: find a name</p>
+      <input type="search" class="hw-field" placeholder="Find a name" aria-label="Find a name" />
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="link" data-hw-version={version}>
+      <p class="text-small text-muted">Link in running text: a bio's links</p>
+      <p class="hw-links">
+        Read the <a href="/">overview</a>.
+      </p>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="breadcrumb" data-hw-version={version}>
+      <p class="text-small text-muted">Breadcrumb: back to the overview</p>
+      <nav class="hw-breadcrumb" aria-label="Breadcrumb">
+        <ol>
+          <li>
+            <a href="/">Practitioners</a>
+          </li>
+          <li>
+            <span aria-current="page">Name</span>
+          </li>
+        </ol>
+      </nav>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="status" data-hw-version={version}>
+      <p class="text-small text-muted">Status box: what an entry still lacks</p>
+      <div class="hw-status" data-tone="warning">
+        <p>Still missing: German bio, LinkedIn.</p>
+      </div>
+    </li>
+    <li class="grid content-start gap-3" data-hw-tile="focus-ring" data-hw-version={version}>
+      <p class="text-small text-muted">Focus ring: focus the link</p>
+      <a href="/">Overview</a>
+    </li>
+  </ul>
+</Home>

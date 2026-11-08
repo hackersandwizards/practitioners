@@ -21,6 +21,13 @@ content. No public host serves a build while an `active`
 entry carries neither its person's own change nor their yes to its text
 (`docs/agent-work/items/practitioner-pages.md` names them).
 
+## Catalog
+
+`bun run catalog` (or `bun run dev`) serves it at practitioners.localhost/catalog/: scaffolding's
+catalog preset in `astro.config.ts`, one story per component in `catalog/stories/` on real entries
+(`catalog/coverage.test.ts` holds that), the brand elements the pages use on its home. It shows
+drafts, so it builds only where drafts render: the dev server and the gate's preview build.
+
 ## Gate
 
 `src/lib/schema.ts` is the contract; `.githooks/pre-commit` runs `astro check` against it when a

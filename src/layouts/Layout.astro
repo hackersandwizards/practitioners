@@ -3,6 +3,7 @@ import AppHeader from "@hackersandwizards/brand/expert/components/AppHeader.astr
 import ThemeToggle from "@hackersandwizards/brand/expert/components/ThemeToggle.astro";
 import faviconIco from "@hackersandwizards/brand/logos/favicon.ico?url";
 import faviconSvg from "@hackersandwizards/brand/logos/favicon.svg?url";
+import { review } from "../lib/entry";
 import "../styles/global.css";
 
 interface Props {
@@ -32,7 +33,20 @@ const { title, description } = Astro.props;
   </head>
   <body>
     <AppHeader product="Practitioners">
-      <ThemeToggle />
+      {
+        /* The catalog builds only where drafts render (astro.config.ts); a public build has no
+           link, so no nav. */
+        review ? (
+          <nav class="hw-header-nav" aria-label="Main">
+            <a class="hw-header-link" href="/catalog/">
+              Catalog
+            </a>
+            <ThemeToggle />
+          </nav>
+        ) : (
+          <ThemeToggle />
+        )
+      }
     </AppHeader>
     <main class="w-full flex-1">
       <slot />

@@ -6,13 +6,12 @@ import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import PersonCard from "../components/PersonCard.astro";
 import { repo, shown } from "../lib/entry";
-import { nameKey, roster, team } from "../lib/website";
+import { listing, roster, team } from "../lib/website";
 
 const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data)))
   .sort((a, b) => a.data.name.localeCompare(b.data.name))
-  .map((entry) => ({ entry, job: web?.get(nameKey(entry.data.name)) }));
-const unlisted = ({ job }: (typeof people)[number]) => Boolean(web && job === undefined);
+  .map((entry) => ({ entry, ...listing(web, entry.data.name) }));
 // A filter that would show nobody, such as drafts in a public build, is left out.
 const filters = [
   { key: "all", label: "All", count: people.length },
@@ -21,7 +20,7 @@ const filters = [
     label: "Drafts",
     count: people.filter((p) => p.entry.data.status === "draft").length,
   },
-  { key: "unlisted", label: "Not on the website", count: people.filter(unlisted).length },
+  { key: "unlisted", label: "Not on the website", count: people.filter((p) => !p.listed).length },
 ].filter((f) => f.key === "all" || f.count > 0);
 ---
 
@@ -80,7 +79,7 @@ const filters = [
         <PersonCard
           entry={p.entry}
           job={p.job}
-          listed={!unlisted(p)}
+          listed={p.listed}
           sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
           priority={i === 0}
         />

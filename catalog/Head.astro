@@ -1,0 +1,15 @@
+---
+import faviconIco from "@hackersandwizards/brand/logos/favicon.ico?url";
+import faviconSvg from "@hackersandwizards/brand/logos/favicon.svg?url";
+// The repository's <head> on every catalog page, inside scaffolding's: the favicon, the focus ring
+// and data-hw-night the site's own <html> carries (src/layouts/Layout.astro). The shell leaves
+// data-hw-night off a state drawn alone while Astrobook still sets its theme, so without it a dark
+// theme drew dark elements on the light ground.
+---
+
+<link rel="icon" href={faviconIco} sizes="32x32" />
+<link rel="icon" href={faviconSvg} type="image/svg+xml" />
+<script is:inline>
+  document.documentElement.classList.add("hw-focus-ring");
+  document.documentElement.setAttribute("data-hw-night", "");
+</script>
