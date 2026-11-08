@@ -2,9 +2,9 @@
 kind: work
 status: open
 priority: 3
-order: 50
+order: 810
 owner: Ada
-evidence: "website 4028ca4b..d987f3d1 (07.11.) publish /team.json; the live URL still answered 404 on 07.11. 19:57 and 08.11. 01:59. The website ships only with its daily 06:00 schedule or a manual `pages` job, so the earliest is 08.11. 06:00."
+evidence: "website 4028ca4b..d987f3d1 publish /team.json; the live URL answers 200 (curl 08.11.), so the switch below is due."
 ---
 
 # Read the team roster from the website's /team.json
@@ -16,5 +16,4 @@ folder name rather than by name, show `role` and, where not `null`, `description
 
 The website's `src/pages/team.json.ts` (origin/main e370f70b) returns an array of
 `{ slug, name, role, description, url, image }`, with `description` `null` where the card has no
-credential line. Switch only after the live URL answers 200: until then a fetch of it leaves the
-overview without a roster, and a gate check against it would fail every commit here.
+credential line. The live URL answers since 08.11., so nothing holds this back.
