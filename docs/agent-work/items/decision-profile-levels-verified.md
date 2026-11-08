@@ -1,7 +1,6 @@
 ---
 kind: decision
 status: assumed
-priority: 2
 owner: Benedikt
 area: people
 evidence: "docs/agent-work/2026-11-08-practitioner-profile.md: a self-rated 1-to-5 scale scored 4.83 on clarity, depth by what was done 8.0"
@@ -16,7 +15,8 @@ options:
   - key: badge
     label: Self-declared, with a public mark where h&w has seen it
     detail: "Like Toptal's verified expert badge. Needs a public field per value and a public statement about each trainer's past deliveries."
-order: 670
+priority: 3
+order: 1605
 ---
 
 # Who vouches for the depth and topics on a public profile
