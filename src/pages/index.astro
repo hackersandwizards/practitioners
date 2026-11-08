@@ -44,28 +44,26 @@ const groups = [
 const placed = groups.flatMap((g) => g.people);
 const items = placed.map(item);
 // Whether someone's entry is done and whether the website lists them are separate questions, so
-// each is its own facet and a person counts once in each. A value that would show nobody is left
-// out, and a facet left with one value, such as the entry in a public build, splits nothing.
-const present = (param: "entry" | "web", values: { value: string; label: string }[]) =>
-  values.filter((o) => items.some((i) => i.facets[param]!.includes(o.value)));
+// each is its own facet and a person counts once in each. A facet with a value that shows nobody,
+// such as the entry in a public build, splits nothing.
 const facets = [
   {
     param: "entry",
     legend: "Entry",
-    options: present("entry", [
+    options: [
       { value: "draft", label: "Draft" },
-      { value: "active", label: "Approved by the person" },
-    ]),
+      { value: "active", label: "Not a draft" },
+    ],
   },
   {
     param: "web",
-    legend: "On the website",
-    options: present("web", [
+    legend: "Website",
+    options: [
       { value: "listed", label: "On the website" },
       { value: "unlisted", label: "Not on the website" },
-    ]),
+    ],
   },
-].filter((f) => f.options.length > 1);
+].filter((f) => f.options.every((o) => items.some((i) => i.facets[f.param]?.includes(o.value))));
 ---
 
 <Layout
@@ -101,7 +99,7 @@ const facets = [
         action="/"
         label="Find a name"
         items={items}
-        state={{ q: "", facets: { entry: "", web: "" } }}
+        state={{ q: "", facets: {} }}
         facet={facets[0] ?? { param: "entry", legend: "Entry", options: [] }}
         select={facets[1]}
         count="{shown} of {total} people"
