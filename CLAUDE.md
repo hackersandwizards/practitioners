@@ -14,6 +14,12 @@ each folder's generated `entry.json` and `photo.webp` under the `./practitioners
 in which group is the website's roster and lives only there; every line about a person, title and
 expertise included, lives here.
 
+`bun run portrait <in> <out.webp>` (`scripts/retouch-portrait.ts`) turns a source photo into
+`photo.webp`: square crop, white balance, a highlight roll-off, WebP q82, never upscaled, and with
+`--sharpen` sharp-2 (luminance unsharp mask, 1.2 px, 70 %, threshold 2). Neither treatment is a
+default: a blind review against the current file decides, as in
+`docs/agent-work/2026-11-08-portraits.md`.
+
 Each practitioner improves their own entry here by pull request (`CONTRIBUTING.md`), and that
 change is their yes to the entry. The one workflow for h&w is the `practitioner-bio` skill in
 `.claude/skills/`: it reviews and merges such a pull request, drafts the mail that asks for one, or
