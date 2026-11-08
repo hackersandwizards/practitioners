@@ -7,14 +7,17 @@ content_re='^src/content/'
 docs_re='^(src/content/|\.claude/|README\.md$|CLAUDE\.md$)'
 
 if echo "$staged" | grep -Ev "$docs_re" | grep -q .; then
+  # Its confidential audit scans every file of the index, this commit's included.
   echo "[pre-commit] app code changed -> bun run check"
   bun run check
-elif echo "$staged" | grep -Eq "$content_re"; then
-  echo "[pre-commit] content changed -> validating bios against the schema"
-  bun run typecheck
-fi
-# Only h&w commits outside src/content/, and only h&w can fetch the confidential list. The gate
-# checks the index, but runs only for app code; this scan covers every commit outside src/content/.
-if echo "$staged" | grep -Ev "$content_re" | grep -q .; then
-  bun run check-confidential --staged
+else
+  if echo "$staged" | grep -Eq "$content_re"; then
+    echo "[pre-commit] content changed -> validating bios against the schema"
+    bun run typecheck
+  fi
+  # Only h&w commits outside src/content/, and only h&w can fetch the confidential list. This scans
+  # the staged changes of such a commit; nothing here scans the commit message.
+  if echo "$staged" | grep -Ev "$content_re" | grep -q .; then
+    bun run check-confidential --staged
+  fi
 fi
