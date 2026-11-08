@@ -1,48 +1,46 @@
-// Deterministic portrait treatment, the same for every face and never a local edit of it:
-// optional square crop, white balance by channel gain, a tone curve whose soft highlight roll-off
-// tames skin shine, resize to the master size, and optionally sharp-2: an unsharp mask on luminance
-// only (radius 1.2 px, amount 70 %, threshold 2) at that size. WebP q82, as the website's
-// scripts/optimize-media.mjs encodes portraits. It never upscales.
+// Turns a source photo into a square WebP master, never upscaled. By default it only crops,
+// resizes and encodes. Two optional treatments (CLAUDE.md says when to keep one):
+//   --retouch  white balance by channel gain and a tone curve whose highlight shoulder tames skin
+//              shine, at full resolution; never a local edit of the face
+//   --sharpen  sharp-2: an unsharp mask on luminance only (radius 1.2 px, amount 70 %, threshold 2)
+//              at the master size
 //
-//   bun run portrait <in> <out.webp> [--crop x,y,side] [--size px] [--sharpen] [--plain]
+//   bun run portrait <in> <out.webp> [--crop x,y,side] [--size px] [--retouch] [--sharpen]
 //
-// --crop is the square in source pixels (head and shoulders, eyes about 40 % from the top);
-// --size defaults to the crop's side, capped at 1024; --plain skips white balance and tone.
+// --crop is the square in source pixels (head and shoulders, eyes about 40 % from the top); without
+// it a non-square source is cut square by sharp's attention strategy. --size defaults to the
+// crop's side, capped at 1024 px, the practitioner-bio skill's cap. WebP q82.
+import { parseArgs } from "node:util";
 import sharp from "sharp";
+
+const luma = (rgb: Uint8Array, p: number) =>
+  0.299 * rgb[p * 3]! + 0.587 * rgb[p * 3 + 1]! + 0.114 * rgb[p * 3 + 2]!;
 
 /** Gray-world gains at half strength, each within 5 % of neutral: a cast is pulled toward neutral
  *  without repainting a coloured wall behind the person. */
-export function gains(rgb: Uint8Array): [number, number, number] {
-  const sum = [0, 0, 0];
-  let n = 0;
-  for (let i = 0; i < rgb.length; i += 3) {
-    const y = 0.299 * rgb[i]! + 0.587 * rgb[i + 1]! + 0.114 * rgb[i + 2]!;
+export function gains(rgb: Uint8Array): number[] {
+  let r = 0;
+  let g = 0;
+  let b = 0;
+  for (let p = 0; p < rgb.length / 3; p++) {
+    const y = luma(rgb, p);
     if (y < 25 || y > 230) continue; // shadows and clipped highlights carry no cast
-    sum[0] += rgb[i]!;
-    sum[1] += rgb[i + 1]!;
-    sum[2] += rgb[i + 2]!;
-    n++;
+    r += rgb[p * 3]!;
+    g += rgb[p * 3 + 1]!;
+    b += rgb[p * 3 + 2]!;
   }
-  if (!n) return [1, 1, 1];
-  const grey = (sum[0]! + sum[1]! + sum[2]!) / 3;
-  return sum.map((s) => Math.min(1.05, Math.max(0.95, 1 + (grey / s - 1) / 2))) as [
-    number,
-    number,
-    number,
-  ];
+  if (!r || !g || !b) return [1, 1, 1];
+  const grey = (r + g + b) / 3;
+  return [r, g, b].map((s) => Math.min(1.05, Math.max(0.95, 1 + (grey / s - 1) / 2)));
 }
 
 /** Identity below 0.75, then a shoulder that only lowers: 1.0 stays 1.0, the highlights between
  *  come down by up to 4 grey levels. */
-export function tone(roll = 0.5): Uint8Array {
+export function tone(): Uint8Array {
   const lut = new Uint8Array(256);
   for (let i = 0; i < 256; i++) {
-    let x = i / 255;
-    if (x > 0.75) {
-      const t = (x - 0.75) / 0.25;
-      x = 0.75 + 0.25 * (t - roll * 0.5 * t * (1 - t));
-    }
-    lut[i] = Math.round(x * 255);
+    const t = Math.max(0, (i / 255 - 0.75) / 0.25);
+    lut[i] = Math.round((i / 255 - 0.25 * 0.25 * t * (1 - t)) * 255);
   }
   return lut;
 }
@@ -72,79 +70,79 @@ function blur(src: Float32Array, width: number, height: number, sigma: number) {
 }
 
 /** sharp-2 in place on interleaved RGB: luminance detail above the threshold, added to all three
- *  channels alike, so colour stays as it was. */
-export function sharpen(
-  rgb: Uint8Array,
-  width: number,
-  height: number,
-  sigma = 1.2,
-  amount = 0.7,
-  threshold = 2,
-) {
-  const y = new Float32Array(width * height);
-  for (let p = 0; p < y.length; p++)
-    y[p] = 0.299 * rgb[p * 3]! + 0.587 * rgb[p * 3 + 1]! + 0.114 * rgb[p * 3 + 2]!;
-  const blurred = blur(y, width, height, sigma);
+ *  channels alike, so the colour differences between channels stay as they were. */
+export function sharpen(rgb: Uint8Array, width: number, height: number) {
+  const y = Float32Array.from({ length: width * height }, (_, p) => luma(rgb, p));
+  const blurred = blur(y, width, height, 1.2);
   for (let p = 0; p < y.length; p++) {
     const d = y[p]! - blurred[p]!;
-    if (Math.abs(d) <= threshold) continue;
+    if (Math.abs(d) <= 2) continue;
     for (let c = 0; c < 3; c++)
-      rgb[p * 3 + c] = Math.min(255, Math.max(0, Math.round(rgb[p * 3 + c]! + amount * d)));
+      rgb[p * 3 + c] = Math.min(255, Math.max(0, Math.round(rgb[p * 3 + c]! + 0.7 * d)));
   }
 }
 
-export interface Options {
+interface Options {
   crop?: { x: number; y: number; side: number };
   size?: number;
+  retouch?: boolean;
   sharpen?: boolean;
-  plain?: boolean;
 }
 
 export async function retouch(input: string | Buffer, o: Options = {}): Promise<Buffer> {
-  let img = sharp(input).rotate().toColourspace("srgb").removeAlpha();
-  const meta = await sharp(input).metadata();
-  const side = o.crop?.side ?? Math.min(meta.width, meta.height);
+  let img = sharp(input)
+    .rotate()
+    .flatten({ background: { r: 255, g: 255, b: 255 } })
+    .toColourspace("srgb");
+  const meta = await img.metadata();
+  const width = meta.autoOrient?.width ?? meta.width;
+  const height = meta.autoOrient?.height ?? meta.height;
+  const side = o.crop?.side ?? Math.min(width, height);
   if (o.crop) img = img.extract({ left: o.crop.x, top: o.crop.y, width: side, height: side });
-  else if (meta.width !== meta.height)
-    img = img.resize(side, side, { fit: "cover", position: "attention" });
+  else if (width !== height) img = img.resize(side, side, { fit: "cover", position: "attention" });
   const size = o.size ?? Math.min(side, 1024);
   if (size > side) throw new Error(`--size ${size} would upscale the ${side} px crop`);
-  const full = await img.raw().toBuffer({ resolveWithObject: true });
-  const rgb = new Uint8Array(full.data);
-  if (!o.plain) {
+  const rgb = new Uint8Array(await img.raw().toBuffer());
+  if (o.retouch) {
     const g = gains(rgb);
     const lut = tone();
     for (let i = 0; i < rgb.length; i++)
       rgb[i] = lut[Math.min(255, Math.round(rgb[i]! * g[i % 3]!))]!;
   }
-  const raw = { width: full.info.width, height: full.info.height, channels: 3 as const };
+  const raw = (w: number) => ({ raw: { width: w, height: w, channels: 3 as const } });
   const sized = new Uint8Array(
-    await sharp(rgb, { raw }).resize(size, size, { kernel: "lanczos3" }).raw().toBuffer(),
+    await sharp(rgb, raw(side)).resize(size, size, { kernel: "lanczos3" }).raw().toBuffer(),
   );
   if (o.sharpen) sharpen(sized, size, size);
-  return sharp(sized, { raw: { width: size, height: size, channels: 3 } })
-    .webp({ quality: 82, effort: 6, smartSubsample: true })
-    .toBuffer();
+  return sharp(sized, raw(size)).webp({ quality: 82, effort: 6, smartSubsample: true }).toBuffer();
 }
 
 if (import.meta.main) {
-  const args = process.argv.slice(2);
-  const flag = (name: string) => {
-    const i = args.indexOf(name);
-    return i < 0 ? undefined : args.splice(i, 2)[1];
+  const usage =
+    "usage: bun run portrait <in> <out.webp> [--crop x,y,side] [--size px] [--retouch] [--sharpen]";
+  const { values, positionals } = parseArgs({
+    allowPositionals: true,
+    options: {
+      crop: { type: "string" },
+      size: { type: "string" },
+      retouch: { type: "boolean" },
+      sharpen: { type: "boolean" },
+    },
+  });
+  const int = (s: string, min: number) => {
+    if (!/^\d+$/.test(s) || Number(s) < min)
+      throw new Error(`not a whole number >= ${min}: ${s}\n${usage}`);
+    return Number(s);
   };
-  const crop = flag("--crop")?.split(",").map(Number);
-  const size = flag("--size");
+  const crop = values.crop?.split(",");
+  if (crop && crop.length !== 3) throw new Error(`--crop takes x,y,side\n${usage}`);
+  const [input, output] = positionals;
+  if (!input || !output || positionals.length > 2) throw new Error(usage);
   const opts: Options = {
-    crop: crop && { x: crop[0]!, y: crop[1]!, side: crop[2]! },
-    size: size ? Number(size) : undefined,
-    sharpen: args.includes("--sharpen"),
-    plain: args.includes("--plain"),
+    crop: crop && { x: int(crop[0]!, 0), y: int(crop[1]!, 0), side: int(crop[2]!, 1) },
+    size: values.size === undefined ? undefined : int(values.size, 1),
+    retouch: values.retouch,
+    sharpen: values.sharpen,
   };
-  const [input, output] = args.filter((a) => !a.startsWith("--"));
-  if (!input || !output)
-    throw new Error(
-      "usage: bun run portrait <in> <out.webp> [--crop x,y,side] [--size px] [--sharpen] [--plain]",
-    );
   await Bun.write(output, await retouch(input, opts));
 }
