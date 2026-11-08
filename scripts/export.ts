@@ -4,19 +4,20 @@
 // package export subpath. One file per folder, so a protected name stays inside its own folder.
 // `bun run export` writes them; src/lib/export.test.ts fails while one is stale.
 import type { SchemaContext } from "astro:content";
-import { basename } from "node:path";
+import { join } from "node:path";
 import { Glob } from "bun";
 import { z } from "zod";
 import { practitionerSchema } from "../src/lib/schema";
 
-export const base = "src/content/practitioners";
+export const base = join(import.meta.dir, "../src/content/practitioners");
 
 // The photo field holds a path; the website resolves it, so the schema checks a string here.
 const schema = practitionerSchema({ image: () => z.string() } as unknown as SchemaContext);
 
 const split = (text: string) => {
-  const [, frontmatter, body] = text.match(/^(?:---\n([\s\S]*?)\n---\n)?([\s\S]*)$/)!;
-  return { data: frontmatter ? Bun.YAML.parse(frontmatter) : {}, body };
+  const lf = text.replace(/\r\n/g, "\n");
+  const [, frontmatter, body] = lf.match(/^(?:---\n([\s\S]*?)\n---(?:\n|$))?([\s\S]*)$/)!;
+  return { data: (frontmatter ? Bun.YAML.parse(frontmatter) : {}) as { photo?: string }, body };
 };
 
 /** Paragraphs joined by a blank line, each on one line: the files wrap at 100 columns. */
@@ -36,12 +37,12 @@ export async function generate() {
     const de = Bun.file(`${base}/${slug}/bio.de.md`);
     const parsed = schema.safeParse(data);
     if (!parsed.success) throw new Error(`${slug}: ${z.prettifyError(parsed.error)}`);
-    const { photo, ...rest } = parsed.data;
+    // The schema typed photo as an image; the file holds the path next to bio.md.
+    const { photo: _, ...rest } = parsed.data;
     const entry = {
       slug,
       ...rest,
-      // The stub above made it the string from the file, a path next to bio.md.
-      ...(photo && { photo: `practitioners/${slug}/${basename(photo as unknown as string)}` }),
+      ...(data.photo && { photo: `practitioners/${slug}/${data.photo.replace(/^\.\//, "")}` }),
       bio: {
         en: paragraphs(body),
         de: (await de.exists()) ? paragraphs(split(await de.text()).body) : "",
