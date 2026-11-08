@@ -77,7 +77,13 @@ const filters = [
 
     <ul class="mt-6 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4" id="people">
       {people.map((p, i) => (
-        <PersonCard entry={p.entry} job={p.job} listed={!unlisted(p)} priority={i === 0} />
+        <PersonCard
+          entry={p.entry}
+          job={p.job}
+          listed={!unlisted(p)}
+          sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
+          priority={i === 0}
+        />
       ))}
     </ul>
     <p class="mt-6 text-muted" id="none" hidden>
