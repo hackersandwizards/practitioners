@@ -68,22 +68,22 @@ const drafts = all.filter((e) => e.data.status === "draft").length;
     <li class="grid content-start gap-3" data-hw-tile="form-field" data-hw-version={version}>
       <p class="text-small text-muted">Form field: the filter's legend over its values</p>
       <fieldset class="hw-form-field">
-        <legend class="hw-form-label">Show</legend>
-        <p class="text-small text-muted">All, drafts, or not on the website</p>
+        <legend class="hw-form-label">Entry</legend>
+        <p class="text-small text-muted">All, draft, or approved by the person</p>
       </fieldset>
     </li>
     <li class="grid content-start gap-3" data-hw-tile="choice" data-hw-version={version}>
       <p class="text-small text-muted">
         Choice: one value of the overview's filter, with its count
       </p>
-      <div class="hw-choices" role="group" aria-label="Show">
+      <div class="hw-choices" role="group" aria-label="Entry">
         <label class="hw-choice">
-          <input type="radio" name="show" value="" checked />
+          <input type="radio" name="entry" value="" checked />
           All <span class="hw-choice-count">{all.length}</span>
         </label>
         <label class="hw-choice">
-          <input type="radio" name="show" value="draft" />
-          Drafts <span class="hw-choice-count">{drafts}</span>
+          <input type="radio" name="entry" value="draft" />
+          Draft <span class="hw-choice-count">{drafts}</span>
         </label>
       </div>
     </li>
