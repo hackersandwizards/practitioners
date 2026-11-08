@@ -20,6 +20,9 @@ export const links = (d: Data) =>
     { label: "Book a call", href: d.bookme },
   ].filter((l): l is { label: string; href: string } => Boolean(l.href));
 
+/** The name without a leading title: "Dr." is not the first name. */
+export const bareName = (name: string) => name.replace(/^Dr\.\s+/, "");
+
 /** What the practitioner-bio skill's mandatory list still lacks. A seed text is one h&w wrote,
  *  so it does not count as the person's bio. */
 export const missing = (entry: CollectionEntry<"practitioners">, german: string | undefined) =>

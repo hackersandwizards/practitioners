@@ -121,6 +121,9 @@ export const kinds = {
   community: "Community",
 };
 
+/** The affiliations that name no other company, with their labels. */
+export const ownAffiliations = { "hackers&wizards": "hackers&wizards", freelance: "Freelance" };
+
 const year = z.int().min(1960).max(new Date().getFullYear());
 
 /** A technology or tool as its maker spells it ("TypeScript", "Claude Code"), so the same name
@@ -139,9 +142,9 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     /** Square portrait next to the bio, 480x480 like the ones the website serves. Mandatory like
      *  the bio (entry.ts, `missing`); a seed h&w starts without one shows initials instead. */
     photo: image().optional(),
-    /** Who the practitioner works for: `freelance`, or the organisation's name as it writes it
-     *  ("INNOQ", "re:cinq"), so two people at one company match. Part of matching a trainer to a
-     *  client or project; empty where nobody has stated it. */
+    /** Who the practitioner works for: a key of `ownAffiliations`, or the organisation's name as
+     *  it writes it ("INNOQ", "re:cinq"), so two people at one company match. Part of matching a
+     *  trainer to a client or project; empty where nobody has stated it. */
     affiliation: z.string().min(1).max(60).optional(),
     /** Mandatory for every human; the practitioner-bio skill enforces it. Optional here only
      *  because Reachy, the familiar, has a Hugging Face page instead. */

@@ -3,6 +3,7 @@
 // a seed h&w starts before the person sends a photo.
 import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
+import { bareName } from "../lib/entry";
 
 interface Props {
   data: CollectionEntry<"practitioners">["data"];
@@ -13,8 +14,7 @@ interface Props {
   class?: string;
 }
 const { data, alt, widths, sizes, priority, class: className } = Astro.props;
-const initials = data.name
-  .replace(/^Dr\.\s+/, "")
+const initials = bareName(data.name)
   .split(/\s+/)
   .map((w) => w[0])
   .filter((_, i, all) => i === 0 || i === all.length - 1)
