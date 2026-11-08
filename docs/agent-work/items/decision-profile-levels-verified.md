@@ -16,9 +16,12 @@ options:
   - key: badge
     label: Self-declared, with a public mark where h&w has seen it
     detail: "Like Toptal's verified expert badge. Needs a public field per value and a public statement about each trainer's past deliveries."
+order: 670
 ---
 
 # Who vouches for the depth and topics on a public profile
+
+Blocks nothing. The assumption stands unless you veto it.
 
 The profile shipped as `self-declared`: the trainer states depth (`used`, `shipped`, `leads`, the
 `teaches` flag), topics and rooms trained, and h&w checks only that the pull request is theirs. Each
