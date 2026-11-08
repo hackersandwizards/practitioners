@@ -15,7 +15,6 @@ const christian = {
     { name: "SwiftUI", depth: "shipped" },
     { name: "AppKit", depth: "shipped" },
   ],
-  ai_tools: [{ name: "Claude Code", depth: "used" }],
   public_work: [
     { kind: "product", title: "The Archive" },
     { kind: "article", title: "zettelkasten.de", url: "https://zettelkasten.de" },
