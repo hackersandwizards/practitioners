@@ -22,6 +22,7 @@ Mandatory: **name, bio in English and German, LinkedIn URL, portrait**. Without 
 entry stays `status: draft` and you say what is missing.
 
 The portrait is `photo.webp`, cropped square, its side the source's shorter side up to 1024 px,
+or at full size where the person's largest slot on the website needs more than 1024 px at 2x,
 never upscaled. Then run `bun test src/lib/photo-size.test.ts`: it fails on a side below
 `MIN_WIDTH`, and the comment on `AWAITING_ORIGINAL` there says what to do.
 
