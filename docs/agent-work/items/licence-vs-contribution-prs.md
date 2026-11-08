@@ -1,6 +1,7 @@
 ---
 kind: decision
 status: assumed
+order: 1510
 priority: 3
 owner: Benedikt
 area: legal
