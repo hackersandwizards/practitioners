@@ -1,0 +1,89 @@
+---
+// The practitioner's profile for matching, under the bios: each filled field as a fact, controlled
+// values by their labels from schema.ts. Renders nothing while the profile is empty.
+import type { CollectionEntry } from "astro:content";
+import * as v from "../lib/schema";
+
+interface Props {
+  data: CollectionEntry<"practitioners">["data"];
+  class?: string;
+}
+const { data: d, class: className } = Astro.props;
+
+const names = (labels: Record<string, string>, keys?: string[]) => keys?.map((k) => labels[k]);
+const skills = (list?: { name: string; depth: keyof typeof v.depths; teaches?: boolean }[]) =>
+  list?.map((s) => ({
+    text: s.name,
+    note: `${v.depths[s.depth]}${s.teaches ? ", teaches it" : ""}`,
+  }));
+const language = new Intl.DisplayNames(["en"], { type: "language" });
+
+type Fact = { label: string; pills?: string[]; skills?: { text: string; note: string }[] };
+const facts: Fact[] = [
+  { label: "Trains on", pills: names(v.topics, d.topics) },
+  { label: "Formats", pills: names(v.formats, d.formats) },
+  { label: "Delivers", pills: names(v.deliveries, d.delivery) },
+  { label: "Audiences", pills: names(v.audiences, d.audiences) },
+  { label: "Rooms trained", pills: names(v.roomLevels, d.room_levels) },
+  { label: "Largest group", pills: d.group_max ? [`${d.group_max} people`] : undefined },
+  {
+    label: "Languages",
+    pills: d.languages?.map(
+      (l) =>
+        `${language.of(l.code)} (${v.languageLevels[l.level]}${l.trains ? ", trains in it" : ""})`,
+    ),
+  },
+  { label: "AI tools", skills: skills(d.ai_tools) },
+  { label: "Stack", skills: skills(d.stack) },
+  { label: "Industries", pills: names(v.domains, d.domains) },
+  { label: "Roles held", pills: names(v.roles, d.roles) },
+  { label: "In the field since", pills: d.since ? [String(d.since)] : undefined },
+].filter((f) => (f.pills ?? f.skills)?.length);
+
+const work = [
+  ...(d.public_work ?? []).map((w) => ({ ...w, note: v.kinds[w.kind] })),
+  ...(d.certifications ?? []).map((c) => ({ ...c, title: c.name, note: "Certification" })),
+];
+---
+
+{(facts.length > 0 || work.length > 0) && (
+  <div class={className}>
+    <h2 class="font-mono text-h4 font-bold">Profile</h2>
+    <dl class="hw-facts mt-4 grid gap-x-stack gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
+      {facts.map((f) => (
+        <div>
+          <dt class="hw-label" data-tone="muted">
+            {f.label}
+          </dt>
+          <dd class="flex flex-wrap gap-2">
+            {f.pills?.map((p) => (
+              <span class="hw-pill" data-tone="neutral">
+                {p}
+              </span>
+            ))}
+            {f.skills?.map((s) => (
+              <span class="hw-pill" data-tone="neutral" title={s.note}>
+                {s.text} · {s.note.toLowerCase()}
+              </span>
+            ))}
+          </dd>
+        </div>
+      ))}
+    </dl>
+    {work.length > 0 && (
+      <>
+        <h3 class="hw-label mt-8" data-tone="muted">
+          Public work
+        </h3>
+        <ul class="mt-2 space-y-1 hw-links">
+          {work.map((w) => (
+            <li>
+              {w.url ? <a href={w.url}>{w.title}</a> : w.title}{" "}
+              <span class="text-muted">{`· ${w.note}${w.year ? `, ${w.year}` : ""}`}</span>
+            </li>
+          ))}
+        </ul>
+      </>
+    )}
+  </div>
+)}

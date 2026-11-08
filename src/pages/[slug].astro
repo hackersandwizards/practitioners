@@ -1,6 +1,6 @@
 ---
 // One practitioner's entry, laid out like their profile on hackersandwizards.dev/team/<slug>/:
-// night hero with portrait, the bio, the outside links. Role, topics and the lists of talks,
+// night hero with portrait, the bio, the profile for matching, the outside links. Role, topics and the lists of talks,
 // episodes and trainings are the website's own data and show only there. While the entry is a
 // draft or lacks anything the practitioner-bio skill makes mandatory, a box under the hero says
 // what and where to change it; English and German stand side by side so the person checks both at once.
@@ -8,6 +8,7 @@ import { getCollection, render } from "astro:content";
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 import Links from "../components/Links.astro";
+import Profile from "../components/Profile.astro";
 import { missing, repo, shown } from "../lib/entry";
 
 export async function getStaticPaths() {
@@ -93,6 +94,7 @@ const first = data.name.replace(/^Dr\.\s+/, "").split(" ")[0];
         </div>
       </div>
     )}
+    <Profile data={data} class="lg:col-span-2" />
     <Links data={data} class="lg:col-span-2" />
   </section>
 </Layout>
