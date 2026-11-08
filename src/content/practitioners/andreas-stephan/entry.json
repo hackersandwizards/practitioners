@@ -1,0 +1,23 @@
+{
+  "slug": "andreas-stephan",
+  "name": "Andreas Stephan",
+  "affiliation": "freelance",
+  "relation": "freelance",
+  "expertise": {
+    "en": "AI-native product management",
+    "de": "KI-natives Produkt­management"
+  },
+  "background": {
+    "en": "Freelance PM, ex-developer, 20 years of digital products",
+    "de": "Freier PM, Ex-Entwickler, 20 Jahre Digitalprodukte"
+  },
+  "linkedin": "https://www.linkedin.com/in/andreasstephan/",
+  "website": "https://andreasstephan.com",
+  "status": "draft",
+  "updated": "2026-11-06",
+  "photo": "practitioners/andreas-stephan/photo.webp",
+  "bio": {
+    "en": "Andreas Stephan is an AI-native product manager from Hamburg, a former developer himself, and has been building digital products for more than 20 years, mainly in e-commerce and online media. As interim product lead he works embedded in the team and explores how AI-native ways of working scale from the individual to whole teams and organizations. He is co-author of hycle, an operating model for product and tech organizations.",
+    "de": "Andreas Stephan ist KI-nativer Produktmanager aus Hamburg, früher selbst Entwickler, und baut seit über 20 Jahren Digitalprodukte, vor allem in E-Commerce und Online-Medien. Als Interim Product Lead arbeitet er eingebettet im Team und beschäftigt sich damit, wie KI-native Arbeitsweisen vom Einzelnen auf ganze Teams und Organisationen skalieren. Er ist Mitautor von hycle, einem Betriebsmodell für Produkt- und Tech-Organisationen."
+  }
+}

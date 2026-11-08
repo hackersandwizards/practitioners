@@ -2,6 +2,14 @@
 name: Markus Andrezak
 photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/markusandrezak
+website: https://ueberproduct.de
+relation: freelance
+job:
+  en: "Founder, überproduct"
+  de: "Gründer, überproduct"
+expertise:
+  en: "Product sense-making"
+  de: "Produkt-Sensemaking"
 status: draft
 updated: "2026-11-06"
 ---

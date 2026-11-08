@@ -1,0 +1,23 @@
+{
+  "slug": "alexander-greim",
+  "name": "Alexander Greim",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Engineering leadership",
+    "de": "Engineering-Leadership"
+  },
+  "background": {
+    "en": "Runs Connective Layer, 25+ years in software",
+    "de": "Führt Connective Layer, 25+ Jahre Software"
+  },
+  "linkedin": "https://www.linkedin.com/in/iltempo/",
+  "github": "https://github.com/iltempo",
+  "status": "active",
+  "owner": "Alexander Greim",
+  "updated": "2026-09-07",
+  "photo": "practitioners/alexander-greim/photo.webp",
+  "bio": {
+    "en": "Alexander is CTO at YogaEasy in Hamburg, where he owns the video streaming platform with 800,000 users end to end, the Rails code as much as the product, marketing, CRM and accounting it serves. On a technical decision he weighs what it means for the business and what it means for tech, and he ships production code with coding agents every day. The management half comes from thirteen years at XING, the last ten as Director of Engineering, where his platform teams enabled more than a hundred developers in twenty-odd domain teams to ship unified apps to 13 million users. At hackers&wizards he delivers two-day trainings for developer and QA teams, runs train-the-trainer cohorts, and mentors engineering leaders. His rooms are often mixed, architects, product owners and a division head at one table, so he adjusts the focus to the room. In his free time he works on music with agents at hand, restores historic instruments, and plays live with his band.",
+    "de": "Alexander ist CTO bei YogaEasy in Hamburg. Dort verantwortet er die Video-Streaming-Plattform mit 800.000 Nutzern: den Rails-Code genauso wie Produkt, Marketing, CRM und Finance, die darauf aufbauen. Bei einer technischen Entscheidung wägt er ab, was sie für das Business bedeutet und was für Tech. Gleichzeitig schreibt er jeden Tag mit Coding-Agenten Code, der in Produktion geht. Den Blick fürs Management hat er aus dreizehn Jahren bei XING, die letzten zehn davon als Director of Engineering. Seine Plattform-Teams haben dort dafür gesorgt, dass über hundert Entwickler in gut zwanzig Domain-Teams an gemeinsamen Apps für 13 Millionen Nutzer arbeiten konnten. Bei hackers&wizards gibt er zweitägige Trainings für Entwickler- und QA-Teams, bildet in Train-the-Trainer-Runden neue Trainer aus und begleitet Engineering-Leads als Mentor. In seinen Trainings sitzen oft Architekten, Product Owner und Leader am selben Tisch. Deshalb passt er den Fokus an die Gruppe an. Privat macht er Musik, auch dort mit Agenten, und restauriert historische Instrumente. Mit seiner Band steht er live auf der Bühne."
+  }
+}

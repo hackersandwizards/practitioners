@@ -1,0 +1,28 @@
+{
+  "slug": "stefan-munz",
+  "name": "Stefan Munz",
+  "affiliation": "hackers&wizards",
+  "relation": "staff",
+  "job": {
+    "en": "Founder & Co-CEO",
+    "de": "Gründer & Co-CEO"
+  },
+  "background": {
+    "en": "Software engineer with 20+ years building products and leading engineering teams.",
+    "de": "Software Engineer mit über 20 Jahren in Produktentwicklung und Führung von Engineering-Teams."
+  },
+  "linkedin": "https://www.linkedin.com/in/stefanmunz",
+  "bluesky": "https://bsky.app/profile/stefanmunz.bsky.social",
+  "threads": "https://www.threads.com/@stefanmunz",
+  "mastodon": "https://mastodon.social/@stefanmunz",
+  "github": "https://github.com/stefanmunz",
+  "website": "https://www.stefanmunz.com",
+  "status": "active",
+  "owner": "Stefan Munz",
+  "updated": "2026-09-18",
+  "photo": "practitioners/stefan-munz/photo.webp",
+  "bio": {
+    "en": "Stefan Munz is Founder & Co-CEO of hackers&wizards in Hamburg, which trains and mentors engineering and product teams in agentic engineering. He went deep into Mac development at university, back when it was a niche with barely any jobs. Then the iPhone arrived and the head start paid off. He has trusted curiosity over the safe bet ever since: twenty years of production code, first at a small agency, then years leading mobile engineering at XING. Long before most roadmaps mentioned AI, he spotted the pattern that taught him to read a team: the tooling kept getting better while delivery got slower, a problem in the foundations that agents magnify rather than fix. Today he helps teams adapt to a software world that is being rewritten underneath them. With each client he works out where their team really stands, what the next step is and which trainer should guide them through it. He also defines what gets taught in Agentic Engineering for Developers and QA and in the Agentic Software Factory team training. He founded [Agentic Hamburg](https://agentic.hamburg) and runs it with two co-organizers. What began as one packed meetup in July 2025 became, in March 2026, Hamburg's first conference built entirely on agentic engineering practices.",
+    "de": "Stefan Munz ist Gründer und Co-CEO von hackers&wizards in Hamburg, das Engineering- und Produktteams in Agentic Engineering schult und mit Mentoring begleitet. Schon im Studium hat er sich tief in die Mac-Entwicklung eingearbeitet, damals eine Nische mit kaum Jobs. Dann kam das iPhone, und der Vorsprung zahlte sich aus. Seitdem vertraut er der Neugier mehr als der sicheren Wahl: zwanzig Jahre Code in Produktion, erst in einer kleinen Agentur, dann viele Jahre als Leiter der Mobile-Entwicklung bei XING. Lange bevor KI auf den meisten Roadmaps stand, erkannte er das Muster, das ihn gelehrt hat, Teams zu verstehen: Die Tools werden besser, und trotzdem wird langsamer ausgeliefert. Agenten beheben dieses Grundproblem nicht, sie verstärken es. Heute hilft er Teams, sich in einer Softwarewelt zurechtzufinden, die gerade neu geschrieben wird. Mit jedem Kunden klärt er, wo dessen Team wirklich steht, was der nächste Schritt ist und welche Trainerin oder welcher Trainer ihn mit dem Team geht. Außerdem legt er fest, was in den Curricula von Agentic Engineering for Developers and QA und der Teamschulung Agentic Software Factory gelehrt wird. Er hat [Agentic Hamburg](https://agentic.hamburg) gegründet und leitet es heute mit zwei Mitorganisatoren. Aus einem vollen Meetup im Juli 2025 wurde im März 2026 Hamburgs erste Konferenz, die ganz auf Agentic-Engineering-Praktiken setzt."
+  }
+}

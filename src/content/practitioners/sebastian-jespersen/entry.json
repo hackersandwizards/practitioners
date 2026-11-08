@@ -1,0 +1,25 @@
+{
+  "slug": "sebastian-jespersen",
+  "name": "Sebastian Jespersen",
+  "relation": "guest",
+  "job": {
+    "en": "Teamlead Architecture and AI at Telio",
+    "de": "Teamlead Architecture and AI bei Telio"
+  },
+  "expertise": {
+    "en": "AI process automation",
+    "de": "KI-Prozessautomatisierung"
+  },
+  "background": {
+    "en": "Freelancer, also employed at Telio",
+    "de": "Freiberufler, außerdem angestellt bei Telio"
+  },
+  "linkedin": "https://www.linkedin.com/in/sjespersen",
+  "status": "draft",
+  "updated": "2026-11-06",
+  "photo": "practitioners/sebastian-jespersen/photo.webp",
+  "bio": {
+    "en": "Sebastian Jespersen is Teamlead Architecture and AI at Telio and also works as a freelance trainer. As Engineering Director at Software-Route he led a department of around 40 people, and at Celebrate he built an AI-supported ticket process between product management and engineering in which two agents write and review tickets. His topic is how developers work at a higher level of abstraction, delegate tasks to agents and review results quickly.",
+    "de": "Sebastian Jespersen ist Teamlead Architecture and AI bei Telio und arbeitet daneben als freier Trainer. Als Engineering Director bei Software-Route hat er eine Abteilung von rund 40 Leuten geleitet, und bei Celebrate hat er einen KI-gestützten Ticketprozess zwischen Produktmanagement und Engineering gebaut, in dem zwei Agenten Tickets schreiben und prüfen. Sein Thema ist, wie Entwickler auf einer höheren Abstraktionsebene arbeiten, Aufgaben an Agenten delegieren und Ergebnisse schnell prüfen."
+  }
+}

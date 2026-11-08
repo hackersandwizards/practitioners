@@ -1,0 +1,20 @@
+{
+  "slug": "aaron-spring",
+  "name": "Aaron Spring",
+  "relation": "freelance",
+  "expertise": {
+    "en": "AI agent evaluation",
+    "de": "Evaluation von KI-Agenten"
+  },
+  "linkedin": "https://www.linkedin.com/in/springaaron/",
+  "github": "https://github.com/aaronspring",
+  "website": "https://aaronspring.github.io/",
+  "status": "active",
+  "owner": "Aaron Spring",
+  "updated": "2026-09-08",
+  "photo": "practitioners/aaron-spring/photo.webp",
+  "bio": {
+    "en": "Aaron did a PhD in climate science, then worked as an ML and AI engineer at XING. He now freelances in Hamburg on machine learning and AI apps. His niche is climate data as a service at petabyte scale and the systematic evaluation of AI agents. For hackers&wizards he leads Agentic Engineering for Developers and QA workshops.",
+    "de": "Aaron hat in Klimawissenschaften promoviert und danach als ML- und KI-Engineer bei XING gearbeitet. Heute arbeitet er freiberuflich in Hamburg an Machine Learning und KI apps. Seine Nische sind Klimadaten als Service im Petabyte-Maßstab und die systematische Evaluation von KI Agenten. Für hackers&wizards leitet er Agentic Engineering for Developers and QA Workshops."
+  }
+}

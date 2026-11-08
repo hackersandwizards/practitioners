@@ -1,0 +1,20 @@
+{
+  "slug": "viktor-shcherban",
+  "name": "Viktor Shcherban",
+  "relation": "freelance",
+  "expertise": {
+    "en": "RAG, voice agents",
+    "de": "RAG, Voice-Agenten"
+  },
+  "linkedin": "https://www.linkedin.com/in/shcherbanviktor",
+  "website": "https://viktor.shcherban.de",
+  "bookme": "https://calendly.com/viktor_shcherban/30min",
+  "status": "active",
+  "owner": "Viktor Shcherban",
+  "updated": "2026-09-08",
+  "photo": "practitioners/viktor-shcherban/photo.webp",
+  "bio": {
+    "en": "Viktor has been building software for twenty years and co-founded five companies along the way, most recently TimberBase, a global timber marketplace he took from zero to an acquisition by a NASDAQ-listed buyer. For the past four years he has shipped production systems as a gen-AI consultant in Berlin: RAG pipelines, agentic workflows and evaluations for customer support (Sixt) and insurance (Alteos), and voice agents that answer real phone lines. He also runs a Telegram assistant that helps Ukrainian refugees navigate German bureaucracy, an NGO project he started in 2023 and still maintains. Since 2025 he has trained over 120 developers in his hands-on gen-AI workshops and given talks at AI meetups on agentic systems and AI-assisted coding. At hackers&wizards he delivers Agentic Engineering for Developers and QA training, a two-day workshop on coding agents.",
+    "de": "Viktor entwickelt seit zwanzig Jahren Software und hat dabei fünf Firmen mitgegründet, zuletzt TimberBase, einen globalen Holzmarktplatz, den er von null bis zur Übernahme durch einen an der NASDAQ notierten Käufer gebracht hat. Seit vier Jahren baut er als Gen-AI-Consultant in Berlin Systeme, die in Produktion laufen: RAG-Pipelines, agentische Workflows und Evals für Kundensupport (Sixt) und Versicherungen (Alteos), dazu Voice Agents, die echte Telefonleitungen bedienen. Außerdem betreibt er einen Telegram-Assistenten, der ukrainischen Geflüchteten hilft, sich in der deutschen Bürokratie zurechtzufinden, ein NGO-Projekt, das er 2023 gestartet hat und bis heute betreut. Seit 2025 hat er über 120 Entwickler in seinen praxisnahen Gen-AI-Workshops geschult und auf KI-Meetups über agentische Systeme und KI-gestütztes Programmieren gesprochen. Bei hackers&wizards liefert er das Agentic Engineering for Developers and QA Training, einen zweitägigen Workshop zu Coding-Agenten."
+  }
+}

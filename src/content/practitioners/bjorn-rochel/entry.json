@@ -1,0 +1,24 @@
+{
+  "slug": "bjorn-rochel",
+  "name": "Björn Rochel",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Agentic engineering coach",
+    "de": "Agentic-Engineering-Coach"
+  },
+  "background": {
+    "en": "Independent coach, writes about software factories",
+    "de": "Unabhängiger Coach, schreibt über Software Factories"
+  },
+  "linkedin": "https://www.linkedin.com/in/bjoern-rochel/",
+  "github": "https://github.com/BjRo",
+  "website": "https://www.bjro.de",
+  "status": "active",
+  "owner": "Björn Rochel",
+  "updated": "2026-09-03",
+  "photo": "practitioners/bjorn-rochel/photo.webp",
+  "bio": {
+    "en": "Björn is an independent consultant for agentic engineering, working with small companies and large corporations on rolling it out across their engineering organizations. Earlier he was Senior Manager Engineering at Wellfound and Director Architecture at XING, where he introduced GraphQL and led the API migrations that followed. That is where he learned change management and how to get a large initiative over the line, which is most of the work. At hackers&wizards he specializes in Agentic Software Factory, though he also runs the full arc from zero to factory. His March 2026 talk at Agentic Conf Hamburg argued that a better harness beats a bigger model, which was a lite software factory before the term caught on.",
+    "de": "Björn ist unabhängiger Berater für Agentic Engineering und arbeitet mit kleinen Unternehmen und großen Konzernen daran, es in ihren Engineering-Organisationen auszurollen. Davor war er Senior Manager Engineering bei Wellfound und Director Architecture bei XING, wo er GraphQL eingeführt und die anschließenden API-Migrationen geleitet hat. Dort hat er Change Management gelernt und wie man eine große Initiative über die Ziellinie bringt, was der größte Teil der Arbeit ist. Bei hackers&wizards ist er auf Agentic Software Factory spezialisiert, begleitet aber auch den ganzen Weg von null bis zur Factory. In seinem Vortrag auf der Agentic Conf Hamburg im März 2026 argumentierte er, dass ein besserer Harness ein größeres Modell schlägt, eine Software Factory light, bevor der Begriff sich durchsetzte."
+  }
+}

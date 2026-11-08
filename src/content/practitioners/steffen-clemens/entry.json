@@ -1,0 +1,22 @@
+{
+  "slug": "steffen-clemens",
+  "name": "Steffen Clemens",
+  "affiliation": "Tudock",
+  "affiliation_url": "https://www.tudock.de",
+  "relation": "partner",
+  "expertise": {
+    "en": "Backend, DevOps, data",
+    "de": "Backend, DevOps, Data"
+  },
+  "background": {
+    "en": "Software engineer at Tudock: Kubernetes, GCP, AWS",
+    "de": "Software Engineer bei Tudock: Kubernetes, GCP, AWS"
+  },
+  "linkedin": "https://www.linkedin.com/in/steffenclemens/",
+  "status": "draft",
+  "photo": "practitioners/steffen-clemens/photo.webp",
+  "bio": {
+    "en": "Steffen Clemens is a software engineer at Tudock in Hamburg, responsible there since 2017 for backend, DevOps and data, with Kubernetes, GCP, AWS, data pipelines and search quality on Elasticsearch. As internal AI lead he brings Tudock's teams and processes to agentic work. Through Tudock's partnership with hackers&wizards he gives two-day workshops on agentic AI.",
+    "de": "Steffen Clemens ist Software Engineer bei Tudock in Hamburg und dort seit 2017 für Backend, DevOps und Data zuständig, mit Kubernetes, GCP, AWS, Datenpipelines und der Suchqualität auf Elasticsearch. Als interner KI-Lead führt er die Teams und Prozesse von Tudock an agentisches Arbeiten heran. Über die Partnerschaft von Tudock mit hackers&wizards gibt er zweitägige Workshops zu agentischer KI."
+  }
+}

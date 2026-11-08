@@ -1,0 +1,19 @@
+{
+  "slug": "matthias-lau",
+  "name": "Matthias Lau",
+  "affiliation": "Heureka Labs",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Agentic software factories",
+    "de": "Agentic Software Factories"
+  },
+  "linkedin": "https://www.linkedin.com/in/matthiaslau/",
+  "github": "https://github.com/matthiaslau",
+  "website": "https://heureka-labs.de",
+  "status": "draft",
+  "photo": "practitioners/matthias-lau/photo.webp",
+  "bio": {
+    "en": "Matthias Lau is a developer and founder of Heureka Labs, a Hamburg technology studio. He builds AI systems, robots and the AI Router for model routing and researches knowledge graphs as memory for agents. He speaks at conferences such as code.talks and Future Coding Day. His own agentic software factory runs on Claude Code.",
+    "de": "Matthias Lau ist Entwickler und Gründer von Heureka Labs, einem Hamburger Technologiestudio. Er baut KI-Systeme, Roboter und den AI Router für Model-Routing und forscht zu Knowledge Graphs als Gedächtnis für Agenten. Er spricht auf Konferenzen wie der code.talks und dem Future Coding Day. Seine eigene agentische Software Factory läuft auf Claude Code."
+  }
+}

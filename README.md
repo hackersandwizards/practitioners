@@ -2,11 +2,12 @@
 
 The people on [hackersandwizards.dev/team](https://www.hackersandwizards.dev/team/),
 one directory each: an English bio, a German bio, a portrait and the profile links they maintain.
-The website copies each approved bio from here into its own pages, so the text you write here is
-the text a client reads there.
+The website renders each profile from this package, so the text you write here is the text a client
+reads there.
 
-Who appears on that page, in which group and with which title is the website's roster and stays
-there. This repo holds what each person says about themselves.
+Who appears on that page and in which group is the website's roster and stays there. This repo
+holds everything the website says about each person: name, bios, links, portrait, affiliation and
+the lines under the name.
 
 ## Your entry
 
@@ -224,10 +225,11 @@ same bio check on GitHub, plus a scan for leaked secrets.
 ## Layout
 
 ```
-src/content/practitioners/<slug>/   bio.md, bio.de.md, photo.webp
+src/content/practitioners/<slug>/   bio.md, bio.de.md, photo.webp, entry.json
 src/lib/schema.ts                   the contract every bio.md meets
 src/pages/index.astro               the preview, alphabetical, as the website's team grid
 src/lib/website.ts                  who hackersandwizards.dev/team/ lists, read from its JSON-LD
+scripts/export.ts                   writes each folder's entry.json, the data the website imports
 scripts/check-inline-space.ts       fails on a line break that the build turns into a missing space
 .claude/skills/practitioner-bio/    reviewing a pull request, the mail and the interview
 .githooks/                          the gate

@@ -48,6 +48,7 @@ box under the portrait lists what is still missing. Then Claude opens the pull r
 | `bio.de.md`    | Your German bio, nothing else                                                                        |
 | `photo.webp`   | Your portrait                                                                                        |
 | `bio.short.md` | Optional: your English bio in at most 300 characters, for conference forms. Not shown on the website |
+| `entry.json`   | Written by h&w from the other files after each merge, for the website. Leave it as it is             |
 
 Until all five things named above are there, your entry stays a draft. A text that says "Seed draft" is a placeholder h&w wrote: replace it. If you do
 not write German, say so in the pull request, and we draft the German text for your yes.
@@ -55,7 +56,7 @@ not write German, say so in the pull request, and we draft the German text for y
 **Links**, only for profiles you keep up, each starting with `https://`: `linkedin`, and optionally
 `bluesky`, `x`, `threads`, `mastodon`, `github`, `website`, `bookme` (a public booking page such as
 cal.com or Calendly) and `profiles`, a list of any further public profiles. Lines you do not
-recognise, such as `photo`, `status`, `owner` and `updated`, stay as they are.
+recognise, such as `photo`, `status`, `owner`, `updated` and `relation`, stay as they are.
 
 ```yaml
 name: Ada Example
@@ -117,8 +118,9 @@ that would point to a single client under NDA.
 
 By opening the pull request you agree that we publish your entry as it stands after your change.
 GitHub mails you when we comment or merge. We check that the pull request comes from you and
-touches only your folder. On style we comment and leave the wording to you. After the merge, h&w
-copies your text to your page on `hackersandwizards.dev/team/<your-folder>/`, a separate step.
+touches only your folder. On style we comment and leave the wording to you. Your page on
+`hackersandwizards.dev/team/<your-folder>/` shows the change with the website's next release.
 
-Your role and the group you appear in are kept on the website, not here: mention a wish in the pull
-request. To be taken off, reply to the mail from h&w.
+The lines under your name are in your `bio.md` too: `job`, `expertise` and `background`, each in
+English and German. Change them like your bio. The group you appear in is kept on the website: mention
+a wish in the pull request. To be taken off, reply to the mail from h&w.

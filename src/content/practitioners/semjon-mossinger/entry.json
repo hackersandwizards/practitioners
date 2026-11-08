@@ -1,0 +1,20 @@
+{
+  "slug": "semjon-mossinger",
+  "name": "Semjon Mössinger",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Claude Code, Copilot",
+    "de": "Claude Code, Copilot"
+  },
+  "background": {
+    "en": "Software architect, writes and speaks on agentic engineering",
+    "de": "Softwarearchitekt, schreibt und spricht über Agentic Engineering"
+  },
+  "linkedin": "https://www.linkedin.com/in/semjon-mössinger/",
+  "status": "draft",
+  "photo": "practitioners/semjon-mossinger/photo.webp",
+  "bio": {
+    "en": "Semjon Mössinger is a software architect in Hamburg and works with GitHub Copilot and Claude Code. He passes on what he knows in articles, among others at heise online, in conference talks and in trainings. He is interested in test automation, software requirements, pair programming and communication within the team.",
+    "de": "Semjon Mössinger ist Softwarearchitekt in Hamburg und arbeitet mit GitHub Copilot und Claude Code. Sein Wissen gibt er in Fachartikeln, unter anderem bei heise online, in Konferenzvorträgen und in Trainings weiter. Ihn interessieren Testautomatisierung, Software-Anforderungen, Pair Programming und die Kommunikation im Team."
+  }
+}

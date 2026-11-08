@@ -7,20 +7,29 @@ threads: https://www.threads.com/@stefanmunz
 mastodon: https://mastodon.social/@stefanmunz
 github: https://github.com/stefanmunz
 website: https://www.stefanmunz.com
+affiliation: "hackers&wizards"
+relation: staff
+job:
+  en: "Founder & Co-CEO"
+  de: "Gründer & Co-CEO"
+background:
+  en: "Software engineer with 20+ years building products and leading engineering teams."
+  de: "Software Engineer mit über 20 Jahren in Produktentwicklung und Führung von Engineering-Teams."
 status: active
 owner: Stefan Munz
 updated: "2026-09-18"
 ---
 
-Stefan went deep into Mac development while still at university, a niche with barely any jobs in
-it at the time. Then the iPhone arrived, that head start paid, and he has trusted curiosity over
-the safe bet ever since: twenty years of production code, first at a small agency, then years
-leading mobile engineering at XING. Long before most roadmaps mentioned AI, he saw the pattern
-that made him good at reading a team: tooling getting better while delivery got slower, a
-foundation problem agents magnify rather than fix. Now he helps teams adapt to a software world
-that is being rewritten underneath them. At hackers&wizards he works out with a client where their
-team actually stands, what their next step is, and which trainer should deliver it, and he defines
-what gets taught across both the Agentic Product Engineering and the Agentic Factory Engineering
-curriculum. He founded and hosts [Agentic Hamburg](https://agentic.hamburg), which grew from one
-packed meetup in July 2025 into Hamburg's first conference in March 2026, built entirely on
-agentic engineering practices.
+Stefan Munz is Founder & Co-CEO of hackers&wizards in Hamburg, which trains and mentors engineering
+and product teams in agentic engineering. He went deep into Mac development at university, back when
+it was a niche with barely any jobs. Then the iPhone arrived and the head start paid off. He has
+trusted curiosity over the safe bet ever since: twenty years of production code, first at a small
+agency, then years leading mobile engineering at XING. Long before most roadmaps mentioned AI, he
+spotted the pattern that taught him to read a team: the tooling kept getting better while delivery
+got slower, a problem in the foundations that agents magnify rather than fix. Today he helps teams
+adapt to a software world that is being rewritten underneath them. With each client he works out
+where their team really stands, what the next step is and which trainer should guide them through
+it. He also defines what gets taught in Agentic Engineering for Developers and QA and in the Agentic
+Software Factory team training. He founded [Agentic Hamburg](https://agentic.hamburg) and runs it
+with two co-organizers. What began as one packed meetup in July 2025 became, in March 2026,
+Hamburg's first conference built entirely on agentic engineering practices.

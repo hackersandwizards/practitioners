@@ -18,6 +18,13 @@ profiles:
   - https://stackoverflow.com/users/7014892/bene
   - https://luma.com/user/slashbene
   - https://www.meetup.com/members/207273743/
+relation: staff
+job:
+  en: "Founder & Co-CEO"
+  de: "Gründer & Co-CEO"
+background:
+  en: "Engineer at OTTO, architect at Breuninger, CIO at BLUME2000."
+  de: "Engineer bei OTTO, Architekt bei Breuninger, CIO bei BLUME2000."
 status: draft
 updated: "2026-11-06"
 ---

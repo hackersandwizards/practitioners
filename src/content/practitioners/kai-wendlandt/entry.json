@@ -1,0 +1,17 @@
+{
+  "slug": "kai-wendlandt",
+  "name": "Kai Wendlandt",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Knowledge graphs, GraphRAG",
+    "de": "Knowledge Graphs, GraphRAG"
+  },
+  "linkedin": "https://www.linkedin.com/in/kaiwendlandt/",
+  "github": "https://github.com/kaiwend",
+  "status": "draft",
+  "photo": "practitioners/kai-wendlandt/photo.webp",
+  "bio": {
+    "en": "Kai Wendlandt is a self-employed software developer focused on Python, FastAPI, machine learning and Claude Code, and works in German as well as English. He has taught advanced topics such as knowledge graphs and GraphRAG. He wants to demystify agentic programming and show what happens under the hood.",
+    "de": "Kai Wendlandt ist selbstständiger Softwareentwickler mit Schwerpunkt Python, FastAPI, Machine Learning und Claude Code und arbeitet auf Deutsch wie auf Englisch. Er hat Trainings zu fortgeschrittenen Themen wie Knowledge Graphs und GraphRAG gegeben. Er will agentisches Programmieren entzaubern und zeigen, was dabei unter der Haube passiert."
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "slug": "hendrik-hemken",
+  "name": "Hendrik Hemken",
+  "affiliation": "Beyond7.ai",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Claude team rollouts",
+    "de": "Claude-Rollouts in Teams"
+  },
+  "background": {
+    "en": "Founder of Beyond7, 12 years leading fintech products",
+    "de": "Gründer von Beyond7, 12 Jahre Product Leadership im Fintech"
+  },
+  "linkedin": "https://www.linkedin.com/in/hendrikhemken/",
+  "website": "https://beyond7.ai",
+  "status": "draft",
+  "photo": "practitioners/hendrik-hemken/photo.webp",
+  "bio": {
+    "en": "Hendrik Hemken founded Beyond7 in Hamburg, a consultancy that sets up Claude for organizations and trains their teams. Before that he spent twelve years in product leadership in fintech, most recently as CPO, and brings experience with ML and GenAI from investment banking. He has trained teams in Claude Code since 2025.",
+    "de": "Hendrik Hemken hat Beyond7 in Hamburg gegründet, eine Beratung, die Claude für Organisationen einrichtet und ihre Teams schult. Davor war er zwölf Jahre in Product Leadership im Fintech, zuletzt als CPO, und bringt aus dem Investment Banking Erfahrung mit ML und GenAI mit. Seit 2025 trainiert er Teams in Claude Code."
+  }
+}
