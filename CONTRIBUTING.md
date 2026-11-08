@@ -71,8 +71,8 @@ you: what you work on now, the roles or projects that shaped you, what you do wi
 client only where the work is public.
 
 **The portrait:** roughly square, at least 918 by 918 pixels. Upload it as a JPEG, PNG or WebP under
-any name and leave `photo.webp` in place, if your folder has one; we crop the new one and put it
-in its place.
+any name and leave `photo.webp` in place, if your folder has one; we crop the new one with
+`bun run portrait` and put it in its place.
 
 ## Your profile for matching
 
