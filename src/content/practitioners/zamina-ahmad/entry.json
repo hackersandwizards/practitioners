@@ -1,0 +1,18 @@
+{
+  "slug": "zamina-ahmad",
+  "name": "Zamina Ahmad",
+  "relation": "freelance",
+  "feminine": true,
+  "expertise": {
+    "en": "Responsible AI",
+    "de": "Verantwortungs­volle KI"
+  },
+  "linkedin": "https://www.linkedin.com/in/zamina-ahmad/",
+  "website": "https://zamina.de",
+  "status": "draft",
+  "photo": "practitioners/zamina-ahmad/photo.webp",
+  "bio": {
+    "en": "Zamina Ahmad is CEO of shades&contrast and brings more than 15 years of experience in data science, machine learning and AI product development. As a Fair AI advocate she speaks at conferences. Her own topics range from data quality for autonomous driving to diversity in AI.",
+    "de": "Zamina Ahmad ist CEO von shades&contrast und bringt über 15 Jahre Erfahrung in Data Science, Machine Learning und KI-Produktentwicklung mit. Als Fair AI Advocate spricht sie auf Konferenzen. Ihre eigenen Themen reichen von Datenqualität für autonomes Fahren bis zu Diversität in der KI."
+  }
+}

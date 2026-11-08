@@ -1,0 +1,17 @@
+{
+  "slug": "felix-duus",
+  "name": "Felix Duus",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Product advisory",
+    "de": "Produktberatung"
+  },
+  "linkedin": "https://www.linkedin.com/in/felixduus/",
+  "website": "https://productful.io",
+  "status": "draft",
+  "photo": "practitioners/felix-duus/photo.webp",
+  "bio": {
+    "en": "Felix Duus is co-founder of productful, a Hamburg consultancy for data and AI products, and has worked on data-driven products for more than 15 years. He comes from software development and has been a project manager, product manager, product leader and consultant, in industries from publishing to medicine to energy.",
+    "de": "Felix Duus ist Mitgründer von productful, einer Hamburger Beratung für Daten- und KI-Produkte, und arbeitet seit über 15 Jahren an datengetriebenen Produkten. Er kommt aus der Softwareentwicklung und war Projektmanager, Produktmanager, Product Leader und Berater, in Branchen von Publishing über Medizin bis Energie."
+  }
+}

@@ -4,6 +4,9 @@ import { z } from "zod";
 /** https only: a link renders as an href, and z.url() alone also takes javascript: URLs. */
 const link = z.url({ protocol: /^https$/ });
 
+/** A short line in both languages the website prints, English and German side by side. */
+const localized = z.object({ en: z.string().min(1).max(120), de: z.string().min(1).max(120) });
+
 /** A controlled list: matching compares keys, the page shows the labels. A value missing here is
  *  added to the list by pull request, never written as free text. */
 const vocab = <K extends string>(labels: Record<K, string>) =>
@@ -134,8 +137,9 @@ const skill = z.object({
   teaches: z.boolean().optional(),
 });
 
-/** What a practitioner owns about themselves. Who is shown on hackersandwizards.dev, in which
- *  group and with which role, is the website's roster and not a field here. */
+/** What a practitioner owns about themselves, the lines the website prints about them included.
+ *  Who is shown on hackersandwizards.dev and in which group is the website's roster and not a
+ *  field here. */
 export const practitionerSchema = ({ image }: SchemaContext) =>
   z
     .object({
@@ -147,6 +151,23 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
        *  it writes it ("INNOQ", "re:cinq"), so two people at one company match. Part of matching a
        *  trainer to a client or project; empty where nobody has stated it. */
       affiliation: z.string().min(1).max(60).optional(),
+      /** The organisation's own site, which the website links from a partner's or guest's label. */
+      affiliation_url: link.optional(),
+      /** How the person works with h&w, which names them on the website: `staff` of h&w, a
+       *  `freelance` trainer, a trainer employed by a `partner` firm, or a `guest` employed
+       *  elsewhere. */
+      relation: z.enum(["staff", "freelance", "partner", "guest"]).optional(),
+      /** German labels about them take the feminine form ("Trainerin"). */
+      feminine: z.literal(true).optional(),
+      /** Their own title as the website prints it: "Founder & Co-CEO", "AI architect and
+       *  engineering trainer at IONOS". */
+      job: localized.optional(),
+      /** Their expertise in about three words, under their name on hackersandwizards.dev/team/;
+       *  never a title or an employer. */
+      expertise: localized.optional(),
+      /** One background line under that, naming their own company or employer where there is one;
+       *  no client, rate or figure they do not publish. */
+      background: localized.optional(),
       /** Mandatory for every human; the practitioner-bio skill enforces it. Optional here only
        *  because Reachy, the familiar, has a Hugging Face page instead. */
       linkedin: link.optional(),

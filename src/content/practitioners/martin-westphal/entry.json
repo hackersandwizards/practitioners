@@ -1,0 +1,21 @@
+{
+  "slug": "martin-westphal",
+  "name": "Martin Westphal",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Agentic engineering mentoring",
+    "de": "Agentic-Engineering-Mentoring"
+  },
+  "linkedin": "https://www.linkedin.com/in/ade-anima/",
+  "website": "https://westphal.ai",
+  "profiles": [
+    "https://martin.westphal.pw",
+    "https://sessionize.com/adeanima/"
+  ],
+  "status": "draft",
+  "photo": "practitioners/martin-westphal/photo.webp",
+  "bio": {
+    "en": "Martin Westphal is an independent consultant for AI agents and platform strategy and has been developing software since 2013, including as CTO at yamuntu. He co-founded alphalist, curates the program of code.talks and has given more than 20 talks. At hackers&wizards he supports teams as a trainer and mentor in agentic engineering.",
+    "de": "Martin Westphal ist unabhängiger Berater für KI-Agenten und Plattformstrategie und entwickelt seit 2013 Software, unter anderem als CTO bei yamuntu. Er hat alphalist mitgegründet, kuratiert das Programm von code.talks und hat über 20 Vorträge gehalten. Bei hackers&wizards begleitet er Teams als Trainer und Mentor im Agentic Engineering."
+  }
+}

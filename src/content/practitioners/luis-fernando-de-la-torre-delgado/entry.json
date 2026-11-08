@@ -1,0 +1,24 @@
+{
+  "slug": "luis-fernando-de-la-torre-delgado",
+  "name": "Luis Fernando De La Torre Delgado",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Sovereign cloud AI",
+    "de": "Souveräne Cloud-KI"
+  },
+  "background": {
+    "en": "EU-sovereign cloud and AI: AWS, RAG agents",
+    "de": "Souveräne EU-Cloud und KI: AWS, RAG-Agenten"
+  },
+  "linkedin": "https://www.linkedin.com/in/luis-fernando-de-la-torre-delgado",
+  "website": "https://luisdelatorre.de/",
+  "bookme": "https://cal.com/luis-fernando-de-la-torre",
+  "status": "active",
+  "owner": "Luis Fernando De La Torre Delgado",
+  "updated": "2026-09-08",
+  "photo": "practitioners/luis-fernando-de-la-torre-delgado/photo.webp",
+  "bio": {
+    "en": "Luis Fernando De La Torre Delgado is a cloud and AI solutions architect in Hamburg with eighteen years in software engineering. FinTech was where he first built on AWS; the circular economy years were where he learned what it takes to keep a system scaling once real load arrives. Today he builds agentic AI systems, on AWS or on European infrastructure when the data is not allowed to leave the continent. For a railway client he delivered a construction plan review system alone in five weeks. It found every gap that had been planted in the test set and invented none. With hackers&wizards he takes on the two-day workshop where teams learn what an agent is asked to do, what it knows while doing it, how its work is verified and what it is allowed to touch.",
+    "de": "Luis Fernando De La Torre Delgado ist Cloud- und AI-Solutions-Architekt in Hamburg und seit achtzehn Jahren in der Softwareentwicklung. Im FinTech hat er zum ersten Mal auf AWS gebaut, in den Jahren in der Kreislaufwirtschaft hat er gelernt, was ein System braucht, damit es unter echter Last weiter skaliert. Heute baut er agentische AI-Systeme, auf AWS oder auf europäischer Infrastruktur, wenn die Daten den Kontinent nicht verlassen dürfen. Für einen Kunden aus dem Bahnbau hat er eine Prüfung von Bauplänen allein in fünf Wochen geliefert. Sie hat jede Lücke gefunden, die im Testsatz versteckt war, und keine erfunden. Bei hackers&wizards übernimmt er den zweitägigen Workshop, in dem Teams lernen, was ein Agent tun soll, was er dabei weiß, wie seine Arbeit überprüft wird und was er anfassen darf."
+  }
+}

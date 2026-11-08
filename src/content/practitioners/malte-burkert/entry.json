@@ -1,0 +1,21 @@
+{
+  "slug": "malte-burkert",
+  "name": "Malte Burkert",
+  "affiliation": "WAPP",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Web/app development",
+    "de": "Web- und App-Entwicklung"
+  },
+  "background": {
+    "en": "Co-founder of WAPP, a web and app studio",
+    "de": "Mitgründer von WAPP, Web- und App-Studio"
+  },
+  "linkedin": "https://www.linkedin.com/in/malte-burkert/",
+  "status": "draft",
+  "photo": "practitioners/malte-burkert/photo.webp",
+  "bio": {
+    "en": "Malte Burkert co-founded and runs WAPP GmbH, a web and app development studio in Bielefeld and Dortmund that builds software from concept to go-live. With ProduQt he is also responsible for a SaaS product of his own that digitizes paper-based routines in industry. He works agentically himself and spoke at the Agentic Hamburg meetup about the bottleneck WAPP ran into along the way.",
+    "de": "Malte Burkert hat die WAPP GmbH mitgegründet und führt sie. Das Studio für Web- und App-Entwicklung in Bielefeld und Dortmund baut Software vom Konzept bis zum Go-live. Mit ProduQt verantwortet er zusätzlich ein eigenes SaaS-Produkt, das papierbasierte Routinen in der Industrie digitalisiert. Er arbeitet selbst agentisch und hat auf dem Agentic Hamburg Meetup über den Engpass gesprochen, auf den WAPP dabei gestoßen ist."
+  }
+}

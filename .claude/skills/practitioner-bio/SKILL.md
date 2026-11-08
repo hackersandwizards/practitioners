@@ -43,8 +43,10 @@ the entry as free text. Depth is something the person did, each step including t
 conventions); `teaches: true` on top where they have taught it to a team. An industry goes in only
 where naming it points to no single client under NDA.
 
-Not here at all: role and group. Who appears on the website, in which section and with which
-title is the website's roster, kept by Stefan and Bina. A wish to change it is flagged to Stefan,
+The lines the website prints under the name are fields here, each in English and German: `job`,
+`expertise`, `background`, with `relation`, `affiliation_url` and `feminine` (`practitionerSchema`
+states each). They change like the bio. Not here at all: who appears on the website and in which
+section, the website's roster, kept by Stefan and Bina. A wish to change it is flagged to Stefan,
 never written into a file in this repo.
 
 ## Routes
@@ -53,7 +55,8 @@ The person's own change is their yes: a pull request or commit they made to thei
 the entry as it stands after that change. An h&w colleague edits an entry only from the person's
 own words, and commits it only after their yes to exactly that text, and after
 `bun run check-confidential --staged` passes: the hook runs no confidential scan on a bio-only
-commit.
+commit. Every h&w commit on `main` that changes an entry runs `bun run export` first and names the
+folder's `entry.json` too: the website reads that file, and only `bun run check` notices it stale.
 
 - **Their pull request**, the default. `CONTRIBUTING.md` tells the person how, in the browser or
   with Claude Code.

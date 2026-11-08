@@ -1,0 +1,22 @@
+{
+  "slug": "markus-andrezak",
+  "name": "Markus Andrezak",
+  "relation": "freelance",
+  "job": {
+    "en": "Founder, überproduct",
+    "de": "Gründer, überproduct"
+  },
+  "expertise": {
+    "en": "Product sense-making",
+    "de": "Produkt-Sensemaking"
+  },
+  "linkedin": "https://www.linkedin.com/in/markusandrezak",
+  "website": "https://ueberproduct.de",
+  "status": "draft",
+  "updated": "2026-11-06",
+  "photo": "practitioners/markus-andrezak/photo.webp",
+  "bio": {
+    "en": "Markus Andrezak founded überproduct, a product and strategy boutique in Berlin and Potsdam that offers the cohort seminar \"AI-Augmented Product Management\". He brings more than 15 years of experience with internet products, employed or as a contractor at eBay Classifieds Group, eBay, AOL, Scout-Gruppe, MyHammer, Gruner & Jahr and mobile.de. He argues for data-driven rather than taste-driven product decisions and hosts the podcast \"Stories Connecting Dots\".",
+    "de": "Markus Andrezak hat überproduct gegründet, eine Produkt- und Strategie-Boutique in Berlin und Potsdam, die das Kohortenseminar „AI-Augmented Product Management“ anbietet. Er bringt über 15 Jahre Erfahrung mit Internetprodukten mit, angestellt oder als Contractor bei eBay Classifieds Group, eBay, AOL, Scout-Gruppe, MyHammer, Gruner & Jahr und mobile.de. Er steht für datenbasierte statt geschmacksgetriebene Produktentscheidungen und hostet den Podcast „Stories Connecting Dots“."
+  }
+}

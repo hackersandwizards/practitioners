@@ -3,6 +3,14 @@ name: Andreas Stephan
 photo: ./photo.webp
 affiliation: freelance
 linkedin: https://www.linkedin.com/in/andreasstephan/
+website: https://andreasstephan.com
+relation: freelance
+expertise:
+  en: "AI-native product management"
+  de: "KI-natives Produkt\u00ADmanagement"
+background:
+  en: "Freelance PM, ex-developer, 20 years of digital products"
+  de: "Freier PM, Ex-Entwickler, 20 Jahre Digitalprodukte"
 status: draft
 updated: "2026-11-06"
 ---

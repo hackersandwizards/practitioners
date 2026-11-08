@@ -8,9 +8,11 @@ The people behind hackersandwizards.dev/team, one directory each under
 `src/content/practitioners/<slug>/`: `bio.md` (frontmatter plus the English text), `bio.de.md`
 (the German text) and `photo.webp`. Optionally `bio.short.md`, a version of the English bio
 capped at 300 characters for conference CfPs and speaker forms; no collection loads it, so it is
-storage only and the website never renders it. The website copies the approved bios into its own pages.
-Who is shown there, in which group and with which title, is the website's roster and lives only
-there.
+storage only and the website never renders it. The website renders its profiles from this package:
+each folder's generated `entry.json` and `photo.webp` under the `./practitioners/*` export
+(`bun run export` writes the `entry.json` files, `src/lib/export.test.ts` fails while one is stale). Who is shown there and
+in which group is the website's roster and lives only there; every line about a person, title and
+expertise included, lives here.
 
 Each practitioner improves their own entry here by pull request (`CONTRIBUTING.md`), and that
 change is their yes to the entry. The one workflow for h&w is the `practitioner-bio` skill in

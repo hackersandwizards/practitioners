@@ -1,13 +1,15 @@
-Stefan hat sich schon im Studium tief in die Mac-Entwicklung eingearbeitet, eine Nische, in der es
-damals kaum Jobs gab. Dann kam das iPhone, der Vorsprung zahlte sich aus, und seitdem vertraut er
-lieber der Neugier als der sicheren Wahl: zwanzig Jahre Code, der in Produktion läuft, erst in
-einer kleinen Agentur, dann Jahre als Leiter der Mobile-Entwicklung bei XING. Lange bevor KI auf
-den meisten Roadmaps stand, sah er das Muster, das ihn im Verstehen eines Teams gut gemacht hat:
-Das Tooling wird besser, die Auslieferung langsamer. Ein fundamentales Problem, das Agenten
-verstärken statt beheben. Heute hilft er Teams, sich in einer Softwarewelt zurechtzufinden, die
-gerade unter ihnen neu geschrieben wird. Bei hackers&wizards klärt er mit einem Kunden, wo dessen
-Team wirklich steht, was der nächste Schritt ist und welcher Trainer ihn liefern sollte, und er
-legt fest, was im Agentic Product Engineering und im Agentic Factory Engineering Curriculum
-gelehrt wird. Er hat [Agentic Hamburg](https://agentic.hamburg) gegründet. Aus einem vollen Meetup
-im Juli 2025 wurde Hamburgs erste Konferenz im März 2026, die sich komplett auf
-Agentic-Engineering-Praktiken konzentriert.
+Stefan Munz ist Gründer und Co-CEO von hackers&wizards in Hamburg, das Engineering- und Produktteams
+in Agentic Engineering schult und mit Mentoring begleitet. Schon im Studium hat er sich tief in die
+Mac-Entwicklung eingearbeitet, damals eine Nische mit kaum Jobs. Dann kam das iPhone, und der
+Vorsprung zahlte sich aus. Seitdem vertraut er der Neugier mehr als der sicheren Wahl: zwanzig Jahre
+Code in Produktion, erst in einer kleinen Agentur, dann viele Jahre als Leiter der
+Mobile-Entwicklung bei XING. Lange bevor KI auf den meisten Roadmaps stand, erkannte er das Muster,
+das ihn gelehrt hat, Teams zu verstehen: Die Tools werden besser, und trotzdem wird langsamer
+ausgeliefert. Agenten beheben dieses Grundproblem nicht, sie verstärken es. Heute hilft er Teams,
+sich in einer Softwarewelt zurechtzufinden, die gerade neu geschrieben wird. Mit jedem Kunden klärt
+er, wo dessen Team wirklich steht, was der nächste Schritt ist und welche Trainerin oder welcher
+Trainer ihn mit dem Team geht. Außerdem legt er fest, was in den Curricula von Agentic Engineering
+for Developers and QA und der Teamschulung Agentic Software Factory gelehrt wird. Er hat [Agentic
+Hamburg](https://agentic.hamburg) gegründet und leitet es heute mit zwei Mitorganisatoren. Aus einem
+vollen Meetup im Juli 2025 wurde im März 2026 Hamburgs erste Konferenz, die ganz auf
+Agentic-Engineering-Praktiken setzt.

@@ -2,6 +2,16 @@
 name: Sebastian Jespersen
 photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/sjespersen
+relation: guest
+job:
+  en: "Teamlead Architecture and AI at Telio"
+  de: "Teamlead Architecture and AI bei Telio"
+expertise:
+  en: "AI process automation"
+  de: "KI-Prozessautomatisierung"
+background:
+  en: "Freelancer, also employed at Telio"
+  de: "Freiberufler, außerdem angestellt bei Telio"
 status: draft
 updated: "2026-11-06"
 ---

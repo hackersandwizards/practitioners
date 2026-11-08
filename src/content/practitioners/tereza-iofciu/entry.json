@@ -1,0 +1,26 @@
+{
+  "slug": "tereza-iofciu",
+  "name": "Tereza Iofciu",
+  "relation": "freelance",
+  "feminine": true,
+  "expertise": {
+    "en": "AI/data leadership coach",
+    "de": "Coach für KI/Data-Leadership"
+  },
+  "background": {
+    "en": "15+ years in data and AI, organises PyLadies Hamburg",
+    "de": "15+ Jahre Data und KI, organisiert PyLadies Hamburg"
+  },
+  "linkedin": "https://www.linkedin.com/in/tereza-iofciu",
+  "bluesky": "https://bsky.app/profile/terezaif.bsky.social",
+  "website": "https://www.terezaiofciu.com",
+  "bookme": "https://calendly.com/terezaif",
+  "status": "active",
+  "owner": "Tereza Iofciu",
+  "updated": "2026-09-14",
+  "photo": "practitioners/tereza-iofciu/photo.webp",
+  "bio": {
+    "en": "Tereza Iofciu holds a PhD in Computer Science and AI and has spent over fifteen years in data science and machine learning. She currently works as an individual contributor, interim AI team lead, and agentic engineering coach, and is building ReiteraLabs. With hackers&wizards she runs agentic engineering enablement courses and the Agentic Dev Bootcamp. She also brings more than five years of edtech experience, having taught data science, AI, and AI product management.",
+    "de": "Tereza Iofciu hat in Informatik und KI promoviert und bringt über fünfzehn Jahre Erfahrung in Data Science und Machine Learning mit. Sie arbeitet aktuell als Individual Contributor, interimistische AI Team Lead und Agentic-Engineering-Coach und baut derzeit ReiteraLabs auf. Bei hackers&wizards leitet sie Enablement-Kurse für Agentic Engineering sowie das Agentic Dev Bootcamp. Zudem bringt sie über fünf Jahre Erfahrung im EdTech-Bereich mit, in denen sie Data Science, KI und AI Product Management unterrichtet hat."
+  }
+}

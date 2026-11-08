@@ -5,6 +5,10 @@ linkedin: https://www.linkedin.com/in/tobiasschlitt/
 github: https://github.com/tobyS
 website: https://schlitt.info
 bookme: https://rent-the-toby.com
+relation: freelance
+expertise:
+  en: "Agentic PHP, TypeScript"
+  de: "Agentic PHP, TypeScript"
 status: active
 owner: Tobias Schlitt
 updated: "2026-09-03"
@@ -15,5 +19,5 @@ engineering teams on code quality and architecture. He then co-founded Frontasti
 management platform for headless ecommerce, where he worked as principal engineer and built the
 engineering team; commercetools acquired the company in 2021. Today he mentors teams adopting
 agentic engineering, mostly in the web stack: PHP, JavaScript, TypeScript. He once wrote a Mustache
-template engine in VimScript :D At h&w he delivers both Agentic Product Engineering and the Agentic
-Factory Engineering add-on.
+template engine in VimScript :D At hackers&wizards he delivers both Agentic Engineering for
+Developers and QA and the Agentic Software Factory add-on.

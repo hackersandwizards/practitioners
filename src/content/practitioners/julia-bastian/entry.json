@@ -1,0 +1,18 @@
+{
+  "slug": "julia-bastian",
+  "name": "Julia Bastian",
+  "relation": "freelance",
+  "feminine": true,
+  "expertise": {
+    "en": "AI product leadership",
+    "de": "KI-Produkt-Leadership"
+  },
+  "linkedin": "https://www.linkedin.com/in/julia-bastian",
+  "website": "https://juliabastian.medium.com",
+  "status": "draft",
+  "photo": "practitioners/julia-bastian/photo.webp",
+  "bio": {
+    "en": "Julia Bastian is a product leader, AI educator and consultant in Munich and works independently. She comes from business psychology, UX research and innovation consulting, has built product teams and works mainly on product discovery in B2B. She writes about visual thinking in product management.",
+    "de": "Julia Bastian ist Product Leader, Dozentin für KI und Beraterin in München und arbeitet selbstständig. Sie kommt aus Wirtschaftspsychologie, UX Research und Innovationsberatung, hat Produktteams aufgebaut und arbeitet vor allem an Product Discovery im B2B. Sie schreibt über Visual Thinking im Produktmanagement."
+  }
+}

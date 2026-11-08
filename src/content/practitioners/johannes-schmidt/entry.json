@@ -1,0 +1,16 @@
+{
+  "slug": "johannes-schmidt",
+  "name": "Johannes Schmidt",
+  "relation": "freelance",
+  "expertise": {
+    "en": "Digital product transformation",
+    "de": "Digitale Produkt­transformation"
+  },
+  "linkedin": "https://www.linkedin.com/in/johannes-schmidt-7b84b33/",
+  "status": "draft",
+  "photo": "practitioners/johannes-schmidt/photo.webp",
+  "bio": {
+    "en": "For 20 years Johannes Schmidt has designed, built and operated digital products and the organizations behind them. He came to product as a web developer and therefore combines engineering practice with depth in product management and product leadership. He works with agents himself.",
+    "de": "Johannes Schmidt gestaltet, baut und betreibt seit 20 Jahren digitale Produkte und die Organisationen dahinter. Er kam als Webentwickler zum Produkt und verbindet deshalb Engineering-Praxis mit Tiefe in Produktmanagement und Produkt-Leadership. Er arbeitet selbst mit Agenten."
+  }
+}
