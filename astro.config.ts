@@ -15,7 +15,7 @@ export default defineConfig({
           product: "Practitioners",
           lead: "Every component of the practitioners hub, each with its variants and states on real entries, then the brand elements the pages use.",
           css: ["./src/styles/global.css"],
-          // The home's rail is brand's hw-nav and hw-search, which the pages themselves never load.
+          // The home's rail is brand's hw-nav, which the pages themselves never load.
           homeCss: ["./src/styles/global.css", "@hackersandwizards/brand/elements.css"],
           head: "./catalog/Head.astro",
           home: "./catalog/Home.astro",

@@ -3,6 +3,7 @@
 // drawn by the hub's own component where one exists. brand-elements.json lists the elements;
 // brand-elements measures every tile against brand's own rule and fails on a used element
 // without a tile.
+import { getCollection } from "astro:content";
 import Home from "@hackersandwizards/scaffolding/catalog/Home.astro";
 import ThemeToggle from "@hackersandwizards/brand/expert/components/ThemeToggle.astro";
 import { version } from "@hackersandwizards/brand/package.json";
@@ -11,6 +12,8 @@ import PersonCard from "../src/components/PersonCard.astro";
 import { card, entry } from "./stories/entries";
 
 const reachy = await card("reachy");
+const all = await getCollection("practitioners");
+const drafts = all.filter((e) => e.data.status === "draft").length;
 ---
 
 <Home>
@@ -57,7 +60,7 @@ const reachy = await card("reachy");
       </div>
     </li>
     <li class="grid content-start gap-3" data-hw-tile="button" data-hw-version={version}>
-      <p class="text-small text-muted">Button: send the search without JavaScript</p>
+      <p class="text-small text-muted">Button: send the search</p>
       <button type="button" class="hw-button justify-self-start" data-variant="secondary">
         Search
       </button>
@@ -76,11 +79,11 @@ const reachy = await card("reachy");
       <div class="hw-choices" role="group" aria-label="Show">
         <label class="hw-choice">
           <input type="radio" name="show" value="" checked />
-          All <span class="hw-choice-count">63</span>
+          All <span class="hw-choice-count">{all.length}</span>
         </label>
         <label class="hw-choice">
           <input type="radio" name="show" value="draft" />
-          Drafts <span class="hw-choice-count">47</span>
+          Drafts <span class="hw-choice-count">{drafts}</span>
         </label>
       </div>
     </li>

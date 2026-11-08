@@ -19,11 +19,8 @@ const show = [
   { value: "draft", label: "Drafts" },
   { value: "unlisted", label: "Not on the website" },
 ];
-// "caluk" finds Čaluk and "buss" finds Buß: the text holds the name as written and folded.
-const fold = (s: string) =>
-  s.normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss").toLowerCase();
 const item = (p: (typeof people)[number]) => ({
-  text: `${p.entry.data.name.toLowerCase()} ${fold(p.entry.data.name)}`,
+  text: p.entry.data.name.toLowerCase(),
   facets: {
     show: [p.entry.data.status === "draft" && "draft", !p.listed && "unlisted"].filter(
       (v): v is string => Boolean(v),
@@ -50,10 +47,9 @@ const groups = [
 ]
   .map((g) => ({ ...g, people: byGroup.get(g.key) ?? [] }))
   .filter((g) => g.people.length);
-// The rows in the page's order, which the filter restores once a search is cleared.
+// The rows in the page's order: the filter's counts read them in it.
 const placed = groups.flatMap((g) => g.people);
 const items = placed.map(item);
-const order = new Map(placed.map((p, i) => [p, i]));
 // A value that would show nobody, such as drafts in a public build, is left out.
 const options = show.filter((o) => items.some((i) => i.facets.show.includes(o.value)));
 ---
@@ -85,7 +81,7 @@ const options = show.filter((o) => items.some((i) => i.facets.show.includes(o.va
       </p>
     )}
 
-    <div class="mt-8">
+    <div class="mt-8" id="controls">
       <ListFilter
         id="find"
         action="/"
@@ -117,7 +113,7 @@ const options = show.filter((o) => items.some((i) => i.facets.show.includes(o.va
                   job={p.job}
                   company={g.key === "company" ? p.entry.data.affiliation : undefined}
                   listed={p.listed}
-                  filter={{ item: items[order.get(p)!]!, order: order.get(p)! }}
+                  filter={item(p)}
                   sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
                   priority={i === 0 && j === 0}
                 />
@@ -129,3 +125,13 @@ const options = show.filter((o) => items.some((i) => i.facets.show.includes(o.va
     </div>
   </div>
 </Layout>
+
+<style>
+  /* A static page has no server to apply the form's query, so without a script the search and
+     its values would do nothing; the cards stay. */
+  @media (scripting: none) {
+    #controls :global(.hw-list-filter > form) {
+      display: none;
+    }
+  }
+</style>
