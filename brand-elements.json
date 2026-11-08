@@ -1,0 +1,16 @@
+{
+  "site": ".preview",
+  "pages": ["/catalog/", "/", "/aaron-spring/", "/bastian-weinlich/"],
+  "uses": [
+    "card",
+    "pill",
+    "callout",
+    "segmented",
+    "field",
+    "link",
+    "arrow-link",
+    "breadcrumb",
+    "status",
+    "focus-ring"
+  ]
+}

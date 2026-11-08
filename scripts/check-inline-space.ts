@@ -15,7 +15,7 @@ const patterns = [
 ];
 
 let hits = 0;
-for (const file of new Glob("src/**/*.astro").scanSync()) {
+for (const file of new Glob("{src,catalog}/**/*.astro").scanSync()) {
   const source = await Bun.file(file).text();
   for (const pattern of patterns)
     for (const match of source.matchAll(pattern)) {

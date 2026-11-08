@@ -10,6 +10,13 @@ type Node = { "@type"?: string; name?: string; jobTitle?: string };
 /** Names compare in NFC, so the same name typed with combining marks still matches. */
 export const nameKey = (name: string) => name.normalize("NFC");
 
+/** The role the website prints under a name, and whether it lists the person at all. While the
+ *  roster is unknown, everyone counts as listed rather than as missing. */
+export const listing = (web: Map<string, string> | undefined, name: string) => {
+  const job = web?.get(nameKey(name));
+  return { job, listed: !web || job !== undefined };
+};
+
 async function load(): Promise<Map<string, string> | undefined> {
   let html: string;
   try {

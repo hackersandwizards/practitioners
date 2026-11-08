@@ -1,0 +1,56 @@
+---
+// A story's ground. `state` renders a state rather than describing it: the script copies every
+// :hover or :focus-visible rule with the pseudo-class swapped for [data-force] and marks the first
+// link, and for hover its ancestors too.
+interface Props {
+  grid?: boolean;
+  state?: "hover" | "focus";
+}
+const { grid, state } = Astro.props;
+const List = grid ? "ul" : "div";
+---
+
+<div class="p-6" data-force-state={state}>
+  <List class:list={[grid && "grid max-w-60"]}>
+    <slot />
+  </List>
+</div>
+
+<script>
+  const PSEUDO = { hover: ":hover", focus: ":focus-visible" };
+  const mirror = (rules: CSSRuleList, parent: CSSStyleSheet | CSSGroupingRule) => {
+    for (let i = rules.length - 1; i >= 0; i--) {
+      const rule = rules[i];
+      if (rule instanceof CSSStyleRule) {
+        let selector = rule.selectorText;
+        for (const [name, pseudo] of Object.entries(PSEUDO))
+          selector = selector.replaceAll(pseudo, `[data-force="${name}"]`);
+        if (selector !== rule.selectorText)
+          try {
+            parent.insertRule(`${selector}{${rule.style.cssText}}`, i + 1);
+          } catch {
+            // A selector the swap made invalid, such as an attribute after a pseudo-element.
+          }
+      }
+      // A style rule holds nested rules too, such as `&:hover`.
+      if ("cssRules" in rule && rule.cssRules instanceof CSSRuleList)
+        mirror(rule.cssRules, rule as CSSGroupingRule);
+    }
+  };
+  const boxes = [...document.querySelectorAll<HTMLElement>("[data-force-state]")];
+  if (boxes.length)
+    for (const sheet of document.styleSheets)
+      try {
+        mirror(sheet.cssRules, sheet);
+      } catch {
+        // A cross-origin sheet has no readable rules.
+      }
+  for (const box of boxes) {
+    const state = box.dataset.forceState!;
+    const link = box.querySelector("a[href]");
+    for (let node = link; node && node !== box; node = node.parentElement) {
+      node.setAttribute("data-force", state);
+      if (state === "focus") break;
+    }
+  }
+</script>
