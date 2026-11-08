@@ -70,17 +70,16 @@ folder's `entry.json` too: the website reads that file, and only `bun run check`
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
    change touches only their folder. Otherwise comment and merge nothing.
-2. `gh pr checkout <number>`, then `bun run check`, and `gh pr checks <number>`: the pull-request
-   workflow runs what the person's push skipped locally, and a failing or pending check blocks the
-   merge. A confidential term other than the person's own name is a review comment and blocks the
-   merge. Their own name gets one `scaffolding.allow`
+2. `gh pr checkout <number>`, then `bun run check`. A confidential term other than the person's
+   own name is a review comment and blocks the merge. Their own name gets one `scaffolding.allow`
    entry in `package.json` per path, with the name as `text` (matching ignores case; a list holds
    other spellings) and their folder as `src/content/practitioners/<slug>/**`, pushed to the pull request's branch
    before the merge, so `main` never holds the name without its entry. Style findings under step 6
    below go into a review comment; their wording stays theirs.
-3. Merge. Then on `main`: an uploaded portrait under another name or format becomes
-   `photo.webp` as above, the upload removed, and a seed without `photo:` gets
-   `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active` once the
+3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
+   push included; a run awaiting approval, as a first fork pull request's does, has not passed.
+   Then on `main`: an uploaded portrait under another name or format becomes `photo.webp` as
+   above, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active` once the
    mandatory list is complete; commit with the paths named and push. A value they wished for a
    profile list: add it with its label to the list in `src/lib/schema.ts` and to their entry,
    in the same commit, unless an existing value already means it; then tell them which.
