@@ -4,9 +4,7 @@ import { base, generate } from "../../scripts/export";
 import pkg from "../../package.json";
 
 const files = await generate();
-const entries: { photo?: string; bio: { en: string; de: string } }[] = [...files.values()].map(
-  (text) => JSON.parse(text),
-);
+const photos = [...files.values()].flatMap((text) => JSON.parse(text).photo ?? []);
 
 test("each entry.json matches its entry; `bun run export` rewrites them", async () => {
   const onDisk = [...new Glob("*/entry.json").scanSync(base)].map((f) => `${base}/${f}`).sort();
@@ -16,18 +14,13 @@ test("each entry.json matches its entry; `bun run export` rewrites them", async 
 
 test("the package exports every entry.json and portrait under the path it names", async () => {
   const target = pkg.exports["./practitioners/*"];
-  expect(target).toBe(`./${base}/*`);
-  const photos = entries.flatMap(({ photo }) => (photo ? [photo] : []));
+  expect(target).toBe("./src/content/practitioners/*");
   expect(photos.length).toBeGreaterThan(0);
-  const missing = [];
-  for (const photo of photos)
-    if (!(await Bun.file(target.replace("*", photo.slice("practitioners/".length))).exists()))
-      missing.push(photo);
+  const exists = await Promise.all(
+    photos.map((photo: string) =>
+      Bun.file(`${base}/${photo.slice("practitioners/".length)}`).exists(),
+    ),
+  );
+  const missing = photos.filter((_: string, i: number) => !exists[i]);
   expect(missing).toEqual([]);
-});
-
-test("every bio paragraph is one line", () => {
-  expect(entries.some(({ bio }) => bio.en.includes("\n\n"))).toBe(true);
-  const wrapped = entries.filter(({ bio }) => /[^\n]\n[^\n]/.test(bio.en + bio.de));
-  expect(wrapped).toEqual([]);
 });

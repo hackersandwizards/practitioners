@@ -42,13 +42,13 @@ box under the portrait lists what is still missing. Then Claude opens the pull r
 
 ## What goes in your folder
 
-| File           | Holds                                                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------- |
-| `bio.md`       | Your name and links between the two `---` lines, then your English bio                               |
-| `bio.de.md`    | Your German bio, nothing else                                                                        |
-| `photo.webp`   | Your portrait                                                                                        |
-| `bio.short.md` | Optional: your English bio in at most 300 characters, for conference forms. Not shown on the website |
-| `entry.json`   | Written by h&w from the other files after each merge, for the website. Leave it as it is             |
+| File           | Holds                                                                                                        |
+| -------------- | ------------------------------------------------------------------------------------------------------------ |
+| `bio.md`       | Your name and links between the two `---` lines, then your English bio                                       |
+| `bio.de.md`    | Your German bio, nothing else                                                                                |
+| `photo.webp`   | Your portrait                                                                                                |
+| `bio.short.md` | Optional: your English bio in at most 300 characters, for conference forms. Not shown on the website         |
+| `entry.json`   | The website's copy of the other files. In the browser leave it; with Claude Code, `bun run export` writes it |
 
 Until all five things named above are there, your entry stays a draft. A text that says "Seed draft" is a placeholder h&w wrote: replace it. If you do
 not write German, say so in the pull request, and we draft the German text for your yes.
