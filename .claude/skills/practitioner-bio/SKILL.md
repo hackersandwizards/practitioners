@@ -21,6 +21,10 @@ from the second, so what you save is what a client reads.
 Mandatory: **name, bio in English and German, LinkedIn URL, portrait**. Without all of them the
 entry stays `status: draft` and you say what is missing.
 
+The portrait is `photo.webp`, cropped square, its side the source's shorter side up to 1024 px,
+never upscaled. Then run `bun test src/lib/photo-size.test.ts`: it fails on a side below
+`MIN_WIDTH`, and the comment on `AWAITING_ORIGINAL` there says what to do.
+
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
 than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a public booking link**
 (cal.com, Calendly; `bookme` in the schema), and any further public profile the person keeps
@@ -67,11 +71,11 @@ commit.
    other spellings) and their folder as `src/content/practitioners/<slug>/**`, pushed to the pull request's branch
    before the merge, so `main` never holds the name without its entry. Style findings under step 6
    below go into a review comment; their wording stays theirs.
-3. Merge. Then on `main`: an uploaded portrait under another name or format becomes a square
-   `photo.webp` at its own size up to 1024 px (below `MIN_WIDTH` in `src/lib/photo-size.test.ts`,
-   its `AWAITING_ORIGINAL` comment says what to do), the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active`
-   once the mandatory list is complete; commit with the paths named and push. A value they wished
-   for a profile list: add it with its label to the list in `src/lib/schema.ts` and to their entry,
+3. Merge. Then on `main`: an uploaded portrait under another name or format becomes
+   `photo.webp` as above, the upload removed, and a seed without `photo:` gets
+   `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active` once the
+   mandatory list is complete; commit with the paths named and push. A value they wished for a
+   profile list: add it with its label to the list in `src/lib/schema.ts` and to their entry,
    in the same commit, unless an existing value already means it; then tell them which.
 4. Asked for a German text, draft it from their English as in step 8 below, show it in the pull
    request or by mail, and commit it after their yes.
@@ -101,8 +105,8 @@ delete their directory, commit, and flag it to Stefan for the website roster.
    frontmatter you did not collect.
 2. **Collect the links**, mandatory and optional as above.
 3. **Ask for the portrait**: a file path to a photo they like, roughly square, at least
-   `MIN_WIDTH` in `src/lib/photo-size.test.ts` on each side. Convert it to a square `photo.webp`
-   at its own size up to 1024 px in their directory.
+   `MIN_WIDTH` in `src/lib/photo-size.test.ts` on each side. Convert it as above into their
+   directory.
 4. **Interview for substance**, a few questions rather than a form: what they work on right now,
    the two or three stations or projects that shaped them, what they deliver with h&w, and one
    concrete thing that makes them memorable (a niche, a stack, a first).

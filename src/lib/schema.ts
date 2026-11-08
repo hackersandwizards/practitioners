@@ -140,7 +140,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
   z
     .object({
       name: z.string(),
-      /** Square portrait next to the bio, at least `MIN_WIDTH` in photo-size.test.ts. Mandatory like
+      /** Square portrait next to the bio; photo-size.test.ts holds its minimum size. Mandatory like
        *  the bio (entry.ts, `missing`); a seed h&w starts without one shows initials instead. */
       photo: image().optional(),
       /** Who the practitioner works for: a key of `ownAffiliations`, or the organisation's name as
