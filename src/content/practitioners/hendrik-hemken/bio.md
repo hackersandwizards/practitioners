@@ -11,10 +11,15 @@ expertise:
 background:
   en: "Founder of Beyond7, 12 years leading fintech products"
   de: "Gründer von Beyond7, 12 Jahre Product Leadership im Fintech"
-status: draft
+status: active
+owner: Hendrik Hemken
+updated: "2026-11-09"
 ---
 
-Hendrik Hemken founded Beyond7 in Hamburg, a consultancy that sets up Claude for organizations and
-trains their teams. Before that he spent twelve years in product leadership in fintech, most
-recently as CPO, and brings experience with ML and GenAI from investment banking. He has trained
-teams in Claude Code since 2025.
+Hendrik Hemken founded Beyond7 in Hamburg and teaches agentic work to larger mid-sized companies
+across industries, to their teams and to the organization as a whole. Before that he spent twelve
+years in product leadership in fintech, most recently as CPO at DealCircle and OWNLY. In those roles
+he gained experience with ML and GenAI in an investment-banking setting and scaled AI workflows to
+more than 3.5 million automated runs a year as early as 2024. He has trained teams in Claude Code
+since 2025, no developer background required. At hackers&wizards he teaches Agentic Engineering for
+Product Managers and Product Owners.

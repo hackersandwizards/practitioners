@@ -13,10 +13,12 @@
   },
   "linkedin": "https://www.linkedin.com/in/hendrikhemken/",
   "website": "https://beyond7.ai",
-  "status": "draft",
+  "status": "active",
+  "owner": "Hendrik Hemken",
+  "updated": "2026-11-09",
   "photo": "practitioners/hendrik-hemken/photo.webp",
   "bio": {
-    "en": "Hendrik Hemken founded Beyond7 in Hamburg, a consultancy that sets up Claude for organizations and trains their teams. Before that he spent twelve years in product leadership in fintech, most recently as CPO, and brings experience with ML and GenAI from investment banking. He has trained teams in Claude Code since 2025.",
-    "de": "Hendrik Hemken hat Beyond7 in Hamburg gegründet, eine Beratung, die Claude für Organisationen einrichtet und ihre Teams schult. Davor war er zwölf Jahre in Product Leadership im Fintech, zuletzt als CPO, und bringt aus dem Investment Banking Erfahrung mit ML und GenAI mit. Seit 2025 trainiert er Teams in Claude Code."
+    "en": "Hendrik Hemken founded Beyond7 in Hamburg and teaches agentic work to larger mid-sized companies across industries, to their teams and to the organization as a whole. Before that he spent twelve years in product leadership in fintech, most recently as CPO at DealCircle and OWNLY. In those roles he gained experience with ML and GenAI in an investment-banking setting and scaled AI workflows to more than 3.5 million automated runs a year as early as 2024. He has trained teams in Claude Code since 2025, no developer background required. At hackers&wizards he teaches Agentic Engineering for Product Managers and Product Owners.",
+    "de": "Hendrik Hemken hat Beyond7 in Hamburg gegründet und bringt größeren Mittelständlern aller Branchen agentisches Arbeiten bei, den Teams ebenso wie der Organisation als Ganzes. Davor war er zwölf Jahre in der Produktführung im FinTech, zuletzt als CPO bei DealCircle und OWNLY. In dieser Zeit sammelte er Erfahrung mit ML und GenAI im Investment-Banking-Umfeld und brachte KI-Workflows schon 2024 auf mehr als 3,5 Millionen automatisierte Durchläufe pro Jahr. Seit 2025 trainiert er Teams in Claude Code, auch ohne Entwickler-Hintergrund. Bei hackers&wizards gibt er die Schulung „Agentic Engineering for Product Managers and Product Owners“."
   }
 }
