@@ -13,7 +13,9 @@
     "de": "Softwarearchitekt bei WPS, iSAQB-AGENTA-Lehrplan-Kurator, Fachbuchautor bei Hanser, Konferenzsprecher"
   },
   "linkedin": "https://www.linkedin.com/in/b-weinlich/",
-  "status": "draft",
+  "status": "active",
+  "owner": "Bastian Weinlich",
+  "updated": "2026-11-09",
   "photo": "practitioners/bastian-weinlich/photo.webp",
   "bio": {
     "en": "Bastian Weinlich is a computer scientist, software architect, and project manager with over ten years of experience in professional software development. His expertise focuses on *Agentic Engineering* and the use of AI agents in software development. As curriculum curator for the iSAQB Advanced Level module [AGENTA](https://www.isaqb.org/de/zertifizierungen/zertifizierungen-uebersicht/cpsa-advanced-level/agenta-architektur-im-kontext-agentischer-softwareentwicklung/), he shapes the curriculum for software architecture in the age of agentic AI. He is also co-authoring the book *“Softwareentwicklung mit agentischer KI – Verstehen, anwenden und etablieren im professionellen Kontext”* (Software Development with Agentic AI), scheduled for publication by Hanser in March 2027. He regularly speaks at conferences, delivers training courses, and publishes technical articles, including contributions to heise online. He has also been featured on Deutschlandfunk, Germany’s national public radio, discussing the topic of Vibe Coding.",
