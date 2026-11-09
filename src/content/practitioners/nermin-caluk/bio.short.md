@@ -1,0 +1,1 @@
+Nermin Čaluk has spent around 20 years in software, the last decade as Director of Engineering, most recently at New Work SE (XING). He works on how organizations change with AI and how they keep quality high in the process.

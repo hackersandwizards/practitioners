@@ -1,3 +1,5 @@
-Nermin Čaluk bringt 20 Jahre Engineering mit, davon über neun auf Director-Ebene. Bei New Work SE
-leitete er den Bereich XING Foundation, brachte dort frühe KI-Features an den Start und baute eine
-Community of Practice für KI auf. Heute arbeitet er freiberuflich.
+Nermin Čaluk ist seit rund 20 Jahren in der Softwarebranche tätig, davon das letzte Jahrzehnt als Director of Engineering, zuletzt bei der New Work SE (XING) in Hamburg, immer mit einem Bein im Engineering und einem im Business.
+
+Im Mittelpunkt seiner Arbeit stehen zwei Fragen, die durch KI dringlicher geworden sind: wie sich Organisationen verändern und wie sie dabei hohe Qualität sicherstellen. Er hat mehrere organisatorische Transformationen geleitet, bei XING die ersten Generative-AI-Features mit in Produktion gebracht und eine Community of Practice aufgebaut, die KI über ein einzelnes Team hinaus getragen hat. Da er seine Laufbahn in der Softwarequalität begonnen hat, achtet er genau darauf, wo sich zwischen der Idee und den Menschen, die das Produkt nutzen, Reibung, Störungen und späte Überraschungen einschleichen. Er setzt lieber auf gezielte Experimente als auf große Programme, und lieber auf Qualität von Anfang an als auf Reparaturen am Ende.
+
+Seine Neugier auf KI-Anwendungen reicht weit über Software hinaus (ja, sogar bis zum Olivenöl).
