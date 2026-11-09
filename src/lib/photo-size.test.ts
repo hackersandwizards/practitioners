@@ -6,8 +6,8 @@ import { Glob } from "bun";
  *  who sits in that group, so every portrait has to fit it. CONTRIBUTING.md states the number. */
 const MIN_WIDTH = 918;
 
-/** Portraits below the minimum today, on either side. Lower it when one reaches the minimum; a new portrait below
- *  the minimum raises it only after the person has been asked for a larger original. */
+/** Portraits below the minimum today, on either side. Lower it when one reaches the minimum; a new
+ *  portrait below the minimum raises it only after the person has been asked for a larger original. */
 const AWAITING_ORIGINAL = 49;
 
 test("the number of portraits below the minimum is AWAITING_ORIGINAL", async () => {
