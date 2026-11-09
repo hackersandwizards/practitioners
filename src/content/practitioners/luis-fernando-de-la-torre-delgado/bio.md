@@ -13,14 +13,17 @@ background:
   de: "Souveräne EU-Cloud und KI: AWS, RAG-Agenten"
 status: active
 owner: Luis Fernando De La Torre Delgado
-updated: "2026-09-08"
+updated: "2026-11-09"
 ---
 
-Luis Fernando De La Torre Delgado is a cloud and AI solutions architect in Hamburg with eighteen
-years in software engineering. FinTech was where he first built on AWS; the circular economy years
-were where he learned what it takes to keep a system scaling once real load arrives. Today he builds
-agentic AI systems, on AWS or on European infrastructure when the data is not allowed to leave the
-continent. For a railway client he delivered a construction plan review system alone in five weeks.
-It found every gap that had been planted in the test set and invented none. With hackers&wizards he
-takes on the two-day workshop where teams learn what an agent is asked to do, what it knows while
-doing it, how its work is verified and what it is allowed to touch.
+Luis Fernando De La Torre Delgado is a cloud and AI solutions architect based in Hamburg and has
+been writing software for 18 years. He has been building on AWS for 13 years, starting in FinTech.
+In the circular economy, he learned what a system needs to scale under real load. In the EU
+research project ARROWHEAD, he worked on how connected systems interoperate securely in local
+clouds. Today he develops agentic AI systems, on AWS or on EU-sovereign infrastructure when data
+must not leave the EU. For an engineering firm working in railway construction, he single-handedly
+built an AI system in five weeks that automatically checks construction plans for regulatory
+compliance. Tested on real project documents, it found every gap and invented none. At
+hackers&wizards, he runs two-day workshops and then supports teams through mentoring. They learn
+what an agent should do, what context it needs, how its work is verified, and what it is allowed to
+touch.
