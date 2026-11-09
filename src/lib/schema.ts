@@ -131,6 +131,24 @@ export const ownAffiliations = { "hackers&wizards": "hackers&wizards", freelance
 const squash = (s: string) => s.toLowerCase().replace(/\s+/g, "");
 const ownKey = (a: string) => Object.keys(ownAffiliations).find((k) => squash(k) === squash(a));
 
+/** The website prints `expertise` on a trainer's card and holds it to three words, never a job
+ *  title (its src/copy/index.test.ts); the same rule here, so a line breaks in this gate first. */
+const jobTitle = /\b(Director|Engineer|Manager|Head of|CTO|Lead)\b/i;
+export const expertiseProblem = (line: string) =>
+  line.trim().split(/\s+/).length > 3
+    ? "three words or fewer"
+    : jobTitle.test(line)
+      ? "no job title"
+      : undefined;
+
+/** Two `expertise.en` lines that came longer than the limit by their people's own pull requests,
+ *  held by their text: a changed line meets the rule. Remove a line once it fits; never add one
+ *  (expertise.test.ts holds both). */
+export const expertiseAwaiting = new Set([
+  "Engineering leadership, change and quality",
+  "Agentic Engineering, AI-assisted software development, software architecture",
+]);
+
 const year = z.int().min(1960).max(new Date().getFullYear());
 
 /** A technology or tool as its maker spells it ("TypeScript", "Claude Code"), so the same name
@@ -166,8 +184,8 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       /** Their own title as the website prints it: "Founder & Co-CEO", "AI architect and
        *  engineering trainer at IONOS". */
       job: localized.optional(),
-      /** Their expertise in about three words, under their name on hackersandwizards.dev/team/;
-       *  never a title or an employer. */
+      /** Their expertise under their name on hackersandwizards.dev/team/, never an employer;
+       *  `expertiseProblem` holds the limit. */
       expertise: localized.optional(),
       /** One background line under that, naming their own company or employer where there is one;
        *  no client, rate or figure they do not publish. */
@@ -246,6 +264,13 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     .refine((d) => d.relation !== "partner" || d.affiliation, {
       message: "a partner's trainer needs an affiliation",
       path: ["affiliation"],
+    })
+    .superRefine((d, ctx) => {
+      if (!d.expertise || expertiseAwaiting.has(d.expertise.en)) return;
+      for (const lang of ["en", "de"] as const) {
+        const problem = expertiseProblem(d.expertise[lang]);
+        if (problem) ctx.addIssue({ code: "custom", message: problem, path: ["expertise", lang] });
+      }
     })
     // "Freelance" or "hackers & wizards" would group as a company; only the exact key is ours.
     .refine((d) => !d.affiliation || (ownKey(d.affiliation) ?? d.affiliation) === d.affiliation, {

@@ -122,5 +122,6 @@ touches only your folder. On style we comment and leave the wording to you. Your
 `hackersandwizards.dev/team/<your-folder>/` shows the change with the website's next release.
 
 The lines under your name are in your `bio.md` too: `job`, `expertise` and `background`, each in
-English and German. Change them like your bio. The group you appear in is kept on the website: mention
-a wish in the pull request. To be taken off, reply to the mail from h&w.
+English and German. Change them like your bio. In both languages, `expertise` takes three words or
+fewer and no job title such as Director or Lead. The group you appear in is kept on the website:
+mention a wish in the pull request. To be taken off, reply to the mail from h&w.
