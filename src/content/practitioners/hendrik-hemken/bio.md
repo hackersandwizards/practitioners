@@ -11,7 +11,9 @@ expertise:
 background:
   en: "Founder of Beyond7, 12 years leading fintech products"
   de: "Gründer von Beyond7, 12 Jahre Product Leadership im Fintech"
-status: draft
+status: active
+owner: Hendrik Hemken
+updated: "2026-11-09"
 ---
 
 Hendrik Hemken founded Beyond7 in Hamburg and teaches agentic work to larger mid-sized companies
