@@ -14,7 +14,7 @@ background:
   de: "Entwickler, Lead of Technical Operations bei Tudock"
 status: active
 owner: Johann Laur
-updated: "2026-09-03"
+updated: "2026-11-09"
 ---
 
 Johann is a software developer and Lead of Technical Operations at Tudock in Hamburg. His work is
