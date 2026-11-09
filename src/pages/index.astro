@@ -8,33 +8,37 @@ import Layout from "../layouts/Layout.astro";
 import type { FilterItem } from "@hackersandwizards/brand/elements/list-filter.ts";
 import ListFilter from "@hackersandwizards/brand/expert/components/ListFilter.astro";
 import PersonCard from "../components/PersonCard.astro";
-import { repo, shown } from "../lib/entry";
+import { affiliation, repo, shown } from "../lib/entry";
 import { ownAffiliations } from "../lib/schema";
 import { listing, roster, team } from "../lib/website";
 
 const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data)))
   .sort((a, b) => a.data.name.localeCompare(b.data.name))
-  .map((entry) => ({ entry, ...listing(web, entry.data.name) }));
-// The name as written and folded, so "muller" finds Müller, "caluk" Čaluk and "buss" Buß.
-const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss");
+  .map((entry) => ({
+    entry,
+    affiliation: affiliation(entry.data),
+    ...listing(web, entry.data.name),
+  }));
+// The name as written, transliterated and folded: "mueller" and "muller" find Müller.
+const umlauts: Record<string, string> = { ä: "ae", ö: "oe", ü: "ue", ß: "ss" };
+const searchText = (name: string) => {
+  const lower = name.toLowerCase();
+  const strip = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "");
+  return [
+    lower,
+    lower.replace(/[äöüß]/g, (c) => umlauts[c]!),
+    strip(lower.replace(/ß/g, "ss")),
+  ].join(" ");
+};
 const item = (p: (typeof people)[number]): FilterItem => ({
-  text: `${p.entry.data.name} ${fold(p.entry.data.name)}`.toLowerCase(),
+  text: searchText(p.entry.data.name),
   facets: { entry: [p.entry.data.status], web: [p.listed ? "listed" : "unlisted"] },
 });
-// Without a stated affiliation, staff and freelance trainers still say who they work for.
-const byRelation: Record<string, string> = { staff: "hackers&wizards", freelance: "freelance" };
-const affiliation = ({ affiliation, relation }: (typeof people)[number]["entry"]["data"]) =>
-  affiliation ?? byRelation[relation ?? ""];
 // Sorted by affiliation, which keeps the names in order within one company.
 const byGroup = Map.groupBy(
-  people.toSorted((a, b) =>
-    (affiliation(a.entry.data) ?? "").localeCompare(affiliation(b.entry.data) ?? ""),
-  ),
-  ({ entry: { data } }) => {
-    const a = affiliation(data);
-    return !a ? "none" : Object.hasOwn(ownAffiliations, a) ? a : "company";
-  },
+  people.toSorted((a, b) => (a.affiliation ?? "").localeCompare(b.affiliation ?? "")),
+  ({ affiliation: a }) => (!a ? "none" : Object.hasOwn(ownAffiliations, a) ? a : "company"),
 );
 const groups = [
   { key: "hackers&wizards", label: ownAffiliations["hackers&wizards"] },
@@ -123,7 +127,7 @@ const facets = [
                 <PersonCard
                   entry={p.entry}
                   job={p.job}
-                  company={g.key === "company" ? p.entry.data.affiliation : undefined}
+                  company={g.key === "company" ? p.affiliation : undefined}
                   listed={p.listed}
                   filter={item(p)}
                   sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"

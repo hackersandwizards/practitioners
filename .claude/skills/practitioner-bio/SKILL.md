@@ -24,9 +24,9 @@ entry stays `status: draft` and you say what is missing.
 The portrait is `photo.webp`, cropped square, its side the source's shorter side, never
 upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px slot on the
 website needs more (`--size`). Make it with `bun run portrait <source> <folder>/photo.webp`,
-adding `--crop x,y,side` where the automatic square cuts the head. Then run `bun test src/lib/photo-size.test.ts`: it fails when the number of
-portraits with a side below `MIN_WIDTH` changes, and the comment on `AWAITING_ORIGINAL` there says
-what to do.
+adding `--crop x,y,side` where the automatic square cuts the head. Then run
+`bun test src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
+`MIN_WIDTH` changes, and the comment on `AWAITING_ORIGINAL` there says what to do.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
 than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a public booking link**
@@ -71,12 +71,13 @@ folder's `entry.json` too: the website reads that file, and a pull request's CI 
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
    change touches only their folder. Otherwise comment and merge nothing.
-2. `gh pr checkout <number>`, `bun run export`, then `bun run check`. A changed `entry.json` is
-   pushed to the pull request's branch before the merge, so `main` never holds a stale one. A confidential term other than the person's
-   own name is a review comment and blocks the merge. Their own name gets one `scaffolding.allow`
-   entry in `package.json` per path, with the name as `text` (matching ignores case; a list holds
-   other spellings) and their folder as `src/content/practitioners/<slug>/**`, pushed to the pull request's branch
-   before the merge, so `main` never holds the name without its entry. Style findings under step 6
+2. `gh pr checkout <number>`, `bun run export`, then `bun run check`. A confidential term other
+   than the person's own name is a review comment and blocks the merge. Their own name gets one
+   `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
+   case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`.
+   Push that entry and a changed `entry.json` to the pull request's branch before the merge, so
+   `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
+   the push, commit both on `main` right after the merge. Style findings under step 6
    below go into a review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
