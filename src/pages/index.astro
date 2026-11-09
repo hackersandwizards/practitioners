@@ -100,8 +100,7 @@ const facets = [
         label="Find a name"
         items={items}
         state={{ q: "", facets: {} }}
-        facet={facets[0] ?? { param: "entry", legend: "Entry", options: [] }}
-        select={facets[1]}
+        facets={facets}
         count="{shown} of {total} people"
         copy={{
           all: "All",
@@ -136,6 +135,12 @@ const facets = [
 </Layout>
 
 <style>
+  /* A card off screen stands in at this content height until it renders. Measured from 390 to
+     1440 px wide, the median card runs 285 to 314 px inside its padding, so the page grows or
+     shrinks by about 5 % at most as cards render, where 3rem made it grow by 45 %. */
+  #controls :global(.hw-list-filter) {
+    --hw-list-filter-row: 18.75rem;
+  }
   /* A static page has no server to apply the form's query, so without a script the search and
      its values would do nothing; the cards stay. */
   @media (scripting: none) {
