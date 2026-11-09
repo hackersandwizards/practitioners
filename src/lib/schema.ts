@@ -94,6 +94,7 @@ export const roles = {
   architect: "Architect",
   "tech-lead": "Tech lead",
   "engineering-manager": "Engineering manager",
+  "engineering-director": "Director of Engineering",
   "tech-executive": "CTO or CIO",
   "product-manager": "Product manager or owner",
   designer: "Designer",

@@ -11,9 +11,11 @@ formats: [coaching, workshop]
 delivery: [onsite, remote]
 audiences: [leads, executives, developers]
 domains: [software]
-roles: [engineering-manager, qa, consultant]
+roles: [engineering-manager, engineering-director, qa, consultant]
 since: 2007
-status: draft
+status: active
+owner: Nermin Čaluk
+updated: "2026-11-09"
 ---
 
 Nermin Čaluk has spent around 20 years in the software industry, the last decade as Director of Engineering, most recently at New Work SE (XING) in Hamburg, always with one foot in engineering and one in the business.

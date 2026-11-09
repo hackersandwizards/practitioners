@@ -30,11 +30,14 @@
   ],
   "roles": [
     "engineering-manager",
+    "engineering-director",
     "qa",
     "consultant"
   ],
   "since": 2007,
-  "status": "draft",
+  "status": "active",
+  "owner": "Nermin Čaluk",
+  "updated": "2026-11-09",
   "photo": "practitioners/nermin-caluk/photo.webp",
   "bio": {
     "en": "Nermin Čaluk has spent around 20 years in the software industry, the last decade as Director of Engineering, most recently at New Work SE (XING) in Hamburg, always with one foot in engineering and one in the business.\n\nHis work centres on two questions that AI has made more pressing: how organizations change, and how they keep quality high in the process. He has led several organizational transformations, and at XING he helped bring the first generative AI features to production and built a community of practice to carry AI beyond a single team. Having started his career in software quality, he looks closely at where friction, noise and late surprises creep in between an idea and the person using the product. He favours deliberate experiments over big programmes, and quality built in early over repairs at the end.\n\nHis curiosity about AI applications reaches well beyond software (yes, even olive oil).",
