@@ -8,7 +8,7 @@ const MIN_WIDTH = 918;
 
 /** Portraits below the minimum today, on either side. Lower it when one reaches the minimum; a new
  *  portrait below the minimum raises it only after the person has been asked for a larger original. */
-const AWAITING_ORIGINAL = 49;
+const AWAITING_ORIGINAL = 48;
 
 test("the number of portraits below the minimum is AWAITING_ORIGINAL", async () => {
   const files = [...new Glob("src/content/practitioners/*/photo.webp").scanSync()];
