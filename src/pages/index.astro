@@ -114,7 +114,11 @@ const facets = [
           <section class="mt-10 first:mt-4" data-filter-group>
             {/* No count here: it would not follow the search, and the filter's count line does. */}
             <h2 class="font-mono text-h4 font-bold">{g.label}</h2>
-            <ul class="mt-4 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4">
+            {/* An off-screen card stands in at --hw-list-filter-row until it renders. The square
+                portrait grows with the column, so the value follows the viewport per column count,
+                fitted to the median card inside its padding: measured from 360 to 1920 px wide, the
+                page moves by about 4 % at most as cards render, where brand's 3rem default moved it by 45 %. */}
+            <ul class="mt-4 grid grid-cols-2 gap-4 [--hw-list-filter-row:max(18rem,43vw_+_5.3rem)] sm:gap-grid md:grid-cols-3 md:[--hw-list-filter-row:calc(27.5vw_+_5.5rem)] lg:grid-cols-4 lg:[--hw-list-filter-row:19.5rem]">
               {g.people.map((p, j) => (
                 <PersonCard
                   entry={p.entry}
@@ -135,19 +139,6 @@ const facets = [
 </Layout>
 
 <style>
-  /* A card off screen stands in at this content height until it renders, so the scrollbar holds
-     still. The square portrait grows with the column, so the height follows the viewport within
-     each of the grid's column counts (2, md:3, lg:4), fitted to the median card inside its
-     padding. */
-  #controls :global(.hw-list-filter) {
-    --hw-list-filter-row: max(18rem, 43vw + 5.3rem);
-    @media (width >= 48rem) {
-      --hw-list-filter-row: calc(27.5vw + 5.5rem);
-    }
-    @media (width >= 64rem) {
-      --hw-list-filter-row: 19.5rem;
-    }
-  }
   /* A static page has no server to apply the form's query, so without a script the search and
      its values would do nothing; the cards stay. */
   @media (scripting: none) {
