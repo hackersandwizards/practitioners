@@ -114,11 +114,7 @@ const facets = [
           <section class="mt-10 first:mt-4" data-filter-group>
             {/* No count here: it would not follow the search, and the filter's count line does. */}
             <h2 class="font-mono text-h4 font-bold">{g.label}</h2>
-            {/* An off-screen card stands in at --hw-list-filter-row until it renders. The square
-                portrait grows with the column, so the value follows the viewport per column count,
-                fitted to the median card inside its padding: measured from 360 to 1920 px wide, the
-                page moves by about 4 % at most as cards render, where brand's 3rem default moved it by 45 %. */}
-            <ul class="mt-4 grid grid-cols-2 gap-4 [--hw-list-filter-row:max(18rem,43vw_+_5.3rem)] sm:gap-grid md:grid-cols-3 md:[--hw-list-filter-row:calc(27.5vw_+_5.5rem)] lg:grid-cols-4 lg:[--hw-list-filter-row:19.5rem]">
+            <ul class="mt-4 grid grid-cols-2 gap-4 sm:gap-grid md:grid-cols-3 lg:grid-cols-4">
               {g.people.map((p, j) => (
                 <PersonCard
                   entry={p.entry}
