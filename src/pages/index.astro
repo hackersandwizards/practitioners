@@ -20,19 +20,8 @@ const people = (await getCollection("practitioners", (e) => shown(e.data)))
     affiliation: affiliation(entry.data),
     ...listing(web, entry.data.name),
   }));
-// The name as written, transliterated and folded: "mueller" and "muller" find Müller.
-const umlauts: Record<string, string> = { ä: "ae", ö: "oe", ü: "ue", ß: "ss" };
-const searchText = (name: string) => {
-  const lower = name.toLowerCase();
-  const strip = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "");
-  return [
-    lower,
-    lower.replace(/[äöüß]/g, (c) => umlauts[c]!),
-    strip(lower.replace(/ß/g, "ss")),
-  ].join(" ");
-};
 const item = (p: (typeof people)[number]): FilterItem => ({
-  text: searchText(p.entry.data.name),
+  text: p.entry.data.name,
   facets: { entry: [p.entry.data.status], web: [p.listed ? "listed" : "unlisted"] },
 });
 // Sorted by affiliation, which keeps the names in order within one company.
