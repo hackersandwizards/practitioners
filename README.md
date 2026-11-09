@@ -230,7 +230,6 @@ src/lib/schema.ts                   the contract every bio.md meets
 src/pages/index.astro               the preview, grouped by affiliation, cards as the website's team grid
 src/lib/website.ts                  who hackersandwizards.dev/team/ lists, read from its JSON-LD
 scripts/export.ts                   writes each folder's entry.json, the data the website imports
-scripts/check-inline-space.ts       fails on a line break that the build turns into a missing space
 .claude/skills/practitioner-bio/    reviewing a pull request, the mail and the interview
 .githooks/                          the gate
 .github/workflows/                  the same check and a secret scan on every pull request
