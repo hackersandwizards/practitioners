@@ -3,14 +3,41 @@
   "name": "Nermin Čaluk",
   "relation": "freelance",
   "expertise": {
-    "en": "Engineering leadership",
-    "de": "Engineering-Leadership"
+    "en": "Engineering leadership, change and quality",
+    "de": "Engineering-Leadership, Wandel und Qualität"
   },
   "linkedin": "https://www.linkedin.com/in/caluk/",
+  "topics": [
+    "engineering-leadership",
+    "ai-strategy",
+    "testing-and-quality"
+  ],
+  "formats": [
+    "coaching",
+    "workshop"
+  ],
+  "delivery": [
+    "onsite",
+    "remote"
+  ],
+  "audiences": [
+    "leads",
+    "executives",
+    "developers"
+  ],
+  "domains": [
+    "software"
+  ],
+  "roles": [
+    "engineering-manager",
+    "qa",
+    "consultant"
+  ],
+  "since": 2007,
   "status": "draft",
   "photo": "practitioners/nermin-caluk/photo.webp",
   "bio": {
-    "en": "Nermin Čaluk brings 20 years of engineering experience, more than nine of them at director level. At New Work SE he led the XING Foundation area, launched early AI features there and built an AI community of practice. Today he works as a freelancer.",
-    "de": "Nermin Čaluk bringt 20 Jahre Engineering mit, davon über neun auf Director-Ebene. Bei New Work SE leitete er den Bereich XING Foundation, brachte dort frühe KI-Features an den Start und baute eine Community of Practice für KI auf. Heute arbeitet er freiberuflich."
+    "en": "Nermin Čaluk has spent around 20 years in the software industry, the last decade as Director of Engineering, most recently at New Work SE (XING) in Hamburg, always with one foot in engineering and one in the business.\n\nHis work centres on two questions that AI has made more pressing: how organizations change, and how they keep quality high in the process. He has led several organizational transformations, and at XING he helped bring the first generative AI features to production and built a community of practice to carry AI beyond a single team. Having started his career in software quality, he looks closely at where friction, noise and late surprises creep in between an idea and the person using the product. He favours deliberate experiments over big programmes, and quality built in early over repairs at the end.\n\nHis curiosity about AI applications reaches well beyond software (yes, even olive oil).",
+    "de": "Nermin Čaluk ist seit rund 20 Jahren in der Softwarebranche tätig, davon das letzte Jahrzehnt als Director of Engineering, zuletzt bei der New Work SE (XING) in Hamburg, immer mit einem Bein im Engineering und einem im Business.\n\nIm Mittelpunkt seiner Arbeit stehen zwei Fragen, die durch KI dringlicher geworden sind: wie sich Organisationen verändern und wie sie dabei hohe Qualität sicherstellen. Er hat mehrere organisatorische Transformationen geleitet, bei XING die ersten Generative-AI-Features mit in Produktion gebracht und eine Community of Practice aufgebaut, die KI über ein einzelnes Team hinaus getragen hat. Da er seine Laufbahn in der Softwarequalität begonnen hat, achtet er genau darauf, wo sich zwischen der Idee und den Menschen, die das Produkt nutzen, Reibung, Störungen und späte Überraschungen einschleichen. Er setzt lieber auf gezielte Experimente als auf große Programme, und lieber auf Qualität von Anfang an als auf Reparaturen am Ende.\n\nSeine Neugier auf KI-Anwendungen reicht weit über Software hinaus (ja, sogar bis zum Olivenöl)."
   }
 }
