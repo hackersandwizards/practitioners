@@ -1,4 +1,7 @@
-Hendrik Hemken hat Beyond7 in Hamburg gegründet, eine Beratung, die Claude für Organisationen
-einrichtet und ihre Teams schult. Davor war er zwölf Jahre in Product Leadership im Fintech, zuletzt
-als CPO, und bringt aus dem Investment Banking Erfahrung mit ML und GenAI mit. Seit 2025 trainiert
-er Teams in Claude Code.
+Hendrik Hemken hat Beyond7 in Hamburg gegründet und bringt größeren Mittelständlern aller Branchen
+agentisches Arbeiten bei, den Teams ebenso wie der Organisation als Ganzes. Davor war er zwölf Jahre
+in der Produktführung im FinTech, zuletzt als CPO bei DealCircle und OWNLY. In dieser Zeit sammelte
+er Erfahrung mit ML und GenAI im Investment-Banking-Umfeld und brachte KI-Workflows schon 2024 auf
+mehr als 3,5 Millionen automatisierte Durchläufe pro Jahr. Seit 2025 trainiert er Teams in Claude
+Code, auch ohne Entwickler-Hintergrund. Bei hackers&wizards gibt er die Schulung „Agentic
+Engineering for Product Managers and Product Owners“.
