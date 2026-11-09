@@ -3,18 +3,15 @@ name: Bastian Weinlich
 photo: ./photo.webp
 affiliation: WPS
 linkedin: https://www.linkedin.com/in/b-weinlich/
-affiliation_url: https://www.wps.de
+affiliation_url: https://www.wps.de/wps/team/bastian-weinlich
 relation: partner
 expertise:
-  en: "AI-assisted, agentic coding"
-  de: "KI-gestütztes, agentisches Coding"
+  en: "Agentic Engineering, AI-assisted software development, software architecture"
+  de: "Agentic Engineering, KI-gestützte Softwareentwicklung, Softwarearchitektur"
 background:
-  en: "Software architect at WPS, writes for heise"
-  de: "Softwarearchitekt bei WPS, schreibt für heise"
+  en: "Software architect at WPS, iSAQB AGENTA curriculum curator, author at Hanser, conference speaker"
+  de: "Softwarearchitekt bei WPS, iSAQB-AGENTA-Lehrplan-Kurator, Fachbuchautor bei Hanser, Konferenzsprecher"
 status: draft
 ---
 
-Bastian Weinlich is a computer scientist, software architect and project lead at WPS and has been
-developing software for more than ten years. He speaks at conferences, gives trainings and writes
-about AI-assisted and agentic programming, for heise online among others, and was on Deutschlandfunk
-talking about vibe coding.
+Bastian Weinlich is a computer scientist, software architect, and project manager with over ten years of experience in professional software development. His expertise focuses on *Agentic Engineering* and the use of AI agents in software development. As curriculum curator for the iSAQB Advanced Level module [AGENTA](https://www.isaqb.org/de/zertifizierungen/zertifizierungen-uebersicht/cpsa-advanced-level/agenta-architektur-im-kontext-agentischer-softwareentwicklung/), he shapes the curriculum for software architecture in the age of agentic AI. He is also co-authoring the book *“Softwareentwicklung mit agentischer KI – Verstehen, anwenden und etablieren im professionellen Kontext”* (Software Development with Agentic AI), scheduled for publication by Hanser in March 2027. He regularly speaks at conferences, delivers training courses, and publishes technical articles, including contributions to heise online. He has also been featured on Deutschlandfunk, Germany’s national public radio, discussing the topic of Vibe Coding.
