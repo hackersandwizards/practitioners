@@ -16,21 +16,25 @@ const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data)))
   .sort((a, b) => a.data.name.localeCompare(b.data.name))
   .map((entry) => ({ entry, ...listing(web, entry.data.name) }));
+// The name as written and folded, so "muller" finds Müller, "caluk" Čaluk and "buss" Buß.
+const fold = (s: string) => s.normalize("NFD").replace(/\p{M}/gu, "").replace(/ß/g, "ss");
 const item = (p: (typeof people)[number]): FilterItem => ({
-  text: p.entry.data.name.toLowerCase(),
+  text: `${p.entry.data.name} ${fold(p.entry.data.name)}`.toLowerCase(),
   facets: { entry: [p.entry.data.status], web: [p.listed ? "listed" : "unlisted"] },
 });
+// Without a stated affiliation, staff and freelance trainers still say who they work for.
+const byRelation: Record<string, string> = { staff: "hackers&wizards", freelance: "freelance" };
+const affiliation = ({ affiliation, relation }: (typeof people)[number]["entry"]["data"]) =>
+  affiliation ?? byRelation[relation ?? ""];
 // Sorted by affiliation, which keeps the names in order within one company.
 const byGroup = Map.groupBy(
   people.toSorted((a, b) =>
-    (a.entry.data.affiliation ?? "").localeCompare(b.entry.data.affiliation ?? ""),
+    (affiliation(a.entry.data) ?? "").localeCompare(affiliation(b.entry.data) ?? ""),
   ),
-  ({ entry: { data } }) =>
-    !data.affiliation
-      ? "none"
-      : Object.hasOwn(ownAffiliations, data.affiliation)
-        ? data.affiliation
-        : "company",
+  ({ entry: { data } }) => {
+    const a = affiliation(data);
+    return !a ? "none" : Object.hasOwn(ownAffiliations, a) ? a : "company";
+  },
 );
 const groups = [
   { key: "hackers&wizards", label: ownAffiliations["hackers&wizards"] },

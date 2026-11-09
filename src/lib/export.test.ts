@@ -34,3 +34,13 @@ test("staff need a job and a partner's trainer an affiliation", () => {
   expect(ok({ relation: "partner", affiliation: "WPS" })).toBe(true);
   expect(ok({ relation: "freelance" })).toBe(true);
 });
+
+test("an own affiliation is written as its key, never as a variant that would read as a company", () => {
+  const ok = (affiliation: string) => schema.safeParse({ name: "A B", affiliation }).success;
+  expect(["freelance", "hackers&wizards", "INNOQ"].map(ok)).toEqual([true, true, true]);
+  expect(["Freelance", "hackers & wizards", "Hackers&Wizards"].map(ok)).toEqual([
+    false,
+    false,
+    false,
+  ]);
+});
