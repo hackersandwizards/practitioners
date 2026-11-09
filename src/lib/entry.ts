@@ -1,4 +1,5 @@
 import type { CollectionEntry } from "astro:content";
+import { ownAffiliations } from "./schema";
 
 type Data = CollectionEntry<"practitioners">["data"];
 
@@ -19,6 +20,13 @@ export const links = (d: Data) =>
     ...(d.profiles ?? []).map((href) => ({ label: host(href), href })),
     { label: "Book a call", href: d.bookme },
   ].filter((l): l is { label: string; href: string } => Boolean(l.href));
+
+const byRelation: Partial<Record<NonNullable<Data["relation"]>, keyof typeof ownAffiliations>> = {
+  staff: "hackers&wizards",
+  freelance: "freelance",
+};
+/** Who the person works for: the stated affiliation, else what staff or freelance already says. */
+export const affiliation = (d: Data) => d.affiliation ?? (d.relation && byRelation[d.relation]);
 
 /** The name without a leading title: "Dr." is not the first name. */
 export const bareName = (name: string) => name.replace(/^Dr\.\s+/, "");

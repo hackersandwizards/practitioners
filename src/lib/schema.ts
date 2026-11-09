@@ -247,7 +247,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       path: ["affiliation"],
     })
     // "Freelance" or "hackers & wizards" would group as a company; only the exact key is ours.
-    .refine((d) => [undefined, d.affiliation].includes(d.affiliation && ownKey(d.affiliation)), {
+    .refine((d) => !d.affiliation || (ownKey(d.affiliation) ?? d.affiliation) === d.affiliation, {
       message: `write ${Object.keys(ownAffiliations).join(" or ")} exactly`,
       path: ["affiliation"],
     });

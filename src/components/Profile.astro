@@ -2,6 +2,7 @@
 // The practitioner's profile for matching, under the bios: each filled field as a fact, controlled
 // values by their labels from schema.ts. Renders nothing while the profile is empty.
 import type { CollectionEntry } from "astro:content";
+import { affiliation } from "../lib/entry";
 import * as v from "../lib/schema";
 
 interface Props {
@@ -17,16 +18,17 @@ const skills = (list: typeof d.stack) =>
     note: `${v.depths[s.depth]}${s.teaches ? ", teaches it" : ""}`,
   }));
 const language = new Intl.DisplayNames(["en"], { type: "language" });
+const employer = affiliation(d);
 
 type Fact = { label: string; pills?: string[]; skills?: { text: string; note: string }[] };
 const facts: Fact[] = [
   {
     label: "Works for",
-    pills: d.affiliation
+    pills: employer
       ? [
-          Object.hasOwn(v.ownAffiliations, d.affiliation)
-            ? v.ownAffiliations[d.affiliation as keyof typeof v.ownAffiliations]
-            : d.affiliation,
+          Object.hasOwn(v.ownAffiliations, employer)
+            ? v.ownAffiliations[employer as keyof typeof v.ownAffiliations]
+            : employer,
         ]
       : undefined,
   },
