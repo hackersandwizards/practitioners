@@ -10,7 +10,7 @@ expertise:
   de: "Autonome KI-Systeme"
 status: active
 owner: Ralf Hüller
-updated: "2026-09-09"
+updated: "2026-11-09"
 ---
 
 "In the current AI cycle, we are always the experts for the next six months. So: carpe diem!"

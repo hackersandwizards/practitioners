@@ -11,7 +11,7 @@ expertise:
   de: "Indie-App-Entwicklung"
 status: active
 owner: Christian Tietze
-updated: "2026-09-08"
+updated: "2026-11-09"
 ---
 
 Christian has run his own Mac and iOS app business since 2013. The Archive, his Zettelkasten app,

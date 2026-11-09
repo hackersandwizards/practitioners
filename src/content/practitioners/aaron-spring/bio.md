@@ -10,7 +10,7 @@ expertise:
   de: "Evaluation von KI-Agenten"
 status: active
 owner: Aaron Spring
-updated: "2026-09-08"
+updated: "2026-11-09"
 ---
 
 Aaron did a PhD in climate science, then worked as an ML and AI engineer at XING. He now freelances

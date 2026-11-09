@@ -15,7 +15,7 @@ expertise:
   de: "Agentische Softwaresysteme"
 status: active
 owner: Ingo Eichhorst
-updated: "2026-09-08"
+updated: "2026-11-09"
 ---
 
 Ingo has spent more than 15 years building software as an engineer, solution architect, and CTO.

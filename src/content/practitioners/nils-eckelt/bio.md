@@ -14,7 +14,7 @@ background:
   de: "19 Jahre Software, baut Open Agentic Overview"
 status: active
 owner: Nils Eckelt
-updated: "2026-09-02"
+updated: "2026-11-09"
 ---
 
 Nils wrote his first database system at 15, for medical research at the Universitätsklinikum

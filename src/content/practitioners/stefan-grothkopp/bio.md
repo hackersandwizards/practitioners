@@ -11,7 +11,7 @@ expertise:
   de: "KI-Coaching für Teams"
 status: active
 owner: Stefan Grothkopp
-updated: "2026-10-01"
+updated: "2026-11-09"
 ---
 
 Stefan has spent more than fifteen years as a startup CTO, several times as a founder, and two of

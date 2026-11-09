@@ -12,7 +12,7 @@ background:
   de: "Führt Connective Layer, 25+ Jahre Software"
 status: active
 owner: Alexander Greim
-updated: "2026-09-07"
+updated: "2026-11-09"
 ---
 
 Alexander is CTO at YogaEasy in Hamburg, where he owns the video streaming platform with 800,000
