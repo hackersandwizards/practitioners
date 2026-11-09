@@ -1,6 +1,6 @@
 {
   "name": "practitioners",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "type": "module",
@@ -13,7 +13,7 @@
   },
   "packageManager": "bun@1.4.4",
   "scripts": {
-    "postinstall": "git rev-parse --git-dir > /dev/null 2>&1 && git config core.hooksPath .githooks || true",
+    "prepare": "[ \"$(git rev-parse --show-toplevel 2>/dev/null)\" = \"$(pwd -P)\" ] && git config core.hooksPath .githooks || true",
     "dev": "printf 'Caddy: http://practitioners.localhost\\n' && astro dev",
     "build": "check-lock astro build",
     "export": "bun scripts/export.ts",

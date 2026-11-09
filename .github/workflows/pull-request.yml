@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
-      # Before any step that runs the pull request's code (postinstall, astro.config), which could
+      # Before any step that runs the pull request's code (install scripts, astro.config), which could
       # rewrite $GITHUB_ENV or $GITHUB_PATH for later steps. The CLI, not gitleaks-action, which
       # needs a license secret for organization repositories.
       - name: gitleaks over the pull request's commits
