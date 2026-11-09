@@ -227,7 +227,7 @@ same bio check on GitHub, plus a scan for leaked secrets.
 ```
 src/content/practitioners/<slug>/   bio.md, bio.de.md, photo.webp, entry.json
 src/lib/schema.ts                   the contract every bio.md meets
-src/pages/index.astro               the preview, alphabetical, as the website's team grid
+src/pages/index.astro               the preview, grouped by affiliation, cards as the website's team grid
 src/lib/website.ts                  who hackersandwizards.dev/team/ lists, read from its JSON-LD
 scripts/export.ts                   writes each folder's entry.json, the data the website imports
 scripts/check-inline-space.ts       fails on a line break that the build turns into a missing space

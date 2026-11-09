@@ -57,7 +57,7 @@ the entry as it stands after that change. An h&w colleague edits an entry only f
 own words, and commits it only after their yes to exactly that text, and after
 `bun run check-confidential --staged` passes: the hook runs no confidential scan on a bio-only
 commit. Every h&w commit on `main` that changes an entry runs `bun run export` first and names the
-folder's `entry.json` too: the website reads that file, and only `bun run check` notices it stale.
+folder's `entry.json` too: the website reads that file, and a pull request's CI never checks it.
 
 - **Their pull request**, the default. `CONTRIBUTING.md` tells the person how, in the browser or
   with Claude Code.

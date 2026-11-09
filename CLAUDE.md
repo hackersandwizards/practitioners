@@ -27,7 +27,7 @@ interviews the person. A practitioner edits their own entry and nobody else's; a
 edits one only from that person's own words and commits it after their yes to exactly that
 content. No public host serves a build while an `active`
 entry carries neither its person's own change nor their yes to its text
-(`docs/agent-work/items/practitioner-pages.md` names them).
+(`docs/agent-work/items/work-practitioner-roster.md`, Before any public host).
 
 ## Catalog
 
