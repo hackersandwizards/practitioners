@@ -127,6 +127,9 @@ export const kinds = {
 /** The affiliations that name no other company, with their labels. */
 export const ownAffiliations = { "hackers&wizards": "hackers&wizards", freelance: "Freelance" };
 
+const squash = (s: string) => s.toLowerCase().replace(/\s+/g, "");
+const ownKey = (a: string) => Object.keys(ownAffiliations).find((k) => squash(k) === squash(a));
+
 const year = z.int().min(1960).max(new Date().getFullYear());
 
 /** A technology or tool as its maker spells it ("TypeScript", "Claude Code"), so the same name
@@ -241,6 +244,11 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     .refine((d) => d.relation !== "staff" || d.job, { message: "staff need a job", path: ["job"] })
     .refine((d) => d.relation !== "partner" || d.affiliation, {
       message: "a partner's trainer needs an affiliation",
+      path: ["affiliation"],
+    })
+    // "Freelance" or "hackers & wizards" would group as a company; only the exact key is ours.
+    .refine((d) => [undefined, d.affiliation].includes(d.affiliation && ownKey(d.affiliation)), {
+      message: `write ${Object.keys(ownAffiliations).join(" or ")} exactly`,
       path: ["affiliation"],
     });
 
