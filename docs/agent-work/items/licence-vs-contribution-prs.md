@@ -18,3 +18,5 @@ options:
 # Does the practitioners licence need a clause for practitioners' own edits?
 
 You asked for a licence "so wie die anderen repos" (v1.1.0 ships PolyForm Strict 1.0.0). That licence grants no right to make changes, while this repository's workflow is practitioners editing their own entry by pull request. I recommend one contribution clause, added in a practitioners release unless you object. Not built yet: `LICENSE` at v1.4.2 (09.11.) has no such clause.
+
+New evidence, 09.11.: five more practitioner pull requests (#3 to #7, four people) were merged under that licence, still without the clause.
