@@ -76,8 +76,10 @@ folder's `entry.json` too: the website reads that file, and a pull request's CI 
    files and git refuses with "unrelated histories". In place of the checkout, run
    `git fetch origin pull/<number>/head` and `git cherry-pick --no-commit` of the person's own
    commits (`gh pr view <number> --json commits` lists them by author); in place of the merge in
-   step 3, commit with `git commit -C <their last commit> --trailer "Closes: #<number>" -- <paths>`,
-   which keeps their authorship and runs the pre-commit hook a plain cherry-pick skips. A
+   step 3, once `bun run check` passes, commit with
+   `git commit -C <their last commit> --trailer "Closes: #<number>" -- <paths>`, naming every path
+   the cherry-pick staged plus `entry.json` and the `package.json` entry below; this keeps their
+   authorship and runs the pre-commit hook a plain cherry-pick skips. A
    confidential term other than the person's own name is a review comment and blocks the merge. Their own name gets one
    `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
    case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`.
