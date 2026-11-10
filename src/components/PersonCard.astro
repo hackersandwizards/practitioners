@@ -49,8 +49,8 @@ const { data } = entry;
       </span>
     </a>
   </p>
-  {job && <p class="mt-1 text-small text-muted">{job}</p>}
-  {company && <p class="mt-1 text-small text-muted">{company}</p>}
+  {job && <p class="mt-tight text-small text-muted">{job}</p>}
+  {company && <p class="mt-tight text-small text-muted">{company}</p>}
   {(data.status === "draft" || !listed) && (
     <p class="mt-3 flex flex-wrap gap-1.5">
       {data.status === "draft" && (

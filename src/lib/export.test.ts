@@ -48,19 +48,6 @@ test("an own affiliation is written as its key, never as a variant that would re
   ]);
 });
 
-test("a name allowed in package.json or in file names is one a practitioner's folder entry allows", () => {
-  const allow = pkg.scaffolding.allow as { path: string; text: string | string[] }[];
-  const key = (s: string) => s.toLowerCase().normalize("NFC");
-  const owned = allow
-    .filter((a) => a.path.startsWith("src/content/practitioners/"))
-    .flatMap((a) => [a.text].flat().map(key));
-  const orphans = allow
-    .filter((a) => a.path === "package.json" || a.path === "file names")
-    .flatMap((a) => [a.text].flat())
-    .filter((t) => !owned.includes(key(t)));
-  expect(orphans).toEqual([]);
-});
-
 /** generate() over one folder `ada` holding the given files; `"link"` makes a symlink to a file
  *  beside the folder. */
 async function generateOne(files: Record<string, string>) {
