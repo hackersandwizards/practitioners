@@ -285,7 +285,8 @@ type Data = z.output<ReturnType<typeof practitionerSchema>>;
 
 /** One folder's entry.json (`./practitioners/<slug>/entry.json`, scripts/export.ts writes it): the
  *  frontmatter as the schema parses it, the portrait as the package export subpath, and the bios
- *  as Markdown. The union carries the schema's rules on `relation`. */
+ *  as paragraphs of text and Markdown links to https or mailto, nothing else (`markdownOutside`
+ *  there). The union carries the schema's rules on `relation`. */
 export type EntryJson = Omit<Data, "photo" | "relation" | "job" | "affiliation"> & {
   slug: string;
   photo?: string;

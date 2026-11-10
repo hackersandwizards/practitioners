@@ -33,7 +33,10 @@ export const bareName = (name: string) => name.replace(/^Dr\.\s+/, "");
 
 /** What the practitioner-bio skill's mandatory list still lacks. A seed text is one h&w wrote,
  *  so it does not count as the person's bio. */
-export const missing = (entry: CollectionEntry<"practitioners">, german: string | undefined) =>
+export const missing = (
+  entry: { id: string; body?: string; data: { linkedin?: string; photo?: unknown } },
+  german: string | undefined,
+) =>
   [
     (!entry.body?.trim() || entry.body.includes("Seed draft")) && "English bio",
     !german?.trim() && "German bio",
