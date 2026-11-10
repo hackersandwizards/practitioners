@@ -9,7 +9,7 @@ evidence: "check-structure of scaffolding v5.15.0, run read-only on 10.11.: 16 f
 options:
   - key: a
     label: Take the rest of the skeleton
-    detail: "A session replaces skip.structure with one allow entry of check structure for each of the three exceptions (pre-commit, commit-msg, bunfig.toml), then runs check-structure --fix, which writes nothing where an allow entry covers the path and adds the thirteen entries. The structure check then runs in the gate for everything else."
+    detail: "A session replaces skip.structure with one allow entry of check structure for each of the three exceptions (pre-commit, commit-msg, bunfig.toml), then runs check-structure --fix, which writes nothing where an allow entry covers the path and writes eight of the thirteen entries; AGENTS.md, .mcp.json, .codex/config.toml, engines.npm and the check:staged script it reports without a repair, so the session writes those by hand. The structure check then runs in the gate for everything else."
   - key: b
     label: Keep the skip, with a reason naming what still waits
     detail: "The thirteen entries stay out. The reason lists each and says what it waits for, so the next pin raise does not ask again. check-structure keeps checking nothing in this repository."

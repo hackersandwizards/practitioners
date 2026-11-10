@@ -45,8 +45,8 @@ test("a crop comes out square at the requested size as WebP, never upscaled", as
   const src = await solid(300, 200, "#808080");
   const out = await retouch(src, { crop: { x: 50, y: 20, side: 160 }, size: 120 });
   expect(await sharp(out).metadata()).toMatchObject({ format: "webp", width: 120, height: 120 });
-  expect(await rejection(retouch(src, { crop: { x: 0, y: 0, side: 160 }, size: 200 }))).toMatch(
-    /upscale/,
+  expect(await rejection(retouch(src, { crop: { x: 0, y: 0, side: 160 }, size: 200 }))).toContain(
+    "--size 200 would upscale the 160 px crop",
   );
 });
 
