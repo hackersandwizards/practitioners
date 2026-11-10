@@ -13,7 +13,9 @@ each folder's generated `entry.json` and `photo.webp` under the `./practitioners
 (`bun run export` writes the `entry.json` files, `src/lib/export.test.ts` fails while one is stale;
 `EntryJson` in the `./schema` export is their type). Who is shown there and
 in which group is the website's roster and lives only there; every line about a person, title and
-expertise included, lives here.
+expertise included, lives here. This repository is public: anything else about a named person,
+such as whether they answered, a mail draft to them or a score of their portrait, goes into an
+item or report in Company OS (`docs/agent-work/`), never into a file or commit message here.
 
 `bun run portrait <in> <out.webp>` (`scripts/retouch-portrait.ts`) turns a source photo into
 `photo.webp`: square crop, at most 1024 px, never upscaled, WebP q82. `--retouch` (white balance,
