@@ -1,7 +1,8 @@
 ---
-// A story's ground. `state` renders a state rather than describing it: the script copies every
-// :hover or :focus-visible rule with the pseudo-class swapped for [data-force] and marks the first
-// link, and for hover its ancestors too. The catalog's tile draws the data-hw-preview element alone.
+// A story's ground. `state` renders a state on the first link rather than describing it: focus is
+// brand's data-hw-focus, which every brand focus rule matches; for hover the script copies every
+// :hover rule with the pseudo-class swapped for [data-force] and marks the link and its ancestors.
+// The catalog's tile draws the data-hw-preview element alone.
 interface Props {
   grid?: boolean;
   state?: "hover" | "focus";
@@ -17,14 +18,11 @@ const List = grid ? "ul" : "div";
 </div>
 
 <script>
-  const PSEUDO = { hover: ":hover", focus: ":focus-visible" };
   const mirror = (rules: CSSRuleList, parent: CSSStyleSheet | CSSGroupingRule) => {
     for (let i = rules.length - 1; i >= 0; i--) {
       const rule = rules[i];
       if (rule instanceof CSSStyleRule) {
-        let selector = rule.selectorText;
-        for (const [name, pseudo] of Object.entries(PSEUDO))
-          selector = selector.replaceAll(pseudo, `[data-force="${name}"]`);
+        const selector = rule.selectorText.replaceAll(":hover", '[data-force="hover"]');
         if (selector !== rule.selectorText)
           try {
             parent.insertRule(`${selector}{${rule.style.cssText}}`, i + 1);
@@ -37,20 +35,17 @@ const List = grid ? "ul" : "div";
         mirror(rule.cssRules, rule as CSSGroupingRule);
     }
   };
-  const boxes = [...document.querySelectorAll<HTMLElement>("[data-force-state]")];
-  if (boxes.length)
+  for (const box of document.querySelectorAll<HTMLElement>('[data-force-state="focus"]'))
+    box.querySelector("a[href]")?.setAttribute("data-hw-focus", "");
+  const hovered = [...document.querySelectorAll<HTMLElement>('[data-force-state="hover"]')];
+  if (hovered.length)
     for (const sheet of document.styleSheets)
       try {
         mirror(sheet.cssRules, sheet);
       } catch {
         // A cross-origin sheet has no readable rules.
       }
-  for (const box of boxes) {
-    const state = box.dataset.forceState!;
-    const link = box.querySelector("a[href]");
-    for (let node = link; node && node !== box; node = node.parentElement) {
-      node.setAttribute("data-force", state);
-      if (state === "focus") break;
-    }
-  }
+  for (const box of hovered)
+    for (let node = box.querySelector("a[href]"); node && node !== box; node = node.parentElement)
+      node.setAttribute("data-force", "hover");
 </script>
