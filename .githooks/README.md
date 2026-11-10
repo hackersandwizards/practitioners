@@ -8,8 +8,8 @@ over its commits.
 | Staged                                                        | Gate                                                                        |
 | ------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | anything but `src/content/`, `.claude/`, README.md, CLAUDE.md | `bun run check`: scaffolding's gate, its confidential audit of the index, brand's colour scan, the preview build |
-| otherwise, a bio or portrait                                  | `astro check` and each `entry.json` fresh                                  |
-| otherwise, `.claude/`, README.md or CLAUDE.md                 | also `check-confidential --staged`, which needs h&w's confidential list     |
+| otherwise, a bio or portrait                                  | `astro check`, each `entry.json` fresh, and `check-confidential --staged --list-optional`: h&w's confidential list where the machine has it, a warning where it has none; images are read by macOS OCR, and one it cannot read refuses the commit |
+| otherwise, `.claude/`, README.md or CLAUDE.md                 | `check-confidential --staged` in place of the optional scan: it needs the list |
 
 First, each practitioner folder the commit touches must match the index, `entry.json` included, so
 the checks read what the commit holds; a content commit also waits while any code outside
@@ -20,6 +20,5 @@ content commit (`practitioner-bio`).
 `pre-push` is scaffolding's own: it refuses a push that carries a commit listed in
 `.confidential-purged.json`, the commits the history rewrite of 10.11. replaced, and reads no
 confidential list, so a practitioner's push passes without one. After any further history rewrite,
-regenerate the list from every replaced commit, the earlier rewrite's included, since the command
-salts each list anew: `bun run --silent check-confidential purged <sha>... > .confidential-purged.json`,
-then `bun run format`.
+add the replaced commits with `bun run --silent check-confidential purged <sha>... > .confidential-purged.json`,
+then `bun run format`: the command keeps the staged list's salt and entries.

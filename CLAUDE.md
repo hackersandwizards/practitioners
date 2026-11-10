@@ -11,7 +11,8 @@ capped at 300 characters for conference CfPs and speaker forms; no collection lo
 storage only and the website never renders it. The website renders its profiles from this package:
 each folder's generated `entry.json` and `photo.webp` under the `./practitioners/*` export
 (`bun run export` writes the `entry.json` files, `src/lib/export.test.ts` fails while one is stale;
-`EntryJson` in the `./schema` export is their type). Who is shown there and
+`EntryJson` in the `./schema` export is their type, `portraitMinimum` there the smallest side a
+portrait may have). Who is shown there and
 in which group is the website's roster and lives only there; every line about a person, title and
 expertise included, lives here. This repository is public: anything else about a named person,
 such as whether they answered, a mail draft to them or a score of their portrait, goes into an

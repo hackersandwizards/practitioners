@@ -154,6 +154,11 @@ export const expertiseAwaiting = new Set([
   "Agentic Engineering, KI-gestützte Softwareentwicklung, Softwarearchitektur",
 ]);
 
+/** The shorter side of a portrait in px, at least: the website's first team group at a 767 px
+ *  window is 459 CSS px on a 2x screen. The website owns who sits in that group, so every portrait
+ *  has to fit it; its gate measures its grid against this number. CONTRIBUTING.md states it. */
+export const portraitMinimum = 918;
+
 const year = z.int().min(1960).max(new Date().getFullYear());
 
 /** A technology or tool as its maker spells it ("TypeScript", "Claude Code"), so the same name
@@ -171,7 +176,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
   z
     .object({
       name: z.string().min(1),
-      /** Square portrait next to the bio; photo-size.test.ts holds its minimum size. Mandatory like
+      /** Square portrait next to the bio; `portraitMinimum` is its smallest side. Mandatory like
        *  the bio (entry.ts, `missing`); a seed h&w starts without one shows initials instead. */
       photo: image().optional(),
       /** Who the practitioner works for: a key of `ownAffiliations`, or the organisation's name as

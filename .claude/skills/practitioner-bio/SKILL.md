@@ -26,7 +26,7 @@ upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px 
 website needs more (`--size`). Make it with `bun run portrait <source> <folder>/photo.webp`,
 adding `--crop x,y,side` where the automatic square cuts the head. Then run
 `bun test ./src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
-`MIN_WIDTH` changes, and the comment on `AWAITING_ORIGINAL` there says what to do. In the person's
+`portraitMinimum` (`src/lib/schema.ts`) changes, and the comment on `AWAITING_ORIGINAL` there says what to do. In the person's
 fork, put the source photo in their folder under its own name instead and leave `photo.webp`: h&w
 converts it after the merge, since the size test and its count lie outside the folder.
 
@@ -58,8 +58,8 @@ never written into a file in this repo.
 The person's own change is their yes: a pull request or commit they made to their folder publishes
 the entry as it stands after that change. An h&w colleague edits an entry only from the person's
 own words, and commits it only after their yes to exactly that text, and after
-`bun run check-confidential --staged` passes: the hook runs no confidential scan on a bio-only
-commit. Every h&w commit on `main` that changes an entry runs `bun run export` and `bun test` first
+`bun run check-confidential --staged` passes: the hook's scan of a bio-only commit passes without
+the list. Every h&w commit on `main` that changes an entry runs `bun run export` and `bun test` first
 and names the folder's `entry.json` too: the website reads that file, a pull request's CI never
 checks it, and the hook runs only the export test on a bio-only commit, not the portrait count,
 the held lines or the entries the catalog draws.
@@ -130,7 +130,7 @@ delete their directory, commit, and flag it to Stefan for the website roster.
    frontmatter you did not collect.
 2. **Collect the links**, mandatory and optional as above.
 3. **Ask for the portrait**: a file path to a photo they like, roughly square, at least
-   `MIN_WIDTH` in `src/lib/photo-size.test.ts` on each side. Convert it as above into their
+   `portraitMinimum` in `src/lib/schema.ts` on each side. Convert it as above into their
    directory.
 4. **Interview for substance**, a few questions rather than a form: what they work on right now,
    the two or three stations or projects that shaped them, what they deliver with h&w, and one
