@@ -21,6 +21,8 @@ order: 1270
 
 # Who vouches for the depth and topics on a public profile
 
+Veto this if h&w should confirm a trainer's depth and topics before they go public.
+
 Blocks nothing. The assumption stands unless you veto it.
 
 The profile shipped as `self-declared`: the trainer states depth (`used`, `shipped`, `leads`, the
