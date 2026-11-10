@@ -78,7 +78,12 @@ folder's `entry.json` too: the website reads that file, and a pull request's CI 
    Push that entry and a changed `entry.json` to the pull request's branch before the merge, so
    `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
    the push, commit both on `main` right after the merge. Style findings under step 6
-   below go into a review comment; their wording stays theirs.
+   below go into a review comment; their wording stays theirs. A pull request opened before a
+   history rewrite of `main` is taken by `git cherry-pick` of its commits
+   (`git fetch origin pull/<number>/head`), never merged: its head carries the removed files and
+   git refuses with "unrelated histories". A cherry-pick runs no pre-commit hook, so run
+   `bun run export` and `bun run check` before pushing it, and close the pull request with
+   `Closes #<number>` in that commit's message.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
    Then on `main`: an uploaded portrait under another name or format becomes `photo.webp` as
