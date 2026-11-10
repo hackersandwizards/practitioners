@@ -15,7 +15,7 @@
   "scripts": {
     "prepare": "[ \"$(git rev-parse --show-toplevel 2>/dev/null)\" = \"$(pwd -P)\" ] && git config core.hooksPath .githooks || true",
     "dev": "printf 'Caddy: http://practitioners.localhost\\n' && astro dev",
-    "build": "check-lock astro build",
+    "build": "PREVIEW= check-lock astro build",
     "export": "bun scripts/export.ts",
     "typecheck": "astro check",
     "format": "prettier --write .",
