@@ -13,15 +13,12 @@ const { data: d, class: className } = Astro.props;
 
 const names = (labels: Record<string, string>, keys?: string[]) => keys?.map((k) => labels[k]);
 const skills = (list: typeof d.stack) =>
-  list?.map((s) => ({
-    text: s.name,
-    note: `${v.depths[s.depth]}${s.teaches ? ", teaches it" : ""}`,
-  }));
-const language = new Intl.DisplayNames(["en"], { type: "language" });
+  list?.map(
+    (s) => `${s.name} · ${v.depths[s.depth].toLowerCase()}${s.teaches ? ", teaches it" : ""}`,
+  );
 const employer = affiliation(d);
 
-type Fact = { label: string; pills?: string[]; skills?: { text: string; note: string }[] };
-const facts: Fact[] = [
+const facts: { label: string; pills?: string[] }[] = [
   {
     label: "Works for",
     pills: employer
@@ -42,15 +39,15 @@ const facts: Fact[] = [
     label: "Languages",
     pills: d.languages?.map(
       (l) =>
-        `${language.of(l.code)} (${v.languageLevels[l.level]}${l.trains ? ", trains in it" : ""})`,
+        `${v.languageNames.of(l.code)} (${v.languageLevels[l.level]}${l.trains ? ", trains in it" : ""})`,
     ),
   },
-  { label: "AI tools", skills: skills(d.ai_tools) },
-  { label: "Stack", skills: skills(d.stack) },
+  { label: "AI tools", pills: skills(d.ai_tools) },
+  { label: "Stack", pills: skills(d.stack) },
   { label: "Industries", pills: names(v.domains, d.domains) },
   { label: "Roles held", pills: names(v.roles, d.roles) },
   { label: "In the field since", pills: d.since ? [String(d.since)] : undefined },
-].filter((f) => (f.pills ?? f.skills)?.length);
+].filter((f) => f.pills?.length);
 
 const work = [
   ...(d.public_work ?? []).map((w) => ({ ...w, note: v.kinds[w.kind] })),
@@ -73,11 +70,6 @@ const work = [
               {f.pills?.map((p) => (
                 <span class="hw-pill" data-tone="neutral">
                   {p}
-                </span>
-              ))}
-              {f.skills?.map((s) => (
-                <span class="hw-pill" data-tone="neutral">
-                  {s.text} · {s.note.toLowerCase()}
                 </span>
               ))}
             </dd>

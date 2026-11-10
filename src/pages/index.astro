@@ -8,13 +8,13 @@ import Layout from "../layouts/Layout.astro";
 import type { FilterItem } from "@hackersandwizards/brand/elements/list-filter.ts";
 import ListFilter from "@hackersandwizards/brand/expert/components/ListFilter.astro";
 import PersonCard from "../components/PersonCard.astro";
-import { affiliation, repo, shown } from "../lib/entry";
+import { affiliation, bareName, repo, shown } from "../lib/entry";
 import { ownAffiliations } from "../lib/schema";
 import { listing, roster, team } from "../lib/website";
 
 const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data)))
-  .sort((a, b) => a.data.name.localeCompare(b.data.name))
+  .sort((a, b) => bareName(a.data.name).localeCompare(bareName(b.data.name)))
   .map((entry) => ({
     entry,
     affiliation: affiliation(entry.data),
