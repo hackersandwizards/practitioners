@@ -4,6 +4,7 @@
 // package export subpath. One file per folder, so a protected name stays inside its own folder.
 // `bun run export` writes them; src/lib/export.test.ts fails while one is stale.
 import type { SchemaContext } from "astro:content";
+import { readdirSync } from "node:fs";
 import { join } from "node:path";
 import { Glob } from "bun";
 import { z } from "zod";
@@ -29,12 +30,15 @@ const paragraphs = (body: string) =>
     .join("\n\n");
 
 /** Each folder's entry.json path and the text it must hold. */
-export async function generate() {
+export async function generate(dir = base) {
   const files = new Map<string, string>();
-  for (const bio of new Glob("*/bio.md").scanSync(base)) {
+  for (const bio of new Glob("*/bio.md").scanSync(dir)) {
     const slug = bio.split("/")[0]!;
-    const { data, body } = split(await Bun.file(`${base}/${bio}`).text());
-    const de = Bun.file(`${base}/${slug}/bio.de.md`);
+    // A link would read a file outside the folder into entry.json, or have the export write there.
+    for (const f of readdirSync(`${dir}/${slug}`, { withFileTypes: true }))
+      if (!f.isFile()) throw new Error(`${slug}: ${f.name} is not a regular file`);
+    const { data, body } = split(await Bun.file(`${dir}/${bio}`).text());
+    const de = Bun.file(`${dir}/${slug}/bio.de.md`);
     const parsed = schema.safeParse(data);
     if (!parsed.success) throw new Error(`${slug}: ${z.prettifyError(parsed.error)}`);
     // The schema typed photo as an image; the file holds the path next to bio.md.
@@ -48,7 +52,7 @@ export async function generate() {
         de: (await de.exists()) ? paragraphs(split(await de.text()).body) : "",
       },
     } as EntryJson;
-    files.set(`${base}/${slug}/entry.json`, `${JSON.stringify(entry, null, 2)}\n`);
+    files.set(`${dir}/${slug}/entry.json`, `${JSON.stringify(entry, null, 2)}\n`);
   }
   return files;
 }
