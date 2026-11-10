@@ -4,6 +4,7 @@ status: open
 priority: 3
 order: 1800
 owner: Ada
+area: software-engineering
 evidence: "website 4028ca4b..d987f3d1 publish /team.json; the live URL answers 200 (curl 08.11.), so the switch below is due."
 ---
 
