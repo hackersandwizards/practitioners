@@ -52,8 +52,12 @@ type Node = {
  *  repository's page renders it. Returns each span outside that subset, as written. */
 export function markdownOutside(body: string) {
   const source = (n: Node) => body.slice(n.position.start.offset, n.position.end.offset);
-  // An escape or entity parses to a text whose value differs from what the website prints.
-  const plain = (n: Node) => n.type === "text" && n.value === source(n);
+  // An escape or entity parses to a text whose value differs from what the website prints; the
+  // website joins a paragraph's lines with one space, as `paragraphs` does.
+  const squash = (s: string) => s.replace(/\s+/g, " ");
+  const plain = (n: Node) =>
+    (n.type === "text" && squash(n.value!) === squash(source(n))) ||
+    (n.type === "break" && !source(n).trim());
   // `[text](https:…)`, or a bare address the website prints as the same characters.
   const link = (n: Node) =>
     n.type === "link" &&
