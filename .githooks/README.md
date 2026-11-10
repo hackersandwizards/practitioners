@@ -8,7 +8,7 @@ over its commits.
 | Staged                                                        | Gate                                                                        |
 | ------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | anything but `src/content/`, `.claude/`, README.md, CLAUDE.md | `bun run check`: scaffolding's gate, its confidential audit of the index, brand's colour scan, the preview build |
-| otherwise, a bio or portrait                                  | `astro check`, each `entry.json` fresh, and `check-confidential --staged --list-optional`: h&w's confidential list where the machine has it, a warning where it has none, a refusal where it is stale or broken; images are read by macOS OCR, and one it cannot read refuses the commit (CONTRIBUTING.md sends a portrait from another machine through the browser) |
+| otherwise, a bio or portrait                                  | `astro check`, each `entry.json` fresh, and `check-confidential --staged --list-optional`: with h&w's confidential list, a refusal for a file it cannot read (images by macOS OCR) and for a stale or broken list; without one, a warning, for such a file too (scaffolding's README, `--list-optional`) |
 | otherwise, `.claude/`, README.md or CLAUDE.md                 | `check-confidential --staged` in place of the optional scan: it needs the list |
 
 First, each practitioner folder the commit touches must match the index, `entry.json` included, so

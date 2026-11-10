@@ -41,10 +41,6 @@ claude
 Your commits show their mail address to anyone; the `git config` line sets your GitHub noreply
 address for this folder instead.
 
-Before each commit, a check reads the text in any image you add, and it can do so only on a Mac
-with the Xcode command line tools (`xcode-select --install`). On any other machine, upload a new
-portrait in the browser as described above.
-
 Say "update my bio". Claude interviews you for a few minutes, drafts both bios and shows your page
 as the website lays it out, at `http://localhost:4325/<your-folder>/` (such as `stefan-munz`). A
 box under the portrait lists what is still missing. Then Claude opens the pull request.

@@ -29,8 +29,7 @@ adding `--crop x,y,side` where the automatic square cuts the head. Then run
 `portraitMinimum` (`src/lib/schema.ts`) changes, and the comment on `AWAITING_ORIGINAL` in that
 test says what to do. In the person's fork, put the source photo in their folder under its own
 name instead and leave `photo.webp`: h&w converts it after the merge, since the size test and its
-count lie outside the folder. Where the hook refuses the photo as not read (no OCR outside macOS),
-the person uploads it in the browser (`CONTRIBUTING.md`).
+count lie outside the folder.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
 than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a public booking link**
