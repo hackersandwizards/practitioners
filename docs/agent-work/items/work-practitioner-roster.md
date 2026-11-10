@@ -5,7 +5,7 @@ priority: 2
 owner: Ada
 area: people
 evidence: "09.11., 21:50: 63 entries, 19 active, 44 draft; 12 entries with a yes from 09.11. (4 by pull request, 8 by mail reply). The mail round went out 09.11. 08:00. Names, mail addresses and thread ids live in os (docs/agent-work/2026-11-08-practitioner-roster.md and Ada's run reports), since this repo is public."
-assumption: "affiliation comes only from `work.company` or `facets.trainer.supply_partner` on the Company OS record (the company record's `name`), `freelance` only where the record says freelance, `hackers&wizards` for staff with an employment record; Slack channels were not read"
+assumption: "affiliation comes only from work.company or facets.trainer.supply_partner on the Company OS record (the company record's name), freelance only where the record says freelance, hackers&wizards for staff with an employment record; Slack channels were not read"
 order: 510
 ---
 
@@ -54,17 +54,4 @@ A public build shows an entry only when it is `active`. Nothing is hosted today;
 - Each `active` entry that the person neither committed nor said yes to is confirmed by them or returns to `draft`.
 - The build stops copying every portrait into `dist/_astro/`: the schema's `image()` processes each entry's photo whether its page renders or not.
 
-## Blind review of the overview, 08.11.
-
-Medium: two personas (h&w colleague staffing a client project, trainer checking their own entry),
-Claude twice and Codex once each, three variants under shuffled neutral labels at 1440 and 375 px.
-Criteria: telling apart who works where, finding a group, breathing room, visual calm.
-
-| Variant                   | staffing (C/C/Codex) | trainer (C/C/Codex) | Mean |
-| ------------------------- | -------------------- | ------------------- | ---- |
-| Sections by affiliation   | 7/7/7.5              | 7/7/8               | 7.25 |
-| Filter row by affiliation | 6/6/6.5              | 6/6/7               | 6.25 |
-| Affiliation line on card  | 4/4/5.5              | 3/4/6.5             | 4.5  |
-
-Noise between the two Claude runs: 0 to 1. Fixed after the round, from the reviewers' reasons:
-companies sorted inside their section, and the card repeats no affiliation its heading names.
+The blind review of the overview (08.11.) is in os `docs/agent-work/2026-11-08-practitioner-roster.md`.
