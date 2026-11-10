@@ -23,7 +23,7 @@
     "check:colours": "brand-colours",
     "check:preview": "PREVIEW=1 check-lock astro build --outDir .preview",
     "catalog": "bun run dev --open /catalog/",
-    "test": "bun test --path-ignore-patterns='src/content/**'",
+    "test": "bun test",
     "check:elements": "brand-elements",
     "check:copies": "brand-copies",
     "check:retired": "brand-retired .preview",

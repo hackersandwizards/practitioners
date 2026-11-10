@@ -12,7 +12,7 @@ over its commits.
 | otherwise, `.claude/`, README.md or CLAUDE.md                 | also `check-confidential --staged`, which needs h&w's confidential list     |
 
 First, each practitioner folder the commit touches must match the index, `entry.json` included, so
-the checks read what the commit holds; a content commit also waits while `src/lib`, `scripts` or
-`package.json` differ from it. The content row runs only the export test, so a practitioner's own
+the checks read what the commit holds; a content commit also waits while any code outside
+`src/content/` differs from it. The content row runs only the export test, so a practitioner's own
 commit never fails on a file outside their folder; h&w runs `bun test` before a content commit
 (`practitioner-bio`).

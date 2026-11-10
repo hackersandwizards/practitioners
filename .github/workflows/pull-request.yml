@@ -37,10 +37,15 @@ jobs:
             --config "$RUNNER_TEMP/gitleaks.toml" --ignore-gitleaks-allow
       # Reads packageManager from package.json.
       - uses: oven-sh/setup-bun@0c5077e51419868618aeaa5fe8019c62421857d6 # v2.2.0
+      # The base's copy, run outside the checkout, so neither the pull request's script nor its
+      # bunfig.toml decides. The workflow itself is the pull request's, so h&w's own run on main
+      # before the checkout (practitioner-bio, step 1) is the guard; this step tells the author early.
       - name: only the bios, entry.json and images of one folder
         env:
           BASE: ${{ github.event.pull_request.base.sha }}
           HEAD: ${{ github.event.pull_request.head.sha }}
-        run: bun run pull-request "$BASE...$HEAD"
+        run: |
+          git show "$BASE:scripts/pull-request.ts" > "$RUNNER_TEMP/pull-request.ts"
+          cd "$RUNNER_TEMP" && GIT_DIR="$GITHUB_WORKSPACE/.git" bun pull-request.ts "$BASE...$HEAD"
       - run: bun install --frozen-lockfile
       - run: bun run typecheck

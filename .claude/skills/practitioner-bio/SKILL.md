@@ -154,8 +154,8 @@ delete their directory, commit, and flag it to Stefan for the website roster.
 10. **Commit**, the changed files named on `git commit`. Run by the person in their fork (`origin`
    is not `hackersandwizards/practitioners`): commit on a branch named after the slug, push it to
    their fork and open the pull request with `gh pr create`, which is their yes and their only way
-   in. In the fork this step replaces the git rule's "stay on the current branch" and "never push a
-   branch and never open a pull request". Run by an h&w colleague with them: commit on `main` only after their yes to exactly what the
+   in. In the fork, that branch, its push and the pull request are the route, never a commit on
+   their `main`. Run by an h&w colleague with them: commit on `main` only after their yes to exactly what the
    commit contains, and push.
 
 ## File format

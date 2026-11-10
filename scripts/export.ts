@@ -17,7 +17,7 @@ export const base = join(import.meta.dir, "../src/content/practitioners");
 // The photo field holds a path; the website resolves it, so the schema checks a string here.
 export const schema = practitionerSchema({ image: () => z.string() } as unknown as SchemaContext);
 
-const split = (text: string) => {
+export const split = (text: string) => {
   const lf = text.replace(/\r\n/g, "\n");
   const [, frontmatter, body] = lf.match(/^(?:---\n([\s\S]*?)\n?---(?:\n|$))?([\s\S]*)$/)!;
   return { data: (frontmatter ? Bun.YAML.parse(frontmatter) : {}) as { photo?: string }, body };
@@ -32,12 +32,13 @@ const paragraphs = (body: string) =>
     .join("\n\n");
 
 /** Markdown in two bios that came by their person's own pull request before the website's subset
- *  was held here, held by their text: a changed span meets the rule. Remove a span once it is
- *  gone; never add one (markdown.test.ts holds them). */
+ *  was held here, each held as `<file> <span>`: a changed span meets the rule. Remove one once it
+ *  is gone; never add one (markdown.test.ts holds them). */
 export const markdownAwaiting = new Set([
-  "*Agentic Engineering*",
-  "*“Softwareentwicklung mit agentischer KI – Verstehen, anwenden und etablieren im professionellen Kontext”*",
-  "*„Softwareentwicklung mit agentischer KI – Verstehen, anwenden und etablieren im professionellen Kontext“*",
+  "bastian-weinlich/bio.md *Agentic Engineering*",
+  "bastian-weinlich/bio.md *“Softwareentwicklung mit agentischer KI – Verstehen, anwenden und etablieren im professionellen Kontext”*",
+  "bastian-weinlich/bio.de.md *Agentic Engineering*",
+  "bastian-weinlich/bio.de.md *„Softwareentwicklung mit agentischer KI – Verstehen, anwenden und etablieren im professionellen Kontext“*",
 ]);
 
 type Node = {
@@ -53,11 +54,13 @@ export function markdownOutside(body: string) {
   const source = (n: Node) => body.slice(n.position.start.offset, n.position.end.offset);
   // An escape or entity parses to a text whose value differs from what the website prints.
   const plain = (n: Node) => n.type === "text" && n.value === source(n);
+  // `[text](https:…)`, or a bare address the website prints as the same characters.
   const link = (n: Node) =>
     n.type === "link" &&
-    /^\[[^\]]+\]\((https|mailto):[^)\s]+\)$/.test(source(n)) &&
     n.children!.length === 1 &&
-    plain(n.children![0]!);
+    plain(n.children![0]!) &&
+    (source(n) === n.children![0]!.value ||
+      /^\[[^\]]+\]\((https|mailto):[^)\s]+\)$/.test(source(n)));
   return (markdownToMdast(body) as unknown as Node).children!.flatMap((block) =>
     block.type !== "paragraph"
       ? [source(block)]
@@ -77,13 +80,13 @@ export async function generate(dir = base) {
     const de = Bun.file(`${dir}/${slug}/bio.de.md`);
     const parsed = schema.safeParse(data);
     if (!parsed.success) throw new Error(`${slug}: ${z.prettifyError(parsed.error)}`);
-    // The schema typed photo as an image; the file holds the path next to bio.md.
-    const german = (await de.exists()) ? split(await de.text()).body : undefined;
+    const german = (await de.exists()) ? split(await de.text()).body : "";
     for (const [file, text] of [
       ["bio.md", body],
-      ["bio.de.md", german ?? ""],
+      ["bio.de.md", german],
     ] as const) {
-      const outside = markdownOutside(text).filter((span) => !markdownAwaiting.has(span));
+      const held = (span: string) => markdownAwaiting.has(`${slug}/${file} ${span}`);
+      const outside = markdownOutside(text).filter((span) => !held(span));
       if (outside.length)
         throw new Error(
           `${slug}/${file}: the website prints this as typed: ${outside.join(" | ")}`,
@@ -93,6 +96,7 @@ export async function generate(dir = base) {
     const lacks = missing({ id: slug, body, data: parsed.data }, german);
     if (parsed.data.status === "active" && lacks.length)
       throw new Error(`${slug}: active, but missing ${lacks.join(", ")}`);
+    // The schema typed photo as an image; the file holds the path next to bio.md.
     const { photo: _, ...rest } = parsed.data;
     const entry = {
       slug,
@@ -100,7 +104,7 @@ export async function generate(dir = base) {
       ...(data.photo && { photo: `practitioners/${slug}/${data.photo.replace(/^\.\//, "")}` }),
       bio: {
         en: paragraphs(body),
-        de: german === undefined ? "" : paragraphs(german),
+        de: paragraphs(german),
       },
     } as EntryJson;
     files.set(`${dir}/${slug}/entry.json`, `${JSON.stringify(entry, null, 2)}\n`);
