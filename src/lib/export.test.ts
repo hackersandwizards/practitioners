@@ -90,3 +90,40 @@ test("a folder holding a link fails the export rather than following it", async 
     rmSync(outside);
   }
 });
+
+test("a bio holds only what the website renders: paragraphs and https or mailto links", async () => {
+  const ok = "A [talk](https://example.com/a), [mail](mailto:a@example.com) and FLINTA* voices.";
+  expect((await generateOne({ "bio.md": bio, "bio.de.md": ok }))[0].bio.de).toBe(ok);
+  for (const de of [
+    "*em*",
+    "- a\n- b",
+    "<b>x</b>",
+    "[x](javascript:alert(1))",
+    "\\*",
+    "&amp;",
+    "a  \nb",
+  ])
+    await expect(generateOne({ "bio.md": bio, "bio.de.md": de })).rejects.toThrow(
+      "ada/bio.de.md: the website prints this as typed",
+    );
+});
+
+test("an active entry lacking what the page's box lists fails the export", async () => {
+  const active =
+    "---\nname: Ada Example\nphoto: ./photo.webp\nstatus: active\n---\n\nAda trains teams.\n";
+  await expect(
+    generateOne({ "bio.md": active, "bio.de.md": "Ada trainiert Teams." }),
+  ).rejects.toThrow("ada: active, but missing LinkedIn");
+  expect(await generateOne({ "bio.md": active.replace("active", "draft") })).toHaveLength(1);
+});
+
+test("an empty frontmatter in bio.de.md is not bio text", async () => {
+  expect(
+    (await generateOne({ "bio.md": bio, "bio.de.md": "---\n---\nAda trainiert Teams." }))[0].bio.de,
+  ).toBe("Ada trainiert Teams.");
+});
+
+test("bio.short.md holds at most 300 characters", async () => {
+  for (const f of new Glob("*/bio.short.md").scanSync(base))
+    expect((await Bun.file(`${base}/${f}`).text()).trim().length, f).toBeLessThanOrEqual(300);
+});
