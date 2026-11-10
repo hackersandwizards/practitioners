@@ -11,4 +11,4 @@ owner: Agent (practitioners session)
 
 Add brand, slides and documents (ports 4326 to 4328) to the Caddy guide in the README.
 
-Add `brand.localhost`, `slides.localhost` and `documents.localhost` (ports 4326, 4327, 4328) to the Caddy guide in the practitioners repo, table and Caddyfile block, as `reverse_proxy` entries like os.localhost (Benedikt decided local addresses for every catalog on 01.11.; os's own entry is e54c08d30). Done when the README's table and Caddyfile block name all three.
+`brand.localhost`, `slides.localhost` and `documents.localhost` go into the table and the Caddyfile block as `reverse_proxy` entries like os.localhost (Benedikt decided local addresses for every catalog on 01.11.; os's own entry is e54c08d30). Done when the README's table and Caddyfile block name all three.
