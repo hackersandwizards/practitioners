@@ -10,6 +10,11 @@ portrait. A profile for matching is optional and helps us offer you the right tr
 nothing else. Using Claude Code? Skip to [With Claude Code](#with-claude-code). No GitHub? Reply
 to the mail from h&w with your text or answers; we write the files and ask for your yes.
 
+Forked this repository before 11 November 2026? Your copy holds a history we have since replaced,
+and a pull request from it cannot be merged. Before your next change, delete the copy on GitHub
+(its **Settings**, then **Delete this repository**) and fork again, or run
+`gh repo sync <your-account>/<your-copy> --force`. A folder cloned from the old copy: clone it again.
+
 ## In the browser
 
 1. Open your folder from the mail, or find your name in
