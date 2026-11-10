@@ -26,7 +26,9 @@ upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px 
 website needs more (`--size`). Make it with `bun run portrait <source> <folder>/photo.webp`,
 adding `--crop x,y,side` where the automatic square cuts the head. Then run
 `bun test ./src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
-`MIN_WIDTH` changes, and the comment on `AWAITING_ORIGINAL` there says what to do.
+`MIN_WIDTH` changes, and the comment on `AWAITING_ORIGINAL` there says what to do. In the person's
+fork, put the source photo in their folder under its own name instead and leave `photo.webp`: h&w
+converts it after the merge, since the size test and its count lie outside the folder.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
 than none): **Bluesky, X, Threads, Mastodon, GitHub, own website or blog, a public booking link**
@@ -152,7 +154,8 @@ delete their directory, commit, and flag it to Stefan for the website roster.
 10. **Commit**, the changed files named on `git commit`. Run by the person in their fork (`origin`
    is not `hackersandwizards/practitioners`): commit on a branch named after the slug, push it to
    their fork and open the pull request with `gh pr create`, which is their yes and their only way
-   in. Run by an h&w colleague with them: commit on `main` only after their yes to exactly what the
+   in. In the fork this step replaces the git rule's "stay on the current branch" and "never push a
+   branch and never open a pull request". Run by an h&w colleague with them: commit on `main` only after their yes to exactly what the
    commit contains, and push.
 
 ## File format
