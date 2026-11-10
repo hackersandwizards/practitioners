@@ -6,8 +6,9 @@ request: a request for us to take it over. We check it and merge it. Change only
 
 Your entry needs five things: your name, your LinkedIn link, an English bio, a German bio and a
 portrait. A profile for matching is optional and helps us offer you the right trainings
-([Your profile for matching](#your-profile-for-matching)). You need a free GitHub account, nothing else. Using Claude Code? Skip to
-[With Claude Code](#with-claude-code).
+([Your profile for matching](#your-profile-for-matching)). You need a free GitHub account,
+nothing else. Using Claude Code? Skip to [With Claude Code](#with-claude-code). No GitHub? Reply
+to the mail from h&w with your text or answers; we write the files and ask for your yes.
 
 ## In the browser
 
@@ -33,8 +34,12 @@ With [Bun](https://bun.sh) and the [GitHub CLI](https://cli.github.com) installe
 gh repo fork hackersandwizards/practitioners --clone
 cd practitioners
 bun install
+git config user.email "$(gh api user --jq '"\(.id)+\(.login)@users.noreply.github.com"')"
 claude
 ```
+
+Your commits show their mail address to anyone; the `git config` line sets your GitHub noreply
+address for this folder instead.
 
 Say "update my bio". Claude interviews you for a few minutes, drafts both bios and shows your page
 as the website lays it out, at `http://localhost:4325/<your-folder>/` (such as `stefan-munz`). A
@@ -44,22 +49,32 @@ box under the portrait lists what is still missing. Then Claude opens the pull r
 
 | File           | Holds                                                                                                        |
 | -------------- | ------------------------------------------------------------------------------------------------------------ |
-| `bio.md`       | Your name and links between the two `---` lines, then your English bio                                       |
+| `bio.md`       | Your name, links and profile between the two `---` lines, then your English bio                              |
 | `bio.de.md`    | Your German bio, nothing else                                                                                |
 | `photo.webp`   | Your portrait                                                                                                |
 | `bio.short.md` | Optional: your English bio in at most 300 characters, for conference forms. Not shown on the website         |
 | `entry.json`   | The website's copy of the other files. In the browser leave it; with Claude Code, `bun run export` writes it |
 
-Until all five things named above are there, your entry stays a draft. A text that says "Seed draft" is a placeholder h&w wrote: replace it. If you do
-not write German, say so in the pull request, and we draft the German text for your yes.
+Until all five things named above are there, your entry stays a draft: not on the website, but,
+like everything here, readable by anyone in this repository. A text that says "Seed draft" is a
+placeholder h&w wrote: replace it. If you do not write German, say so in the pull request: we
+draft the German text, and you say yes to it in the pull request or by mail.
 
 **Links**, only for profiles you keep up, each starting with `https://`: `linkedin`, and optionally
 `bluesky`, `x`, `threads`, `mastodon`, `github`, `website`, `bookme` (a public booking page such as
 cal.com or Calendly) and `profiles`, a list of any further public profiles. Lines you do not
-recognise, such as `photo`, `status`, `owner`, `updated` and `relation`, stay as they are.
+recognise, such as `photo`, `status`, `owner`, `updated` and `relation`, stay as they are: we set
+`status` to `active` once your entry is complete.
+
+The three lines the website prints under your name go in the same block, each in English and
+German: `job`, `expertise` and `background`. In both languages, `expertise` takes three words or
+fewer and no job title such as Director or Lead.
 
 ```yaml
 name: Ada Example
+job: { en: Trainer for agentic coding, de: Trainerin für agentisches Coding }
+expertise: { en: Agentic coding, de: Agentisches Coding }
+background: { en: Founder of Example GmbH, de: Gründerin der Example GmbH }
 linkedin: https://www.linkedin.com/in/ada-example/
 github: https://github.com/ada-example
 profiles:
@@ -68,7 +83,9 @@ profiles:
 
 **The bio:** three to five sentences about you in the third person, as a colleague would introduce
 you: what you work on now, the roles or projects that shaped you, what you do with h&w. Name a
-client only where the work is public.
+client only where the work is public. Write plain paragraphs, with links as `[text](https://…)`:
+the website shows no other formatting, such as italics or lists, so we would ask you to take it
+out.
 
 **The portrait:** roughly square, at least 918 by 918 pixels. Upload it as a JPEG, PNG or WebP under
 any name and leave `photo.webp` in place, if your folder has one; we crop the new one with
@@ -76,11 +93,12 @@ any name and leave `photo.webp` in place, if your folder has one; we crop the ne
 
 ## Your profile for matching
 
-Under your bio, an optional profile tells us which client training fits you. We match trainers to
-a client's language, format, room and stack from these fields, so each one you fill in brings you
-work that suits you. Fill in what is true, leave the rest out. Each field takes values from a fixed
-list in [`src/lib/schema.ts`](src/lib/schema.ts). Missing a value? Name it in the pull request and
-we add it to the list.
+An optional profile, in the same block between the `---` lines, tells us which client training
+fits you. The website does not show it, but like everything here it is public in your `bio.md`.
+We match trainers to a client's language, format, room and stack from these fields, so each one
+you fill in brings you work that suits you. Fill in what is true, leave the rest out. Each field
+takes values from a fixed list in [`src/lib/schema.ts`](src/lib/schema.ts). Missing a value? Name
+it in the pull request and we add it to the list.
 
 ```yaml
 affiliation: freelance # or the company you work for, as it writes its name
@@ -121,7 +139,5 @@ GitHub mails you when we comment or merge. We check that the pull request comes 
 touches only your folder. On style we comment and leave the wording to you. Your page on
 `hackersandwizards.dev/team/<your-folder>/` shows the change with the website's next release.
 
-The lines under your name are in your `bio.md` too: `job`, `expertise` and `background`, each in
-English and German. Change them like your bio. In both languages, `expertise` takes three words or
-fewer and no job title such as Director or Lead. The group you appear in is kept on the website:
-mention a wish in the pull request. To be taken off, reply to the mail from h&w.
+The group you appear in is kept on the website: mention a wish in the pull request. To be taken
+off, reply to the mail from h&w.
