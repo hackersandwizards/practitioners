@@ -42,6 +42,11 @@ Read on 09.11. at 21:50 from the merged pull requests and from replies to the ro
   waits until the person states it and the name gets an allow entry with their yes.
 - **Six `active` entries carry no affiliation yet** although Company OS records one: an approved
   entry changes only with the person's yes, so the follow-up asks them.
+- **Home town line**: the follow-up to `andreas-stephan`, `kamil-kubica`, `julia-bastian` and
+  `semjon-mossinger` asks whether the town their bio names stays.
+- **Emphasis**: the follow-up to `bastian-weinlich` asks whether the asterisks in both bios may go,
+  since the website prints them as typed (`markdownAwaiting` in `scripts/export.ts`), unless the
+  website comes to render emphasis.
 
 ## Before any public host
 
