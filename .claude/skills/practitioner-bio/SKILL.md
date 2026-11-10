@@ -25,7 +25,7 @@ The portrait is `photo.webp`, cropped square, its side the source's shorter side
 upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px slot on the
 website needs more (`--size`). Make it with `bun run portrait <source> <folder>/photo.webp`,
 adding `--crop x,y,side` where the automatic square cuts the head. Then run
-`bun test src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
+`bun test ./src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
 `MIN_WIDTH` changes, and the comment on `AWAITING_ORIGINAL` there says what to do.
 
 Optional, asked once each, recorded only where the practitioner maintains it (a dead link is worse
@@ -69,8 +69,12 @@ folder's `entry.json` too: the website reads that file, and a pull request's CI 
 ## Their pull request
 
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
-   it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
-   change touches only their folder. Otherwise comment and merge nothing.
+   it (their website, LinkedIn) or by their mail from the address h&w holds for them. Then, on
+   your own `main` and before any checkout, `git fetch origin pull/<number>/head` and
+   `bun run pull-request origin/main...FETCH_HEAD`, for a pull request from before a rewrite
+   `<their first commit>^ <their last commit>`: it passes only the bios, `entry.json` and images
+   of one folder, each a regular file, since the gate runs files it finds in the tree. Otherwise
+   comment and merge nothing.
 2. `gh pr checkout <number>`, `bun run export`, then `bun run check`. A pull request opened before
    a history rewrite of `main` is taken by cherry-pick, never merged: its head carries the removed
    files and git refuses with "unrelated histories". In place of the checkout, run
