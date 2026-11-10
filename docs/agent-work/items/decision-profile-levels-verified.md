@@ -21,9 +21,9 @@ order: 1270
 
 # Who vouches for the depth and topics on a public profile
 
-Veto this if h&w should confirm a trainer's depth and topics before they go public.
+Veto this and pick `verified` or `badge` if h&w should vouch for a trainer's depth and topics.
 
-Blocks nothing. The assumption stands unless you veto it.
+Blocks nothing.
 
 The profile shipped as `self-declared`: the trainer states depth (`used`, `shipped`, `leads`, the
 `teaches` flag), topics and rooms trained, and h&w checks only that the pull request is theirs. Each
