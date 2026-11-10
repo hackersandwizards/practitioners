@@ -141,12 +141,14 @@ export const expertiseProblem = (line: string) =>
       ? "no job title"
       : undefined;
 
-/** Two `expertise.en` lines that came longer than the limit by their people's own pull requests,
- *  held by their text: a changed line meets the rule. Remove a line once it fits; never add one
- *  (expertise.test.ts holds both). */
+/** Four `expertise` lines, two entries in both languages, that came longer than the limit by
+ *  their people's own pull requests, held by their text: a changed line meets the rule. Remove a
+ *  line once it fits; never add one (expertise.test.ts holds them). */
 export const expertiseAwaiting = new Set([
   "Engineering leadership, change and quality",
+  "Engineering-Leadership, Wandel und Qualität",
   "Agentic Engineering, AI-assisted software development, software architecture",
+  "Agentic Engineering, KI-gestützte Softwareentwicklung, Softwarearchitektur",
 ]);
 
 const year = z.int().min(1960).max(new Date().getFullYear());
@@ -266,8 +268,9 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       path: ["affiliation"],
     })
     .superRefine((d, ctx) => {
-      if (!d.expertise || expertiseAwaiting.has(d.expertise.en)) return;
+      if (!d.expertise) return;
       for (const lang of ["en", "de"] as const) {
+        if (expertiseAwaiting.has(d.expertise[lang])) continue;
         const problem = expertiseProblem(d.expertise[lang]);
         if (problem) ctx.addIssue({ code: "custom", message: problem, path: ["expertise", lang] });
       }
