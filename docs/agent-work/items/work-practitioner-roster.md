@@ -11,6 +11,8 @@ order: 510
 
 # Every person who delivers for h&w has an entry, with affiliation
 
+Draft the follow-up for the other 49 people, each only once they answered their first mail.
+
 Done on 08.11.: `affiliation` in the schema, shown as "Works for" on each page; the overview
 groups people into hackers&wizards, At a company (sorted by company), Freelance and Not stated
 yet. Seeds without a portrait show initials and list "Portrait" as missing.
