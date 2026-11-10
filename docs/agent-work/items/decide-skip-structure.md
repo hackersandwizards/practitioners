@@ -19,6 +19,6 @@ options:
 
 Pick whether practitioners adopts the thirteen skeleton entries it still leaves out.
 
-`scaffolding.skip.structure` in `package.json` switches the whole structure check off. Three parts of its reason are deliberate and stay under either option: a contributor committing their own bio must not need gitleaks or the confidential-terms list (CLAUDE.md, "Gate"), so pre-commit, commit-msg and bunfig.toml differ from the skeleton. For the thirteen other entries the reason says "not adopted yet, with no reason recorded". The pin raises to scaffolding v5.13.0 (2677f16) and v5.15.0 left them out too.
+`scaffolding.skip.structure` in `package.json` switches the whole structure check off. Three parts of its reason are deliberate and stay under either option: a contributor committing their own bio must not need gitleaks or the confidential-terms list (CLAUDE.md, "Gate"), so pre-commit, commit-msg and bunfig.toml differ from the skeleton. For the thirteen other entries the reason says "not adopted yet, with no reason recorded". The pin raises to scaffolding v5.13.0 (db59d35) and v5.15.0 left them out too.
 
 No file in the repository says whether the thirteen fit a contributor's clone, so there is no recommendation.
