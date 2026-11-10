@@ -42,6 +42,10 @@ Read on 09.11. at 21:50 from the merged pull requests and from replies to the ro
   waits until the person states it and the name gets an allow entry with their yes.
 - **Six `active` entries carry no affiliation yet** although Company OS records one: an approved
   entry changes only with the person's yes, so the follow-up asks them.
+- **Two more questions for the follow-up**, the folders in os: four draft entries whose bio names
+  a home town are asked whether that line stays, and the entry held in `markdownAwaiting`
+  (`scripts/export.ts`) is asked whether its emphasis asterisks may go, since the website prints
+  them as typed, unless the website comes to render emphasis.
 
 ## Before any public host
 

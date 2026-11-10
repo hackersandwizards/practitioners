@@ -16,3 +16,9 @@ the checks read what the commit holds; a content commit also waits while any cod
 `src/content/` differs from it. The content row runs only the export test, so a practitioner's own
 commit is never held to a count or list kept outside their folder; h&w runs `bun test` before a
 content commit (`practitioner-bio`).
+
+`pre-push` is scaffolding's own: it refuses a push that carries a commit listed in
+`.confidential-purged.json`, the commits the history rewrite of 10.11. replaced, and reads no
+confidential list, so a practitioner's push passes without one. After any further history rewrite,
+regenerate the list with `bun run check-confidential purged <sha>...` from every replaced commit,
+the earlier rewrite's included, since the command salts each list anew.
