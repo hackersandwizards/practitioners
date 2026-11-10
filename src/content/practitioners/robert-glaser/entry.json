@@ -2,11 +2,29 @@
   "slug": "robert-glaser",
   "name": "Robert Glaser",
   "affiliation": "Exxeta",
+  "job": {
+    "en": "Head of Applied AI at Exxeta",
+    "de": "Head of Applied AI bei Exxeta"
+  },
+  "expertise": {
+    "en": "Agentic engineering",
+    "de": "Agentic Engineering"
+  },
+  "background": {
+    "en": "Software engineer by training, previously 16 years at INNOQ, last as Head of Data & AI, SaaS co-founder with exit",
+    "de": "Ausgebildeter Software Engineer, zuvor 16 Jahre bei INNOQ, zuletzt Head of Data & AI, SaaS-Mitgründer mit Exit"
+  },
   "linkedin": "https://www.linkedin.com/in/robertglaser1/",
+  "x": "https://x.com/youngbrioche",
+  "github": "https://github.com/youngbrioche",
+  "website": "https://www.robert-glaser.de/",
+  "profiles": [
+    "https://elastic-loop.robert-glaser.de/"
+  ],
   "status": "draft",
   "photo": "practitioners/robert-glaser/photo.webp",
   "bio": {
-    "en": "Robert is a Forward Deployed Leader in the h&w practitioner network. Seed draft: Robert, replace this text with your own bio, as CONTRIBUTING.md in this repository describes.",
-    "de": ""
+    "en": "Robert Glaser is Head of Applied AI at Exxeta. He works with organizations on agentic engineering and the software factory as an operating model for product teams. His focus is on reliable delegation to agents, product quality, and turning experience from daily work into shared capabilities. He writes [The Elastic Loop](https://elastic-loop.robert-glaser.de/), an agent-ready book about human–agent collaboration. Previously, he spent 16 years at INNOQ, where he built and led the Data & AI practice.",
+    "de": "Robert Glaser ist Head of Applied AI bei Exxeta. Er arbeitet mit Unternehmen an Agentic Engineering und der Software Factory als Operating Model für Produktteams. Dabei geht es um verlässliche Delegation an Agenten, Produktqualität und die Frage, wie Erfahrungen aus der täglichen Arbeit dem ganzen Team zugutekommen. Er schreibt [The Elastic Loop](https://elastic-loop.robert-glaser.de/), ein agentenlesbares Online-Buch über die Zusammenarbeit mit Agenten. Zuvor war er 16 Jahre bei INNOQ und hat dort Data & AI aufgebaut und geleitet."
   }
 }
