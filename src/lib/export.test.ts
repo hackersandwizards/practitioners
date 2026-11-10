@@ -61,14 +61,16 @@ test("a name allowed in package.json or in file names is one a practitioner's fo
   expect(orphans).toEqual([]);
 });
 
-/** generate() over one folder `ada` holding the given files; a value `{ link }` makes a symlink. */
-async function generateOne(files: Record<string, string | { link: string }>) {
+/** generate() over one folder `ada` holding the given files; `"link"` makes a symlink to a file
+ *  beside the folder. */
+async function generateOne(files: Record<string, string>) {
   const dir = mkdtempSync(join(tmpdir(), "practitioners-export-"));
   try {
     mkdirSync(join(dir, "ada"));
+    await Bun.write(join(dir, "outside.txt"), "a local file\n");
     for (const [name, content] of Object.entries(files))
-      if (typeof content === "string") await Bun.write(join(dir, "ada", name), content);
-      else symlinkSync(content.link, join(dir, "ada", name));
+      if (content === "link") symlinkSync(join(dir, "outside.txt"), join(dir, "ada", name));
+      else await Bun.write(join(dir, "ada", name), content);
     return [...(await generate(dir)).values()].map((text) => JSON.parse(text));
   } finally {
     rmSync(dir, { recursive: true });
@@ -79,16 +81,10 @@ const bio = "---\nname: Ada Example\n---\n\nAda trains teams.\n";
 
 test("a folder holding a link fails the export rather than following it", async () => {
   expect((await generateOne({ "bio.md": bio }))[0].bio.en).toBe("Ada trains teams.");
-  const outside = join(tmpdir(), "practitioners-export-outside.txt");
-  await Bun.write(outside, "a local file\n");
-  try {
-    for (const name of ["bio.de.md", "entry.json"])
-      await expect(generateOne({ "bio.md": bio, [name]: { link: outside } })).rejects.toThrow(
-        `ada: ${name} is not a regular file`,
-      );
-  } finally {
-    rmSync(outside);
-  }
+  for (const name of ["bio.de.md", "entry.json"])
+    await expect(generateOne({ "bio.md": bio, [name]: "link" })).rejects.toThrow(
+      `ada: ${name} is not a regular file`,
+    );
 });
 
 test("a bio holds only what the website renders: paragraphs and https or mailto links", async () => {

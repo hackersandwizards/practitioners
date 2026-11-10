@@ -37,6 +37,6 @@ const stefan = {
 
 export const Filled = { args: { data: christian }, decorators: [frame()] };
 export const Sparse = { args: { data: stefan }, decorators: [frame()] };
-// Every relation and affiliation yields a "Works for" fact, so the empty profile drops both.
+// This entry's relation and affiliation each yield a "Works for" fact, so the empty profile drops both.
 const empty = { ...(await entry("stefan-munz")).data, affiliation: undefined, relation: undefined };
 export const Empty = { args: { data: empty }, decorators: [frame()] };
