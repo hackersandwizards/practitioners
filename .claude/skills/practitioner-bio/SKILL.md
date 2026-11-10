@@ -71,19 +71,20 @@ folder's `entry.json` too: the website reads that file, and a pull request's CI 
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them, and the
    change touches only their folder. Otherwise comment and merge nothing.
-2. `gh pr checkout <number>`, `bun run export`, then `bun run check`. A confidential term other
-   than the person's own name is a review comment and blocks the merge. Their own name gets one
+2. `gh pr checkout <number>`, `bun run export`, then `bun run check`. A pull request opened before
+   a history rewrite of `main` is taken by cherry-pick, never merged: its head carries the removed
+   files and git refuses with "unrelated histories". In place of the checkout, run
+   `git fetch origin pull/<number>/head` and `git cherry-pick --no-commit` of the person's own
+   commits (`gh pr view <number> --json commits` lists them by author); in place of the merge in
+   step 3, commit with `git commit -C <their last commit> --trailer "Closes: #<number>" -- <paths>`,
+   which keeps their authorship and runs the pre-commit hook a plain cherry-pick skips. A
+   confidential term other than the person's own name is a review comment and blocks the merge. Their own name gets one
    `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
    case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`.
    Push that entry and a changed `entry.json` to the pull request's branch before the merge, so
    `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
    the push, commit both on `main` right after the merge. Style findings under step 6
-   below go into a review comment; their wording stays theirs. A pull request opened before a
-   history rewrite of `main` is taken by `git cherry-pick` of its commits
-   (`git fetch origin pull/<number>/head`), never merged: its head carries the removed files and
-   git refuses with "unrelated histories". A cherry-pick runs no pre-commit hook, so run
-   `bun run export` and `bun run check` before pushing it, and close the pull request with
-   `Closes #<number>` in that commit's message.
+   below go into a review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
    Then on `main`: an uploaded portrait under another name or format becomes `photo.webp` as
