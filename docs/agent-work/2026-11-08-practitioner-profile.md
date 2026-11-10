@@ -4,7 +4,7 @@ Each entry can now carry an optional profile beside bio and links: what the pers
 for whom, in which languages, with which stack and AI tools at which depth, in which industries
 and roles, since when, and their public work. `src/lib/schema.ts` holds the fields and their fixed
 lists; `src/components/Profile.astro` renders them under the bios; `CONTRIBUTING.md` and the
-`practitioner-bio` skill ask for them. No entry fills them yet: each person adds their own.
+`practitioner-bio` skill ask for them. On 08.11. no entry filled them: each person adds their own.
 
 ## Research, fetched 08.11.2026
 

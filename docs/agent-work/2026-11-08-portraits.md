@@ -8,9 +8,8 @@ is public, so the per-person tables of this report live in os (`docs/agent-work/
 
 ## Scope
 
-The 33 folders with a portrait below 960 px that hackersandwizards.dev shows. Left out: the 15
-folders whose names stay off the website, which have no slot to improve and may not be named
-outside their own folder, plus `reachy` and `robert-glaser`, which the site does not show either.
+The 33 folders with a portrait below 960 px that hackersandwizards.dev shows. Left out: the 17
+folders the website did not show on 08.11., which have no slot to improve.
 Measured with `sips -g pixelWidth` on all 56 portraits: 50 below 960 px.
 
 What the live site shows (headless Chrome for Testing, 08.11.): at a 1440 px window the first

@@ -1,8 +1,8 @@
 # Performance, 09.11.2026
 
 This run changed no code that affects performance, so the report has no before-and-after pair. It
-measures the state of `origin/main` at `a0329db`, after the overview moved onto brand's
-`ListFilter` (`cd97855`) and the brand and scaffolding raises up to brand v1.64.0 and scaffolding
+measures the state of `origin/main` at `a49838f`, after the overview moved onto brand's
+`ListFilter` (`82755bd`) and the brand and scaffolding raises up to brand v1.64.0 and scaffolding
 v5.5.1. The previous report, of 08.11., is in git history.
 
 The site is static (Astro 7.4.7, `output: "static"`), so it has no endpoints to time. Nothing is
