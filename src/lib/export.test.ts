@@ -90,6 +90,11 @@ test("a folder holding a link fails the export rather than following it", async 
 test("a bio holds only what the website renders: paragraphs and https or mailto links", async () => {
   const ok = "A [talk](https://example.com/a), [mail](mailto:a@example.com) and FLINTA* voices.";
   expect((await generateOne({ "bio.md": bio, "bio.de.md": ok }))[0].bio.de).toBe(ok);
+  // Stray spaces a browser edit leaves change nothing the website prints.
+  const spaced = "Ada \n  trainiert  \nTeams. ";
+  expect((await generateOne({ "bio.md": bio, "bio.de.md": spaced }))[0].bio.de).toBe(
+    "Ada trainiert Teams.",
+  );
   for (const de of [
     "*em*",
     "- a\n- b",
@@ -97,7 +102,7 @@ test("a bio holds only what the website renders: paragraphs and https or mailto 
     "[x](javascript:alert(1))",
     "\\*",
     "&amp;",
-    "a  \nb",
+    "a\\\nb",
   ])
     await expect(generateOne({ "bio.md": bio, "bio.de.md": de })).rejects.toThrow(
       "ada/bio.de.md: the website prints this as typed",

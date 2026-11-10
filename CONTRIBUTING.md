@@ -55,8 +55,8 @@ box under the portrait lists what is still missing. Then Claude opens the pull r
 | `bio.short.md` | Optional: your English bio in at most 300 characters, for conference forms. Not shown on the website         |
 | `entry.json`   | The website's copy of the other files. In the browser leave it; with Claude Code, `bun run export` writes it |
 
-Until all five things named above are there, your entry stays a draft: not on the website, but,
-like everything here, readable by anyone in this repository. A text that says "Seed draft" is a
+Until all five things named above are there, your entry stays a draft, which, like everything
+here, anyone can read in this repository. A text that says "Seed draft" is a
 placeholder h&w wrote: replace it. If you do not write German, say so in the pull request: we
 draft the German text, and you say yes to it in the pull request or by mail.
 

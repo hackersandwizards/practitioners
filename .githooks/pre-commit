@@ -23,9 +23,11 @@ if echo "$staged" | grep -Ev "$docs_re" | grep -q .; then
 else
   if echo "$staged" | grep -Eq "$content_re"; then
     # Those checks read the code in the working tree, so code this commit leaves out would decide it.
-    code=(. ':!src/content' ':!.claude' ':!docs' ':!*.md')
-    if ! git diff --quiet -- "${code[@]}" || [ -n "$(git ls-files --others --exclude-standard -- "${code[@]}")" ]; then
-      echo "[pre-commit] code outside src/content/ differs from this commit: commit it first"
+    code=(. ':!src/content' ':!.claude' ':!docs' ':!*.md' ':!bun.lock')
+    other=$(git diff --name-only -- "${code[@]}"; git ls-files --others --exclude-standard -- "${code[@]}")
+    if [ -n "$other" ]; then
+      echo "[pre-commit] the checks would read code this commit leaves out; commit, restore or remove:"
+      echo "$other"
       exit 1
     fi
     echo "[pre-commit] content changed -> validating bios against the schema, entry.json fresh"
