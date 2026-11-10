@@ -3,6 +3,7 @@ import { mkdirSync, mkdtempSync, rmSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { Glob } from "bun";
+import { rejection } from "@hackersandwizards/scaffolding/rejection";
 import { base, generate, schema } from "../../scripts/export";
 import pkg from "../../package.json";
 
@@ -69,7 +70,7 @@ const bio = "---\nname: Ada Example\n---\n\nAda trains teams.\n";
 test("a folder holding a link fails the export rather than following it", async () => {
   expect((await generateOne({ "bio.md": bio }))[0].bio.en).toBe("Ada trains teams.");
   for (const name of ["bio.de.md", "entry.json"])
-    await expect(generateOne({ "bio.md": bio, [name]: "link" })).rejects.toThrow(
+    expect(await rejection(generateOne({ "bio.md": bio, [name]: "link" }))).toContain(
       `ada: ${name} is not a regular file`,
     );
 });
@@ -91,7 +92,7 @@ test("a bio holds only what the website renders: paragraphs and https or mailto 
     "&amp;",
     "a\\\nb",
   ])
-    await expect(generateOne({ "bio.md": bio, "bio.de.md": de })).rejects.toThrow(
+    expect(await rejection(generateOne({ "bio.md": bio, "bio.de.md": de }))).toContain(
       "ada/bio.de.md: the website prints this as typed",
     );
 });
@@ -99,9 +100,9 @@ test("a bio holds only what the website renders: paragraphs and https or mailto 
 test("an active entry lacking what the page's box lists fails the export", async () => {
   const active =
     "---\nname: Ada Example\nphoto: ./photo.webp\nstatus: active\n---\n\nAda trains teams.\n";
-  await expect(
-    generateOne({ "bio.md": active, "bio.de.md": "Ada trainiert Teams." }),
-  ).rejects.toThrow("ada: active, but missing LinkedIn");
+  expect(
+    await rejection(generateOne({ "bio.md": active, "bio.de.md": "Ada trainiert Teams." })),
+  ).toContain("ada: active, but missing LinkedIn");
   expect(await generateOne({ "bio.md": active.replace("active", "draft") })).toHaveLength(1);
 });
 

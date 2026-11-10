@@ -1,5 +1,6 @@
 import { expect, test } from "bun:test";
 import sharp from "sharp";
+import { rejection } from "@hackersandwizards/scaffolding/rejection";
 import { gains, retouch, sharpen, tone } from "./retouch-portrait";
 
 const solid = (width: number, height: number, background: string, channels: 3 | 4 = 3) =>
@@ -44,7 +45,9 @@ test("a crop comes out square at the requested size as WebP, never upscaled", as
   const src = await solid(300, 200, "#808080");
   const out = await retouch(src, { crop: { x: 50, y: 20, side: 160 }, size: 120 });
   expect(await sharp(out).metadata()).toMatchObject({ format: "webp", width: 120, height: 120 });
-  expect(retouch(src, { crop: { x: 0, y: 0, side: 160 }, size: 200 })).rejects.toThrow(/upscale/);
+  expect(await rejection(retouch(src, { crop: { x: 0, y: 0, side: 160 }, size: 200 }))).toMatch(
+    /upscale/,
+  );
 });
 
 test("without options a source is cut square at its short side, capped at 1024, transparency white", async () => {
