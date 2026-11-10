@@ -106,6 +106,9 @@ export const roles = {
   consultant: "Consultant",
 };
 
+/** English names of ISO 639-1 codes; an unknown code comes back unchanged. */
+export const languageNames = new Intl.DisplayNames(["en"], { type: "language" });
+
 export const languageLevels = {
   native: "native",
   c2: "C2",
@@ -167,7 +170,7 @@ const skill = z.object({
 export const practitionerSchema = ({ image }: SchemaContext) =>
   z
     .object({
-      name: z.string(),
+      name: z.string().min(1),
       /** Square portrait next to the bio; photo-size.test.ts holds its minimum size. Mandatory like
        *  the bio (entry.ts, `missing`); a seed h&w starts without one shows initials instead. */
       photo: image().optional(),
@@ -222,7 +225,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
             code: z
               .string()
               .regex(/^[a-z]{2}$/)
-              .refine((c) => new Intl.DisplayNames(["en"], { type: "language" }).of(c) !== c),
+              .refine((c) => languageNames.of(c) !== c),
             level: vocab(languageLevels),
             trains: z.boolean().optional(),
           }),

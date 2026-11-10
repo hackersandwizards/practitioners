@@ -102,7 +102,7 @@ export async function retouch(input: string | Buffer, o: Options = {}): Promise<
   else if (width !== height) img = img.resize(side, side, { fit: "cover", position: "attention" });
   const size = o.size ?? Math.min(side, 1024);
   if (size > side) throw new Error(`--size ${size} would upscale the ${side} px crop`);
-  const rgb = new Uint8Array(await img.raw().toBuffer());
+  const rgb = await img.raw().toBuffer();
   if (o.retouch) {
     const g = gains(rgb);
     const lut = tone();
@@ -110,9 +110,10 @@ export async function retouch(input: string | Buffer, o: Options = {}): Promise<
       rgb[i] = lut[Math.min(255, Math.round(rgb[i]! * g[i % 3]!))]!;
   }
   const raw = (w: number) => ({ raw: { width: w, height: w, channels: 3 as const } });
-  const sized = new Uint8Array(
-    await sharp(rgb, raw(side)).resize(size, size, { kernel: "lanczos3" }).raw().toBuffer(),
-  );
+  const sized = await sharp(rgb, raw(side))
+    .resize(size, size, { kernel: "lanczos3" })
+    .raw()
+    .toBuffer();
   if (o.sharpen) sharpen(sized, size, size);
   return sharp(sized, raw(size)).webp({ quality: 82, effort: 6, smartSubsample: true }).toBuffer();
 }
