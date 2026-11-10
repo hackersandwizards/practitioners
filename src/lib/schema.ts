@@ -156,7 +156,8 @@ export const expertiseAwaiting = new Set([
 
 /** The shorter side of a portrait in px, at least: the website's first team group at a 767 px
  *  window is 459 CSS px on a 2x screen. The website owns who sits in that group, so every portrait
- *  has to fit it; its gate measures its grid against this number. CONTRIBUTING.md states it. */
+ *  has to fit it; its gate measures its grid against this number. CONTRIBUTING.md states it
+ *  (photo-size.test.ts). */
 export const portraitMinimum = 918;
 
 const year = z.int().min(1960).max(new Date().getFullYear());

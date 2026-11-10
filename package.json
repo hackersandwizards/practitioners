@@ -1,6 +1,6 @@
 {
   "name": "practitioners",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "license": "SEE LICENSE IN LICENSE",
   "private": true,
   "type": "module",
@@ -247,7 +247,7 @@
     ],
     "typecheck": "astro check",
     "skip": {
-      "structure": "the skeleton's pre-commit (check-staged) and commit-msg (the message scan) would make a practitioner committing their own bio need gitleaks, the confidential-terms list and macOS OCR, so the bio-only commit stays astro check and a confidential scan that passes without the list (CLAUDE.md, Gate); bunfig.toml keeps src/content/ out of bun test, where a file would run as code; .githooks/pre-push is the skeleton's own, byte for byte, which this skip leaves unchecked; not adopted yet, with no reason recorded: .editorconfig, .npmrc, post-merge, post-checkout, AGENTS.md, .claude/settings.json, .mcp.json, .codex/config.toml, the .agents/skills link, engines.npm and the check:staged script"
+      "structure": "the skeleton's pre-commit (check-staged) and commit-msg (the message scan) would make a practitioner committing their own bio need gitleaks and the confidential-terms list, so the bio-only commit stays astro check and a confidential scan that passes without the list, though like every scan it reads an image only on macOS (CLAUDE.md, Gate); bunfig.toml keeps src/content/ out of bun test, where a file would run as code; .githooks/pre-push is the skeleton's own, byte for byte, which this skip leaves unchecked; not adopted yet, with no reason recorded: .editorconfig, .npmrc, post-merge, post-checkout, AGENTS.md, .claude/settings.json, .mcp.json, .codex/config.toml, the .agents/skills link, engines.npm and the check:staged script"
     },
     "check": [
       [
