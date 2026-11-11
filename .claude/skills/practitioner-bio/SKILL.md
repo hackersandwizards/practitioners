@@ -95,15 +95,15 @@ bio-only commit, not the portrait count, the held lines or the entries the catal
    than the person's own name is a review comment and blocks the merge. Where the confidential step
    names their own name, it gets one `scaffolding.allow` entry in `package.json` per path, with the
    name as `text` (matching ignores case; a list holds other spellings) and their folder as
-   `src/content/practitioners/<slug>/**`. Checking a detached head, commit the entry on `main`,
-   since the pull request's folder check refuses `package.json`, then `git merge --no-edit main` on
-   the head and run `bun run check` again: a red confidential step stops the gate before the preview
-   build. Commit a changed `entry.json` with its path named and push it, with the merge of `main`
-   where you made one, to the pull request's branch (`git push <its fork's URL> HEAD:<its branch>`,
-   both from `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before
-   the merge, so `main` never holds the name without its entry nor a stale `entry.json`; where the
-   fork refuses the push, commit it on `main` right after the merge. Style findings under step 6
-   below go into a review comment; their wording stays theirs.
+   `src/content/practitioners/<slug>/**`, committed on `main` before the merge: the pull request's
+   folder check refuses `package.json`. A red confidential step stops `bun run check` before the
+   preview build, so the check counts only once it passes in full. Commit a changed `entry.json`
+   with its path named and push it to the pull request's branch (`git push <its fork's URL>
+   HEAD:<its branch>`, both from
+   `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before the merge, so
+   `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
+   the push, commit it on `main` right after the merge. Style findings under step 6 below go into a
+   review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
    Merge with `--match-head-commit` and the head you checked: `git rev-parse HEAD` after your own
