@@ -4,17 +4,17 @@ This is the shared setup guide for our local apps. Caddy gives each app a URL wi
 The app still runs separately with `bun run dev`. Caddy starts automatically at boot.
 This setup is optional: the apps also work through their direct localhost ports.
 
-| App           | Local URL                      | App port |
-| ------------- | ------------------------------ | -------- |
-| OS            | http://os.localhost            | 4321     |
-| Website       | http://website.localhost       | 4322     |
-| Trainer Hub   | http://trainer-hub.localhost   | 4323     |
-| Talks         | http://talks.localhost         | 4324     |
-| Practitioners | http://practitioners.localhost | 4325     |
-| Brand         | http://brand.localhost         | 4326     |
-| Testimonials  | http://testimonials.localhost  | 4327     |
-| Documents     | http://documents.localhost     | 4330     |
-| Slides        | http://slides.localhost        | 4335     |
+- OS: http://os.localhost, port 4321
+- Website: http://website.localhost, port 4322
+- Trainer Hub: http://trainer-hub.localhost, port 4323
+- Talks: http://talks.localhost, port 4324
+- Practitioners: http://practitioners.localhost, port 4325
+- Brand: http://brand.localhost, port 4326
+- Testimonials: http://testimonials.localhost, port 4327
+- Admin: http://admin.localhost, port 4329
+- Documents: http://documents.localhost, port 4330
+- Slides: http://slides.localhost, port 4335
+- Mail: http://mail.localhost, port 4455
 
 ## Install Caddy
 
@@ -75,6 +75,11 @@ http://testimonials.localhost {
     reverse_proxy 127.0.0.1:4327
 }
 
+http://admin.localhost {
+    bind 127.0.0.1
+    reverse_proxy 127.0.0.1:4329
+}
+
 http://documents.localhost {
     bind 127.0.0.1
     reverse_proxy 127.0.0.1:4330
@@ -84,9 +89,14 @@ http://slides.localhost {
     bind 127.0.0.1
     reverse_proxy 127.0.0.1:4335
 }
+
+http://mail.localhost {
+    bind 127.0.0.1
+    reverse_proxy 127.0.0.1:4455
+}
 ```
 
-Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all nine entries even if you only
+Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all eleven entries even if you only
 use Practitioners. They do not start or install the other apps.
 
 `bind 127.0.0.1` keeps the proxy local to your Mac. Explicit `http://` avoids certificate setup.
@@ -99,18 +109,21 @@ After adding an app, follow [First aid](#first-aid) to load the new route.
 Chrome resolves `.localhost` names itself. Safari and apps using the macOS system resolver may
 not resolve these names automatically. Add explicit entries so the URLs also work there.
 
-For a fresh setup, run this single-line command once. It appends the names without replacing
+For a fresh setup, run this command once. It appends the names without replacing
 existing hosts entries and asks for your Mac password:
 
 ```sh
-printf '\n127.0.0.1 os.localhost website.localhost trainer-hub.localhost talks.localhost practitioners.localhost brand.localhost testimonials.localhost documents.localhost slides.localhost\n' | sudo tee -a /etc/hosts
+(echo; printf '127.0.0.1 %s\n' os.localhost website.localhost \
+  trainer-hub.localhost talks.localhost practitioners.localhost \
+  brand.localhost testimonials.localhost admin.localhost documents.localhost \
+  slides.localhost mail.localhost) | sudo tee -a /etc/hosts
 ```
 
 If you already added these names, skip this command. To correct existing entries, use
 `sudo nano /etc/hosts` instead of appending duplicates.
 
 If the terminal shows `heredoc>` or `>` after pasting an earlier multiline command, it is waiting
-for the closing marker. Press Ctrl+C to cancel, then paste the single-line command above.
+for the closing marker. Press Ctrl+C to cancel, then paste the command above.
 For a command beginning with `<<'EOF'`, typing `EOF` alone on a new line also ends the input.
 
 Refresh the macOS resolver cache:
@@ -161,7 +174,10 @@ bun install
 bun run dev
 ```
 
-The console prints its Caddy URL. For this repo, open http://practitioners.localhost.
+OS, Website, Trainer Hub, Talks, Practitioners and Testimonials print their Caddy URL as they
+start. Admin prints its direct URL with the port, http://admin.localhost:4329. Brand, Documents,
+Slides and Mail print none: take their URL from the list above. For this repo, open
+http://practitioners.localhost.
 The repositories set their own ports; Caddy does not choose them or launch the apps.
 Use the URL only after the app reports that it is running.
 
@@ -171,7 +187,8 @@ For a blank page after adding an app, validate and restart Caddy. This loads the
 Caddyfile. The restart briefly interrupts all local Caddy URLs:
 
 ```sh
-caddy validate --config "$(brew --prefix)/etc/Caddyfile" && sudo "$(command -v brew)" services restart caddy
+caddy validate --config "$(brew --prefix)/etc/Caddyfile" &&
+  sudo "$(command -v brew)" services restart caddy
 ```
 
 Only restart if validation succeeds. Then reload the page. A Caddy process using an old
@@ -181,19 +198,21 @@ HTTP 200 alone does not prove the app is being served.
 Check both status and downloaded content, using Practitioners as an example:
 
 ```sh
-curl --noproxy '*' -sS -o /dev/null -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://practitioners.localhost
-curl --noproxy '*' -sS -o /dev/null -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://127.0.0.1:4325
+curl --noproxy '*' -sS -o /dev/null \
+  -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://practitioners.localhost
+curl --noproxy '*' -sS -o /dev/null \
+  -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://127.0.0.1:4325
 ```
 
 Both should return HTTP 200 with a nonempty body. For another app, use its hostname and port
-from the table above.
+from the list above.
 
 | Symptom                                                            | First action                                                                                                                                                      |
 | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Blank page, HTTP 200 with 0 bytes, but the direct port serves HTML | Run the validate-and-restart command above.                                                                                                                       |
 | `502 Bad Gateway` or the direct port refuses the connection        | Run `bun run dev` in the app's repo and check its port. Caddy does not start apps.                                                                                |
 | Browser cannot find the server                                     | Check `/etc/hosts`: every line containing hostnames must begin with `127.0.0.1`. Follow the Safari setup above, flush the resolver cache, and reopen the browser. |
-| Terminal waits at `heredoc>`                                       | Press Ctrl+C and use the single-line hosts command above.                                                                                                         |
+| Terminal waits at `heredoc>`                                       | Press Ctrl+C and use the hosts command above.                                                                                                                     |
 
 If the page is still blank despite a nonempty HTML response, check browser console errors;
 restarting Caddy does not repair app rendering errors.
