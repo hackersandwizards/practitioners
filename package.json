@@ -52,7 +52,7 @@
     "typescript": "6.0.3"
   },
   "overrides": {
-    "minimatch": "11.0.5"
+    "minimatch": "11.0.8"
   },
   "prettier": "@hackersandwizards/scaffolding/prettier",
   "scaffolding": {
