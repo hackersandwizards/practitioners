@@ -1,5 +1,6 @@
 ---
 name: Matthias Lübken
+photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/luebken/
 status: draft
 ---

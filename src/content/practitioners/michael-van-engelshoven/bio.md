@@ -1,5 +1,6 @@
 ---
 name: Michael van Engelshoven
+photo: ./photo.webp
 affiliation: INNOQ
 status: draft
 ---

@@ -1,5 +1,6 @@
 ---
 name: Pini Reznik
+photo: ./photo.webp
 affiliation: "re:cinq"
 linkedin: https://www.linkedin.com/in/pinireznik
 status: draft
