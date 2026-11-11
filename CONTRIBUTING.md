@@ -75,15 +75,20 @@ The three lines the website prints under your name go in the same block, each in
 German: `job`, `expertise` and `background`. In both languages, `expertise` takes three words or
 fewer and no job title such as Director or Lead.
 
+The link lines below start with `#`, so a copy of them changes nothing. Where your `bio.md` already
+has a line such as `linkedin:`, change the address there; otherwise copy the line without the `#`
+and put your own address in. A key twice, such as `linkedin:`, fails the check with `Map keys must
+be unique` and the line it found.
+
 ```yaml
 name: Ada Example
 job: { en: Trainer for agentic coding, de: Trainerin für agentisches Coding }
 expertise: { en: Agentic coding, de: Agentisches Coding }
 background: { en: Founder of Example GmbH, de: Gründerin der Example GmbH }
-linkedin: https://www.linkedin.com/in/ada-example/
-github: https://github.com/ada-example
-profiles:
-  - https://speakerdeck.com/ada-example
+# linkedin: https://www.linkedin.com/in/your-name/
+# github: https://github.com/your-name
+# profiles:
+#   - https://speakerdeck.com/your-name
 ```
 
 **The bio:** three to five sentences about you in the third person, as a colleague would introduce
