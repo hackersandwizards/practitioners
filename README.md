@@ -1,238 +1,33 @@
 # Practitioners | hackers&wizards
 
-The people on [hackersandwizards.dev/team](https://www.hackersandwizards.dev/team/),
-one directory each: an English bio, a German bio, a portrait and the profile links they maintain.
-The website renders each profile from this package, so the text you write here is the text a client
-reads there.
+The people on [hackersandwizards.dev/team](https://www.hackersandwizards.dev/team/), one folder
+each: an English bio, a German bio, a portrait and the profile links they maintain. The website
+renders each profile from this repository, so the text you write here is the text a client reads
+there. Who appears on that page, and in which group, the website decides.
 
-Who appears on that page and in which group is the website's roster and stays there. This repo
-holds everything the website says about each person: name, bios, links, portrait, affiliation and
-the lines under the name.
+| You want                           | Go to                                                                |
+| ---------------------------------- | -------------------------------------------------------------------- |
+| Read the published profiles        | [The team page](https://www.hackersandwizards.dev/team/)             |
+| Change your entry in the browser   | [In the browser](CONTRIBUTING.md#in-the-browser)                     |
+| Change your entry with Claude Code | [With Claude Code](CONTRIBUTING.md#with-claude-code)                 |
+| Change your entry without GitHub   | [CONTRIBUTING.md](CONTRIBUTING.md)                                   |
+| Know what your entry needs         | [What goes in your folder](CONTRIBUTING.md#what-goes-in-your-folder) |
+| See your page before you send it   | [Preview](#preview)                                                  |
+| Know what checks your pull request | [How it is checked](#how-it-is-checked)                              |
+| Work on this repository            | [CLAUDE.md](CLAUDE.md)                                               |
+| Open our local apps without a port | [docs/local-urls.md](docs/local-urls.md)                             |
 
-## Your entry
+## Preview
 
-You improve your own entry here, in the browser or with Claude Code, through a pull request that
-h&w reviews and merges. [CONTRIBUTING.md](CONTRIBUTING.md) says how, file by file.
-
-## Local URLs with Caddy on macOS
-
-This is the shared setup guide for our local apps. Caddy gives each app a URL without a port.
-The app still runs separately with `bun run dev`. Caddy starts automatically at boot.
-This setup is optional: the apps also work through their direct localhost ports.
-
-| App           | Local URL                      | App port |
-| ------------- | ------------------------------ | -------- |
-| OS            | http://os.localhost            | 4321     |
-| Website       | http://website.localhost       | 4322     |
-| Trainer Hub   | http://trainer-hub.localhost   | 4323     |
-| Talks         | http://talks.localhost         | 4324     |
-| Practitioners | http://practitioners.localhost | 4325     |
-| Brand         | http://brand.localhost         | 4326     |
-| Documents     | http://documents.localhost     | 4330     |
-| Slides        | http://slides.localhost        | 4335     |
-
-### Install Caddy
-
-Install [Homebrew](https://brew.sh/) first if `brew --version` does not work. Then run:
-
-```sh
-brew install caddy
-```
-
-### Configure the local URLs
-
-Open the configuration file:
-
-```sh
-nano "$(brew --prefix)/etc/Caddyfile"
-```
-
-For a new installation, paste the configuration below. If you already use Caddy, preserve your
-existing sites and merge these entries. A Caddyfile can have only one global options block.
-
-```caddyfile
-{
-    admin off
-}
-
-http://os.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4321
-}
-
-http://website.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4322
-}
-
-http://trainer-hub.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4323
-}
-
-http://talks.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4324
-}
-
-http://practitioners.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4325
-}
-
-http://brand.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4326
-}
-
-http://documents.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4330
-}
-
-http://slides.localhost {
-    bind 127.0.0.1
-    reverse_proxy 127.0.0.1:4335
-}
-```
-
-Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all eight entries even if you only
-use Practitioners. They do not start or install the other apps.
-
-`bind 127.0.0.1` keeps the proxy local to your Mac. Explicit `http://` avoids certificate setup.
-The admin API is disabled, so configuration changes require a service restart.
-Saving the file or running `caddy validate` does not update a running Caddy process.
-After adding an app, follow [First aid](#first-aid) to load the new route.
-
-### Make the names work in Safari and other macOS apps
-
-Chrome resolves `.localhost` names itself. Safari and apps using the macOS system resolver may
-not resolve these names automatically. Add explicit entries so the URLs also work there.
-
-For a fresh setup, run this single-line command once. It appends the names without replacing
-existing hosts entries and asks for your Mac password:
-
-```sh
-printf '\n127.0.0.1 os.localhost website.localhost trainer-hub.localhost talks.localhost practitioners.localhost brand.localhost documents.localhost slides.localhost\n' | sudo tee -a /etc/hosts
-```
-
-If you already added these names, skip this command. To correct existing entries, use
-`sudo nano /etc/hosts` instead of appending duplicates.
-
-If the terminal shows `heredoc>` or `>` after pasting an earlier multiline command, it is waiting
-for the closing marker. Press Ctrl+C to cancel, then paste the single-line command above.
-For a command beginning with `<<'EOF'`, typing `EOF` alone on a new line also ends the input.
-
-Refresh the macOS resolver cache:
-
-```sh
-sudo dscacheutil -flushcache
-sudo killall -HUP mDNSResponder
-```
-
-Quit and reopen a browser that still reports an unknown server. Verify system name resolution:
-
-```sh
-dscacheutil -q host -a name website.localhost
-```
-
-The result should include `127.0.0.1`. These entries match Caddy's IPv4 loopback binding;
-no public DNS records are needed. See the [WebKit localhost subdomain issue](https://bugs.webkit.org/show_bug.cgi?id=160504).
-
-### Start Caddy automatically
-
-Validate the configuration before starting the service:
-
-```sh
-caddy validate --config "$(brew --prefix)/etc/Caddyfile"
-```
-
-If you previously started Caddy without `sudo`, stop that login service first:
-
-```sh
-brew services stop caddy
-```
-
-Start the system service with your Mac password. This also registers Caddy to start at boot:
-
-```sh
-sudo "$(command -v brew)" services start caddy
-```
-
-The system service can bind port 80, which a login service may lack permission to use.
-Another server already using port 80 must be stopped or reconfigured first.
-
-### Start an app and open its URL
-
-In a current checkout of the app, install its dependencies and start it:
+In the browser, the **Preview** tab shows how your text reads. To see your page as the website lays
+it out, with [Bun](https://bun.sh) installed, in your copy of this repository:
 
 ```sh
 bun install
 bun run dev
 ```
 
-The console prints its Caddy URL. For this repo, open http://practitioners.localhost.
-The repositories set their own ports; Caddy does not choose them or launch the apps.
-Use the URL only after the app reports that it is running.
-
-### First aid
-
-For a blank page after adding an app, validate and restart Caddy. This loads the current
-Caddyfile. The restart briefly interrupts all local Caddy URLs:
-
-```sh
-caddy validate --config "$(brew --prefix)/etc/Caddyfile" && sudo "$(command -v brew)" services restart caddy
-```
-
-Only restart if validation succeeds. Then reload the page. A Caddy process using an old
-configuration can answer an unknown hostname with HTTP 200 and an empty body.
-HTTP 200 alone does not prove the app is being served.
-
-Check both status and downloaded content, using Practitioners as an example:
-
-```sh
-curl --noproxy '*' -sS -o /dev/null -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://practitioners.localhost
-curl --noproxy '*' -sS -o /dev/null -w 'HTTP %{http_code}, body %{size_download} bytes\n' http://127.0.0.1:4325
-```
-
-Both should return HTTP 200 with a nonempty body. For another app, use its hostname and port
-from the table above.
-
-| Symptom                                                            | First action                                                                                                                                                      |
-| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Blank page, HTTP 200 with 0 bytes, but the direct port serves HTML | Run the validate-and-restart command above.                                                                                                                       |
-| `502 Bad Gateway` or the direct port refuses the connection        | Run `bun run dev` in the app's repo and check its port. Caddy does not start apps.                                                                                |
-| Browser cannot find the server                                     | Check `/etc/hosts`: every line containing hostnames must begin with `127.0.0.1`. Follow the Safari setup above, flush the resolver cache, and reopen the browser. |
-| Terminal waits at `heredoc>`                                       | Press Ctrl+C and use the single-line hosts command above.                                                                                                         |
-
-If the page is still blank despite a nonempty HTML response, check browser console errors;
-restarting Caddy does not repair app rendering errors.
-
-### Further diagnostics
-
-Check the service and its log:
-
-```sh
-sudo "$(command -v brew)" services list
-tail -n 50 "$(brew --prefix)/var/log/caddy.log"
-```
-
-A `502 Bad Gateway` usually means the app is stopped or listening on the wrong address or port.
-Check its startup output. Practitioners should listen on `127.0.0.1:4325`.
-If that port works directly but the hostname does not, check Caddy's status and restart after configuration changes.
-If the log reports `address already in use`, identify the listener with `sudo lsof -nP -iTCP:80 -sTCP:LISTEN`.
-Use `http://`, not `https://`, with this configuration.
-
-To stop Caddy and remove its automatic startup registration:
-
-```sh
-sudo "$(command -v brew)" services stop caddy
-```
-
-References: [Homebrew services](https://docs.brew.sh/Manpage#services-subcommand),
-[Caddy reverse proxy](https://caddyserver.com/docs/caddyfile/directives/reverse_proxy),
-[local binding](https://caddyserver.com/docs/caddyfile/directives/bind), and
-[HTTP and automatic HTTPS](https://caddyserver.com/docs/automatic-https).
+Then open http://localhost:4325/ for every entry, or http://localhost:4325/your-folder/ for yours.
 
 ## How it is checked
 
@@ -241,15 +36,13 @@ staged bio against it on your machine. `bun install` enables the hook. Your pull
 schema check on GitHub, a check that it changes only the bios, `entry.json` and images of one
 folder, and a scan for leaked secrets; h&w runs the rest of the hook's checks before the merge.
 
-## Layout
+## Licence and contact
 
-```
-src/content/practitioners/<slug>/   bio.md, bio.de.md, photo.webp, entry.json
-src/lib/schema.ts                   the contract every bio.md meets
-src/pages/index.astro               the preview, grouped by affiliation, cards as the website's team grid
-src/lib/website.ts                  who hackersandwizards.dev/team/ lists, read from its JSON-LD
-scripts/export.ts                   writes each folder's entry.json, the data the website imports
-.claude/skills/practitioner-bio/    reviewing a pull request, the mail and the interview
-.githooks/                          the gate
-.github/workflows/                  the same check and a secret scan on every pull request
-```
+The code is under the [PolyForm Strict License 1.0.0](LICENSE). Your text and portrait stay
+yours, and a photographer keeps the rights in their portrait. Questions about your entry go in your
+pull request, or in a reply to the mail from h&w.
+
+## Local URLs with Caddy on macOS
+
+Moved to [docs/local-urls.md](docs/local-urls.md). This heading stays for links from other
+repositories.
