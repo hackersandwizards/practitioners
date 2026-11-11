@@ -18,7 +18,8 @@ commit is never held to a count or list kept outside their folder; h&w runs `bun
 content commit (`practitioner-bio`).
 
 `pre-push` is scaffolding's own: it refuses a push that carries a commit listed in
-`.confidential-purged.json`, the commits the history rewrite of 10.11. replaced, and reads no
+`.confidential-purged.json`, the commits both history rewrites of 10.11. replaced, and reads no
 confidential list, so a practitioner's push passes without one. After any further history rewrite,
-add the replaced commits with `bun run --silent check-confidential purged <sha>... > .confidential-purged.json`,
+add the replaced commits, every commit that descends from the old root on origin's branches, tags
+and `refs/pull/*` and in the maintainer's clone (reflogs and unreachable objects included), with `bun run --silent check-confidential purged <sha>... > .confidential-purged.json`,
 then `bun run format`: the command keeps the staged list's salt and entries.

@@ -4,6 +4,11 @@ Your profile on [hackersandwizards.dev/team](https://www.hackersandwizards.dev/t
 your folder in this repository. You change it here yourself and send the change to h&w as a pull
 request: a request for us to take it over. We check it and merge it. Change only your own folder.
 
+Forked this repository before 11 November 2026? Your copy holds a history we have since replaced,
+and GitHub cannot merge a pull request from it. Before your next change, delete the copy on GitHub
+(its **Settings**, then **Delete this repository**) and fork again, or run
+`gh repo sync <your-account>/<your-copy> --force`. A folder cloned from the old copy: clone it again.
+
 Your entry needs five things: your name, your LinkedIn link, an English bio, a German bio and a
 portrait. A profile for matching is optional and helps us offer you the right trainings
 ([Your profile for matching](#your-profile-for-matching)). You need a free GitHub account,
