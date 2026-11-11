@@ -26,8 +26,9 @@ after the overview's runs and 14.9 after the entry's page. Other sessions shared
 The overview's mobile LCP splits in two. Of six runs, four landed at 906, 907, 945 and 1001 ms and
 two at 3007 and 3086 ms, with the same 28 requests and the same bytes in each. Three of the four
 fast runs came in a second batch at a load average of 101 to 83, so load alone does not explain the
-slow pair. In both slow runs the LCP element is text and the trace shows an element render delay of
-349 ms against 62 to 117 ms in the fast ones.
+slow pair. In all six the LCP element is the same intro paragraph, and the observed render delay
+does not separate them: 348 and 56 ms in the slow pair, 62 to 117 ms in the fast runs. The cause is
+not explained.
 
 The overview's mobile weight: 231,033 bytes of images in 22 requests, 174,688 bytes of fonts in 3,
 one stylesheet of 14,938 bytes, one script of 4,244 bytes, the document 6,982 bytes.

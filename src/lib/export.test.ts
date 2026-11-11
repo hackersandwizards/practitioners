@@ -125,7 +125,7 @@ test("a link is https:// and a key the schema lacks fails rather than vanishing"
     ),
   ).toEqual([false, false]);
   expect(ok({ Github: "https://github.com/a" })).toBe(false);
-  expect(ok({ stack: [{ name: "TypeScript", depht: "used" }] })).toBe(false);
+  expect(ok({ stack: [{ name: "TypeScript", depth: "used", teach: true }] })).toBe(false);
 });
 
 test("an empty frontmatter in bio.de.md is not bio text", async () => {

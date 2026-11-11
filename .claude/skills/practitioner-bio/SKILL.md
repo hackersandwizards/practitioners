@@ -94,12 +94,13 @@ the held lines or the entries the catalog draws.
    authorship and runs the pre-commit hook a plain cherry-pick skips. A
    confidential term other than the person's own name is a review comment and blocks the merge. Their own name gets one
    `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
-   case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`.
-   Push that entry and a changed `entry.json` to the pull request's branch
+   case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`,
+   committed on `main` before the merge: the pull request's folder check refuses `package.json`.
+   Push a changed `entry.json` to the pull request's branch
    (`git push <its fork's URL> HEAD:<its branch>`, both from
    `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before the merge, so
    `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
-   the push, commit both on `main` right after the merge. Style findings under step 6
+   the push, commit it on `main` right after the merge. Style findings under step 6
    below go into a review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
