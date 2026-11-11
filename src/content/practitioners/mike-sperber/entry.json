@@ -177,9 +177,12 @@
       "url": "https://deinprogramm.de/sdp/"
     }
   ],
-  "status": "draft",
+  "status": "active",
+  "owner": "Dr. Michael Sperber",
+  "updated": "2026-11-11",
+  "photo": "practitioners/mike-sperber/photo.webp",
   "bio": {
     "en": "Mike is managing director of Active Group.  He is an internationally recognized expert on functional programming and software architecture. Mike is also an accredited iSAQB trainer, curator of its FUNAR, DSL, and FM curricula, and a member of iSAQB's strategy council.",
-    "de": "Mike ist Geschäftsführer der Active Group GmbH. Er ist international annerkannter Experte für funktionale Programmierung und Softwarearchitektur.  Mike ist außerdem akkreditierter iSAQB-Trainer und Kurator für die iSAQB-Curricula FUNAR, DSL and FM, and Mitglied im Strategie-Council des iSAQB."
+    "de": "Mike ist Geschäftsführer der Active Group GmbH. Er ist international anerkannter Experte für funktionale Programmierung und Softwarearchitektur.  Mike ist außerdem akkreditierter iSAQB-Trainer und Kurator für die iSAQB-Curricula FUNAR, DSL and FM, and Mitglied im Strategie-Council des iSAQB."
   }
 }

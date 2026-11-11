@@ -1,5 +1,6 @@
 ---
 name: Dr. Michael Sperber
+photo: ./photo.webp
 job: { en: "Trainer, Architect", de: "Trainer, Architekt" }
 expertise: { en: "Functional, Architecture, Formal", de: "Funktional, Architektur, Formal" }
 background: { en: Managing Director Active Group, de: Geschäftsführer Active Group }
@@ -45,7 +46,9 @@ public_work: # books, products, talks, articles, podcasts, courses, open source,
   - { kind: podcast, title: Host Haskell Interlude, year: 2024, url: https://haskell.foundation/podcast/ }
   - { kind: article, title: Functional Programming, year: 2014, url: https://funktionale-programmierung.de/ }
   - { kind: book, title: Schreibe Dein Programm!, year: 2024, url: https://deinprogramm.de/sdp/}
-
+status: active
+owner: Dr. Michael Sperber
+updated: "2026-11-11"
 ---
 
 Mike is managing director of Active Group.  He is an internationally
