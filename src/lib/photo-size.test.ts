@@ -5,7 +5,7 @@ import { portraitMinimum } from "./schema";
 
 /** Portraits below the minimum today, on either side. Lower it when one reaches the minimum; a new
  *  portrait below the minimum raises it only after the person has been asked for a larger original. */
-const AWAITING_ORIGINAL = 49;
+const AWAITING_ORIGINAL = 48;
 
 test("CONTRIBUTING.md states portraitMinimum", async () => {
   const text = await Bun.file("CONTRIBUTING.md").text();
