@@ -12,6 +12,7 @@ This setup is optional: the apps also work through their direct localhost ports.
 | Talks         | http://talks.localhost         | 4324     |
 | Practitioners | http://practitioners.localhost | 4325     |
 | Brand         | http://brand.localhost         | 4326     |
+| Testimonials  | http://testimonials.localhost  | 4327     |
 | Documents     | http://documents.localhost     | 4330     |
 | Slides        | http://slides.localhost        | 4335     |
 
@@ -69,6 +70,11 @@ http://brand.localhost {
     reverse_proxy 127.0.0.1:4326
 }
 
+http://testimonials.localhost {
+    bind 127.0.0.1
+    reverse_proxy 127.0.0.1:4327
+}
+
 http://documents.localhost {
     bind 127.0.0.1
     reverse_proxy 127.0.0.1:4330
@@ -80,7 +86,7 @@ http://slides.localhost {
 }
 ```
 
-Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all eight entries even if you only
+Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all nine entries even if you only
 use Practitioners. They do not start or install the other apps.
 
 `bind 127.0.0.1` keeps the proxy local to your Mac. Explicit `http://` avoids certificate setup.
@@ -97,7 +103,7 @@ For a fresh setup, run this single-line command once. It appends the names witho
 existing hosts entries and asks for your Mac password:
 
 ```sh
-printf '\n127.0.0.1 os.localhost website.localhost trainer-hub.localhost talks.localhost practitioners.localhost brand.localhost documents.localhost slides.localhost\n' | sudo tee -a /etc/hosts
+printf '\n127.0.0.1 os.localhost website.localhost trainer-hub.localhost talks.localhost practitioners.localhost brand.localhost testimonials.localhost documents.localhost slides.localhost\n' | sudo tee -a /etc/hosts
 ```
 
 If you already added these names, skip this command. To correct existing entries, use
