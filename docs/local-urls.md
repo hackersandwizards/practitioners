@@ -96,13 +96,14 @@ http://mail.localhost {
 }
 ```
 
-Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all eleven entries even if you only
+Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all entries even if you only
 use Practitioners. They do not start or install the other apps.
 
 `bind 127.0.0.1` keeps the proxy local to your Mac. Explicit `http://` avoids certificate setup.
 The admin API is disabled, so configuration changes require a service restart.
 Saving the file or running `caddy validate` does not update a running Caddy process.
-After adding an app, follow [First aid](#first-aid) to load the new route.
+Where your Caddyfile lacks an app from the list, add its block, then follow
+[First aid](#first-aid) to load the new route.
 
 ## Make the names work in Safari and other macOS apps
 
@@ -119,8 +120,8 @@ existing hosts entries and asks for your Mac password:
   slides.localhost mail.localhost) | sudo tee -a /etc/hosts
 ```
 
-If you already added these names, skip this command. To correct existing entries, use
-`sudo nano /etc/hosts` instead of appending duplicates.
+If you already added some of these names, add only the missing ones with `sudo nano /etc/hosts`
+instead of appending duplicates.
 
 If the terminal shows `heredoc>` or `>` after pasting an earlier multiline command, it is waiting
 for the closing marker. Press Ctrl+C to cancel, then paste the command above.
@@ -175,8 +176,8 @@ bun run dev
 ```
 
 OS, Website, Trainer Hub, Talks, Practitioners and Testimonials print their Caddy URL as they
-start. Admin prints its direct URL with the port, http://admin.localhost:4329. Brand, Documents,
-Slides and Mail print none: take their URL from the list above. For this repo, open
+start. Admin prints http://admin.localhost:4329, which bypasses Caddy. Brand, Documents, Slides and
+Mail print only their port: take their Caddy URL from the list above. For this repo, open
 http://practitioners.localhost.
 The repositories set their own ports; Caddy does not choose them or launch the apps.
 Use the URL only after the app reports that it is running.

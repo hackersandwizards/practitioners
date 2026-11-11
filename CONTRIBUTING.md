@@ -75,10 +75,10 @@ The three lines the website prints under your name go in the same block, each in
 German: `job`, `expertise` and `background`. In both languages, `expertise` takes three words or
 fewer and no job title such as Director or Lead.
 
-The link lines below start with `#`, so a copy of them changes nothing. Where your `bio.md` already
-has a line such as `linkedin:`, change the address there; otherwise copy the line without the `#`
-and put your own address in. A key twice, such as `linkedin:`, fails the check with `Map keys must
-be unique` and the line it found.
+Change the lines your `bio.md` already has rather than adding them again: a key twice, such as
+`linkedin:`, fails the check with `Map keys must be unique` and the line it found. The link lines
+below start with `#`, so a copy of them changes nothing; to add one, copy it without the `#` and
+put your own address in.
 
 ```yaml
 name: Ada Example
