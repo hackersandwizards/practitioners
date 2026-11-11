@@ -131,7 +131,9 @@
       "year": 2016
     }
   ],
-  "status": "draft",
+  "status": "active",
+  "owner": "Ivan Petkovic",
+  "updated": "2026-11-11",
   "photo": "practitioners/ivan-petkovic/photo.webp",
   "bio": {
     "en": "Ivan Petkovic is a leadership coach, organisational transformation consultant and founder of ipCoaching. He brings more than 15 years of experience across product, technology, strategy and leadership, including leading teams and organisational transformations involving the Product Operating Model and Agile ways of working. Alongside his independent practice, he works as Executive Technology Advisor at XING, where he leads the scaling of AI and agentic ways of working across engineering and non-engineering functions. His work connects strategy with implementation through workflow redesign, leadership development, clear accountability and practical enablement, helping organisations turn individual expertise and experiments into shared capabilities. Within the hackers&wizards network, he offers training, workshops and coaching to help engineering and business teams turn AI experimentation into responsible, scalable everyday practice.",

@@ -2,7 +2,9 @@
 name: Ivan Petkovic
 photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/petkovicivan/
-status: draft
+status: active
+owner: Ivan Petkovic
+updated: "2026-11-11"
 job:
   en: "Leadership Coach & Organisational Transformation Consultant"
   de: "Führungskräftecoach & Berater für organisationale Transformation"
