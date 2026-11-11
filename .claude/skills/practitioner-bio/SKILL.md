@@ -96,21 +96,24 @@ bio-only commit, not the portrait count, the held lines or the entries the catal
    `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
    case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`,
    committed on `main` before the merge: the pull request's folder check refuses `package.json`.
-   Push a changed `entry.json` to the pull request's branch (`git push <its fork's URL>
-   HEAD:<its branch>`, both from
+   The head you check lacks a new entry, so `bun run check` there fails `confidential` on their
+   name in their folder; that hit is the expected one. Push a changed `entry.json` to the pull
+   request's branch (`git push <its fork's URL> HEAD:<its branch>`, both from
    `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before the merge, so
    `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
-   the push, commit it on `main` right after the merge. Style findings under step 6
-   below go into a review comment; their wording stays theirs.
+   the push, commit it on `main` right after the merge. Style findings under step 6 below go into a
+   review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
-   Merge with `--match-head-commit` and `git rev-parse HEAD` of your checkout after your own
-   push, so a later push by the author is never merged unchecked.
+   Merge with `--match-head-commit` and the head you checked: `git rev-parse HEAD` after your own
+   push, `git rev-parse pr-<number>` where the fork refused it, so a later push by the author is
+   never merged unchecked.
    Then on `main`: an uploaded portrait under another name or format becomes `photo.webp` as
    above, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner`
    to their name, `updated`, and `status: active` once the mandatory list is complete; commit with
    the paths named and push. A value they wished for a profile list: add it with its label to the
-   list in `src/lib/schema.ts` and to their entry, in the same commit, unless an existing value already means it; then tell them which.
+   list in `src/lib/schema.ts` and to their entry, in the same commit, unless an existing value
+   already means it; then tell them which.
 4. Asked for a German text, draft it from their English as in step 8 below, show it in the pull
    request or by mail, and commit it after their yes.
 
