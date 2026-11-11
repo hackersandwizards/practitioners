@@ -1,5 +1,6 @@
 ---
 name: Mike Sperber
+photo: ./photo.webp
 affiliation: Active Group
 linkedin: https://www.linkedin.com/in/sperber
 status: draft

@@ -1,5 +1,6 @@
 ---
 name: Young Jin Kim
+photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/yjk
 status: draft
 ---

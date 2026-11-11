@@ -1,5 +1,6 @@
 ---
 name: Michael Müller
+photo: ./photo.webp
 affiliation: "re:cinq"
 linkedin: https://www.linkedin.com/in/michael-mueller-cn
 status: draft

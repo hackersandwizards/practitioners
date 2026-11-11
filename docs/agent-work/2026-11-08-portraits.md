@@ -1,12 +1,89 @@
-# Portraits: larger originals and the retouch, 08.11.2026
+# Portraits: larger originals, retouch and head framing, 08.11. and 11.11.2026
 
-Three portraits changed, each a larger copy of the same shot, and each got the retouch, without
-sharp-2. Every other portrait keeps its file. Across 33 people, retouch alone tied with the current
-files (mean −0.02 on a 10-point scale) and retouch plus sharp-2 lost (mean −0.21). This repository
-is public, so the per-person tables of this report live in os (`docs/agent-work/2026-11-08-portraits.md`).
+State on 11.11.: one more portrait changed, re-cropped from the same upload so the head comes close
+to the size and height of the two reference portraits. The other nine re-crops the review saw keep
+their files, and so do the three portraits added on 11.11. from public pages: retouch and sharp-2
+won for none of them. On 08.11. three portraits changed, each a larger copy of the same shot with the
+retouch, without sharp-2; across 33 people, retouch alone tied with the current files (mean −0.02
+on a 10-point scale) and retouch plus sharp-2 lost (mean −0.21). This repository is public, so the
+per-person tables of 08.11. live in os (`docs/agent-work/2026-11-08-portraits.md`); those of 11.11.
+are not filed there yet.
 `bun run portrait` (`scripts/retouch-portrait.ts`) holds the treatment for the next portrait.
 
-## Scope
+## Head framing, 11.11.
+
+The request: every portrait cut to a head framing like the founders' two portraits (`stefan-munz`,
+`benedikt-stemmildt`), so the grid looks more even.
+
+**Measured** on all 60 portraits with Apple's Vision framework (face landmarks for the face box and
+the pupils, person segmentation for the top of the hair). The OpenCV YuNet model of 08.11. is no
+longer on the machine, so references and the rest share this detector instead. 59 portraits show a
+face. Shares of the frame: face box height 22 to 58 % (median 44), eye line 26 to 53 % from the top
+(median 37), centre between the pupils 37 to 59 % from the left (median 50). Control: a crop known
+to cut the chin measures its chin outside the frame.
+
+**Target**: face box 45 % of the frame height and eye line 36.5 % from the top, the midpoints of the
+two references, and the centre of the frame, 50 %. The band is the references' own spread for face
+and eye line and 3 points either side of the centre; three portraits already lie in it.
+
+**What can move.** Each crop is a square from the largest source, never upscaled, with 3 % of its
+side above the hair and 2 % below the chin. Where those margins or the frame's edge conflict with
+the target, they win and the crop moves only toward it. A file of 918 px or more stays at 918 px or
+more, or `src/lib/photo-size.test.ts` counts it below the minimum. Any other file keeps at least
+480 px, the 240 CSS px profile slot at 2x, and a file below 480 px does not shrink. That floor
+leaves out the three `/team/` cards at 302 CSS px, which ask for 604 px. Larger originals came from
+the public pages of 08.11. and 11.11. and, for two uploads, from this repository's history; the
+three seed originals rebuild their committed files byte for byte. Of the 54 portraits outside the
+references and the band, 10 can move toward the target. For 25 no crop helps, since the frame
+leaves no room on the side the move needs and no wider source exists; 18 would drop below their
+size floor (16 of them at 480 px), and one gains too little. A person's own upload is cropped only.
+
+## Retouch and sharp-2 for the portraits of 11.11.
+
+Six portraits arrived on 11.11. and stayed. All went through `bun run portrait` without
+`--retouch` or `--sharpen`. Three are the practitioners' own uploads, cropped only. The three
+seeded from public pages were reviewed with retouch and with retouch plus sharp-2; neither won, so
+all three keep their files. Three more draft entries took a portrait from a public page later that
+day, crop only and unreviewed: each is below 918 px (600 to 852), stands in until the person sends
+a larger original, and raises `AWAITING_ORIGINAL` to 49.
+
+## Blind review, 11.11.
+
+The same persona, devices, criteria and decision rule as on 08.11. below; the portrait prompt
+differs only in its file list, the shape of the answer and, on the phone, the device sentence.
+Claude Opus 5.5 at medium effort and Codex (gpt-6.1-sol, high), two runs each: 40 calls, 232 scored
+portraits and 16 scored grids, none missing. Run-to-run gap over all portraits: 0.33 for Claude,
+0.25 for Codex. Before and after went through the same request interception and encoder.
+
+Pairs: each of the 10 re-crops against its current file on the profile page, and the three seeds
+in three versions each. The re-crop won for 1, lost for 1 outside the noise, and tied for 8. Six
+re-crops were cut from the committed WebP; on average they lost on fit (−0.31) and calm (−0.46) and
+gained on sharpness (+0.13). Why is not yet explained: they carry one more q82 encode and a tighter
+framing, and no control separated the two.
+
+Grid: this repository's overview, before and after all ten re-crops, at 1440 px (4 sections of 6;
+the two without a changed card were pixel-identical and left out) and at 390 px (5 strips of three
+screen heights). Mean of the five criteria 7.30 before and 7.53 after, noise 0.20, smallest lead per
+model and run 0.15: a tie. Consistency alone rose from 6.63 to 7.38, ahead in 7 of 8 cells.
+
+The grid prompt, verbatim, folder path shortened:
+
+> You are the CTO of a 300-person software company. You are checking the trainers of a training provider before you book a training for your engineering teams, on a phone with a 3x screen at a 390 CSS px wide window. You are looking at the page that lists all trainers as portrait cards.
+>
+> You see two versions of the same page, a and b, that differ only in some of the portrait photos. Each version is cut into sections in page order (a-1, a-2, ...); each section shows three consecutive screen heights side by side, left to right, scaled down to 1000 px wide. The files are in the folder …/g-phone-codex-r1: [file list]
+>
+> Read every image. Judge the portrait cards of each version as a whole, as you would see them while scrolling that page. Score each version from 1 to 10 on each criterion: 1. consistency: the heads appear at a similar size and position from card to card 2. calm: the grid reads calmly, no portrait jumps out 3. fit: the portraits fit with the page around them 4. trust: the trainers look credible and professional as people you would put in front of your engineers 5. sharpness: the faces look crisp at this display size
+>
+> Answer with only a JSON array, one object per version, nothing else
+
+The live site on 11.11. (headless Chrome for Testing): at a 1440 px window 16 `/team/` cards render
+at 210 CSS px and 3 at 302, the profile page at 240; at 390 px, 12 cards at 135, 7 at 208 and the
+profile page at 160.
+
+Review: medium, because the change is visible on every card of the team page and is easy to take
+back.
+
+## Scope, 08.11.
 
 The 33 folders with a portrait below 960 px that hackersandwizards.dev shows. Left out: the 17
 folders the website did not show on 08.11., which have no slot to improve.
@@ -18,7 +95,7 @@ and 160 CSS px. At 2x a 480 px file fills a 240 px slot exactly, so a larger fil
 first group and screens wider than these two. `src/lib/photo-size.test.ts` keeps the 918 px minimum
 for the 459 CSS px slot at a 767 px window.
 
-## Sources
+## Sources, 08.11.
 
 Searched per person: the websites and profiles named in the entry, speaker and company team pages,
 web search, and Benedikt's Gmail (171 messages with an image attachment and a photo word,
@@ -47,7 +124,7 @@ lowers. Denoise is left out: the Immerkær estimate put 54 of 56 portraits at 1.
 The two above, at 4.3 (sharpened once already) and 7.8, are texture and earlier sharpening, not sensor noise. Masters stop at 1024 px, the cap in the
 `practitioner-bio` skill, rather than 1760 px: the largest practitioner slot needs 972 px.
 
-## Blind review
+## Blind review, 08.11.
 
 Medium: one persona on two devices, the CTO of a 300-person software company checking trainers
 before booking, on a 14-inch 2x laptop at 1440 px and on a 390 px 3x phone. Claude Opus and Codex
@@ -77,5 +154,5 @@ inside the noise and one lost on natural. Retouch alone tied for one more person
 unsharpened twin for 3 of 33 people and won nowhere against the current file; reviewers marked it
 down on natural.
 
-Review: medium, because a CTO's first look at the team page decides whether the trainers seem
-credible.
+Review on 08.11.: medium, because a CTO's first look at the team page decides whether the trainers
+seem credible.
