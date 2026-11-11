@@ -9,6 +9,7 @@ import pkg from "../../package.json";
 
 const files = await generate();
 const photos = [...files.values()].flatMap((text) => JSON.parse(text).photo ?? []);
+const ok = (d: object) => schema.safeParse({ name: "A B", ...d }).success;
 
 test("each entry.json matches its entry; `bun run export` rewrites them", async () => {
   const onDisk = [...new Glob("*/entry.json").scanSync(base)].map((f) => `${base}/${f}`).sort();
@@ -31,7 +32,6 @@ test("the package exports every entry.json and portrait under the path it names"
 
 test("staff need a job and a partner's trainer an affiliation", () => {
   const job = { en: "CFO", de: "CFO" };
-  const ok = (d: object) => schema.safeParse({ name: "A B", ...d }).success;
   expect(ok({ relation: "staff" })).toBe(false);
   expect(ok({ relation: "staff", job })).toBe(true);
   expect(ok({ relation: "partner" })).toBe(false);
@@ -40,9 +40,9 @@ test("staff need a job and a partner's trainer an affiliation", () => {
 });
 
 test("an own affiliation is written as its key, never as a variant that would read as a company", () => {
-  const ok = (affiliation: string) => schema.safeParse({ name: "A B", affiliation }).success;
-  expect(["freelance", "hackers&wizards", "INNOQ"].map(ok)).toEqual([true, true, true]);
-  expect(["Freelance", "hackers & wizards", "Hackers&Wizards"].map(ok)).toEqual([
+  const own = (affiliation: string) => ok({ affiliation });
+  expect(["freelance", "hackers&wizards", "INNOQ"].map(own)).toEqual([true, true, true]);
+  expect(["Freelance", "hackers & wizards", "Hackers&Wizards"].map(own)).toEqual([
     false,
     false,
     false,
@@ -76,8 +76,9 @@ test("a folder holding a link fails the export rather than following it", async 
 });
 
 test("a bio holds only what the website renders: paragraphs and https or mailto links", async () => {
-  const ok = "A [talk](https://example.com/a), [mail](mailto:a@example.com) and FLINTA* voices.";
-  expect((await generateOne({ "bio.md": bio, "bio.de.md": ok }))[0].bio.de).toBe(ok);
+  const linked =
+    "A [talk](https://example.com/a), [mail](mailto:a@example.com) and FLINTA* voices.";
+  expect((await generateOne({ "bio.md": bio, "bio.de.md": linked }))[0].bio.de).toBe(linked);
   // Stray spaces a browser edit leaves change nothing the website prints.
   const spaced = "Ada \n  trainiert  \nTeams. ";
   expect((await generateOne({ "bio.md": bio, "bio.de.md": spaced }))[0].bio.de).toBe(
@@ -117,7 +118,6 @@ test("photo is the folder's photo.webp, which the size test counts", async () =>
 });
 
 test("a link is https:// and a key the schema lacks fails rather than vanishing", () => {
-  const ok = (d: object) => schema.safeParse({ name: "A B", ...d }).success;
   expect(ok({ linkedin: "https://www.linkedin.com/in/a" })).toBe(true);
   expect(
     ["https:/www.linkedin.com/in/a", "https:www.linkedin.com/in/a"].map((linkedin) =>

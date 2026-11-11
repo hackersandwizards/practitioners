@@ -46,7 +46,7 @@ type Node = {
   children?: Node[];
 };
 /** What the website renders of a bio (its src/data/practitioners.ts) is paragraphs of text and
- *  `[text](https:…)` or mailto links; anything else it prints as the characters typed, while this
+ *  `[text](https://…)` or mailto links; anything else it prints as the characters typed, while this
  *  repository's page renders it. Returns each span outside that subset, as written. */
 export function markdownOutside(body: string) {
   const source = (n: Node) => body.slice(n.position.start.offset, n.position.end.offset);
@@ -56,7 +56,7 @@ export function markdownOutside(body: string) {
   const plain = (n: Node) =>
     (n.type === "text" && squash(n.value!) === squash(source(n))) ||
     (n.type === "break" && !source(n).trim());
-  // `[text](https:…)`, or a bare address the website prints as the same characters.
+  // `[text](https://…)`, or a bare address the website prints as the same characters.
   const link = (n: Node) =>
     n.type === "link" &&
     n.children!.length === 1 &&

@@ -1,9 +1,9 @@
 import type { SchemaContext } from "astro:content";
 import { z } from "zod";
 
-/** https only: a link renders as an href, and z.url() alone also takes javascript: URLs. Without
- *  the `//`, `https:/a.dev` parses as a URL but resolves as a path on the page that prints it. */
-const link = z.url({ protocol: /^https$/ }).startsWith("https://");
+/** `https://` only: a link renders as an href, z.url() alone also takes javascript: URLs, and
+ *  `https:/a.dev` parses as a URL but resolves as a path on the page that prints it. */
+const link = z.url().startsWith("https://");
 
 /** A short line in both languages the website prints, English and German side by side. */
 const localized = z.strictObject({
