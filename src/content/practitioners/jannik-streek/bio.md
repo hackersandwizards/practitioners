@@ -11,7 +11,9 @@ expertise:
 background:
   en: "Co-founder of B310, open-source engineer"
   de: "Mitgründer von B310, Open-Source-Engineer"
-status: draft
+status: active
+owner: Jannik Streek
+updated: "2026-11-11"
 ---
 
 Jannik Streek is a software engineer and co-founder of B310 Digital, a software company based in Kiel, Germany, that helps organizations with open-source initiatives such as GitLab. His work focuses primarily on open source and collaborative software, such as TeamMapper, a mind-mapping tool.
