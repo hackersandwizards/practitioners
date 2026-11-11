@@ -1,11 +1,15 @@
 import type { SchemaContext } from "astro:content";
 import { z } from "zod";
 
-/** https only: a link renders as an href, and z.url() alone also takes javascript: URLs. */
-const link = z.url({ protocol: /^https$/ });
+/** https only: a link renders as an href, and z.url() alone also takes javascript: URLs. Without
+ *  the `//`, `https:/a.dev` parses as a URL but resolves as a path on the page that prints it. */
+const link = z.url({ protocol: /^https$/ }).startsWith("https://");
 
 /** A short line in both languages the website prints, English and German side by side. */
-const localized = z.object({ en: z.string().min(1).max(120), de: z.string().min(1).max(120) });
+const localized = z.strictObject({
+  en: z.string().min(1).max(120),
+  de: z.string().min(1).max(120),
+});
 
 /** A controlled list: matching compares keys, the page shows the labels. A value missing here is
  *  added to the list by pull request, never written as free text. */
@@ -164,7 +168,7 @@ const year = z.int().min(1960).max(new Date().getFullYear());
 
 /** A technology or tool as its maker spells it ("TypeScript", "Claude Code"), so the same name
  *  in two entries matches. */
-const skill = z.object({
+const skill = z.strictObject({
   name: z.string().min(1).max(40),
   depth: vocab(depths),
   teaches: z.boolean().optional(),
@@ -175,7 +179,7 @@ const skill = z.object({
  *  field here. */
 export const practitionerSchema = ({ image }: SchemaContext) =>
   z
-    .object({
+    .strictObject({
       name: z.string().min(1),
       /** Square portrait next to the bio; `portraitMinimum` is its smallest side. Mandatory like
        *  the bio (entry.ts, `missing`); a seed h&w starts without one shows initials instead. */
@@ -227,7 +231,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       /** ISO 639-1 code, CEFR level, and whether they run a training in it. */
       languages: z
         .array(
-          z.object({
+          z.strictObject({
             code: z
               .string()
               .regex(/^[a-z]{2}$/)
@@ -245,7 +249,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       since: year.optional(),
       certifications: z
         .array(
-          z.object({
+          z.strictObject({
             name: z.string().min(1),
             year: year.optional(),
             url: link.optional(),
@@ -255,7 +259,7 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       /** Public work only: what anyone can find. */
       public_work: z
         .array(
-          z.object({
+          z.strictObject({
             kind: vocab(kinds),
             title: z.string().min(1),
             year: year.optional(),

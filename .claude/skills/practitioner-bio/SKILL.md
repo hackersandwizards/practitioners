@@ -81,7 +81,8 @@ the held lines or the entries the catalog draws.
    `<their first commit>^ <their last commit>`: it passes only the bios, `entry.json` and images
    of one folder, each a regular file, since the gate runs files it finds in the tree. Otherwise
    comment and merge nothing.
-2. `gh pr checkout <number>`, `bun run export`, then `bun run check`. A pull request opened before
+2. `gh pr checkout <number>`; where `git rev-parse HEAD` differs from the `FETCH_HEAD` step 1
+   checked, run step 1 again on the new head. Then `bun run export` and `bun run check`. A pull request opened before
    a history rewrite of `main` is taken by cherry-pick, never merged: its head carries the removed
    files and git refuses with "unrelated histories". In place of the checkout, run
    `git fetch origin pull/<number>/head` and `git cherry-pick --no-commit` of the person's own
@@ -99,6 +100,8 @@ the held lines or the entries the catalog draws.
    below go into a review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
+   Merge with `--match-head-commit <that head>`, so a later push by the author is never merged
+   unchecked.
    Then on `main`: an uploaded portrait under another name or format becomes `photo.webp` as
    above, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active` once the
    mandatory list is complete; commit with the paths named and push. A value they wished for a

@@ -6,13 +6,14 @@ staged=$(git -c core.quotePath=false diff --cached --name-only --no-renames --di
 content_re='^src/content/'
 docs_re='^(src/content/|\.claude/|README\.md$|CLAUDE\.md$)'
 
-for dir in $(echo "$staged" | grep -Eo '^src/content/practitioners/[^/]+/' | sort -u); do
+while IFS= read -r dir; do
+  [ -n "$dir" ] || continue
   untracked=$(git ls-files --others --exclude-standard -- "$dir")
   if ! git diff --quiet -- "$dir" || [ -n "$untracked" ]; then
     echo "[pre-commit] $dir differs from the index: run bun run export, stage the whole folder"
     exit 1
   fi
-done
+done <<<"$(echo "$staged" | grep -Eo '^src/content/practitioners/[^/]+/' | sort -u)"
 
 if echo "$staged" | grep -Ev "$docs_re" | grep -q .; then
   echo "[pre-commit] app code changed -> bun run check"

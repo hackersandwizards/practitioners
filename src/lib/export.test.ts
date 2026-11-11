@@ -107,11 +107,25 @@ test("an active entry lacking what the page's box lists fails the export", async
   expect(await generateOne({ "bio.md": active.replace("active", "draft") })).toHaveLength(1);
 });
 
-test("a photo outside the entry's own folder fails the export", async () => {
-  const other = "---\nname: Ada Example\nphoto: ../bob/photo.webp\n---\n\nAda trains teams.\n";
-  expect(await rejection(generateOne({ "bio.md": other }))).toContain(
-    "ada: photo ../bob/photo.webp is not a file in the folder",
-  );
+test("photo is the folder's photo.webp, which the size test counts", async () => {
+  for (const photo of ["../bob/photo.webp", "./me.jpg"])
+    expect(
+      await rejection(
+        generateOne({ "bio.md": bio.replace("---\n\n", `photo: ${photo}\n---\n\n`) }),
+      ),
+    ).toContain(`ada: photo is ${photo}, not ./photo.webp`);
+});
+
+test("a link is https:// and a key the schema lacks fails rather than vanishing", () => {
+  const ok = (d: object) => schema.safeParse({ name: "A B", ...d }).success;
+  expect(ok({ linkedin: "https://www.linkedin.com/in/a" })).toBe(true);
+  expect(
+    ["https:/www.linkedin.com/in/a", "https:www.linkedin.com/in/a"].map((linkedin) =>
+      ok({ linkedin }),
+    ),
+  ).toEqual([false, false]);
+  expect(ok({ Github: "https://github.com/a" })).toBe(false);
+  expect(ok({ stack: [{ name: "TypeScript", depht: "used" }] })).toBe(false);
 });
 
 test("an empty frontmatter in bio.de.md is not bio text", async () => {

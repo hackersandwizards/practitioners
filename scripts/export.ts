@@ -99,14 +99,14 @@ export async function generate(dir = base) {
     if (parsed.data.status === "active" && lacks.length)
       throw new Error(`${slug}: active, but missing ${lacks.join(", ")}`);
     // The schema typed photo as an image; the file holds the path next to bio.md.
-    const photo = data.photo?.replace(/^\.\//, "");
-    if (photo?.includes("/"))
-      throw new Error(`${slug}: photo ${data.photo} is not a file in the folder`);
+    // Only photo.webp is the portrait photo-size.test.ts measures; h&w converts an upload to it.
+    if (data.photo && data.photo !== "./photo.webp")
+      throw new Error(`${slug}: photo is ${data.photo}, not ./photo.webp`);
     const { photo: _, ...rest } = parsed.data;
     const entry = {
       slug,
       ...rest,
-      ...(photo && { photo: `practitioners/${slug}/${photo}` }),
+      ...(data.photo && { photo: `practitioners/${slug}/photo.webp` }),
       bio: {
         en: paragraphs(body),
         de: paragraphs(german),

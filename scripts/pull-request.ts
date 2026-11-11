@@ -5,10 +5,11 @@
 // other file name, a link or an executable stops the review before it starts.
 import { $ } from "bun";
 
-// Case-sensitive but for an image's extension: `Bio.md` beside `bio.md` would collide on a
-// case-insensitive checkout, where the local checks read one file and the merge keeps both.
+// Lower case but for an image's extension: `Bio.md` beside `bio.md`, or `Ada/` beside `ada/`,
+// would collide on a case-insensitive checkout, where the local checks read one file and the merge
+// keeps both.
 const allowed =
-  /^src\/content\/practitioners\/[^/]+\/(bio\.md|bio\.de\.md|bio\.short\.md|entry\.json|[^/]+\.(jpe?g|png|webp|heic|avif|JPE?G|PNG|WEBP|HEIC|AVIF))$/;
+  /^src\/content\/practitioners\/[a-z0-9-]+\/(bio\.md|bio\.de\.md|bio\.short\.md|entry\.json|[^/]+\.(jpe?g|png|webp|heic|avif|JPE?G|PNG|WEBP|HEIC|AVIF))$/;
 
 /** The paths of `git diff --raw -z` output that a pull request may not change, each with why. */
 export function offences(raw: string): string[] {
