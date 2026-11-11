@@ -6,8 +6,8 @@ linkedin: https://www.linkedin.com/in/b-weinlich/
 affiliation_url: https://www.wps.de/wps/team/bastian-weinlich
 relation: partner
 expertise:
-  en: "Agentic Engineering, AI-assisted software development, software architecture"
-  de: "Agentic Engineering, KI-gestützte Softwareentwicklung, Softwarearchitektur"
+  en: "Agentic Engineering"
+  de: "Agentic Engineering"
 background:
   en: "Software architect at WPS, iSAQB AGENTA curriculum curator, author at Hanser, conference speaker"
   de: "Softwarearchitekt bei WPS, iSAQB-AGENTA-Lehrplan-Kurator, Fachbuchautor bei Hanser, Konferenzsprecher"

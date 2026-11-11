@@ -4,8 +4,8 @@ photo: ./photo.webp
 linkedin: https://www.linkedin.com/in/caluk/
 relation: freelance
 expertise:
-  en: "Engineering leadership, change and quality"
-  de: "Engineering-Leadership, Wandel und Qualität"
+  en: "Engineering leadership"
+  de: "Engineering-Leadership"
 topics: [engineering-leadership, ai-strategy, testing-and-quality]
 formats: [coaching, workshop]
 delivery: [onsite, remote]

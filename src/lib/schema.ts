@@ -148,16 +148,6 @@ export const expertiseProblem = (line: string) =>
       ? "no job title"
       : undefined;
 
-/** Four `expertise` lines, two entries in both languages, that came longer than the limit by
- *  their people's own pull requests, held by their text: a changed line meets the rule. Remove a
- *  line once it fits; never add one (expertise.test.ts holds them). */
-export const expertiseAwaiting = new Set([
-  "Engineering leadership, change and quality",
-  "Engineering-Leadership, Wandel und Qualität",
-  "Agentic Engineering, AI-assisted software development, software architecture",
-  "Agentic Engineering, KI-gestützte Softwareentwicklung, Softwarearchitektur",
-]);
-
 /** The shorter side of a portrait in px, at least: the website's first team group at a 767 px
  *  window is 459 CSS px on a 2x screen. The website owns who sits in that group, so every portrait
  *  has to fit it; its gate measures its grid against this number. CONTRIBUTING.md states it
@@ -283,7 +273,6 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
     .superRefine((d, ctx) => {
       if (!d.expertise) return;
       for (const lang of ["en", "de"] as const) {
-        if (expertiseAwaiting.has(d.expertise[lang])) continue;
         const problem = expertiseProblem(d.expertise[lang]);
         if (problem) ctx.addIssue({ code: "custom", message: problem, path: ["expertise", lang] });
       }
