@@ -76,16 +76,17 @@ the held lines or the entries the catalog draws.
 
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them. Then, on
-   your own `main` and before any checkout, `git fetch origin pull/<number>/head`, note
-   `git rev-parse FETCH_HEAD`, and `bun run pull-request origin/main...FETCH_HEAD`, for a pull request from before a rewrite
+   your own `main` and before any checkout, `git fetch origin +pull/<number>/head:pr-<number>` and
+   `bun run pull-request origin/main...pr-<number>`, for a pull request from before a rewrite
    `<their first commit>^ <their last commit>`: it passes only the bios, `entry.json` and images
    of one folder, each a regular file, since the gate runs files it finds in the tree. Otherwise
    comment and merge nothing.
-2. `gh pr checkout <number>`; where `git rev-parse HEAD` differs from the commit step 1 noted
-   (the checkout fetches again and moves `FETCH_HEAD`), run step 1 again on the new head. Then `bun run export` and `bun run check`. A pull request opened before
+2. `git switch --detach pr-<number>`, the commit step 1 checked: a second fetch such as
+   `gh pr checkout` can take a head pushed since, whose `.githooks/` run at the checkout. Then
+   `bun run export` and `bun run check`. A pull request opened before
    a history rewrite of `main` is taken by cherry-pick, never merged: its head carries the removed
-   files and git refuses with "unrelated histories". In place of the checkout, run
-   `git fetch origin pull/<number>/head` and `git cherry-pick --no-commit` of the person's own
+   files and git refuses with "unrelated histories". In place of the switch, run
+   `git cherry-pick --no-commit` of the person's own
    commits (`gh pr view <number> --json commits` lists them by author); in place of the merge in
    step 3, once `bun run check` passes, commit with
    `git commit -C <their last commit> --trailer "Closes: #<number>" -- <paths>`, naming every path
@@ -94,14 +95,16 @@ the held lines or the entries the catalog draws.
    confidential term other than the person's own name is a review comment and blocks the merge. Their own name gets one
    `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
    case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`.
-   Push that entry and a changed `entry.json` to the pull request's branch before the merge, so
+   Push that entry and a changed `entry.json` to the pull request's branch
+   (`git push <its fork's URL> HEAD:<its branch>`, both from
+   `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before the merge, so
    `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
    the push, commit both on `main` right after the merge. Style findings under step 6
    below go into a review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
-   Merge with `--match-head-commit <that head>`, so a later push by the author is never merged
-   unchecked.
+   Merge with `--match-head-commit` and `git rev-parse HEAD` of your checkout after your own
+   push, so a later push by the author is never merged unchecked.
    Then on `main`: an uploaded portrait under another name or format becomes `photo.webp` as
    above, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active` once the
    mandatory list is complete; commit with the paths named and push. A value they wished for a

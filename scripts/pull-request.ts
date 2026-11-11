@@ -1,13 +1,13 @@
 // What a practitioner's pull request may change, read from git objects alone, so it runs before
-// anything checks the pull request out: `bun run pull-request origin/main...FETCH_HEAD` on your own
-// main (practitioner-bio, step 1), and in the pull request's CI as the base's copy. The gate runs
-// files it finds in the tree (tests, lint configs) and a link reaches outside the folder, so any
-// other file name, a link or an executable stops the review before it starts.
+// anything checks the pull request out: `bun run pull-request origin/main...pr-<number>` on your
+// own main (practitioner-bio, step 1), and in the pull request's CI as the base's copy. The gate
+// runs files it finds in the tree (tests, lint configs) and a link reaches outside the folder, so
+// any other file name, a link or an executable stops the review before it starts.
 import { $ } from "bun";
 
-// Lower case but for an uploaded image's name and extension: `Bio.md` beside `bio.md`, `Ada/` beside
-// `ada/` or `Photo.webp` beside `photo.webp` would collide on a case-insensitive checkout, where
-// the local checks read one file and the merge keeps both.
+// Lower case but for an uploaded image's name and extension: `Bio.md` beside `bio.md`, `Ada/`
+// beside `ada/` or `Photo.webp` beside `photo.webp` would collide on a case-insensitive checkout,
+// where the local checks read one file and the merge keeps both.
 const allowed =
   /^src\/content\/practitioners\/[a-z0-9-]+\/(bio\.md|bio\.de\.md|bio\.short\.md|entry\.json|[^/]+\.(jpe?g|png|webp|heic|avif))$/;
 const image = /\.(jpe?g|png|webp|heic|avif)$/i;
