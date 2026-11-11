@@ -13,8 +13,8 @@ description: >-
 
 You complete a practitioner's introduction and save it to `src/content/practitioners/<slug>/`:
 `bio.md` (the frontmatter and the English text), `bio.de.md` (the German text, no frontmatter)
-and `photo.webp`. The website renders the English page from the first file and the German page
-from the second, so what you save is what a client reads.
+and `photo.webp`. The website renders its English and German pages from them, through the
+`entry.json` that `bun run export` writes, so what you save is what a client reads.
 
 ## Mandatory and optional
 
@@ -64,9 +64,8 @@ own words, and commits it only after their yes to exactly that text, and after
 `bun run check-confidential --staged` passes: the hook's scan of a bio-only commit passes with only
 a warning where the list is missing. Every h&w commit on `main` that changes an entry runs
 `bun run export` and `bun test` first and names the folder's `entry.json` too: the website reads
-that file, a pull request's CI never
-checks it, and the hook runs only the export test on a bio-only commit, not the portrait count,
-the held lines or the entries the catalog draws.
+that file, a pull request's CI never checks it, and the hook runs only the export test on a
+bio-only commit, not the portrait count, the held lines or the entries the catalog draws.
 
 - **Their pull request**, the default. `CONTRIBUTING.md` tells the person how, in the browser or
   with Claude Code.
@@ -85,21 +84,20 @@ the held lines or the entries the catalog draws.
    comment and merge nothing.
 2. `git switch --detach pr-<number>`, the commit step 1 checked: a second fetch such as
    `gh pr checkout` can take a head pushed since, whose `.githooks/` run at the checkout. Then
-   `bun run export` and `bun run check`. A pull request opened before
-   a history rewrite of `main` is taken by cherry-pick, never merged: its head carries the removed
-   files and git refuses with "unrelated histories". In place of the switch, run
-   `git cherry-pick --no-commit` of the person's own
-   commits (`gh pr view <number> --json commits` lists them by author); in place of the merge in
+   `bun run export` and `bun run check`. A pull request opened before a history rewrite of `main`
+   is taken by cherry-pick, never merged: its head carries the removed files and git refuses with
+   "unrelated histories". In place of the switch, run `git cherry-pick --no-commit` of the person's
+   own commits (`gh pr view <number> --json commits` lists them by author); in place of the merge in
    step 3, once `bun run check` passes, commit with
    `git commit -C <their last commit> --trailer "Closes: #<number>" -- <paths>`, naming every path
    the cherry-pick staged plus `entry.json` and the `package.json` entry below; this keeps their
-   authorship and runs the pre-commit hook a plain cherry-pick skips. A
-   confidential term other than the person's own name is a review comment and blocks the merge. Their own name gets one
+   authorship and runs the pre-commit hook a plain cherry-pick skips. A confidential term other
+   than the person's own name is a review comment and blocks the merge. Their own name gets one
    `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
    case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`,
    committed on `main` before the merge: the pull request's folder check refuses `package.json`.
-   Push a changed `entry.json` to the pull request's branch
-   (`git push <its fork's URL> HEAD:<its branch>`, both from
+   Push a changed `entry.json` to the pull request's branch (`git push <its fork's URL>
+   HEAD:<its branch>`, both from
    `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before the merge, so
    `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
    the push, commit it on `main` right after the merge. Style findings under step 6
@@ -109,10 +107,10 @@ the held lines or the entries the catalog draws.
    Merge with `--match-head-commit` and `git rev-parse HEAD` of your checkout after your own
    push, so a later push by the author is never merged unchecked.
    Then on `main`: an uploaded portrait under another name or format becomes `photo.webp` as
-   above, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner` to their name, `updated`, and `status: active` once the
-   mandatory list is complete; commit with the paths named and push. A value they wished for a
-   profile list: add it with its label to the list in `src/lib/schema.ts` and to their entry,
-   in the same commit, unless an existing value already means it; then tell them which.
+   above, the upload removed, and a seed without `photo:` gets `photo: ./photo.webp`; set `owner`
+   to their name, `updated`, and `status: active` once the mandatory list is complete; commit with
+   the paths named and push. A value they wished for a profile list: add it with its label to the
+   list in `src/lib/schema.ts` and to their entry, in the same commit, unless an existing value already means it; then tell them which.
 4. Asked for a German text, draft it from their English as in step 8 below, show it in the pull
    request or by mail, and commit it after their yes.
 
@@ -166,8 +164,8 @@ delete their directory, commit, and flag it to Stefan for the website roster.
    is not `hackersandwizards/practitioners`): commit on a branch named after the slug, push it to
    their fork and open the pull request with `gh pr create`, which is their yes and their only way
    in. In the fork, that branch, its push and the pull request are the route, never a commit on
-   their `main`. Run by an h&w colleague with them: commit on `main` only after their yes to exactly what the
-   commit contains, and push.
+   their `main`. Run by an h&w colleague with them: commit on `main` only after their yes to
+   exactly what the commit contains, and push.
 
 ## File format
 
