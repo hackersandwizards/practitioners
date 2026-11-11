@@ -238,8 +238,8 @@ References: [Homebrew services](https://docs.brew.sh/Manpage#services-subcommand
 
 `src/lib/schema.ts` says what an entry is, and the pre-commit hook in `.githooks/` checks every
 staged bio against it on your machine. `bun install` enables the hook. Your pull request gets the
-same bio check on GitHub, a check that it changes only the bios, `entry.json` and images of one
-folder, and a scan for leaked secrets.
+schema check on GitHub, a check that it changes only the bios, `entry.json` and images of one
+folder, and a scan for leaked secrets; h&w runs the rest of the hook's checks before the merge.
 
 ## Layout
 

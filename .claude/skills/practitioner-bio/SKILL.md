@@ -76,13 +76,13 @@ the held lines or the entries the catalog draws.
 
 1. Check the author: the GitHub account is the person's, shown by a profile they keep that links
    it (their website, LinkedIn) or by their mail from the address h&w holds for them. Then, on
-   your own `main` and before any checkout, `git fetch origin pull/<number>/head` and
-   `bun run pull-request origin/main...FETCH_HEAD`, for a pull request from before a rewrite
+   your own `main` and before any checkout, `git fetch origin pull/<number>/head`, note
+   `git rev-parse FETCH_HEAD`, and `bun run pull-request origin/main...FETCH_HEAD`, for a pull request from before a rewrite
    `<their first commit>^ <their last commit>`: it passes only the bios, `entry.json` and images
    of one folder, each a regular file, since the gate runs files it finds in the tree. Otherwise
    comment and merge nothing.
-2. `gh pr checkout <number>`; where `git rev-parse HEAD` differs from the `FETCH_HEAD` step 1
-   checked, run step 1 again on the new head. Then `bun run export` and `bun run check`. A pull request opened before
+2. `gh pr checkout <number>`; where `git rev-parse HEAD` differs from the commit step 1 noted
+   (the checkout fetches again and moves `FETCH_HEAD`), run step 1 again on the new head. Then `bun run export` and `bun run check`. A pull request opened before
    a history rewrite of `main` is taken by cherry-pick, never merged: its head carries the removed
    files and git refuses with "unrelated histories". In place of the checkout, run
    `git fetch origin pull/<number>/head` and `git cherry-pick --no-commit` of the person's own

@@ -12,6 +12,7 @@ test("a pull request's own bios, entry.json and an image under any name pass", (
     line("100644", `${folder}/bio.de.md`, "A"),
     line("100644", `${folder}/entry.json`),
     line("100644", `${folder}/My Portrait.JPG`, "A"),
+    line("100644", `${folder}/Portrait.Jpg`, "A"),
     line("000000", `${folder}/old.png`, "D"),
   ].join("");
   expect(offences(raw)).toEqual([]);
@@ -30,6 +31,8 @@ test("a file the gate would run, a link, an executable or a second folder fails"
     line("100644", `SRC/content/practitioners/ada-example/bio.md`, "A"),
     line("100644", "src/content/practitioners/Ada-Example/bio.md", "A"),
     line("100644", "src/content/practitioners/ada example/bio.md", "A"),
+    line("100644", `${folder}/Photo.webp`, "A"),
+    line("100644", `${folder}/photo.WEBP`, "A"),
   ].join("");
   expect(offences(raw)).toEqual([
     `${folder}/x.test.ts: not a bio, entry.json or image in a practitioner's folder`,
@@ -41,6 +44,8 @@ test("a file the gate would run, a link, an executable or a second folder fails"
     "SRC/content/practitioners/ada-example/bio.md: not a bio, entry.json or image in a practitioner's folder",
     "src/content/practitioners/Ada-Example/bio.md: not a bio, entry.json or image in a practitioner's folder",
     "src/content/practitioners/ada example/bio.md: not a bio, entry.json or image in a practitioner's folder",
+    `${folder}/Photo.webp: photo.webp in another case`,
+    `${folder}/photo.WEBP: photo.webp in another case`,
     "more than one folder: src/content/practitioners/ada-example, src/content/practitioners/someone-else",
   ]);
 });
