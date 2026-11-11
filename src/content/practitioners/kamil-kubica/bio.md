@@ -45,7 +45,9 @@ public_work:
   - { kind: product, title: Wegweiser Gesundheit, url: "https://www.wegweisergesundheit.de/de" }
   - { kind: product, title: lomigo, url: "https://lomigo.de" }
   - { kind: product, title: Lieber zu Hause, url: "https://www.lieber-zu-hause.eu/" }
-status: draft
+status: active
+owner: Kamil Kubica
+updated: "2026-11-11"
 ---
 
 Kamil Kubica is an AI solution architect and co-owner of nice solutions GmbH, which builds AI

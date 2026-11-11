@@ -138,7 +138,9 @@
       "url": "https://www.lieber-zu-hause.eu/"
     }
   ],
-  "status": "draft",
+  "status": "active",
+  "owner": "Kamil Kubica",
+  "updated": "2026-11-11",
   "photo": "practitioners/kamil-kubica/photo.webp",
   "bio": {
     "en": "Kamil Kubica is an AI solution architect and co-owner of nice solutions GmbH, which builds AI software for companies, from the first prototype to a solution that runs in daily operation. He has developed software for more than 20 years, over ten of them self-employed as a software and solution architect, for e-commerce, industry, aviation, healthcare and media. He was responsible for the architecture and implementation of [Wegweiser Gesundheit](https://www.wegweisergesundheit.de/de), a health portal whose AI assistant answers employees' questions on health and occupational safety in eight languages. With hackers&wizards he runs two-day workshops in which product and development teams learn to build software together with AI agents. In one client codebase he opened 35 years of legacy code to coding agents through a controlled MCP interface, without leaving the existing security rules. With teams that want to go further he builds an AI software factory: a pipeline of agents that takes work from the requirement to the code, with automated quality gates along the way.",
