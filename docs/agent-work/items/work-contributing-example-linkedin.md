@@ -10,7 +10,7 @@ evidence: "CONTRIBUTING.md at origin/main, read 11.11. 18:00: the example bio.md
 
 # CONTRIBUTING's example invites a contributor to copy a second linkedin line
 
-Ada briefs a practitioners session to make the example's link lines impossible to copy by mistake; it ends on the green gate.
+Ada briefs a practitioners session to make the example's link lines impossible to copy by mistake.
 
 A contributor who copies the example and adds their own line ends up with `linkedin:` twice, and the
 build fails with a YAML error that does not say which line. Two ways, the session picks one and
