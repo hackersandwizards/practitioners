@@ -27,6 +27,9 @@ This setup is optional: the apps also work through their direct localhost ports.
 | Trainer Hub   | http://trainer-hub.localhost   | 4323     |
 | Talks         | http://talks.localhost         | 4324     |
 | Practitioners | http://practitioners.localhost | 4325     |
+| Brand         | http://brand.localhost         | 4326     |
+| Documents     | http://documents.localhost     | 4330     |
+| Slides        | http://slides.localhost        | 4335     |
 
 ### Install Caddy
 
@@ -76,9 +79,24 @@ http://practitioners.localhost {
     bind 127.0.0.1
     reverse_proxy 127.0.0.1:4325
 }
+
+http://brand.localhost {
+    bind 127.0.0.1
+    reverse_proxy 127.0.0.1:4326
+}
+
+http://documents.localhost {
+    bind 127.0.0.1
+    reverse_proxy 127.0.0.1:4330
+}
+
+http://slides.localhost {
+    bind 127.0.0.1
+    reverse_proxy 127.0.0.1:4335
+}
 ```
 
-Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all five entries even if you only
+Save with Ctrl+O, Enter, then exit with Ctrl+X. You can keep all eight entries even if you only
 use Practitioners. They do not start or install the other apps.
 
 `bind 127.0.0.1` keeps the proxy local to your Mac. Explicit `http://` avoids certificate setup.
@@ -95,7 +113,7 @@ For a fresh setup, run this single-line command once. It appends the names witho
 existing hosts entries and asks for your Mac password:
 
 ```sh
-printf '\n127.0.0.1 os.localhost website.localhost trainer-hub.localhost talks.localhost practitioners.localhost\n' | sudo tee -a /etc/hosts
+printf '\n127.0.0.1 os.localhost website.localhost trainer-hub.localhost talks.localhost practitioners.localhost brand.localhost documents.localhost slides.localhost\n' | sudo tee -a /etc/hosts
 ```
 
 If you already added these names, skip this command. To correct existing entries, use
@@ -220,7 +238,8 @@ References: [Homebrew services](https://docs.brew.sh/Manpage#services-subcommand
 
 `src/lib/schema.ts` says what an entry is, and the pre-commit hook in `.githooks/` checks every
 staged bio against it on your machine. `bun install` enables the hook. Your pull request gets the
-same bio check on GitHub, plus a scan for leaked secrets.
+same bio check on GitHub, a check that it changes only the bios, `entry.json` and images of one
+folder, and a scan for leaked secrets.
 
 ## Layout
 
