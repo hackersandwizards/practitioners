@@ -1,12 +1,14 @@
 // What a practitioner's pull request may change, read from git objects alone, so it runs before
 // anything checks the pull request out: `bun run pull-request origin/main...FETCH_HEAD` on your own
-// main (practitioner-bio, step 1), and in the pull request's CI as the base's copy. The gate runs files it finds in the
-// tree (tests, lint configs) and a link reaches outside the folder, so any other file name, a link
-// or an executable stops the review before it starts.
+// main (practitioner-bio, step 1), and in the pull request's CI as the base's copy. The gate runs
+// files it finds in the tree (tests, lint configs) and a link reaches outside the folder, so any
+// other file name, a link or an executable stops the review before it starts.
 import { $ } from "bun";
 
+// Case-sensitive but for an image's extension: `Bio.md` beside `bio.md` would collide on a
+// case-insensitive checkout, where the local checks read one file and the merge keeps both.
 const allowed =
-  /^src\/content\/practitioners\/[^/]+\/(bio\.md|bio\.de\.md|bio\.short\.md|entry\.json|[^/]+\.(jpe?g|png|webp|heic|avif))$/i;
+  /^src\/content\/practitioners\/[^/]+\/(bio\.md|bio\.de\.md|bio\.short\.md|entry\.json|[^/]+\.(jpe?g|png|webp|heic|avif|JPE?G|PNG|WEBP|HEIC|AVIF))$/;
 
 /** The paths of `git diff --raw -z` output that a pull request may not change, each with why. */
 export function offences(raw: string): string[] {

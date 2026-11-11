@@ -5,8 +5,8 @@ export default { component: PersonCard };
 
 const grid = [frame({ grid: true })];
 
-// Stories draw only names the website lists, so a state is set on an entry rather than picking a
-// seed that has it.
+// Every story but NotOnTheWebsite draws a name the website lists, so a state is set on an entry
+// rather than picking a seed that has it.
 const aaron = await card("aaron-spring");
 const withData = (data: Partial<typeof aaron.entry.data>) => ({
   ...aaron,

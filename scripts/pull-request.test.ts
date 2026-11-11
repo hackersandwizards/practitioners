@@ -25,6 +25,9 @@ test("a file the gate would run, a link, an executable or a second folder fails"
     line("100755", `${folder}/photo.webp`),
     line("100644", "src/content/practitioners/someone-else/bio.md"),
     line("100644", "src/lib/photo-size.test.ts"),
+    // Each collides with the real path on a case-insensitive checkout.
+    line("100644", `${folder}/Bio.md`, "A"),
+    line("100644", `SRC/content/practitioners/ada-example/bio.md`, "A"),
   ].join("");
   expect(offences(raw)).toEqual([
     `${folder}/x.test.ts: not a bio, entry.json or image in a practitioner's folder`,
@@ -32,6 +35,8 @@ test("a file the gate would run, a link, an executable or a second folder fails"
     `${folder}/bio.de.md: mode 120000`,
     `${folder}/photo.webp: mode 100755`,
     "src/lib/photo-size.test.ts: not a bio, entry.json or image in a practitioner's folder",
+    `${folder}/Bio.md: not a bio, entry.json or image in a practitioner's folder`,
+    "SRC/content/practitioners/ada-example/bio.md: not a bio, entry.json or image in a practitioner's folder",
     "more than one folder: src/content/practitioners/ada-example, src/content/practitioners/someone-else",
   ]);
 });

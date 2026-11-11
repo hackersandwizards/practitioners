@@ -1,5 +1,4 @@
-# A practitioner's pull request skips every local hook (.githooks/README.md), so it gets the
-# bio gate and a secret scan here. No deploy, no secrets.
+# No deploy, no secrets.
 name: pull-request
 
 on: pull_request

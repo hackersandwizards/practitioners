@@ -88,6 +88,7 @@ test("a bio holds only what the website renders: paragraphs and https or mailto 
     "- a\n- b",
     "<b>x</b>",
     "[x](javascript:alert(1))",
+    "[x](https:example.com)",
     "\\*",
     "&amp;",
     "a\\\nb",
@@ -104,6 +105,13 @@ test("an active entry lacking what the page's box lists fails the export", async
     await rejection(generateOne({ "bio.md": active, "bio.de.md": "Ada trainiert Teams." })),
   ).toContain("ada: active, but missing LinkedIn");
   expect(await generateOne({ "bio.md": active.replace("active", "draft") })).toHaveLength(1);
+});
+
+test("a photo outside the entry's own folder fails the export", async () => {
+  const other = "---\nname: Ada Example\nphoto: ../bob/photo.webp\n---\n\nAda trains teams.\n";
+  expect(await rejection(generateOne({ "bio.md": other }))).toContain(
+    "ada: photo ../bob/photo.webp is not a file in the folder",
+  );
 });
 
 test("an empty frontmatter in bio.de.md is not bio text", async () => {

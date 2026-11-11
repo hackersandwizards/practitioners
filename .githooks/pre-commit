@@ -2,12 +2,10 @@
 set -e
 # core.quotePath=false, or git escapes umlaut paths and the anchored patterns below miss them.
 # --no-renames lists a moved file's old path too, so moving a file out of app code runs the gate.
-staged=$(git -c core.quotePath=false diff --cached --name-only --no-renames --diff-filter=ACMD)
+staged=$(git -c core.quotePath=false diff --cached --name-only --no-renames --diff-filter=ACMDT)
 content_re='^src/content/'
 docs_re='^(src/content/|\.claude/|README\.md$|CLAUDE\.md$)'
 
-# The checks read the working tree, so each practitioner folder this commit touches must match the
-# index there: a bio staged in part or an entry.json left out would commit what no check read.
 for dir in $(echo "$staged" | grep -Eo '^src/content/practitioners/[^/]+/' | sort -u); do
   untracked=$(git ls-files --others --exclude-standard -- "$dir")
   if ! git diff --quiet -- "$dir" || [ -n "$untracked" ]; then
@@ -17,7 +15,6 @@ for dir in $(echo "$staged" | grep -Eo '^src/content/practitioners/[^/]+/' | sor
 done
 
 if echo "$staged" | grep -Ev "$docs_re" | grep -q .; then
-  # Its confidential audit scans every file of the index, this commit's included.
   echo "[pre-commit] app code changed -> bun run check"
   bun run check
 else

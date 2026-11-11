@@ -25,9 +25,12 @@ const { title, description } = Astro.props;
     <link rel="icon" href={faviconSvg} type="image/svg+xml" />
     {/* Applied before first paint, or the wrong theme flashes. */}
     <script is:inline>
-      const theme =
-        localStorage.getItem("theme") ||
-        (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+      let theme;
+      // Storage can be blocked (site data off, a file:// page); the system preference still holds.
+      try {
+        theme = localStorage.getItem("theme");
+      } catch {}
+      theme ||= window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
       document.documentElement.setAttribute("data-theme", theme);
     </script>
   </head>

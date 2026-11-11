@@ -2,8 +2,7 @@ import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import { catalog } from "@hackersandwizards/scaffolding/catalog";
 
-// The catalog (/catalog/) shows drafts, so it builds where drafts render: the dev server and the
-// gate's preview build (src/lib/entry.ts, `review`). argv[2] is Astro's command.
+// As `review` in src/lib/entry.ts (CLAUDE.md, Catalog); argv[2] is Astro's command.
 const review = process.argv[2] === "dev" || process.env.PREVIEW === "1";
 
 export default defineConfig({

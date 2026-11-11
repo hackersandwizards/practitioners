@@ -1,4 +1,3 @@
-// Every component has a story file named after it, and the hub's header links the catalog.
 import { expect, test } from "bun:test";
 import { basename } from "node:path";
 import { Glob } from "bun";

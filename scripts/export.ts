@@ -1,8 +1,6 @@
-// entry.json in each practitioner's folder, the package's data for sites that render practitioner
-// pages without astro (the website's profiles load in plain Node): the entry's frontmatter as the
-// schema parses it, its bios with one line per paragraph, and its portrait as the
-// package export subpath. One file per folder, so a protected name stays inside its own folder.
-// `bun run export` writes them; src/lib/export.test.ts fails while one is stale.
+// entry.json in each practitioner's folder, for sites that render practitioner pages without astro
+// (the website's profiles load in plain Node). One file per folder, so a protected name stays
+// inside its own folder.
 import type { SchemaContext } from "astro:content";
 import { readdirSync } from "node:fs";
 import { join } from "node:path";
@@ -64,7 +62,7 @@ export function markdownOutside(body: string) {
     n.children!.length === 1 &&
     plain(n.children![0]!) &&
     (source(n) === n.children![0]!.value ||
-      /^\[[^\]]+\]\((https|mailto):[^)\s]+\)$/.test(source(n)));
+      /^\[[^\]]+\]\((https:\/\/|mailto:)[^)\s]+\)$/.test(source(n)));
   return (markdownToMdast(body) as unknown as Node).children!.flatMap((block) =>
     block.type !== "paragraph"
       ? [source(block)]
@@ -101,11 +99,14 @@ export async function generate(dir = base) {
     if (parsed.data.status === "active" && lacks.length)
       throw new Error(`${slug}: active, but missing ${lacks.join(", ")}`);
     // The schema typed photo as an image; the file holds the path next to bio.md.
+    const photo = data.photo?.replace(/^\.\//, "");
+    if (photo?.includes("/"))
+      throw new Error(`${slug}: photo ${data.photo} is not a file in the folder`);
     const { photo: _, ...rest } = parsed.data;
     const entry = {
       slug,
       ...rest,
-      ...(data.photo && { photo: `practitioners/${slug}/${data.photo.replace(/^\.\//, "")}` }),
+      ...(photo && { photo: `practitioners/${slug}/${photo}` }),
       bio: {
         en: paragraphs(body),
         de: paragraphs(german),
