@@ -92,17 +92,18 @@ bio-only commit, not the portrait count, the held lines or the entries the catal
    `git commit -C <their last commit> --trailer "Closes: #<number>" -- <paths>`, naming every path
    the cherry-pick staged plus `entry.json` and the `package.json` entry below; this keeps their
    authorship and runs the pre-commit hook a plain cherry-pick skips. A confidential term other
-   than the person's own name is a review comment and blocks the merge. Their own name gets one
-   `scaffolding.allow` entry in `package.json` per path, with the name as `text` (matching ignores
-   case; a list holds other spellings) and their folder as `src/content/practitioners/<slug>/**`,
-   committed on `main` before the merge: the pull request's folder check refuses `package.json`.
-   The head you check lacks a new entry, so `bun run check` there fails `confidential` on their
-   name in their folder; that hit is the expected one. Push a changed `entry.json` to the pull
-   request's branch (`git push <its fork's URL> HEAD:<its branch>`, both from
-   `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before the merge, so
-   `main` never holds the name without its entry nor a stale `entry.json`; where the fork refuses
-   the push, commit it on `main` right after the merge. Style findings under step 6 below go into a
-   review comment; their wording stays theirs.
+   than the person's own name is a review comment and blocks the merge. Where the confidential step
+   names their own name, it gets one `scaffolding.allow` entry in `package.json` per path, with the
+   name as `text` (matching ignores case; a list holds other spellings) and their folder as
+   `src/content/practitioners/<slug>/**`. Checking a detached head, commit the entry on `main`,
+   since the pull request's folder check refuses `package.json`, then `git merge --no-edit main` on
+   the head and run `bun run check` again: a red confidential step stops the gate before the preview
+   build. Commit a changed `entry.json` with its path named and push it, with the merge of `main`
+   where you made one, to the pull request's branch (`git push <its fork's URL> HEAD:<its branch>`,
+   both from `gh pr view <number> --json headRepository,headRepositoryOwner,headRefName`) before
+   the merge, so `main` never holds the name without its entry nor a stale `entry.json`; where the
+   fork refuses the push, commit it on `main` right after the merge. Style findings under step 6
+   below go into a review comment; their wording stays theirs.
 3. Merge once `gh pr checks <number>` shows every check passed on the head you merge, your own
    push included; a run awaiting approval, as a first fork pull request's does, has not passed.
    Merge with `--match-head-commit` and the head you checked: `git rev-parse HEAD` after your own
