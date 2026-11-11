@@ -1,9 +1,12 @@
 # Portraits: larger originals, retouch and head framing, 08.11. and 11.11.2026
 
-State on 11.11.: one more portrait changed, re-cropped from the same upload so the head comes close
-to the size and height of the two reference portraits. The other nine re-crops the review saw keep
-their files, and so do the three portraits added on 11.11. from public pages: retouch and sharp-2
-won for none of them. On 08.11. three portraits changed, each a larger copy of the same shot with the
+State on 11.11.: nine of the ten re-crops the review saw are in, so the head comes close to the
+size and height of the two reference portraits: one after its review pair, eight by the decision
+of 11.11. to even out the framing across the grid wherever the pair found no difference beyond the
+noise. The tenth keeps its file. Of the eight, five are cut from the committed file, crop only, one
+from a larger public original, crop only, and two from the larger originals of 08.11. with the
+retouch their files already carried. The three portraits added on 11.11. from public pages keep
+their files: retouch and sharp-2 won for none of them. On 08.11. three portraits changed, each a larger copy of the same shot with the
 retouch, without sharp-2; across 33 people, retouch alone tied with the current files (mean −0.02
 on a 10-point scale) and retouch plus sharp-2 lost (mean −0.21). This repository is public, so the
 per-person tables of 08.11. live in os (`docs/agent-work/2026-11-08-portraits.md`); those of 11.11.

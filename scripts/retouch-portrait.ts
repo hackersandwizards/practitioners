@@ -5,8 +5,9 @@
 //   --sharpen  sharp-2: an unsharp mask on luminance only (radius 1.2 px, amount 70 %, threshold 2)
 //              at the master size
 //
-// --crop is the square in source pixels (head and shoulders, eyes about 40 % from the top); without
-// it a non-square source is cut square by sharp's attention strategy. --size defaults to the
+// --crop is the square in source pixels (head and shoulders: face about 45 % of the side, eyes about
+// 36.5 % from the top, centred); without it a non-square source is cut square by sharp's attention
+// strategy. --size defaults to the
 // crop's side, capped at 1024 px, the practitioner-bio skill's cap. WebP q82.
 import { parseArgs } from "node:util";
 import sharp from "sharp";

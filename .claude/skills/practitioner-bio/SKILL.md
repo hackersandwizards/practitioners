@@ -21,10 +21,12 @@ from the second, so what you save is what a client reads.
 Mandatory: **name, bio in English and German, LinkedIn URL, portrait**. Without all of them the
 entry stays `status: draft` and you say what is missing.
 
-The portrait is `photo.webp`, cropped square, its side the source's shorter side, never
-upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px slot on the
-website needs more (`--size`). Make it with `bun run portrait <source> <folder>/photo.webp`,
-adding `--crop x,y,side` where the automatic square cuts the head. Then run
+The portrait is `photo.webp`, a square cut to the head framing of `stefan-munz` and
+`benedikt-stemmildt`: face box about 45 % of the side, eyes about 36.5 % from the top, face
+centred, with at least 3 % of the side above the hair and 2 % below the chin, which win over that
+framing. Never upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px slot
+on the website needs more (`--size`). Make it with
+`bun run portrait <source> <folder>/photo.webp --crop x,y,side`. Then run
 `bun test ./src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
 `portraitMinimum` (`src/lib/schema.ts`) changes, and the comment on `AWAITING_ORIGINAL` in that
 test says what to do. In the person's fork, put the source photo in their folder under its own
