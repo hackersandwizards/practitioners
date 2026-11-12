@@ -1,45 +1,54 @@
-/** Who hackersandwizards.dev/team/ shows, with the role it prints under each name. The website
- *  publishes both as schema.org Person in the page's JSON-LD; reading that published page keeps
- *  the roster the website's own (CLAUDE.md). Undefined when the page is unreachable, so the
- *  overview says it does not know rather than marking everyone as missing. A page that answers
- *  without Person nodes throws: the website changed its data, and the build must say so. */
+import { z } from "zod";
+
+/** Who hackersandwizards.dev/team/ shows, with the role and credential line it prints under each
+ *  name and their profile there, read from the roster the website publishes at /team.json; reading
+ *  it keeps the roster the website's own (CLAUDE.md). Undefined when it is unreachable, so the
+ *  overview says it does not know rather than marking everyone as missing. An answer of another
+ *  shape throws: the website changed its data, and the build must say so. */
 export const team = "https://www.hackersandwizards.dev/team/";
+export const source = "https://www.hackersandwizards.dev/team.json";
 
-type Node = { "@type"?: string; name?: string; jobTitle?: string };
+const person = z.object({
+  slug: z.string(),
+  role: z.string(),
+  description: z
+    .string()
+    .nullable()
+    .transform((d) => d ?? undefined),
+  url: z.url({ protocol: /^https$/ }),
+});
+type Person = z.output<typeof person>;
+const people = z.array(person).nonempty();
 
-/** Names compare in NFC, so the same name typed with combining marks still matches. */
-const nameKey = (name: string) => name.normalize("NFC");
-
-/** The role the website prints under a name, and whether it lists the person at all. While the
- *  roster is unknown, everyone counts as listed rather than as missing. */
-export const listing = (web: Map<string, string> | undefined, name: string) => {
-  const job = web?.get(nameKey(name));
-  return { job, listed: !web || job !== undefined };
+/** What the website prints about the person in folder `slug`, and whether it lists them at all.
+ *  While the roster is unknown, everyone counts as listed rather than as missing. */
+export const listing = (web: Map<string, Person> | undefined, slug: string) => {
+  const p = web?.get(slug);
+  return { job: p?.role, description: p?.description, url: p?.url, listed: !web || !!p };
 };
 
-async function load(): Promise<Map<string, string> | undefined> {
-  let html: string;
+export async function load(): Promise<Map<string, Person> | undefined> {
+  let body: string;
   try {
-    const res = await fetch(team, { signal: AbortSignal.timeout(10_000) });
+    const res = await fetch(source, { signal: AbortSignal.timeout(10_000) });
     if (!res.ok) return undefined;
-    html = await res.text();
+    body = await res.text();
   } catch {
     return undefined;
   }
-  const nodes = [
-    ...html.matchAll(/<script[^>]*type="application\/ld\+json"[^>]*>(.*?)<\/script>/gs),
-  ].flatMap(([, json]) => {
-    const data = JSON.parse(json!);
-    return (Array.isArray(data) ? data : (data["@graph"] ?? [data])) as Node[];
-  });
-  const people = nodes.filter((n) => n["@type"] === "Person" && n.name);
-  if (!people.length) throw new Error(`${team} answered without schema.org Person nodes`);
-  return new Map(people.map((n) => [nameKey(n.name!), n.jobTitle ?? ""]));
+  let json: unknown;
+  try {
+    json = JSON.parse(body);
+  } catch {} // not JSON: the shape check below names it
+  const parsed = people.safeParse(json);
+  if (!parsed.success)
+    throw new Error(`${source} answered in another shape: ${z.prettifyError(parsed.error)}`);
+  return new Map(parsed.data.map((p) => [p.slug, p]));
 }
 
 let cached: ReturnType<typeof load> | undefined;
 /** Fetched once per process: the dev server renders the overview on every request, a build every
- *  page. In the dev server an unreachable or failing page is asked again on the next request, so
+ *  page. In the dev server an unreachable or failing roster is asked again on the next request, so
  *  one started offline recovers; a build keeps the answer rather than waiting out each timeout. */
 export const roster = () =>
   (cached ??= load().then(

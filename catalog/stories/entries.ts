@@ -1,4 +1,4 @@
-// Stories draw real entries: the person's own data and the role the website's team page gives them,
+// Stories draw real entries: the person's own data and the lines the website's team roster gives them,
 // read as the overview reads them (src/pages/index.astro).
 import { getEntry } from "astro:content";
 import { listing, roster } from "../../src/lib/website";
@@ -13,7 +13,7 @@ export const entry = async (slug: string) => {
 /** PersonCard's props for one entry, sized for the story's one-card column. */
 export const card = async (slug: string) => {
   const e = await entry(slug);
-  return { entry: e, ...listing(await roster(), e.data.name), sizes: "240px" };
+  return { entry: e, ...listing(await roster(), e.id), sizes: "240px" };
 };
 
 /** The story's ground; `grid` holds a card in a list as the overview does, `state` forces the

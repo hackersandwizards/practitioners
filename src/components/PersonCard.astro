@@ -1,7 +1,8 @@
 ---
-// One person as the website's team grid shows them: portrait, name, the website's role. The whole
-// card opens the detail page through the name's link, stretched over the card, so the card holds
-// one link named by the person; its arrow says the card opens something.
+// One person as the website's team grid shows them: portrait, name, the website's role and
+// credential line, and a link to their profile there. The card opens the detail page through the
+// name's link, stretched over the card; its arrow says the card opens something. The profile link
+// sits above that stretch (brand's card.css).
 // The hub adds what the website never shows: a draft, and someone the website does not list yet.
 // The data-filter-* attributes are what the overview's list filter reads (brand's ListFilter).
 import type { CollectionEntry } from "astro:content";
@@ -12,9 +13,13 @@ interface Props {
   entry: CollectionEntry<"practitioners">;
   /** The website's role line; undefined when the website does not list the person. */
   job?: string;
+  /** The website's credential line under the role, where it prints one. */
+  description?: string;
+  /** Their profile on the website. */
+  url?: string;
   /** The company they work for, where the overview's section heading does not already say it. */
   company?: string;
-  /** False when the website's team page was read and does not list the person. */
+  /** False when the website's team roster was read and does not list the person. */
   listed: boolean;
   /** The card as the overview's list filter reads it. */
   filter?: FilterItem;
@@ -23,7 +28,7 @@ interface Props {
   /** The first card holds the largest paint above the fold, so its portrait loads first. */
   priority?: boolean;
 }
-const { entry, job, company, listed, filter, sizes, priority } = Astro.props;
+const { entry, job, description, url, company, listed, filter, sizes, priority } = Astro.props;
 const { data } = entry;
 ---
 
@@ -49,8 +54,16 @@ const { data } = entry;
       </span>
     </a>
   </p>
-  {job && <p class="mt-tight text-small text-muted">{job}</p>}
-  {company && <p class="mt-tight text-small text-muted">{company}</p>}
+  {[job, description, company].map(
+    (line) => line && <p class="mt-tight text-small text-muted">{line}</p>,
+  )}
+  {url && (
+    <p class="mt-tight text-small">
+      <a href={url} class="hw-link" aria-label={`${data.name} on the website`}>
+        On the website
+      </a>
+    </p>
+  )}
   {(data.status === "draft" || !listed) && (
     <p class="mt-3 flex flex-wrap gap-1.5">
       {data.status === "draft" && (

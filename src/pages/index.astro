@@ -2,7 +2,8 @@
 // Everyone in this repo as hackersandwizards.dev/team/ shows them, each card opening the person's
 // page, grouped by who they work for: h&w itself, a company (sorted by it, so colleagues stand
 // together), freelance, or not stated yet. The website's grouping stays the website's; a card's
-// role line is the one the website prints, read from its page (lib/website.ts).
+// role and credential lines are the ones the website prints, read from its /team.json
+// (lib/website.ts).
 import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import type { FilterItem } from "@hackersandwizards/brand/elements/list-filter.ts";
@@ -16,12 +17,12 @@ const web = await roster();
 const people = (await getCollection("practitioners", (e) => shown(e.data)))
   .sort((a, b) => bareName(a.data.name).localeCompare(bareName(b.data.name)))
   .map((entry) => {
-    const { job, listed } = listing(web, entry.data.name);
+    const there = listing(web, entry.id);
     const filter: FilterItem = {
       text: entry.data.name,
-      facets: { entry: [entry.data.status], web: [listed ? "listed" : "unlisted"] },
+      facets: { entry: [entry.data.status], web: [there.listed ? "listed" : "unlisted"] },
     };
-    return { entry, affiliation: affiliation(entry.data), job, listed, filter };
+    return { entry, affiliation: affiliation(entry.data), there, filter };
   });
 // Sorted by affiliation, which keeps the names in order within one company.
 const byGroup = Map.groupBy(
@@ -84,8 +85,8 @@ const facets = [
     </p>
     {!web && (
       <p class="mt-3 hw-callout max-w-measure text-small">
-        The website's team page could not be read when this page was built, so roles and who is not
-        on the website yet are missing.
+        The website's team roster could not be read when this page was built, so roles, credential
+        lines, profile links and who is not on the website yet are missing.
       </p>
     )}
 
@@ -114,9 +115,8 @@ const facets = [
               {g.people.map((p, j) => (
                 <PersonCard
                   entry={p.entry}
-                  job={p.job}
+                  {...p.there}
                   company={g.key === "company" ? p.affiliation : undefined}
-                  listed={p.listed}
                   filter={p.filter}
                   sizes="(min-width: 1024px) 210px, (min-width: 768px) 25vw, 40vw"
                   priority={i === 0 && j === 0}
