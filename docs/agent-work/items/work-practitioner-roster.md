@@ -4,7 +4,7 @@ status: open
 priority: 2
 owner: Ada
 area: people
-evidence: "09.11., 21:50: 63 entries, 19 active, 44 draft; 12 entries with a yes from 09.11. (4 by pull request, 8 by mail reply). The mail round went out 09.11. 08:00. Names, mail addresses and thread ids live in os (docs/agent-work/2026-11-08-practitioner-roster.md and Ada's run reports), since this repo is public."
+evidence: "12.11., frontmatter parsed: 63 entries, 26 active, 37 draft; seven turned active after 09.11., among them the entries of pull requests #8, #11 and #12, #13, #14 and #15. 09.11., 21:50: 12 entries with a yes from 09.11. (4 by pull request, 8 by mail reply). The mail round went out 09.11. 08:00. Names, mail addresses and thread ids live in os (docs/agent-work/2026-11-08-practitioner-roster.md and Ada's run reports), since this repo is public."
 assumption: "affiliation comes only from the person's Company OS record: its company, freelance where the record says so, hackers&wizards for staff; Slack was not read"
 order: 510
 ---
