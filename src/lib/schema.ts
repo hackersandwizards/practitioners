@@ -3,7 +3,11 @@ import { z } from "zod";
 
 /** `https://` only: a link renders as an href, z.url() alone also takes javascript: URLs, and
  *  `https:/a.dev` parses as a URL but resolves as a path on the page that prints it. */
-const link = z.url().startsWith("https://");
+const link = z
+  .url()
+  .startsWith("https://")
+  // CONTRIBUTING.md's example handles: an uncommented line left unfilled links a real account.
+  .refine((u) => !/\b(your-name|ada-example)\b/i.test(u), "put your own address in");
 
 /** A short line in both languages the website prints, English and German side by side. */
 const localized = z.strictObject({
@@ -139,7 +143,8 @@ const squash = (s: string) => s.toLowerCase().replace(/\s+/g, "");
 const ownKey = (a: string) => Object.keys(ownAffiliations).find((k) => squash(k) === squash(a));
 
 /** The website prints `expertise` on a trainer's card and holds it to three words, never a job
- *  title (its src/copy/index.test.ts); the same rule here, so a line breaks in this gate first. */
+ *  title: its src/copy/index.test.ts imports `expertiseProblem` from `practitioners/schema`, and
+ *  the schema below holds every entry to it, so a line breaks in this gate first. */
 const jobTitle = /\b(Director|Engineer|Manager|Head of|CTO|Lead)\b/i;
 export const expertiseProblem = (line: string) =>
   line.trim().split(/\s+/).length > 3
