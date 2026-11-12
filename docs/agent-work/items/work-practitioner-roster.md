@@ -5,7 +5,7 @@ priority: 2
 owner: Ada
 area: people
 evidence: "09.11., 21:50: 63 entries, 19 active, 44 draft; 12 entries with a yes from 09.11. (4 by pull request, 8 by mail reply). The mail round went out 09.11. 08:00. Names, mail addresses and thread ids live in os (docs/agent-work/2026-11-08-practitioner-roster.md and Ada's run reports), since this repo is public."
-assumption: "affiliation comes only from work.company or facets.trainer.supply_partner on the Company OS record (the company record's name), freelance only where the record says freelance, hackers&wizards for staff with an employment record; Slack channels were not read"
+assumption: "affiliation comes only from the person's Company OS record: its company, freelance where the record says so, hackers&wizards for staff; Slack was not read"
 order: 510
 ---
 
@@ -15,7 +15,9 @@ Draft the follow-up for the other 49 people, each only once they answered their 
 
 Done on 08.11.: `affiliation` in the schema, shown as "Works for" on each page; the overview
 groups people into hackers&wizards, At a company (sorted by company), Freelance and Not stated
-yet. Seeds without a portrait show initials and list "Portrait" as missing.
+yet. Seeds without a portrait show initials and list "Portrait" as missing. The affiliation is the
+company record's name from `work.company` or `facets.trainer.supply_partner`; staff are those with
+an employment record.
 
 ## Yes on record, 09.11.
 
