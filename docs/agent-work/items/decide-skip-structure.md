@@ -22,3 +22,5 @@ Pick whether practitioners adopts the skeleton entries it still leaves out.
 `scaffolding.skip.structure` in `package.json` switches the whole structure check off. Three parts of its reason are deliberate and stay under either option: a contributor committing their own bio must not need gitleaks or the confidential-terms list (CLAUDE.md, "Gate"), so pre-commit, commit-msg and bunfig.toml differ from the skeleton. For the other entries the reason says "not adopted yet, with no reason recorded". No pin raise since scaffolding v5.13.0 (db59d35) has adopted them.
 
 No file in the repository says whether those entries fit a contributor's clone, so there is no recommendation.
+
+The reason's sentence that `.githooks/pre-push` is the skeleton's own, byte for byte, is out of date: the hook differs from scaffolding v5.24.2's at line 4, as the evidence says. Either option replaces that sentence.
