@@ -139,9 +139,7 @@ profile gets the mail too. A reply with text instead of a pull request
 is a correction: apply it under the style rules of step 6 below, draft a reply in the thread with
 the whole updated entry, and commit after their yes. A reply confirming the entry as it stands is
 their yes: set `owner`, `updated` and `status` as in step 3 above and commit. "Take me off":
-flag it to Stefan for the website roster, and delete their directory and commit once
-`/team.json` no longer lists them: `src/lib/website.test.ts` fails while it lists a slug without a
-folder here.
+delete their directory, commit, and flag it to Stefan for the website roster.
 
 ## Interview
 
