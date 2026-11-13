@@ -2,15 +2,15 @@
 kind: work
 status: open
 priority: 3
-order: 2100
+order: 2050
 owner: Ada
 area: software-engineering
-evidence: "scaffolding v5.19.3 bin/scaffolding.ts: the repository's own steps run only `if (ok)` after the shared group, which holds `confidential`"
+evidence: "scaffolding v5.24.2 bin/scaffolding.ts (read 13.11.): the repository's own steps run only `if (ok)` after the shared group, which holds `confidential`"
 ---
 
 # Find a full-gate route for a pull request whose author's name needs a new allow entry
 
-Ada briefs a practitioners session to find and test that route, then write it into `practitioner-bio` step 2.
+Brief a practitioners session to find and test that route, then write it into `practitioner-bio` step 2.
 
 A practitioner whose name is on the confidential list and has no `scaffolding.allow` entry yet
 opens a pull request. The entry goes on `main`, since the pull request's folder check refuses

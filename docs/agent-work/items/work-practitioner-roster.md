@@ -9,7 +9,7 @@ assumption: "affiliation comes only from the person's Company OS record: its com
 order: 510
 ---
 
-# Every person who delivers for h&w has an entry, with affiliation
+# Get every delivering person's yes on their entry, with affiliation
 
 Draft the follow-up for the other 49 people, each only once they answered their first mail.
 
@@ -19,9 +19,7 @@ yet. Seeds without a portrait show initials and list "Portrait" as missing. The 
 company record's name from `work.company` or `facets.trainer.supply_partner`; staff are those with
 an employment record.
 
-## Yes on record, 09.11.
-
-Read on 09.11. at 21:50 from the merged pull requests and from replies to the round of 09.11.
+**Yes on record, 09.11.** Read on 09.11. at 21:50 from the merged pull requests and from replies to the round of 09.11.
 08:00. Names, threads and each person's state live in os
 (`docs/agent-work/2026-11-08-practitioner-roster.md`), since this repo is public.
 
@@ -33,7 +31,7 @@ Read on 09.11. at 21:50 from the merged pull requests and from replies to the ro
 - **Without a yes so far**: 40 more draft entries, and 6 active entries without a yes read in this run.
   One active entry is a founder's own; `benedikt-stemmildt` stays `draft`.
 
-## What remains
+**What remains:**
 
 - **Follow-up for the other 49** (the round of 09.11. 08:00 asked for bio and links, not for the profile or
   affiliation): draft only after each person has answered their first mail, so nobody gets two
@@ -49,9 +47,7 @@ Read on 09.11. at 21:50 from the merged pull requests and from replies to the ro
   `markdownAwaiting` (`scripts/export.ts`) is asked whether its emphasis asterisks may go, since the
   website prints them as typed, unless the website comes to render emphasis.
 
-## Before any public host
-
-A public build shows an entry only when it is `active`. Nothing is hosted today; before a host goes up:
+**Before any public host.** A public build shows an entry only when it is `active`. Nothing is hosted today; before a host goes up:
 
 - Each `active` entry that the person neither committed nor said yes to is confirmed by them or returns to `draft`.
 - The build stops copying every portrait into `dist/_astro/`: the schema's `image()` processes each entry's photo whether its page renders or not.

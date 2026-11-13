@@ -19,6 +19,4 @@ options:
 
 Veto this if the licence should stay PolyForm Strict without a clause for practitioners' own edits.
 
-You asked for a licence "so wie die anderen repos" (v1.1.0 ships PolyForm Strict 1.0.0). That licence grants no right to make changes, while this repository's workflow is practitioners editing their own entry by pull request. I recommend one contribution clause, added in a practitioners release unless you object. Not built yet: `LICENSE` at v1.4.2 (09.11.) has no such clause.
-
-New evidence, 09.11.: five more practitioner pull requests (#3 to #7, four people) were merged under that licence, still without the clause.
+You asked for a licence "so wie die anderen repos" (v1.1.0 ships PolyForm Strict 1.0.0). That licence grants no right to make changes, while this repository's workflow is practitioners editing their own entry by pull request. I recommend one contribution clause, added in a practitioners release unless you object. Not built yet: `LICENSE` at v1.7.16 (13.11.) has no such clause. Eleven practitioner pull requests have reached `main` under that licence without it: #3 to #7 on 09.11. (four people), #11 to #14 on 11.11., and #8 and #15 through h&w commits.
