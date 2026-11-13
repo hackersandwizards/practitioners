@@ -19,7 +19,11 @@ and `photo.webp`. The website renders its English and German pages from them, th
 ## Mandatory and optional
 
 Mandatory: **name, bio in English and German, LinkedIn URL, portrait**. Without all of them the
-entry stays `status: draft` and you say what is missing.
+entry stays `status: draft` and you say what is missing. Before an h&w colleague calls a portrait
+or bio missing, they search the mail the person sent h&w, attachments included, and the public
+pages that name them. What turns up goes into the request as a proposal for their yes, and only
+text the person wrote becomes a bio. Slack is not reachable from this repository: a Company OS
+session reads their Slack profile picture.
 
 The portrait is `photo.webp`, a square cut to the head framing of `stefan-munz` and
 `benedikt-stemmildt`: face box about 45 % of the side, eyes about 36.5 % from the top, face
@@ -65,7 +69,10 @@ own words, and commits it only after their yes to exactly that text, and after
 a warning where the list is missing. Every h&w commit on `main` that changes an entry runs
 `bun run export` and `bun test` first and names the folder's `entry.json` too: the website reads
 that file, a pull request's CI never checks it, and the hook runs only the export test on a
-bio-only commit, not the portrait count, the held lines or the entries the catalog draws.
+bio-only commit, not the portrait count, the held lines or the entries the catalog draws. A
+commit the person made on `main` itself, as GitHub's editor does for an account with write access,
+ran neither the hook nor the pull request's workflow: follow it on `main` with step 3's `owner`,
+`updated` and `status` and a fresh `entry.json`.
 
 - **Their pull request**, the default. `CONTRIBUTING.md` tells the person how, in the browser or
   with Claude Code.
@@ -134,7 +141,9 @@ profile gets the mail too. A reply with text instead of a pull request
 is a correction: apply it under the style rules of step 6 below, draft a reply in the thread with
 the whole updated entry, and commit after their yes. A reply confirming the entry as it stands is
 their yes: set `owner`, `updated` and `status` as in step 3 above and commit. "Take me off":
-delete their directory, commit, and flag it to Stefan for the website roster.
+flag it to Stefan for the website roster, and delete their directory and commit once
+`/team.json` no longer lists them: `src/lib/website.test.ts` fails while it lists a slug without a
+folder here.
 
 ## Interview
 
