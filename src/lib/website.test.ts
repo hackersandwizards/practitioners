@@ -55,6 +55,21 @@ test("a page that answers in HTML fails naming the roster", () =>
     },
   ));
 
+test("a roster that is gone fails the build, an outage reads as unknown", async () => {
+  await stub(
+    async () => new Response("Not found", { status: 404 }),
+    async () => {
+      expect(await rejection(load())).toContain(source);
+    },
+  );
+  await stub(
+    async () => new Response("", { status: 503 }),
+    async () => {
+      expect(await load()).toBeUndefined();
+    },
+  );
+});
+
 // The gate check: the website lists nobody without a folder here. An unreachable website passes, so
 // a commit made offline is not held up by it.
 test("every slug the website lists has a folder here", async () => {

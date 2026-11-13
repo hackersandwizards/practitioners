@@ -4,9 +4,9 @@ import { z } from "zod";
  *  name and their profile there, read from the roster the website publishes at /team.json; reading
  *  it keeps the roster the website's own (CLAUDE.md). Undefined when it is unreachable, so the
  *  overview says it does not know rather than marking everyone as missing. An answer of another
- *  shape throws: the website changed its data, and the build must say so. */
+ *  shape throws, a 404 or 410 included: the website changed its data, and the build must say so. */
 export const team = "https://www.hackersandwizards.dev/team/";
-export const source = "https://www.hackersandwizards.dev/team.json";
+export const source = new URL("/team.json", team).href;
 
 const person = z.object({
   slug: z.string(),
@@ -31,7 +31,7 @@ export async function load(): Promise<Map<string, Person> | undefined> {
   let body: string;
   try {
     const res = await fetch(source, { signal: AbortSignal.timeout(10_000) });
-    if (!res.ok) return undefined;
+    if (!res.ok && res.status !== 404 && res.status !== 410) return undefined;
     body = await res.text();
   } catch {
     return undefined;
