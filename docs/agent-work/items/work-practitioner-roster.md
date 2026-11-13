@@ -36,6 +36,10 @@ an employment record.
 - **Follow-up for the other 49** (the round of 09.11. 08:00 asked for bio and links, not for the profile or
   affiliation): draft only after each person has answered their first mail, so nobody gets two
   asks at once.
+- **One draft entry was edited by its owner on `main` on 13.11.** (54c4b0e and 0fb27ed, made in
+  GitHub's editor; 4cfee7e regenerated its `entry.json`). `practitioner-bio` reads such a commit as
+  the person's yes and gives the entry step 3's `owner`, `updated` and `status`. Read 13.11., it is
+  still `draft`, without `owner`, `updated` 06.11.
 - **One new entry has no draft**: the only address on record bounces since 19.10.
 - **One new entry lacks LinkedIn**: none on record; the mail asks for it.
 - **Three affiliations stay empty**: the company names are on os's confidential list, so each
