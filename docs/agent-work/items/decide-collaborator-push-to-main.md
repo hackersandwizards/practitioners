@@ -21,11 +21,10 @@ options:
 
 # Should trainers with write access keep committing straight to main?
 
-Benedikt picks a, b or c. Changing a repository setting or a collaborator's access is his call.
+Benedikt picks a, b or c: a repository setting and who holds write access are his call.
 
-This repository is public. Forty accounts hold write access through the org, trainers among
-them. A commit they push to `main`, which GitHub's web editor does by default for such an
-account, skips the pull-request workflow, so no gitleaks scan, folder check or `astro check` runs.
-It also skips the local hook. Such a commit can change any folder, `scripts/` or `.githooks/`, and
-the hooks run on h&w's machines at the next commit there. On 13.11. the only effect was a stale
-`entry.json`. h&w regenerated it, and the gate is green again.
+Forty accounts hold write access to this public repository through the org, trainers among them.
+GitHub's web editor commits straight to `main` for such an account. That commit skips the
+pull-request workflow and the local hook, so no gitleaks scan, folder check or `astro check` runs,
+whatever file it changes. On 13.11. two bio edits went in this way and left one `entry.json` stale
+until h&w regenerated it.
