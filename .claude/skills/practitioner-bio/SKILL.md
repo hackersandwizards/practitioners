@@ -56,7 +56,7 @@ where naming it points to no single client under NDA.
 The lines the website prints under the name are fields here, each in English and German: `job`,
 `expertise`, `background`, with `relation`, `affiliation_url` and `feminine` (`practitionerSchema`
 states each). They change like the bio. Not here at all: who appears on the website and in which
-section, the website's roster, kept by Stefan and Bina. A wish to change it is flagged to Stefan,
+section, the website's roster, kept by Stefan and Bene. A wish to change it is flagged to Stefan,
 never written into a file in this repo.
 
 ## Routes
