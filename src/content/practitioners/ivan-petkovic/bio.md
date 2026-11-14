@@ -15,6 +15,7 @@ background:
   en: "Founder of ipCoaching; Executive Technology Advisor at XING"
   de: "Gründer von ipCoaching; Executive Technology Advisor bei XING"
 affiliation: freelance
+relation: freelance
 website: https://ipcoaching.eu
 topics: [engineering-leadership, ai-strategy, context-engineering, ai-product-management]
 # Additional topic labels requested for matching:
