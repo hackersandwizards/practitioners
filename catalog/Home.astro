@@ -5,7 +5,6 @@
 // without a tile.
 import { getCollection } from "astro:content";
 import Home from "@hackersandwizards/scaffolding/catalog/Home.astro";
-import ThemeToggle from "@hackersandwizards/brand/expert/components/ThemeToggle.astro";
 import { version } from "@hackersandwizards/brand/package.json";
 import Links from "../src/components/Links.astro";
 import PersonCard from "../src/components/PersonCard.astro";
@@ -17,7 +16,6 @@ const drafts = all.filter((e) => e.data.status === "draft").length;
 ---
 
 <Home>
-  <ThemeToggle slot="nav" />
   <h3>Brand elements</h3>
   <p>
     Each element as a page of this hub draws it, from brand {version}. A part of its own fails the
