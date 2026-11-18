@@ -1,4 +1,5 @@
 import { expect, test } from "bun:test";
+import { runInNewContext } from "node:vm";
 
 // Scaffolding's shell draws a state alone in the day theme because its <html> carries no
 // data-hw-night. The repository's catalog head runs on every catalog page, so it must not set it.
@@ -12,6 +13,6 @@ test("the catalog head leaves data-hw-night to the shell", async () => {
       classList: { add: () => {} },
     },
   };
-  for (const script of scripts) new Function("document", script)(document);
+  for (const script of scripts) runInNewContext(script, { document });
   expect(attributes.has("data-hw-night")).toBe(false);
 });

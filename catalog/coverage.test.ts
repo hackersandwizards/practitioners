@@ -1,6 +1,7 @@
 import { expect, test } from "bun:test";
 import { basename } from "node:path";
 import { Glob } from "bun";
+import { pages } from "../brand-elements.json";
 
 const names = (pattern: string, ext: string) =>
   [...new Glob(pattern).scanSync()].map((f) => basename(f, ext)).sort();
@@ -22,7 +23,6 @@ test("every entry a story, the catalog's home or brand-elements.json draws exist
   const named = (await Promise.all(sources)).flatMap((t) =>
     [...t.matchAll(/\b(?:card|entry)\("([^"]+)"\)/g)].map((m) => m[1]!),
   );
-  const pages = (await Bun.file("brand-elements.json").json()).pages as string[];
   const slugs = [
     ...named,
     ...pages.map((p) => p.replaceAll("/", "")).filter((s) => s && s !== "catalog"),

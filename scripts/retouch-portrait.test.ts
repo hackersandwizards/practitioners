@@ -23,7 +23,9 @@ test("white balance pulls a small cast halfway toward grey and a large one at mo
   const [r, , b] = cast(130, 128, 122);
   expect(r).toBeCloseTo(1 + (grey / 130 - 1) / 2, 6);
   expect(b).toBeCloseTo(1 + (grey / 122 - 1) / 2, 6);
-  expect(cast(140, 120, 100)).toEqual([0.95, expect.any(Number), 1.05]);
+  const clipped = cast(140, 120, 100);
+  expect(clipped).toHaveLength(3);
+  expect(clipped).toMatchObject([0.95, expect.any(Number), 1.05]);
 });
 
 test("sharp-2 steepens a luminance edge, leaves flat areas alone and adds the same to each channel", () => {

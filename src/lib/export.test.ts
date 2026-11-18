@@ -3,12 +3,19 @@ import { mkdirSync, mkdtempSync, rmSync, symlinkSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { Glob } from "bun";
+import { z } from "zod";
 import { rejection } from "@hackersandwizards/scaffolding/rejection";
 import { base, generate, schema } from "../../scripts/export";
 import pkg from "../../package.json";
 
+const exportedFields = z.object({
+  photo: z.string().optional(),
+  bio: z.object({ en: z.string(), de: z.string() }),
+});
+const parseExport = (text: string) => exportedFields.parse(JSON.parse(text));
+
 const files = await generate();
-const photos = [...files.values()].flatMap((text) => JSON.parse(text).photo ?? []);
+const photos = [...files.values()].flatMap((text) => parseExport(text).photo ?? []);
 const ok = (d: object) => schema.safeParse({ name: "A B", ...d }).success;
 
 test("each entry.json matches its entry; `bun run export` rewrites them", async () => {
@@ -59,7 +66,7 @@ async function generateOne(files: Record<string, string>) {
     for (const [name, content] of Object.entries(files))
       if (content === "link") symlinkSync(join(dir, "outside.txt"), join(dir, "ada", name));
       else await Bun.write(join(dir, "ada", name), content);
-    return [...(await generate(dir)).values()].map((text) => JSON.parse(text));
+    return [...(await generate(dir)).values()].map(parseExport);
   } finally {
     rmSync(dir, { recursive: true });
   }

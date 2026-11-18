@@ -37,7 +37,7 @@
     "@astrojs/check": "0.9.12",
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.39.1",
     "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v2.28.1",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v5.28.0",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v5.29.1",
     "@tailwindcss/vite": "4.3.5",
     "@types/bun": "1.4.4",
     "astro": "7.4.11",
@@ -103,12 +103,6 @@
         "check": "confidential",
         "path": "src/content/practitioners/henning-thies/**",
         "text": "Henning Thies",
-        "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
-      },
-      {
-        "check": "confidential",
-        "path": "src/content/practitioners/ivan-petkovic/**",
-        "text": "Ivan Petkovic",
         "reason": "the practitioner's own name in their own entry, published content of this repository; os keeps the names not on hackersandwizards.dev on the list, so the entry is bound to this spelling and folder and any other term still fails"
       },
       {
