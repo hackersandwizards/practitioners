@@ -1,3 +1,0 @@
-# src/content/ is the practitioners' own: a test file there would run as code, `bun test` bare included.
-[test]
-pathIgnorePatterns = ["src/content/**"]

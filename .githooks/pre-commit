@@ -30,7 +30,7 @@ else
     fi
     echo "[pre-commit] content changed -> validating bios against the schema, entry.json fresh"
     bun run typecheck
-    bun test ./src/lib/export.test.ts || { echo "[pre-commit] run bun run export and stage each entry.json"; exit 1; }
+    bun run test ./src/lib/export.test.ts || { echo "[pre-commit] run bun run export and stage each entry.json"; exit 1; }
   fi
   # Only h&w commits outside src/content/ and can fetch the confidential list, so such a commit
   # needs it. A practitioner's own commit passes without the list; with it, h&w's is scanned.

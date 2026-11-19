@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import { expertiseProblem } from "./schema";
 import { schema } from "../../scripts/export";
 

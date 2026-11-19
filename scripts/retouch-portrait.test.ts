@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import sharp from "sharp";
 import { rejection } from "@hackersandwizards/scaffolding/rejection";
 import { gains, retouch, sharpen, tone } from "./retouch-portrait";

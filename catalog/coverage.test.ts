@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import { basename } from "node:path";
 import { Glob } from "bun";
 import { pages } from "../brand-elements.json";

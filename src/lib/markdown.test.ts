@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import { Glob } from "bun";
 import { base, markdownAwaiting, markdownOutside, split } from "../../scripts/export";
 

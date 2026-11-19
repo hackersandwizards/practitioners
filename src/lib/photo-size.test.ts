@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import { imageMetadata } from "astro/assets/utils";
 import { Glob } from "bun";
 import { portraitMinimum } from "./schema";

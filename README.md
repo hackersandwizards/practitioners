@@ -36,6 +36,8 @@ staged bio against it on your machine. `bun install` enables the hook. Your pull
 schema check on GitHub, a check that it changes only the bios, `entry.json` and images of one
 folder, and a scan for leaked secrets; h&w runs the rest of the hook's checks before the merge.
 
+Run the Vitest suite locally with `bun run test`.
+
 ## Licence and contact
 
 The code is under the [PolyForm Strict License 1.0.0](LICENSE). Your text and portrait stay

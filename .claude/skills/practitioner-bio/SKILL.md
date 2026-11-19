@@ -30,7 +30,7 @@ centred, with at least 3 % of the side above the hair and 2 % below the chin, wh
 framing. Never upscaled, and at most 1024 px except for `benedikt-stemmildt`, whose 866 CSS px slot
 on the website needs more (`--size`). Make it with
 `bun run portrait <source> <folder>/photo.webp --crop x,y,side`. Then run
-`bun test ./src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
+`bun run test ./src/lib/photo-size.test.ts`: it fails when the number of portraits with a side below
 `portraitMinimum` (`src/lib/schema.ts`) changes, and the comment on `AWAITING_ORIGINAL` in that
 test says what to do. In the person's fork, put the source photo in their folder under its own
 name instead and leave `photo.webp`: h&w converts it after the merge, since the size test and its
@@ -66,7 +66,7 @@ the entry as it stands after that change. An h&w colleague edits an entry only f
 own words, and commits it only after their yes to exactly that text, and after
 `bun run check-confidential --staged` passes: the hook's scan of a bio-only commit passes with only
 a warning where the list is missing. Every h&w commit on `main` that changes an entry runs
-`bun run export` and `bun test` first and names the folder's `entry.json` too: the website reads
+`bun run export` and `bun run test` first and names the folder's `entry.json` too: the website reads
 that file, a pull request's CI never checks it, and the hook runs only the export test on a
 bio-only commit, not the portrait count, the held lines or the entries the catalog draws. A
 commit the person made on `main` itself, as GitHub's editor does for an account with write access,

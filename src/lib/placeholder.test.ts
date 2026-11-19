@@ -1,4 +1,4 @@
-import { expect, test } from "bun:test";
+import { expect, test } from "vitest";
 import { schema } from "../../scripts/export";
 
 /** CONTRIBUTING.md's example block, its link lines uncommented and their handles left unfilled. */

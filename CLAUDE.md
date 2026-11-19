@@ -41,6 +41,8 @@ drafts, so it builds only where drafts render: the dev server and the gate's pre
 
 ## Gate
 
+`bun run test` runs Vitest under Bun. Add a test file path to run that file on its own.
+
 `src/lib/schema.ts` is the contract; `.githooks/pre-commit` runs `astro check` against it when a
 bio is staged, and `.githooks/README.md` lists what else it runs for which path. `bun install`
 enables the hooks per clone. A pull request skips them, so `.github/workflows/pull-request.yml`

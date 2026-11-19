@@ -14,7 +14,7 @@ over its commits.
 First, each practitioner folder the commit touches must match the index, `entry.json` included, so
 the checks read what the commit holds; a content commit also waits while any code outside
 `src/content/` differs from it. The content row runs only the export test, so a practitioner's own
-commit is never held to a count or list kept outside their folder; h&w runs `bun test` before a
+commit is never held to a count or list kept outside their folder; h&w runs `bun run test` before a
 content commit (`practitioner-bio`).
 
 `pre-push` is scaffolding's own: it refuses a push that carries a commit listed in
