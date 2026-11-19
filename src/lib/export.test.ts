@@ -141,6 +141,32 @@ test("an empty frontmatter in bio.de.md is not bio text", async () => {
   ).toBe("Ada trainiert Teams.");
 });
 
+test("the export preserves paragraphs in Windows line endings and supplies an empty translation", async () => {
+  const windows =
+    "---\r\nname: Ada Example\r\n---\r\n\r\nAda trains\r\nindustry teams.\r\n\r\nShe writes.\r\n";
+  expect((await generateOne({ "bio.md": windows }))[0].bio).toEqual({
+    en: "Ada trains industry teams.\n\nShe writes.",
+    de: "",
+  });
+});
+
+test("an approved profile exports its portrait once the required fields are filled", async () => {
+  const active = bio.replace(
+    "---\n\n",
+    "photo: ./photo.webp\nstatus: active\nlinkedin: https://www.linkedin.com/in/ada\n---\n\n",
+  );
+  expect(
+    (await generateOne({ "bio.md": active, "bio.de.md": "Ada trainiert Teams." }))[0].photo,
+  ).toBe("practitioners/ada/photo.webp");
+});
+
+test("export diagnostics name the folder and each unsupported span", async () => {
+  expect(await rejection(generateOne({ "bio.md": "---\nname: 12\n---" }))).toContain("ada:");
+  expect(
+    await rejection(generateOne({ "bio.md": bio, "bio.de.md": "One *em* and `code`." })),
+  ).toContain("ada/bio.de.md: the website prints this as typed: *em* | `code`");
+});
+
 test("bio.short.md holds at most 300 characters", async () => {
   for (const f of new Glob("*/bio.short.md").scanSync(base))
     expect((await Bun.file(`${base}/${f}`).text()).trim().length, f).toBeLessThanOrEqual(300);
