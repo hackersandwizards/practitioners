@@ -6,3 +6,5 @@ dist/
 .DS_Store
 .claude/projects/
 .eslintcache
+/.stryker-tmp/
+/.stryker-reports/
