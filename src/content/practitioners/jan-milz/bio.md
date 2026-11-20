@@ -12,7 +12,9 @@ expertise:
 background:
   en: "PM and PO since 2011, formerly at XING"
   de: "PM und PO seit 2011, früher bei XING"
-status: draft
+status: active
+owner: Jan Milz
+updated: "2026-11-20"
 ---
 
 Jan Milz works as an agentic product manager with teams that run a software factory. He has worked
