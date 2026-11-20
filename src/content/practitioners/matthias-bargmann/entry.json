@@ -1,11 +1,22 @@
 {
   "slug": "matthias-bargmann",
   "name": "Matthias Bargmann",
+  "expertise": {
+    "en": "Software factories",
+    "de": "Software Factories"
+  },
+  "background": {
+    "en": "Agentic engineer, 20+ years of software development in many teams",
+    "de": "Agentic Engineer, 20+ Jahre Softwareentwicklung in vielen Teams"
+  },
   "linkedin": "https://www.linkedin.com/in/matthias-bargmann/",
-  "status": "draft",
+  "website": "https://bargmann.io",
+  "status": "active",
+  "owner": "Matthias Bargmann",
+  "updated": "2026-11-20",
   "photo": "practitioners/matthias-bargmann/photo.webp",
   "bio": {
-    "en": "Matthias is a Forward Deployed Engineer in the h&w practitioner network. Seed draft: Matthias, replace this text with your own bio, as CONTRIBUTING.md in this repository describes.",
-    "de": ""
+    "en": "Matthias specializes in software factories and helps companies build them: through coaching or hands-on together with the client's team. He has been developing software for more than 20 years, 15 of them as a freelancer, and in that time got to know many teams, their workflows and their domains. He carries both over into agentic systems. To him, agents are new teammates: they have to know a team's workflows and its domain just like everyone else. At hackers&wizards he supports teams through mentoring while they build their software factory and develop it further.",
+    "de": "Matthias ist auf Software Factories spezialisiert und hilft Unternehmen, sie aufzubauen: im Coaching oder hands-on gemeinsam mit dem Team des Kunden. Er entwickelt seit mehr als 20 Jahren Software, davon 15 Jahre als Freelancer, und hat in dieser Zeit viele Teams, ihre Abläufe und ihre Fachdomänen kennengelernt. Beides überträgt er in agentische Systeme. Agenten sind für ihn neue Teamkollegen: Sie müssen die Abläufe des Teams und das Wissen über die Domäne genauso kennen wie alle anderen. Bei hackers&wizards begleitet er im Mentoring Teams, die ihre Software Factory aufbauen und weiterentwickeln."
   }
 }

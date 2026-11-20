@@ -9,7 +9,9 @@ expertise:
 background:
   en: "Agentic engineer, 20+ years of software development in many teams"
   de: "Agentic Engineer, 20+ Jahre Softwareentwicklung in vielen Teams"
-status: draft
+status: active
+owner: Matthias Bargmann
+updated: "2026-11-20"
 ---
 
 Matthias specializes in software factories and helps companies build them: through coaching or
