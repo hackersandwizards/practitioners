@@ -32,6 +32,14 @@ content. No public host serves a build while an `active`
 entry carries neither its person's own change nor their yes to its text
 (`docs/agent-work/items/work-practitioner-roster.md`, Before any public host).
 
+## Layers
+
+Pages can import layouts, components and library modules. Components can import other components
+and library modules. `.oxlintrc.json` blocks imports from `src/lib` into `src/components`,
+`src/layouts` and `src/pages`, and from `src/components` into `src/layouts` and `src/pages`.
+Both checks apply to tests, type imports, dynamic imports and Astro scripts. Library tests may
+import the export script.
+
 ## Catalog
 
 `bun run catalog` (or `bun run dev`) serves it at practitioners.localhost/catalog/: scaffolding's
