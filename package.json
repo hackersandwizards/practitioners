@@ -26,7 +26,7 @@
     "check:preview": "PREVIEW=1 check-lock astro build --outDir .preview",
     "catalog": "bun run dev --open /catalog/",
     "test": "bun --bun vitest run",
-    "mutation": "stryker run",
+    "mutation": "scaffolding-mutation",
     "check:elements": "brand-elements",
     "check:copies": "brand-copies",
     "check:retired": "brand-retired .preview",
@@ -40,7 +40,7 @@
     "@astrojs/check": "0.9.12",
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.39.1",
     "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v2.28.2",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v5.31.0",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v5.32.0",
     "@tailwindcss/vite": "4.3.5",
     "@types/bun": "1.4.4",
     "astro": "7.4.11",
@@ -214,7 +214,12 @@
         "check:retired"
       ]
     ],
-    "test": "test"
+    "test": "test",
+    "fullOnly": {
+      "check:preview": "builds the preview site",
+      "check:elements": "renders and checks elements",
+      "check:retired": "scans generated output"
+    }
   },
   "admin": {
     "label": "Team profiles"

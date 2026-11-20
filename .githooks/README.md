@@ -24,7 +24,7 @@ content commit (`practitioner-bio`).
 
 `pre-push` runs scaffolding's purged-history check. It refuses a push that carries a commit listed in
 `.confidential-purged.json`, the commits the history rewrites of 10.11. and 11.11. replaced, and reads no
-confidential list. The pinned skeleton also runs the full gate on branch pushes. Practitioners
+confidential list. The pinned skeleton runs the changed-path gate on branch pushes. Practitioners
 can push their bios to forks without that gate's confidential list. After any further history rewrite,
 add the replaced commits, every commit that descends from the old root on origin's branches, tags
 and `refs/pull/*` and in the maintainer's clone (reflogs and unreachable objects included), with `bun run --silent check-confidential purged <sha>... > .confidential-purged.json`,
