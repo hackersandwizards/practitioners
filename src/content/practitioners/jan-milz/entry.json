@@ -2,19 +2,23 @@
   "slug": "jan-milz",
   "name": "Jan Milz",
   "relation": "freelance",
+  "job": {
+    "en": "Agentic Product Manager",
+    "de": "Agentic Product Manager"
+  },
   "expertise": {
-    "en": "Product management training",
-    "de": "Produkt­management-Training"
+    "en": "Agentic product management",
+    "de": "Agentisches Produkt­management"
   },
   "background": {
-    "en": "Freelance PM with a modular product curriculum",
-    "de": "Freier PM mit modularem Produkt-Curriculum"
+    "en": "PM and PO since 2011, formerly at XING",
+    "de": "PM und PO seit 2011, früher bei XING"
   },
   "linkedin": "https://www.linkedin.com/in/jan-milz-02ab8210/",
   "status": "draft",
   "photo": "practitioners/jan-milz/photo.webp",
   "bio": {
-    "en": "Jan Milz is a freelance product manager and, together with Andreas Stephan, is building a modular curriculum for product management trainings. He has already taught it at several companies.",
-    "de": "Jan Milz ist freier Produktmanager und baut gemeinsam mit Andreas Stephan ein modulares Curriculum für Produktmanagement-Trainings auf. Er hat es bereits in mehreren Unternehmen unterrichtet."
+    "en": "Jan Milz works as an agentic product manager with teams that run a software factory. He has worked as a product manager and product owner since 2011, including as product owner at XING. He has run discovery workshops since 2017. Together with Andreas Stephan he built the training for product managers and product owners that hackers&wizards offers. He also teaches at the Digitale Leute School.",
+    "de": "Jan Milz arbeitet als Agentic Product Manager mit Teams, die eine Software-Factory im Einsatz haben. Seit 2011 ist er Product Manager und Product Owner, bei XING war er Product Owner. Discovery-Workshops gibt er seit 2017. Gemeinsam mit Andreas Stephan hat er das Training für Product Manager und Product Owner entwickelt, das hackers&wizards anbietet. Außerdem ist er Trainer an der Digitale Leute School."
   }
 }
