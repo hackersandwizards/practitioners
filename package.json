@@ -61,6 +61,21 @@
   "scaffolding": {
     "allow": [
       {
+        "check": "structure",
+        "path": ".githooks/pre-push",
+        "reason": "Practitioners can commit and push a bio from a fork without gitleaks or the confidential-terms list."
+      },
+      {
+        "check": "structure",
+        "path": ".githooks/pre-commit",
+        "reason": "Practitioners can commit and push a bio from a fork without gitleaks or the confidential-terms list."
+      },
+      {
+        "check": "structure",
+        "path": ".githooks/commit-msg",
+        "reason": "Practitioners can commit and push a bio from a fork without gitleaks or the confidential-terms list."
+      },
+      {
         "check": "confidential",
         "path": "src/content/practitioners/anastasia-karavdina/**",
         "text": "anastasia karavdina",
@@ -188,9 +203,6 @@
       }
     ],
     "typecheck": "astro check",
-    "skip": {
-      "structure": "Four recorded differences await a decision. The bio-only pre-commit does not require gitleaks or the confidential list, the commit-msg hook would require the list, and the pinned pre-push hook would require the full gate on a contributor's branch push. The repository also keeps Bun's default dependency-saving behavior without bunfig.toml."
-    },
     "check": [
       [
         "check:colours",

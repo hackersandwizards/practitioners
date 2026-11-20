@@ -36,7 +36,9 @@ staged bio against it on your machine. `bun install` enables the hook. Your pull
 schema check on GitHub, a check that it changes only the bios, `entry.json` and images of one
 folder, and a scan for leaked secrets; h&w runs the rest of the hook's checks before the merge.
 
-Run the Vitest suite locally with `bun run test`.
+Run the Vitest suite locally with `bun run test`. For repository changes, run `bun run check`,
+which checks the scaffolding structure and flags rules enabled in both Oxlint and ESLint.
+See [Git hooks](.githooks/README.md) for the local checks for bio contributions.
 
 ## Licence and contact
 

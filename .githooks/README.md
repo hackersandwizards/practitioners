@@ -5,6 +5,11 @@ The gate runs on the machine that makes the edit. A pull request skips it, so
 `.github/workflows/pull-request.yml` runs only gitleaks, `bun run pull-request` and `astro check`
 over its commits.
 
+The structure step of `bun run check` verifies the scaffolding skeleton and flags rules enabled
+in both Oxlint and ESLint on the same code. The structure allowances in `package.json` cover
+exactly `.githooks/pre-push`, `.githooks/pre-commit` and `.githooks/commit-msg` so practitioners can
+commit and push a bio from a fork without gitleaks or the confidential-terms list.
+
 | Staged                                                        | Gate                                                                        |
 | ------------------------------------------------------------- | --------------------------------------------------------------------------- |
 | anything but `src/content/`, `.claude/`, README.md, CLAUDE.md | `bun run check`: scaffolding's gate, its confidential audit of the index, brand's colour scan, the preview build |
