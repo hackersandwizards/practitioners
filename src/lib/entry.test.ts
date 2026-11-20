@@ -19,7 +19,7 @@ test("profile links stay in display order and use readable labels for extra site
     x: "https://x.com/ada",
     threads: "https://threads.net/@ada",
     mastodon: "https://mastodon.social/@ada",
-    profiles: ["https://www.speakerdeck.com/ada", "https://gitlab.com/ada"],
+    profiles: ["https://www.speakerdeck.com/ada", "https://sub.www.example.com/ada"],
     bookme: "https://cal.com/ada",
   };
   expect(links(profiles)).toEqual([
@@ -31,7 +31,7 @@ test("profile links stay in display order and use readable labels for extra site
     { label: "Threads", href: profiles.threads },
     { label: "Mastodon", href: profiles.mastodon },
     { label: "speakerdeck.com", href: profiles.profiles[0] },
-    { label: "gitlab.com", href: profiles.profiles[1] },
+    { label: "sub.www.example.com", href: profiles.profiles[1] },
     { label: "Book a call", href: profiles.bookme },
   ]);
   expect(links(draft)).toEqual([]);

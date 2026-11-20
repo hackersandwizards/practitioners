@@ -51,10 +51,8 @@ drafts, so it builds only where drafts render: the dev server and the gate's pre
 
 `bun run test` runs Vitest under Bun. Add a test file path to run that file on its own.
 
-`bun run mutation` runs Stryker with a 15-minute cap against the library and three scripts covered
-by Vitest, with all ten test files included (the slowest took 223 ms). Mutation targets exclude
-tests, Astro pages and components, the catalog, and practitioner content because the targets are
-the TypeScript modules the suite exercises. The command runs outside the gate and writes
+`bun run mutation` runs the Vitest suite against Stryker mutants in `src/lib` and the export,
+pull-request and portrait scripts. It runs outside the gate with a 15-minute cap and writes
 `.stryker-reports/mutation.json`.
 
 `src/lib/schema.ts` is the contract; `.githooks/pre-commit` runs `astro check` against it when a
