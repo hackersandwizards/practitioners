@@ -9,7 +9,8 @@
     "./practitioners/*": "./src/content/practitioners/*"
   },
   "engines": {
-    "bun": ">=1.3.0"
+    "bun": ">=1.3.0",
+    "npm": "please-use-bun"
   },
   "packageManager": "bun@1.4.4",
   "scripts": {
@@ -20,6 +21,7 @@
     "typecheck": "astro check",
     "format": "prettier --write .",
     "check": "scaffolding check",
+    "check:staged": "check-staged",
     "check:colours": "brand-colours",
     "check:preview": "PREVIEW=1 check-lock astro build --outDir .preview",
     "catalog": "bun run dev --open /catalog/",
@@ -187,7 +189,7 @@
     ],
     "typecheck": "astro check",
     "skip": {
-      "structure": "the skeleton's pre-commit (check-staged) and commit-msg (the message scan) would make a practitioner committing their own bio need gitleaks and the confidential-terms list, so the bio-only commit stays astro check and a confidential scan that passes without the list (CLAUDE.md, Gate); .githooks/pre-push is the skeleton's own, byte for byte, which this skip leaves unchecked; not adopted yet, with no reason recorded: .editorconfig, .npmrc, post-merge, post-checkout, .githooks/install, .githooks/check-lock.ts, .githooks/session-start, AGENTS.md, the SessionStart hook in .claude/settings.json, .mcp.json, .codex/config.toml, the .agents/skills link, engines.npm and the check:staged script"
+      "structure": "Four recorded differences await a decision. The bio-only pre-commit does not require gitleaks or the confidential list, the commit-msg hook would require the list, and the pinned pre-push hook would require the full gate on a contributor's branch push. The repository also keeps Bun's default dependency-saving behavior without bunfig.toml."
     },
     "check": [
       [

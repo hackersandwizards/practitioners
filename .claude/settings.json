@@ -11,5 +11,18 @@
   "claudeMdExcludes": [
     "/Users/*/.claude/rules/**",
     "/home/*/.claude/rules/**"
-  ]
+  ],
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "\"$(git rev-parse --show-toplevel)/.githooks/session-start\""
+          }
+        ]
+      }
+    ]
+  }
 }
