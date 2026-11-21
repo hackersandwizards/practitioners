@@ -9,7 +9,7 @@ vi.unstubAllEnvs();
 
 const draft = { name: "Ada Example", status: "draft" } as const;
 
-test("named profile links use their display labels and order", () => {
+test("named and extra profile links use their display labels and order", () => {
   const profiles = {
     ...draft,
     linkedin: "https://www.linkedin.com/in/ada",
@@ -19,6 +19,7 @@ test("named profile links use their display labels and order", () => {
     x: "https://x.com/ada",
     threads: "https://threads.net/@ada",
     mastodon: "https://mastodon.social/@ada",
+    profiles: ["https://www.speakerdeck.com/ada", "https://sub.www.example.com/ada"],
     bookme: "https://cal.com/ada",
   };
   expect(links(profiles)).toEqual([
@@ -29,6 +30,8 @@ test("named profile links use their display labels and order", () => {
     { label: "X", href: profiles.x },
     { label: "Threads", href: profiles.threads },
     { label: "Mastodon", href: profiles.mastodon },
+    { label: "speakerdeck.com", href: profiles.profiles[0] },
+    { label: "sub.www.example.com", href: profiles.profiles[1] },
     { label: "Book a call", href: profiles.bookme },
   ]);
 });

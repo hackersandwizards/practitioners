@@ -7,7 +7,7 @@
 //
 // --crop is the square in source pixels, framed as the practitioner-bio skill says; without it a
 // non-square source is cut square by sharp's attention strategy. --size defaults to the crop's side,
-// capped at 1024 px, the skill's cap. WebP q82.
+// capped at 1024 px. WebP q82.
 import sharp from "sharp";
 
 const lumaThousandths = (rgb: Uint8Array, p: number) =>

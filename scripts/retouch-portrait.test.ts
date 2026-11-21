@@ -59,6 +59,12 @@ test("without options a source is cut square at its short side, capped at 1024, 
   expect([...(await sharp(clear).raw().toBuffer()).subarray(0, 3)]).toEqual([255, 255, 255]);
 });
 
+test("an explicit portrait size can exceed the default cap without upscaling", async () => {
+  const source = await solid(1100, 1100, "#808080");
+  const output = await retouch(source, { size: 1050 });
+  expect(await sharp(output).metadata()).toMatchObject({ width: 1050, height: 1050 });
+});
+
 test("crop coordinates refer to the displayed orientation", async () => {
   const red = await solid(16, 32, "#da2020");
   const input = await sharp(await solid(48, 32, "#2020da"))

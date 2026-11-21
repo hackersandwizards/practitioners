@@ -19,7 +19,8 @@ such as whether they answered, a mail draft to them or a score of their portrait
 item or report in Company OS (`docs/agent-work/`), never into a file or commit message here.
 
 `bun run portrait <in> <out.webp>` turns a source photo into
-`photo.webp`: square crop, at most 1024 px, never upscaled, WebP q82. `--retouch` (white balance,
+`photo.webp`: square crop, capped at 1024 px by default, never upscaled, WebP q82. The
+`practitioner-bio` skill names when to use a larger `--size`. `--retouch` (white balance,
 highlight roll-off) and `--sharpen` (sharp-2) are candidates, never defaults: a blind review against
 the current file decides, as in `docs/agent-work/2026-11-08-portraits.md`.
 

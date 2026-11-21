@@ -9,9 +9,10 @@ test("schema.ts says the website imports expertiseProblem rather than copying it
 test("the schema reports expertise problems on the affected translation", () => {
   const result = schema.safeParse({
     name: "Ada Example",
-    expertise: { en: "AI evaluation", de: "Head of Quality" },
+    expertise: { en: "one two three four", de: "Head of Quality" },
   });
   expect(result.error?.issues).toEqual([
+    { code: "custom", message: "three words or fewer", path: ["expertise", "en"] },
     { code: "custom", message: "no job title", path: ["expertise", "de"] },
   ]);
 });
