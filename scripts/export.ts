@@ -7,6 +7,7 @@ import { join } from "node:path";
 import { Glob } from "bun";
 import { markdownToMdast } from "satteri";
 import { z } from "zod";
+import { paragraphs, split } from "../src/lib/bio-text";
 import { missing } from "../src/lib/entry";
 import { practitionerSchema, type EntryJson } from "../src/lib/schema";
 
@@ -14,20 +15,6 @@ export const base = join(import.meta.dir, "../src/content/practitioners");
 
 // The photo field holds a path; the website resolves it, so the schema checks a string here.
 export const schema = practitionerSchema({ image: () => z.string() } as unknown as SchemaContext);
-
-export const split = (text: string) => {
-  const lf = text.replace(/\r\n/g, "\n");
-  const [, frontmatter, body] = lf.match(/^(?:---\n([\s\S]*?)\n?---(?:\n|$))?([\s\S]*)$/)!;
-  return { data: (frontmatter ? Bun.YAML.parse(frontmatter) : {}) as { photo?: string }, body };
-};
-
-/** Paragraphs joined by a blank line, each on one line: the files wrap at 100 columns. */
-const paragraphs = (body: string) =>
-  body
-    .trim()
-    .split(/\n\s*\n/)
-    .map((p) => p.replace(/\s*\n\s*/g, " "))
-    .join("\n\n");
 
 /** Markdown in two bios that came by their person's own pull request before the website's subset
  *  was held here, each held as `<file> <span>`: a changed span meets the rule. Remove one once it

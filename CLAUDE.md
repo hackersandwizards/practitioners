@@ -18,7 +18,7 @@ expertise included, lives here. This repository is public: anything else about a
 such as whether they answered, a mail draft to them or a score of their portrait, goes into an
 item or report in Company OS (`docs/agent-work/`), never into a file or commit message here.
 
-`bun run portrait <in> <out.webp>` (`scripts/retouch-portrait.ts`) turns a source photo into
+`bun run portrait <in> <out.webp>` turns a source photo into
 `photo.webp`: square crop, at most 1024 px, never upscaled, WebP q82. `--retouch` (white balance,
 highlight roll-off) and `--sharpen` (sharp-2) are candidates, never defaults: a blind review against
 the current file decides, as in `docs/agent-work/2026-11-08-portraits.md`.

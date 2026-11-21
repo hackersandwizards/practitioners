@@ -2,10 +2,15 @@ import base from "@hackersandwizards/scaffolding/stryker";
 
 export default {
   ...base,
+  incremental: false,
   mutate: [
-    "src/lib/*.ts",
-    "!src/lib/*.test.ts",
-    "scripts/{export,pull-request,retouch-portrait}.ts",
+    "src/lib/bio-text.ts",
+    "src/lib/entry.ts",
+    "src/lib/schema.ts",
+    "src/lib/website.ts",
+    "scripts/export.ts",
+    "scripts/pull-request-paths.ts",
+    "scripts/retouch-portrait.ts",
   ],
-  plugins: ["./scripts/stryker-vitest.mjs"],
+  vitest: { ...base.vitest, pool: "forks" },
 };

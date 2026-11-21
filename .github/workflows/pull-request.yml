@@ -45,6 +45,9 @@ jobs:
           HEAD: ${{ github.event.pull_request.head.sha }}
         run: |
           git show "$BASE:scripts/pull-request.ts" > "$RUNNER_TEMP/pull-request.ts"
+          if git cat-file -e "$BASE:scripts/pull-request-paths.ts"; then
+            git show "$BASE:scripts/pull-request-paths.ts" > "$RUNNER_TEMP/pull-request-paths.ts"
+          fi
           cd "$RUNNER_TEMP" && GIT_DIR="$GITHUB_WORKSPACE/.git" bun pull-request.ts "$BASE...$HEAD"
       - run: bun install --frozen-lockfile
       - run: bun run typecheck

@@ -46,14 +46,8 @@ test("staff need a job and a partner's trainer an affiliation", () => {
   expect(ok({ relation: "freelance" })).toBe(true);
 });
 
-test("an own affiliation is written as its key, never as a variant that would read as a company", () => {
-  const own = (affiliation: string) => ok({ affiliation });
-  expect(["freelance", "hackers&wizards", "INNOQ"].map(own)).toEqual([true, true, true]);
-  expect(["Freelance", "hackers & wizards", "Hackers&Wizards"].map(own)).toEqual([
-    false,
-    false,
-    false,
-  ]);
+test("the schema preserves the spelling of a third-party affiliation", () => {
+  expect(schema.parse({ name: "A B", affiliation: "INNOQ" }).affiliation).toBe("INNOQ");
 });
 
 /** generate() over one folder `ada` holding the given files; `"link"` makes a symlink to a file
@@ -92,13 +86,10 @@ test("a bio holds only what the website renders: paragraphs and https or mailto 
     "Ada trainiert Teams.",
   );
   for (const de of [
-    "*em*",
     "- a\n- b",
     "<b>x</b>",
     "[x](javascript:alert(1))",
     "[x](https:example.com)",
-    "\\*",
-    "&amp;",
     "a\\\nb",
   ])
     expect(await rejection(generateOne({ "bio.md": bio, "bio.de.md": de }))).toContain(

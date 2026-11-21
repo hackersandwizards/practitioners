@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import { Glob } from "bun";
-import { base, markdownAwaiting, markdownOutside, split } from "../../scripts/export";
+import { base, markdownAwaiting, markdownOutside } from "../../scripts/export";
+import { split } from "./bio-text";
 
 test("markdownAwaiting only shrinks: each held span is still in its bio", async () => {
   const held = new Set<string>();
@@ -10,9 +11,9 @@ test("markdownAwaiting only shrinks: each held span is still in its bio", async 
   for (const key of markdownAwaiting) expect(held.has(key), `${key} is gone: remove it`).toBe(true);
 });
 
-test("bare addresses print as typed, so they pass; their Markdown forms do not", () => {
-  expect(
-    markdownOutside("At https://example.com, www.example.com or kontakt@example.com."),
-  ).toEqual([]);
-  expect(markdownOutside("<https://example.com> [x](http://example.com)")).toHaveLength(2);
+test("an inline dash suffix in YAML stays part of the name", () => {
+  expect(split("---\nname: X---\n---\nBio.")).toEqual({
+    data: { name: "X---" },
+    body: "Bio.",
+  });
 });

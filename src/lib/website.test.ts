@@ -2,7 +2,7 @@ import { expect, test, vi } from "vitest";
 import { Glob } from "bun";
 import { rejection } from "@hackersandwizards/scaffolding/rejection";
 import { base } from "../../scripts/export";
-import { listing, load, roster, source } from "./website";
+import { load, roster, source } from "./website";
 
 const stub = async (respond: () => Promise<Response>, run: () => Promise<void>) => {
   vi.stubGlobal("fetch", respond);
@@ -22,19 +22,18 @@ const person = {
   image: "https://www.hackersandwizards.dev/media/portraits/ada-lovelace.webp",
 };
 
-test("the roster matches a folder by slug, whatever name the website prints", () =>
+test("the roster response is keyed by slug and normalizes a null description", () =>
   stub(
     async () => Response.json([person, { ...person, slug: "grace", description: "Admiral." }]),
     async () => {
       const web = await load();
-      expect(listing(web, "ada-lovelace")).toEqual({
-        job: "Analyst",
+      expect(web?.get("ada-lovelace")).toEqual({
+        slug: "ada-lovelace",
+        role: "Analyst",
         description: undefined,
         url: person.url,
-        listed: true,
       });
-      expect(listing(web, "grace").description).toBe("Admiral.");
-      expect(listing(web, "nobody").listed).toBe(false);
+      expect(web?.get("grace")?.description).toBe("Admiral.");
     },
   ));
 
@@ -83,7 +82,28 @@ test(
   (15_000 * Number(process.env.SCAFFOLDING_TEST_TIMEOUT_MS || 5000)) / 5000,
 );
 
+test("the dev server retries a malformed or unreachable roster on the next request", async () => {
+  vi.stubEnv("DEV", true);
+  const fetch = vi
+    .fn<() => Promise<Response>>()
+    .mockResolvedValueOnce(new Response("<!doctype html>"))
+    .mockRejectedValueOnce(new Error("unreachable"))
+    .mockResolvedValueOnce(Response.json([person]));
+  try {
+    await stub(fetch, async () => {
+      expect(await rejection(roster())).toContain(source);
+      expect(await roster()).toBeUndefined();
+      expect((await roster())?.has(person.slug)).toBe(true);
+      expect(fetch).toHaveBeenCalledTimes(3);
+    });
+  } finally {
+    vi.unstubAllEnvs();
+    vi.resetModules();
+  }
+});
+
 test("a build asks an unreachable website once, not once per page", async () => {
+  const { roster } = await import("./website");
   vi.stubEnv("DEV", false);
   let calls = 0;
   try {

@@ -8,11 +8,10 @@
 // --crop is the square in source pixels, framed as the practitioner-bio skill says; without it a
 // non-square source is cut square by sharp's attention strategy. --size defaults to the crop's side,
 // capped at 1024 px, the skill's cap. WebP q82.
-import { parseArgs } from "node:util";
 import sharp from "sharp";
 
-const luma = (rgb: Uint8Array, p: number) =>
-  0.299 * rgb[p * 3]! + 0.587 * rgb[p * 3 + 1]! + 0.114 * rgb[p * 3 + 2]!;
+const lumaThousandths = (rgb: Uint8Array, p: number) =>
+  299 * rgb[p * 3]! + 587 * rgb[p * 3 + 1]! + 114 * rgb[p * 3 + 2]!;
 
 /** Gray-world gains at half strength, each within 5 % of neutral: a cast is pulled toward neutral
  *  without repainting a coloured wall behind the person. */
@@ -21,8 +20,8 @@ export function gains(rgb: Uint8Array): number[] {
   let g = 0;
   let b = 0;
   for (let p = 0; p < rgb.length / 3; p++) {
-    const y = luma(rgb, p);
-    if (y < 25 || y > 230) continue; // shadows and clipped highlights carry no cast
+    const y = lumaThousandths(rgb, p);
+    if (y < 25_000 || y > 230_000) continue; // shadows and clipped highlights carry no cast
     r += rgb[p * 3]!;
     g += rgb[p * 3 + 1]!;
     b += rgb[p * 3 + 2]!;
@@ -70,7 +69,7 @@ function blur(src: Float32Array, width: number, height: number, sigma: number) {
 /** sharp-2 in place on interleaved RGB: luminance detail above the threshold, added to all three
  *  channels alike, so the colour differences between channels stay as they were. */
 export function sharpen(rgb: Uint8Array, width: number, height: number) {
-  const y = Float32Array.from({ length: width * height }, (_, p) => luma(rgb, p));
+  const y = Float32Array.from({ length: width * height }, (_, p) => lumaThousandths(rgb, p) / 1000);
   const blurred = blur(y, width, height, 1.2);
   for (let p = 0; p < y.length; p++) {
     const d = y[p]! - blurred[p]!;
@@ -80,7 +79,7 @@ export function sharpen(rgb: Uint8Array, width: number, height: number) {
   }
 }
 
-interface Options {
+export interface Options {
   crop?: { x: number; y: number; side: number };
   size?: number;
   retouch?: boolean;
@@ -114,34 +113,4 @@ export async function retouch(input: string | Buffer, o: Options = {}): Promise<
     .toBuffer();
   if (o.sharpen) sharpen(sized, size, size);
   return sharp(sized, raw(size)).webp({ quality: 82, effort: 6, smartSubsample: true }).toBuffer();
-}
-
-if (import.meta.main) {
-  const usage =
-    "usage: bun run portrait <in> <out.webp> [--crop x,y,side] [--size px] [--retouch] [--sharpen]";
-  const { values, positionals } = parseArgs({
-    allowPositionals: true,
-    options: {
-      crop: { type: "string" },
-      size: { type: "string" },
-      retouch: { type: "boolean" },
-      sharpen: { type: "boolean" },
-    },
-  });
-  const int = (s: string, min: number) => {
-    if (!/^\d+$/.test(s) || Number(s) < min)
-      throw new Error(`not a whole number >= ${min}: ${s}\n${usage}`);
-    return Number(s);
-  };
-  const crop = values.crop?.split(",");
-  if (crop && crop.length !== 3) throw new Error(`--crop takes x,y,side\n${usage}`);
-  const [input, output] = positionals;
-  if (!input || !output || positionals.length > 2) throw new Error(usage);
-  const opts: Options = {
-    crop: crop && { x: int(crop[0]!, 0), y: int(crop[1]!, 0), side: int(crop[2]!, 1) },
-    size: values.size === undefined ? undefined : int(values.size, 1),
-    retouch: values.retouch,
-    sharpen: values.sharpen,
-  };
-  await Bun.write(output, await retouch(input, opts));
 }
