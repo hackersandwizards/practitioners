@@ -62,3 +62,9 @@ enables the hooks per clone. A pull request skips them, so `.github/workflows/pu
 runs gitleaks, `bun run pull-request` (only the bios, `entry.json` and images of one folder) and
 `astro check` over its commits; that is the only CI. It skips `bun run check`
 and `check-confidential`, which a reviewer runs locally (`practitioner-bio`).
+
+## Dependencies
+
+TypeScript uses scaffolding's two packages. `typescript` gives `astro check` and
+typescript-eslint the TypeScript 6 compiler API from `@typescript/typescript6`.
+`@typescript/native` provides the TypeScript 7 `tsc` executable.
