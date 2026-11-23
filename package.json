@@ -31,6 +31,7 @@
     "check:elements": "brand-elements",
     "check:copies": "brand-copies",
     "check:retired": "brand-retired .preview",
+    "check:links": "with-server 'exec astro preview --ignore-lock --outDir .preview --port \"$PORT\"' -- check-links {url}",
     "portrait": "bun scripts/portrait-cli.ts",
     "pull-request": "bun scripts/pull-request.ts"
   },
@@ -214,14 +215,16 @@
       "check:preview",
       [
         "check:elements",
-        "check:retired"
+        "check:retired",
+        "check:links"
       ]
     ],
     "test": "test",
     "fullOnly": {
       "check:preview": "builds the preview site",
       "check:elements": "renders and checks elements",
-      "check:retired": "scans generated output"
+      "check:retired": "scans generated output",
+      "check:links": "crawls the preview build"
     }
   },
   "admin": {

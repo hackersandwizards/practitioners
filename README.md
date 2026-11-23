@@ -40,7 +40,8 @@ Run the Vitest suite locally with `bun run test`. Run `bun run explore` to try 5
 property with a fresh seed, or `bun run explore --seed <seed>` to replay it. Run `bun run mutation`
 to check whether the suite catches changes to the code. For repository changes, run
 `bun run check`, which checks the scaffolding structure and flags rules enabled in both
-Oxlint and ESLint.
+Oxlint and ESLint. After building `.preview`, the gate runs `bun run check:links` to crawl its
+internal links.
 See [Git hooks](.githooks/README.md) for the local checks for bio contributions.
 
 ## Licence and contact
