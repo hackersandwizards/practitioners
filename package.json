@@ -22,14 +22,12 @@
     "format": "prettier --write .",
     "check": "scaffolding check",
     "check:staged": "check-staged",
-    "check:colours": "brand-colours",
     "check:preview": "PREVIEW=1 check-lock astro build --outDir .preview",
     "catalog": "bun run dev --open /catalog/",
     "test": "bun --bun vitest run",
     "explore": "scaffolding-explore",
     "mutation": "SCAFFOLDING_MUTATION_BUN=1 scaffolding-mutation",
     "check:elements": "brand-elements",
-    "check:copies": "brand-copies",
     "check:retired": "brand-retired .preview",
     "check:links": "with-server 'exec astro preview --ignore-lock --outDir .preview --port \"$PORT\"' -- check-links {url}",
     "portrait": "bun scripts/portrait-cli.ts",
@@ -42,7 +40,7 @@
     "@astrojs/check": "0.9.12",
     "@hackersandwizards/admin": "git+https://github.com/hackersandwizards/admin.git#v1.40.2",
     "@hackersandwizards/brand": "git+https://github.com/hackersandwizards/brand.git#v2.29.3",
-    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v5.37.3",
+    "@hackersandwizards/scaffolding": "git+https://github.com/hackersandwizards/scaffolding.git#v5.40.0",
     "@tailwindcss/vite": "4.3.5",
     "@types/bun": "1.4.5",
     "@typescript/native": "npm:typescript@7.0.2",
@@ -63,6 +61,11 @@
   },
   "prettier": "@hackersandwizards/scaffolding/prettier",
   "scaffolding": {
+    "markdown": {
+      "content": [
+        "src/content"
+      ]
+    },
     "allow": [
       {
         "check": "structure",
@@ -208,10 +211,6 @@
     ],
     "typecheck": "astro check",
     "check": [
-      [
-        "check:colours",
-        "check:copies"
-      ],
       "check:preview",
       [
         "check:elements",

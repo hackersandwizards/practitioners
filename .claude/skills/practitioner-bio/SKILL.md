@@ -167,7 +167,7 @@ delete their directory, commit, and flag it to Stefan for the website roster.
 8. **Draft the German bio** from the approved English one: the same content in their own German,
    not a word-by-word translation. Show it; most practitioners will edit a phrase.
 9. **Save** both files in the format below with `status: draft`, then run `bun run dev` and show
-   the result at http://localhost:4325/<slug>/ so they see their page as a client will. Confirm the
+   the result at `http://localhost:4325/<slug>/` so they see their page as a client will. Confirm the
    new sentences are on the page, not that the page loaded.
 10. **Commit**, the changed files named on `git commit`. Run by the person in their fork (`origin`
    is not `hackersandwizards/practitioners`): commit on a branch named after the slug, push it to
