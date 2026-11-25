@@ -3,8 +3,9 @@ import { z } from "zod";
 /** Who hackersandwizards.dev/team/ shows, with the role and credential line it prints under each
  *  name and their profile there, read from the roster the website publishes at /team.json; reading
  *  it keeps the roster the website's own (CLAUDE.md). Undefined when it is unreachable, so the
- *  overview says it does not know rather than marking everyone as missing. An answer of another
- *  shape throws, a 404 or 410 included: the website changed its data, and the build must say so. */
+ *  overview says it does not know rather than marking everyone as missing. An answer that is not
+ *  JSON or of another shape throws, a 404 or 410 included: the website changed its data, and the
+ *  build must say so. */
 export const team = "https://www.hackersandwizards.dev/team/";
 export const source = new URL("/team.json", team).href;
 
@@ -39,7 +40,9 @@ export async function load(): Promise<Map<string, Person> | undefined> {
   let json: unknown;
   try {
     json = JSON.parse(body);
-  } catch {} // not JSON: the shape check below names it
+  } catch (cause) {
+    throw new Error(`${source} did not answer in JSON`, { cause });
+  }
   const parsed = people.safeParse(json);
   if (!parsed.success)
     throw new Error(`${source} answered in another shape: ${z.prettifyError(parsed.error)}`);

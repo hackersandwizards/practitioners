@@ -49,7 +49,7 @@ test("a page that answers in HTML fails naming the roster", () =>
   stub(
     async () => new Response("<!doctype html>"),
     async () => {
-      expect(await rejection(load())).toContain(source);
+      expect(await rejection(load())).toBe(`Error: ${source} did not answer in JSON`);
     },
   ));
 
