@@ -61,45 +61,80 @@ test.prop([fc.array(profile)], {
   );
 });
 
-const bio = fc.oneof(
-  fc.constant({ text: undefined, blank: true }),
-  whitespace.map((text) => ({ text, blank: true })),
-  fc.constant({ text: "", blank: true }),
-  unicodeString.map((text) => ({
-    text: `Text ${text.replaceAll("Seed draft", "Seed_draft")}`,
-    blank: false,
+const texts = (label: string) =>
+  fc.oneof(
+    fc.constant({ text: undefined, lacks: [label] }),
+    whitespace.map((text) => ({ text, lacks: [label] })),
+    fc.constant({ text: "", lacks: [label] }),
+    unicodeString.map((text) => ({
+      text: `Text ${text.replaceAll("Seed draft", "Seed_draft")}`,
+      lacks: [],
+    })),
+  );
+
+const englishBio = texts("English bio");
+const englishRequirement = fc.oneof(
+  englishBio,
+  englishBio.map(({ text }) => ({
+    text: `Text. Seed draft: ${text ?? ""}`,
+    lacks: ["English bio"],
   })),
 );
-
-test.prop([bio, bio, fc.boolean(), fc.boolean(), fc.boolean(), fc.boolean()], {
-  examples: [
-    [{ text: "", blank: true }, { text: "\n", blank: true }, false, false, false, false],
-    [
-      { text: "Écrit.", blank: false },
-      { text: "Übersetzt.", blank: false },
-      true,
-      false,
-      true,
-      false,
-    ],
-    [{ text: "English", blank: false }, { text: "Deutsch", blank: false }, false, true, true, true],
-  ],
-})(
-  "lists each missing requirement in display order",
-  (english, german, familiar, linkedin, photo, seed) => {
-    const entry = {
-      id: familiar ? "reachy" : "ada",
-      body: seed ? `Text. Seed draft: ${english.text ?? ""}` : english.text,
-      data: {
-        linkedin: linkedin ? "https://example.com/ada" : undefined,
-        photo: photo ? "./photo.webp" : undefined,
-      },
-    };
-    expect(missing(entry, german.text)).toEqual([
-      ...(english.blank || seed ? ["English bio"] : []),
-      ...(german.blank ? ["German bio"] : []),
-      ...(!linkedin && !familiar ? ["LinkedIn"] : []),
-      ...(!photo ? ["Portrait"] : []),
-    ]);
-  },
+const germanRequirement = texts("German bio");
+const linkedInRequirement = fc.constantFrom(
+  { id: "ada", linkedin: undefined, lacks: ["LinkedIn"] },
+  { id: "ada", linkedin: "https://example.com/ada", lacks: [] },
+  { id: "reachy", linkedin: undefined, lacks: [] },
+  { id: "reachy", linkedin: "https://example.com/ada", lacks: [] },
 );
+const portraitRequirement = fc.constantFrom(
+  { photo: undefined, lacks: ["Portrait"] },
+  { photo: "./photo.webp", lacks: [] },
+);
+const entryRequirements = fc
+  .tuple(englishRequirement, germanRequirement, linkedInRequirement, portraitRequirement)
+  .map(([english, german, linkedIn, portrait]) => ({
+    entry: {
+      id: linkedIn.id,
+      body: english.text,
+      data: { linkedin: linkedIn.linkedin, photo: portrait.photo },
+    },
+    german: german.text,
+    expected: [...english.lacks, ...german.lacks, ...linkedIn.lacks, ...portrait.lacks],
+  }));
+
+test.prop([entryRequirements], {
+  examples: [
+    [
+      {
+        entry: { id: "ada", body: "", data: { linkedin: undefined, photo: undefined } },
+        german: "\n",
+        expected: ["English bio", "German bio", "LinkedIn", "Portrait"],
+      },
+    ],
+    [
+      {
+        entry: {
+          id: "reachy",
+          body: "Écrit.",
+          data: { linkedin: undefined, photo: "./photo.webp" },
+        },
+        german: "Übersetzt.",
+        expected: [],
+      },
+    ],
+    [
+      {
+        entry: {
+          id: "ada",
+          body: "Text. Seed draft: English",
+          data: { linkedin: "https://example.com/ada", photo: "./photo.webp" },
+        },
+        german: "Deutsch",
+        expected: ["English bio"],
+      },
+    ],
+  ],
+})("lists each missing requirement in display order", ({ entry, german, expected }) => {
+  expect(missing(entry, german)).toEqual(expected);
+});

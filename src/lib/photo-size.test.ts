@@ -15,10 +15,13 @@ test("CONTRIBUTING.md states portraitMinimum", async () => {
 test("the number of portraits below the minimum is AWAITING_ORIGINAL", async () => {
   const files = [...new Glob("src/content/practitioners/*/photo.webp").scanSync()];
   expect(files.length).toBeGreaterThan(0);
-  const below: string[] = [];
+  const portraits: { file: string; width: number; height: number }[] = [];
   for (const file of files) {
     const { width, height } = await imageMetadata(await Bun.file(file).bytes());
-    if (Math.min(width, height) < portraitMinimum) below.push(`${file}: ${width} x ${height} px`);
+    portraits.push({ file, width, height });
   }
+  const below = portraits
+    .filter(({ width, height }) => Math.min(width, height) < portraitMinimum)
+    .map(({ file, width, height }) => `${file}: ${width} x ${height} px`);
   expect(below.length, below.sort().join("\n")).toBe(AWAITING_ORIGINAL);
 });

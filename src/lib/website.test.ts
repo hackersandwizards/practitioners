@@ -1,8 +1,10 @@
-import { expect, test, vi } from "vitest";
+import { assert, expect, test, vi } from "vitest";
 import { Glob } from "bun";
 import { rejection } from "@hackersandwizards/scaffolding/rejection";
 import { base } from "../../scripts/export";
 import { load, roster, source } from "./website";
+
+const gateTimeoutFactor = Number(process.env.SCAFFOLDING_TEST_TIMEOUT_MS || 5000) / 5000;
 
 const stub = async (respond: () => Promise<Response>, run: () => Promise<void>) => {
   vi.stubGlobal("fetch", respond);
@@ -68,18 +70,18 @@ test("a roster that is gone fails the build, an outage reads as unknown", async 
   );
 });
 
-// The gate check: the website lists nobody without a folder here. An unreachable website passes, so
-// a commit made offline is not held up by it.
+// Skip the roster check when the website is unreachable so offline commits can proceed.
 test(
   "every slug the website lists has a folder here",
-  async () => {
+  async ({ skip }) => {
     const web = await load();
-    if (!web) return console.warn(`website.test.ts: the roster was unreachable, not checked`);
+    skip(!web, "website.test.ts: the roster was unreachable, not checked");
+    assert(web, "the website roster should be available after the skip check");
     const folders = new Set([...new Glob("*/bio.md").scanSync(base)].map((p) => p.split("/")[0]));
     expect(web.size).toBeGreaterThan(0);
     expect([...web.keys()].filter((slug) => !folders.has(slug))).toEqual([]);
   },
-  (15_000 * Number(process.env.SCAFFOLDING_TEST_TIMEOUT_MS || 5000)) / 5000,
+  15_000 * gateTimeoutFactor,
 );
 
 test("the dev server retries a malformed or unreachable roster on the next request", async () => {

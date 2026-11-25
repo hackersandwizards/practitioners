@@ -65,33 +65,42 @@ test.prop([rgb, dimension, dimension], {
   expect(after).toEqual(before);
 });
 
-test.prop(
-  [
-    fc.integer({ min: 50, max: 100 }),
-    fc.integer({ min: 140, max: 205 }),
-    fc.integer({ min: 8, max: 12 }),
-    fc.boolean(),
+type GreyLevels = { dark: number; light: number };
+
+function edgeImage({ dark, light }: GreyLevels, half: number, stride: number) {
+  const size = half * 2;
+  const before = Uint8Array.from({ length: size * size * 3 }, (_, i) => {
+    const pixel = Math.floor(i / 3);
+    const axis = Math.floor(pixel / stride) % size;
+    return (axis < half ? dark : light) + (i % 3) * 5;
+  });
+  return { before, size, left: (half - 1) * stride * 3, right: half * stride * 3 };
+}
+
+const edgeGeometry = fc
+  .integer({ min: 8, max: 12 })
+  .chain((half) => fc.constantFrom({ half, stride: half * 2 }, { half, stride: 1 }));
+
+const edges = fc
+  .tuple(
+    fc.record({
+      dark: fc.integer({ min: 50, max: 100 }),
+      light: fc.integer({ min: 140, max: 205 }),
+    }),
+    edgeGeometry,
+  )
+  .map(([levels, { half, stride }]) => edgeImage(levels, half, stride));
+
+test.prop([edges], {
+  examples: [
+    [edgeImage({ dark: 50, light: 205 }, 8, 16)],
+    [edgeImage({ dark: 100, light: 140 }, 12, 1)],
   ],
-  {
-    examples: [
-      [50, 205, 8, true],
-      [100, 140, 12, false],
-    ],
-  },
-)(
+})(
   "sharpens either edge orientation by the same amount in each channel away from clipping",
-  (dark, light, half, horizontal) => {
-    const size = half * 2;
-    const before = Uint8Array.from({ length: size * size * 3 }, (_, i) => {
-      const p = Math.floor(i / 3);
-      const axis = horizontal ? Math.floor(p / size) : p % size;
-      return (axis < half ? dark : light) + (i % 3) * 5;
-    });
+  ({ before, size, left, right }) => {
     const after = before.slice();
     sharpen(after, size, size);
-    const step = horizontal ? size : 1;
-    const left = (half - 1) * step * 3;
-    const right = half * step * 3;
     expect(after[left]).toBeLessThan(before[left]!);
     expect(after[right]).toBeGreaterThan(before[right]!);
     for (let i = 0; i < before.length; i += 3) {

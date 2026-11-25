@@ -6,6 +6,8 @@ import { pages } from "../brand-elements.json";
 const names = (pattern: string, ext: string) =>
   [...new Glob(pattern).scanSync()].map((f) => basename(f, ext)).sort();
 
+const nonEntryPages = new Set(["", "catalog"]);
+
 test("every component in src/components has a story", () => {
   const components = names("src/components/*.astro", ".astro");
   expect(components.length).toBeGreaterThan(0);
@@ -25,7 +27,7 @@ test("every entry a story, the catalog's home or brand-elements.json draws exist
   );
   const slugs = [
     ...named,
-    ...pages.map((p) => p.replaceAll("/", "")).filter((s) => s && s !== "catalog"),
+    ...pages.map((p) => p.replaceAll("/", "")).filter((slug) => !nonEntryPages.has(slug)),
   ];
   expect(slugs.length).toBeGreaterThan(0);
   const gone = slugs.filter((s) => !Bun.file(`src/content/practitioners/${s}/bio.md`).size);

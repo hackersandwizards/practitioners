@@ -3,24 +3,40 @@ import { expect } from "vitest";
 import { markdownOutside } from "../../scripts/export";
 import { paragraphs, split } from "./bio-text";
 
-test.prop([unicodeString, unicodeString, fc.constantFrom("\n", "\r\n"), fc.boolean()], {
+const emptyHeader = { text: "---\n---\n", data: {} };
+const header = fc.oneof(
+  fc.constant(emptyHeader),
+  unicodeString.map((name) => ({
+    text: `---\nname: ${JSON.stringify(name)}\n---\n`,
+    data: { name },
+  })),
+);
+
+test.prop([header, unicodeString, fc.constantFrom("\n", "\r\n")], {
   examples: [
-    ["", "", "\n", false],
-    ["constructor", "Écrit.\nBeitrag.", "\r\n", true],
-    ["__proto__", "李".repeat(1024), "\n", true],
-    ["toString", "before\n---\nafter", "\n", false],
+    [emptyHeader, "", "\n"],
+    [
+      { text: '---\nname: "constructor"\n---\n', data: { name: "constructor" } },
+      "Écrit.\nBeitrag.",
+      "\r\n",
+    ],
+    [
+      { text: '---\nname: "__proto__"\n---\n', data: { name: "__proto__" } },
+      "李".repeat(1024),
+      "\n",
+    ],
+    [emptyHeader, "before\n---\nafter", "\n"],
   ],
 })(
   "splits delimited YAML from the body and normalizes Windows newlines",
-  (name, body, newline, frontmatter) => {
+  ({ text, data }, body, newline) => {
     const normalized = body.replaceAll("\r\n", "\n");
-    const header = frontmatter ? `---\nname: ${JSON.stringify(name)}\n---\n` : "---\n---\n";
-    expect(split(`${header}${normalized}`.replaceAll("\n", newline))).toEqual({
-      data: frontmatter ? { name } : {},
+    expect(split(`${text}${normalized}`.replaceAll("\n", newline))).toEqual({
+      data,
       body: normalized,
     });
-    expect(split(header.trimEnd().replaceAll("\n", newline))).toEqual({
-      data: frontmatter ? { name } : {},
+    expect(split(text.trimEnd().replaceAll("\n", newline))).toEqual({
+      data,
       body: "",
     });
     expect(split(`Bio\n${normalized}`.replaceAll("\n", newline))).toEqual({

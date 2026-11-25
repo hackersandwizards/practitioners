@@ -9,27 +9,29 @@ const word = fc.string({
   maxLength: 256,
 });
 
-test.prop(
-  [
+const affiliationSpelling = fc
+  .tuple(
     fc.constantFrom("freelance", "hackers&wizards"),
     fc.nat(),
     fc.constantFrom("", " ", "\t", "\u2003"),
     fc.boolean(),
-  ],
-  {
-    examples: [
-      ["freelance", 0, "", false],
-      ["freelance", 0, "", true],
-      ["hackers&wizards", 6, "\u2003", false],
-      ["hackers&wizards", 7, "\t", true],
-    ],
-  },
-)(
-  "reserves case and whitespace variants of an own affiliation for its exact key",
-  (key, index, gap, upper) => {
+  )
+  .map(([key, index, gap, upper]) => {
     const offset = 1 + (index % (key.length - 1));
-    const variant = `${key.slice(0, offset)}${gap}${key.slice(offset)}`;
-    const affiliation = upper ? variant.toUpperCase() : variant;
+    const spelling = `${key.slice(0, offset)}${gap}${key.slice(offset)}`;
+    return { key, affiliation: upper ? spelling.toUpperCase() : spelling };
+  });
+
+test.prop([affiliationSpelling], {
+  examples: [
+    [{ key: "freelance", affiliation: "freelance" }],
+    [{ key: "freelance", affiliation: "FREELANCE" }],
+    [{ key: "hackers&wizards", affiliation: "hackers\u2003&wizards" }],
+    [{ key: "hackers&wizards", affiliation: "HACKERS&\tWIZARDS" }],
+  ],
+})(
+  "reserves case and whitespace variants of an own affiliation for its exact key",
+  ({ key, affiliation }) => {
     expect(schema.safeParse({ name: "Example", affiliation }).success).toBe(affiliation === key);
   },
 );

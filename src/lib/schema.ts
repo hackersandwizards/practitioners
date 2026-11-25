@@ -169,103 +169,98 @@ const skill = z.strictObject({
   teaches: z.boolean().optional(),
 });
 
+const practitionerName = z.string().min(1);
+const workReferenceFields = { year: year.optional(), url: link.optional() };
+const certification = z.strictObject({ name: z.string().min(1), ...workReferenceFields });
+const publicWork = z.strictObject({
+  kind: vocab(kinds),
+  title: z.string().min(1),
+  ...workReferenceFields,
+});
+const practitionerFields = {
+  /** Who the practitioner works for: a key of `ownAffiliations`, or the organisation's name as
+   *  it writes it ("INNOQ", "re:cinq"), so two people at one company match. Part of matching a
+   *  trainer to a client or project; empty where nobody has stated it. */
+  affiliation: z.string().min(1).max(60).optional(),
+  /** The organisation's own site, which the website links from a partner's or guest's label. */
+  affiliation_url: link.optional(),
+  /** How the person works with h&w, which names them on the website: `staff` of h&w, a
+   *  `freelance` trainer, a trainer employed by a `partner` firm, or a `guest` employed
+   *  elsewhere. */
+  relation: z.enum(["staff", "freelance", "partner", "guest"]).optional(),
+  /** German labels about them take the feminine form ("Trainerin"). */
+  feminine: z.literal(true).optional(),
+  /** Their own title as the website prints it: "Founder & Co-CEO", "AI architect and
+   *  engineering trainer at IONOS". */
+  job: localized.optional(),
+  /** Their expertise under their name on hackersandwizards.dev/team/, never an employer;
+   *  `expertiseProblem` holds the limit. */
+  expertise: localized.optional(),
+  /** One background line under that, naming their own company or employer where there is one;
+   *  no client, rate or figure they do not publish. */
+  background: localized.optional(),
+  /** Mandatory for every human; the practitioner-bio skill enforces it. Optional here only
+   *  because Reachy, the familiar, has a Hugging Face page instead. */
+  linkedin: link.optional(),
+  bluesky: link.optional(),
+  x: link.optional(),
+  threads: link.optional(),
+  mastodon: link.optional(),
+  github: link.optional(),
+  website: link.optional(),
+  /** A public booking link (cal.com, Calendly), for "book a call with me". */
+  bookme: link.optional(),
+  /** Further public profiles the person keeps (GitLab, Xing, Speaker Deck, Wikidata), labelled
+   *  by host; the website lists them with the named links in its structured data. */
+  profiles: z.array(link).optional(),
+  /** The profile h&w matches a client's training against. Public like the bio: no rate,
+   *  availability, client under NDA or contact detail, which Company OS keeps. */
+  topics: z.array(vocab(topics)).optional(),
+  formats: z.array(vocab(formats)).optional(),
+  delivery: z.array(vocab(deliveries)).optional(),
+  audiences: z.array(vocab(audiences)).optional(),
+  room_levels: z.array(vocab(roomLevels)).optional(),
+  /** The largest group they have trained alone. */
+  group_max: z.int().positive().optional(),
+  /** ISO 639-1 code, CEFR level, and whether they run a training in it. */
+  languages: z
+    .array(
+      z.strictObject({
+        code: z
+          .string()
+          .regex(/^[a-z]{2}$/)
+          .refine((c) => languageNames.of(c) !== c),
+        level: vocab(languageLevels),
+        trains: z.boolean().optional(),
+      }),
+    )
+    .optional(),
+  stack: z.array(skill).optional(),
+  ai_tools: z.array(skill).optional(),
+  domains: z.array(vocab(domains)).optional(),
+  roles: z.array(vocab(roles)).optional(),
+  /** The year of their first professional job in software or product. */
+  since: year.optional(),
+  certifications: z.array(certification).optional(),
+  /** Public work only: what anyone can find. */
+  public_work: z.array(publicWork).optional(),
+  /** draft until `missing` in entry.ts finds nothing and the person's own change or yes is in. */
+  status: z.enum(["draft", "active"]).default("draft"),
+  owner: z.string().optional(),
+  updated: z.iso.date().optional(),
+};
+
 /** What a practitioner owns about themselves, the lines the website prints about them included.
  *  Who is shown on hackersandwizards.dev and in which group is the website's roster and not a
  *  field here. */
 export const practitionerSchema = ({ image }: SchemaContext) =>
   z
     .strictObject({
-      name: z.string().min(1),
+      name: practitionerName,
       /** Square portrait next to the bio; `portraitMinimum` is its smallest side. Mandatory like
        *  the bio (entry.ts, `missing`); a seed h&w starts without one shows initials instead. */
       photo: image().optional(),
-      /** Who the practitioner works for: a key of `ownAffiliations`, or the organisation's name as
-       *  it writes it ("INNOQ", "re:cinq"), so two people at one company match. Part of matching a
-       *  trainer to a client or project; empty where nobody has stated it. */
-      affiliation: z.string().min(1).max(60).optional(),
-      /** The organisation's own site, which the website links from a partner's or guest's label. */
-      affiliation_url: link.optional(),
-      /** How the person works with h&w, which names them on the website: `staff` of h&w, a
-       *  `freelance` trainer, a trainer employed by a `partner` firm, or a `guest` employed
-       *  elsewhere. */
-      relation: z.enum(["staff", "freelance", "partner", "guest"]).optional(),
-      /** German labels about them take the feminine form ("Trainerin"). */
-      feminine: z.literal(true).optional(),
-      /** Their own title as the website prints it: "Founder & Co-CEO", "AI architect and
-       *  engineering trainer at IONOS". */
-      job: localized.optional(),
-      /** Their expertise under their name on hackersandwizards.dev/team/, never an employer;
-       *  `expertiseProblem` holds the limit. */
-      expertise: localized.optional(),
-      /** One background line under that, naming their own company or employer where there is one;
-       *  no client, rate or figure they do not publish. */
-      background: localized.optional(),
-      /** Mandatory for every human; the practitioner-bio skill enforces it. Optional here only
-       *  because Reachy, the familiar, has a Hugging Face page instead. */
-      linkedin: link.optional(),
-      bluesky: link.optional(),
-      x: link.optional(),
-      threads: link.optional(),
-      mastodon: link.optional(),
-      github: link.optional(),
-      website: link.optional(),
-      /** A public booking link (cal.com, Calendly), for "book a call with me". */
-      bookme: link.optional(),
-      /** Further public profiles the person keeps (GitLab, Xing, Speaker Deck, Wikidata), labelled
-       *  by host; the website lists them with the named links in its structured data. */
-      profiles: z.array(link).optional(),
-      /** The profile h&w matches a client's training against. Public like the bio: no rate,
-       *  availability, client under NDA or contact detail, which Company OS keeps. */
-      topics: z.array(vocab(topics)).optional(),
-      formats: z.array(vocab(formats)).optional(),
-      delivery: z.array(vocab(deliveries)).optional(),
-      audiences: z.array(vocab(audiences)).optional(),
-      room_levels: z.array(vocab(roomLevels)).optional(),
-      /** The largest group they have trained alone. */
-      group_max: z.int().positive().optional(),
-      /** ISO 639-1 code, CEFR level, and whether they run a training in it. */
-      languages: z
-        .array(
-          z.strictObject({
-            code: z
-              .string()
-              .regex(/^[a-z]{2}$/)
-              .refine((c) => languageNames.of(c) !== c),
-            level: vocab(languageLevels),
-            trains: z.boolean().optional(),
-          }),
-        )
-        .optional(),
-      stack: z.array(skill).optional(),
-      ai_tools: z.array(skill).optional(),
-      domains: z.array(vocab(domains)).optional(),
-      roles: z.array(vocab(roles)).optional(),
-      /** The year of their first professional job in software or product. */
-      since: year.optional(),
-      certifications: z
-        .array(
-          z.strictObject({
-            name: z.string().min(1),
-            year: year.optional(),
-            url: link.optional(),
-          }),
-        )
-        .optional(),
-      /** Public work only: what anyone can find. */
-      public_work: z
-        .array(
-          z.strictObject({
-            kind: vocab(kinds),
-            title: z.string().min(1),
-            year: year.optional(),
-            url: link.optional(),
-          }),
-        )
-        .optional(),
-      /** draft until `missing` in entry.ts finds nothing and the person's own change or yes is in. */
-      status: z.enum(["draft", "active"]).default("draft"),
-      owner: z.string().optional(),
-      updated: z.iso.date().optional(),
+      ...practitionerFields,
     })
     // A seed may wait for its portrait; an entry the person approved may not.
     .refine((d) => d.status === "draft" || d.photo, { message: "an active entry needs a photo" })

@@ -57,47 +57,59 @@ export function markdownOutside(body: string) {
   );
 }
 
+type FolderBios = { english: string; german: string };
+
+/** Reads the bios from a regular-file-only folder, with empty text for an absent German bio. */
+async function readEntryFolder(dir: string, slug: string, bio: string): Promise<FolderBios> {
+  // A link would read a file outside the folder into entry.json, or have the export write there.
+  for (const f of readdirSync(`${dir}/${slug}`, { withFileTypes: true }))
+    if (!f.isFile()) throw new Error(`${slug}: ${f.name} is not a regular file`);
+  const english = await Bun.file(`${dir}/${bio}`).text();
+  const de = Bun.file(`${dir}/${slug}/bio.de.md`);
+  const german = (await de.exists()) ? await de.text() : "";
+  return { english, german };
+}
+
+/** Validates the frontmatter and bios in export order and builds the entry. */
+function entryFromBios(slug: string, bios: FolderBios): EntryJson {
+  const { data, body } = split(bios.english);
+  const parsed = schema.safeParse(data);
+  if (!parsed.success) throw new Error(`${slug}: ${z.prettifyError(parsed.error)}`);
+  const german = split(bios.german).body;
+  for (const [file, text] of [
+    ["bio.md", body],
+    ["bio.de.md", german],
+  ] as const) {
+    const held = (span: string) => markdownAwaiting.has(`${slug}/${file} ${span}`);
+    const outside = markdownOutside(text).filter((span) => !held(span));
+    if (outside.length)
+      throw new Error(`${slug}/${file}: the website prints this as typed: ${outside.join(" | ")}`);
+  }
+  // What the page's "Still missing" box lists keeps an entry a draft.
+  const lacks = missing({ id: slug, body, data: parsed.data }, german);
+  if (parsed.data.status === "active" && lacks.length)
+    throw new Error(`${slug}: active, but missing ${lacks.join(", ")}`);
+  // Only photo.webp is the portrait photo-size.test.ts measures; h&w converts an upload to it.
+  if (data.photo && data.photo !== "./photo.webp")
+    throw new Error(`${slug}: photo is ${data.photo}, not ./photo.webp`);
+  const { photo: _, ...rest } = parsed.data;
+  return {
+    slug,
+    ...rest,
+    ...(data.photo && { photo: `practitioners/${slug}/photo.webp` }),
+    bio: {
+      en: paragraphs(body),
+      de: paragraphs(german),
+    },
+  } as EntryJson;
+}
+
 /** Each folder's entry.json path and the text it must hold. */
 export async function generate(dir = base) {
   const files = new Map<string, string>();
   for (const bio of new Glob("*/bio.md").scanSync(dir)) {
     const slug = bio.split("/")[0]!;
-    // A link would read a file outside the folder into entry.json, or have the export write there.
-    for (const f of readdirSync(`${dir}/${slug}`, { withFileTypes: true }))
-      if (!f.isFile()) throw new Error(`${slug}: ${f.name} is not a regular file`);
-    const { data, body } = split(await Bun.file(`${dir}/${bio}`).text());
-    const de = Bun.file(`${dir}/${slug}/bio.de.md`);
-    const parsed = schema.safeParse(data);
-    if (!parsed.success) throw new Error(`${slug}: ${z.prettifyError(parsed.error)}`);
-    const german = (await de.exists()) ? split(await de.text()).body : "";
-    for (const [file, text] of [
-      ["bio.md", body],
-      ["bio.de.md", german],
-    ] as const) {
-      const held = (span: string) => markdownAwaiting.has(`${slug}/${file} ${span}`);
-      const outside = markdownOutside(text).filter((span) => !held(span));
-      if (outside.length)
-        throw new Error(
-          `${slug}/${file}: the website prints this as typed: ${outside.join(" | ")}`,
-        );
-    }
-    // What the page's "Still missing" box lists keeps an entry a draft.
-    const lacks = missing({ id: slug, body, data: parsed.data }, german);
-    if (parsed.data.status === "active" && lacks.length)
-      throw new Error(`${slug}: active, but missing ${lacks.join(", ")}`);
-    // Only photo.webp is the portrait photo-size.test.ts measures; h&w converts an upload to it.
-    if (data.photo && data.photo !== "./photo.webp")
-      throw new Error(`${slug}: photo is ${data.photo}, not ./photo.webp`);
-    const { photo: _, ...rest } = parsed.data;
-    const entry = {
-      slug,
-      ...rest,
-      ...(data.photo && { photo: `practitioners/${slug}/photo.webp` }),
-      bio: {
-        en: paragraphs(body),
-        de: paragraphs(german),
-      },
-    } as EntryJson;
+    const entry = entryFromBios(slug, await readEntryFolder(dir, slug, bio));
     files.set(`${dir}/${slug}/entry.json`, `${JSON.stringify(entry, null, 2)}\n`);
   }
   return files;

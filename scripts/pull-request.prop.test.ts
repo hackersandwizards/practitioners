@@ -14,31 +14,55 @@ const record = (mode: string, name: string) => {
   return `:100644 ${mode} ${"1".repeat(40)} ${after} ${status}\0${name}\0`;
 };
 
-test.prop(
-  [
-    slug,
-    unicodeString,
-    fc.constantFrom("JPEG", "Jpg", "png", "WebP", "HEIC", "avif"),
-    fc.constantFrom("100644", "000000", "120000", "100755", "160000"),
-  ],
-  {
-    examples: [
-      ["ada", "", "Jpg", "100644"],
-      ["a-1", "Élodie\t李", "HEIC", "000000"],
-      ["ada", "x".repeat(240), "avif", "120000"],
-      ["ada", "__proto__", "WebP", "100755"],
-      ["ada", "back\\slash\nline", "JPEG", "160000"],
-    ],
-  },
-)(
-  "accepts only regular files and deletions among supported image paths",
-  (slug, stem, extension, mode) => {
-    const name = `${root}/${slug}/image-${stem.replaceAll("/", "_").replaceAll("\0", "_")}.${extension}`;
-    expect(offences(record(mode, name))).toEqual(
-      mode === "100644" || mode === "000000" ? [] : [`${name}: mode ${mode}`],
-    );
-  },
+const imagePath = fc
+  .tuple(slug, unicodeString, fc.constantFrom("JPEG", "Jpg", "png", "WebP", "HEIC", "avif"))
+  .map(
+    ([folder, stem, extension]) =>
+      `${root}/${folder}/image-${stem.replaceAll("/", "_").replaceAll("\0", "_")}.${extension}`,
+  );
+
+const acceptedImageChange = fc
+  .tuple(imagePath, fc.constantFrom("100644", "000000"))
+  .map(([path, mode]) => ({ raw: record(mode, path), expected: [] }));
+
+const refusedImageChange = fc
+  .tuple(imagePath, fc.constantFrom("120000", "100755", "160000"))
+  .map(([path, mode]) => ({
+    raw: record(mode, path),
+    expected: [`${path}: mode ${mode}`],
+  }));
+
+const imageChange = fc.oneof(
+  { weight: 2, arbitrary: acceptedImageChange },
+  { weight: 3, arbitrary: refusedImageChange },
 );
+
+test.prop([imageChange], {
+  examples: [
+    [{ raw: record("100644", `${root}/ada/image-.Jpg`), expected: [] }],
+    [{ raw: record("000000", `${root}/a-1/image-Élodie\t李.HEIC`), expected: [] }],
+    [
+      {
+        raw: record("120000", `${root}/ada/image-${"x".repeat(240)}.avif`),
+        expected: [`${root}/ada/image-${"x".repeat(240)}.avif: mode 120000`],
+      },
+    ],
+    [
+      {
+        raw: record("100755", `${root}/ada/image-__proto__.WebP`),
+        expected: [`${root}/ada/image-__proto__.WebP: mode 100755`],
+      },
+    ],
+    [
+      {
+        raw: record("160000", `${root}/ada/image-back\\slash\nline.JPEG`),
+        expected: [`${root}/ada/image-back\\slash\nline.JPEG: mode 160000`],
+      },
+    ],
+  ],
+})("accepts only regular files and deletions among supported image paths", ({ raw, expected }) => {
+  expect(offences(raw)).toEqual(expected);
+});
 
 test.prop([slug, unicodeString], {
   examples: [

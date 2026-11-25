@@ -42,8 +42,10 @@ export function tone(): Uint8Array {
   return lut;
 }
 
+type ImagePlane = { pixels: Float32Array; width: number; height: number };
+
 /** Gaussian blur of a single float channel, separable, edges clamped. */
-function blur(src: Float32Array, width: number, height: number, sigma: number) {
+function blur({ pixels, width, height }: ImagePlane, sigma: number) {
   const r = Math.ceil(3 * sigma);
   const k = Array.from({ length: 2 * r + 1 }, (_, i) =>
     Math.exp(-((i - r) ** 2) / (2 * sigma ** 2)),
@@ -63,14 +65,14 @@ function blur(src: Float32Array, width: number, height: number, sigma: number) {
       }
     return out;
   };
-  return pass(pass(src, 1, 0), 0, 1);
+  return pass(pass(pixels, 1, 0), 0, 1);
 }
 
 /** sharp-2 in place on interleaved RGB: luminance detail above the threshold, added to all three
  *  channels alike, so the colour differences between channels stay as they were. */
 export function sharpen(rgb: Uint8Array, width: number, height: number) {
   const y = Float32Array.from({ length: width * height }, (_, p) => lumaThousandths(rgb, p) / 1000);
-  const blurred = blur(y, width, height, 1.2);
+  const blurred = blur({ pixels: y, width, height }, 1.2);
   for (let p = 0; p < y.length; p++) {
     const d = y[p]! - blurred[p]!;
     if (Math.abs(d) <= 2) continue;
@@ -86,26 +88,41 @@ export interface Options {
   sharpen?: boolean;
 }
 
+type SourceSize = { width: number; height: number };
+
+export function portraitFrame(
+  { width, height }: SourceSize,
+  { crop, size: requested }: Pick<Options, "crop" | "size">,
+) {
+  const side = crop?.side ?? Math.min(width, height);
+  const size = requested ?? Math.min(side, 1024);
+  if (size > side) throw new Error(`--size ${size} would upscale the ${side} px crop`);
+  return { side, size };
+}
+
+export function applyPortraitTreatment(rgb: Uint8Array) {
+  const g = gains(rgb);
+  const lut = tone();
+  for (let i = 0; i < rgb.length; i++)
+    rgb[i] = lut[Math.min(255, Math.round(rgb[i]! * g[i % 3]!))]!;
+}
+
 export async function retouch(input: string | Buffer, o: Options = {}): Promise<Buffer> {
   let img = sharp(input)
     .rotate()
     .flatten({ background: { r: 255, g: 255, b: 255 } })
     .toColourspace("srgb");
   const meta = await img.metadata();
-  const width = meta.autoOrient?.width ?? meta.width;
-  const height = meta.autoOrient?.height ?? meta.height;
-  const side = o.crop?.side ?? Math.min(width, height);
-  if (o.crop) img = img.extract({ left: o.crop.x, top: o.crop.y, width: side, height: side });
-  else if (width !== height) img = img.resize(side, side, { fit: "cover", position: "attention" });
-  const size = o.size ?? Math.min(side, 1024);
-  if (size > side) throw new Error(`--size ${size} would upscale the ${side} px crop`);
-  const rgb = await img.raw().toBuffer();
-  if (o.retouch) {
-    const g = gains(rgb);
-    const lut = tone();
-    for (let i = 0; i < rgb.length; i++)
-      rgb[i] = lut[Math.min(255, Math.round(rgb[i]! * g[i % 3]!))]!;
+  const { width, height } = meta.autoOrient ?? meta;
+  if (o.crop) {
+    const { x, y, side } = o.crop;
+    img = img.extract({ left: x, top: y, width: side, height: side });
   }
+  const { side, size } = portraitFrame({ width, height }, o);
+  if (!o.crop && width !== height)
+    img = img.resize(side, side, { fit: "cover", position: "attention" });
+  const rgb = await img.raw().toBuffer();
+  if (o.retouch) applyPortraitTreatment(rgb);
   const raw = (w: number) => ({ raw: { width: w, height: w, channels: 3 as const } });
   const sized = await sharp(rgb, raw(side))
     .resize(size, size, { kernel: "lanczos3" })
