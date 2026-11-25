@@ -21,7 +21,12 @@
         "no-restricted-imports": [
           "error",
           {
-            "patterns": [{ "regex": "^(\\.\\./)+(?:src/)?(components|layouts|pages)/" }]
+            "patterns": [
+              {
+                "regex": "^(\\.\\./)+(?:src/)?(components|layouts|pages)/",
+                "message": "src/lib/** cannot import from src/components/, src/layouts/, or src/pages/. Move shared logic or types into src/lib/ (library tests may import scripts/), or move UI-dependent code into src/components/, src/layouts/, or src/pages/. Do not silence with oxlint-disable."
+              }
+            ]
           }
         ]
       }
@@ -32,7 +37,12 @@
         "no-restricted-imports": [
           "error",
           {
-            "patterns": [{ "regex": "^(\\.\\./)+(?:src/)?(layouts|pages)/" }]
+            "patterns": [
+              {
+                "regex": "^(\\.\\./)+(?:src/)?(layouts|pages)/",
+                "message": "src/components/** cannot import from src/layouts/ or src/pages/. Pass layout or page data and markup via props or <slot /> from src/layouts/ or src/pages/, and put shared helpers or types in src/lib/ or another component under src/components/. Do not silence with oxlint-disable."
+              }
+            ]
           }
         ]
       }
