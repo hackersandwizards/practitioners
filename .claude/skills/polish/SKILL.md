@@ -85,6 +85,7 @@ One pass of each. Name any finding you dismissed, and why, in the final summary,
 Run the repo's own checks, the gate on its own line, and read `$?`. "A gate that ran but was never read" in `references/failure-modes.md` names this phase's traps.
 
 A failing check blocks the commit. Fix it if the sweep caused it; report it and stop if it predates the sweep. A failure traced to a file in the exclusion set is another session's half-finished edit: wait for the gate to clear, and report it and stop if it does not.
+
 ## 6. Commit and push
 
 Re-run `git status` and drop any file that became dirty since phase 1 without an edit of yours, and commit each batch that passes the gate. Push, and check that `git status -sb` shows nothing unpushed.
