@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import { basename } from "node:path";
 import { Glob } from "bun";
+import { defined } from "@hackersandwizards/scaffolding/defined";
 import { pages } from "../brand-elements.json";
 
 const names = (pattern: string, ext: string) =>
@@ -23,7 +24,7 @@ test("every entry a story, the catalog's home or brand-elements.json draws exist
     Bun.file(f).text(),
   );
   const named = (await Promise.all(sources)).flatMap((t) =>
-    [...t.matchAll(/\b(?:card|entry)\("([^"]+)"\)/g)].map((m) => m[1]!),
+    [...t.matchAll(/\b(?:card|entry)\("([^"]+)"\)/g)].map((m) => defined(m[1], "entry slug")),
   );
   const slugs = [
     ...named,

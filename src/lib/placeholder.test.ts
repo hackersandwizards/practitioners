@@ -1,10 +1,15 @@
 import { expect, test } from "vitest";
+import { defined } from "@hackersandwizards/scaffolding/defined";
 import { schema } from "../../scripts/export";
 
 /** CONTRIBUTING.md's example block, its link lines uncommented and their handles left unfilled. */
 const example = async () => {
   const text = await Bun.file("CONTRIBUTING.md").text();
-  const block = text.match(/```yaml\n(name: Ada Example\n[\s\S]*?)```/)![1];
+  const [, body] = defined(
+    text.match(/```yaml\n(name: Ada Example\n[\s\S]*?)```/),
+    "YAML example in CONTRIBUTING.md",
+  );
+  const block = defined(body, "YAML example body");
   return Bun.YAML.parse(block.replace(/^# ?/gm, "")) as Record<string, unknown>;
 };
 

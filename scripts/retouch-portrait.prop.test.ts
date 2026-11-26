@@ -1,4 +1,5 @@
 import { fc, test } from "@hackersandwizards/scaffolding/property";
+import { defined } from "@hackersandwizards/scaffolding/defined";
 import { expect } from "vitest";
 import { gains, sharpen } from "./retouch-portrait";
 
@@ -41,7 +42,8 @@ test.prop([fc.array(rgb, { maxLength: 128 })], {
     const light = 299 * r + 587 * g + 114 * b;
     return light >= 25_000 && light <= 230_000;
   });
-  const totals = [0, 1, 2].map((c) => usable.reduce((sum, pixel) => sum + pixel[c]!, 0));
+  const channels = [0, 1, 2] as const;
+  const totals = channels.map((c) => usable.reduce((sum, pixel) => sum + pixel[c], 0));
   const neutral = totals.reduce((sum, total) => sum + total, 0) / 3;
   const expected = totals.includes(0)
     ? [1, 1, 1]
@@ -101,11 +103,14 @@ test.prop([edges], {
   ({ before, size, left, right }) => {
     const after = before.slice();
     sharpen(after, size, size);
-    expect(after[left]).toBeLessThan(before[left]!);
-    expect(after[right]).toBeGreaterThan(before[right]!);
+    expect(after[left]).toBeLessThan(defined(before[left], "original dark edge sample"));
+    expect(after[right]).toBeGreaterThan(defined(before[right], "original light edge sample"));
     for (let i = 0; i < before.length; i += 3) {
-      expect(after[i + 1]! - after[i]!).toBe(5);
-      expect(after[i + 2]! - after[i]!).toBe(10);
+      const red = defined(after[i], "sharpened red sample");
+      const green = defined(after[i + 1], "sharpened green sample");
+      const blue = defined(after[i + 2], "sharpened blue sample");
+      expect(green - red).toBe(5);
+      expect(blue - red).toBe(10);
     }
   },
 );

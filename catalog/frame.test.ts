@@ -12,6 +12,33 @@ class HoverRule {
   constructor(readonly selectorText: string) {}
 }
 
+const hoverScriptGlobals = {
+  document: { querySelectorAll: () => [] },
+  DOMException,
+  CSSStyleRule: HoverRule,
+};
+
+test("a mirrored hover rule goes immediately after its original", () => {
+  const rule = new HoverRule("a:hover");
+  const insertRule = vi.fn();
+  runInNewContext(`${previewScript}\nmirrorHoverRule(rule, sheet, 2);`, {
+    ...hoverScriptGlobals,
+    rule,
+    sheet: { insertRule },
+  });
+  expect(insertRule).toHaveBeenCalledExactlyOnceWith('a[data-force="hover"]{color: red}', 3);
+});
+
+test("a stylesheet mirrors hover rules from last to first to preserve insertion indices", () => {
+  const insertRule = vi.fn();
+  const sheet = { cssRules: [new HoverRule("a:hover"), new HoverRule("button:hover")], insertRule };
+  runInNewContext(`${previewScript}\nmirrorHoverSheet(sheet);`, { ...hoverScriptGlobals, sheet });
+  expect(insertRule.mock.calls).toEqual([
+    ['button[data-force="hover"]{color: red}', 2],
+    ['a[data-force="hover"]{color: red}', 1],
+  ]);
+});
+
 function runHoverPreview(
   operation: "cssRules" | "insertRule",
   error: DOMException,

@@ -1,6 +1,7 @@
 import { expect, test } from "vitest";
 import sharp from "sharp";
 import { rejection } from "@hackersandwizards/scaffolding/rejection";
+import { defined } from "@hackersandwizards/scaffolding/defined";
 import {
   applyPortraitTreatment,
   gains,
@@ -23,10 +24,11 @@ const transparentSource = (width: number, height: number) =>
 test("the tone curve keeps black, white and the midtones, and lowers highlights by at most 4 levels", () => {
   const lut = tone();
   expect([lut[0], lut[128], lut[191], lut[255]]).toEqual([0, 128, 191, 255]);
-  expect(lut[230]!).toBeLessThan(230);
+  expect(defined(lut[230], "tone level at 230")).toBeLessThan(230);
   for (let i = 1; i < 256; i++) {
-    expect(lut[i]!).toBeGreaterThanOrEqual(lut[i - 1]!);
-    expect(i - lut[i]!).toBeLessThanOrEqual(4);
+    const level = defined(lut[i], `tone level at ${i}`);
+    expect(level).toBeGreaterThanOrEqual(defined(lut[i - 1], `tone level at ${i - 1}`));
+    expect(i - level).toBeLessThanOrEqual(4);
   }
 });
 
@@ -113,8 +115,15 @@ test("optional portrait treatments reduce a cast and increase contrast at a resi
   const sharpened = await pixels({ sharpen: true });
   const left = (8 * 16 + 7) * 3;
   const right = left + 3;
-  expect(balanced[0]! - balanced[2]!).toBeLessThan(plain[0]! - plain[2]! - 5);
-  expect(sharpened[right]! - sharpened[left]!).toBeGreaterThan(plain[right]! - plain[left]! + 5);
+  const balancedCast = defined(balanced[0], "balanced red") - defined(balanced[2], "balanced blue");
+  const plainCast = defined(plain[0], "untreated red") - defined(plain[2], "untreated blue");
+  const sharpenedContrast =
+    defined(sharpened[right], "sharpened light edge") -
+    defined(sharpened[left], "sharpened dark edge");
+  const plainContrast =
+    defined(plain[right], "untreated light edge") - defined(plain[left], "untreated dark edge");
+  expect(balancedCast).toBeLessThan(plainCast - 5);
+  expect(sharpenedContrast).toBeGreaterThan(plainContrast + 5);
 });
 
 test.each([

@@ -18,40 +18,43 @@ const List = grid ? "ul" : "div";
 </div>
 
 <script>
-  const mirror = (rules: CSSRuleList, parent: CSSStyleSheet | CSSGroupingRule) => {
-    for (let i = rules.length - 1; i >= 0; i--) {
-      const rule = rules[i];
-      if (rule instanceof CSSStyleRule) {
-        const selector = rule.selectorText.replaceAll(":hover", '[data-force="hover"]');
-        if (selector !== rule.selectorText)
-          try {
-            parent.insertRule(`${selector}{${rule.style.cssText}}`, i + 1);
-          } catch (error) {
-            // A selector the swap made invalid, such as an attribute after ::part().
-            if (!(error instanceof DOMException) || error.name !== "SyntaxError") throw error;
-          }
-      }
-      // A style rule holds nested rules too, such as `&:hover`.
-      if ("cssRules" in rule && rule.cssRules instanceof CSSRuleList)
-        mirror(rule.cssRules, rule as CSSGroupingRule);
+  function mirrorHoverRule(rule: CSSRule, parent: CSSStyleSheet | CSSGroupingRule, index: number) {
+    if (rule instanceof CSSStyleRule) {
+      const selector = rule.selectorText.replaceAll(":hover", '[data-force="hover"]');
+      if (selector !== rule.selectorText)
+        try {
+          parent.insertRule(`${selector}{${rule.style.cssText}}`, index + 1);
+        } catch (error) {
+          // A selector the swap made invalid, such as an attribute after ::part().
+          if (!(error instanceof DOMException) || error.name !== "SyntaxError") throw error;
+        }
     }
-  };
+    // A style rule holds nested rules too, such as `&:hover`.
+    if ("cssRules" in rule && rule.cssRules instanceof CSSRuleList)
+      mirror(rule.cssRules, rule as CSSGroupingRule);
+  }
+
+  function mirror(rules: CSSRuleList, parent: CSSStyleSheet | CSSGroupingRule) {
+    for (let i = rules.length - 1; i >= 0; i--) mirrorHoverRule(rules[i], parent, i);
+  }
+
+  function mirrorHoverSheet(sheet: CSSStyleSheet) {
+    let rules: CSSRuleList;
+    try {
+      rules = sheet.cssRules;
+    } catch (error) {
+      // A cross-origin sheet has no readable rules.
+      if (!(error instanceof DOMException) || error.name !== "SecurityError") throw error;
+      return;
+    }
+    mirror(rules, sheet);
+  }
+
   for (const box of document.querySelectorAll<HTMLElement>('[data-force-state="focus"]'))
     box.querySelector("a[href]")?.setAttribute("data-hw-focus", "");
   const hovered = [...document.querySelectorAll<HTMLElement>('[data-force-state="hover"]')];
   try {
-    if (hovered.length)
-      for (const sheet of document.styleSheets) {
-        let rules: CSSRuleList;
-        try {
-          rules = sheet.cssRules;
-        } catch (error) {
-          // A cross-origin sheet has no readable rules.
-          if (!(error instanceof DOMException) || error.name !== "SecurityError") throw error;
-          continue;
-        }
-        mirror(rules, sheet);
-      }
+    if (hovered.length) for (const sheet of document.styleSheets) mirrorHoverSheet(sheet);
   } finally {
     for (const box of hovered)
       for (let node = box.querySelector("a[href]"); node && node !== box; node = node.parentElement)
