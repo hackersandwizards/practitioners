@@ -70,6 +70,34 @@ test("a roster that is gone fails the build, an outage reads as unknown", async 
   );
 });
 
+test.each([
+  ["network TypeError", new TypeError("Failed to fetch")],
+  ["timeout DOMException", new DOMException("The operation timed out.", "TimeoutError")],
+])("a roster fetch failing with %s reads as unknown", (_label, error) =>
+  stub(
+    async () => {
+      throw error;
+    },
+    async () => {
+      expect(await load()).toBeUndefined();
+    },
+  ),
+);
+
+test.each([
+  ["generic Error", new Error("unexpected fetch failure")],
+  ["non-timeout DOMException", new DOMException("aborted", "InvalidStateError")],
+])("a roster fetch failing with %s propagates rather than reading as unknown", (_label, error) =>
+  stub(
+    async () => {
+      throw error;
+    },
+    async () => {
+      expect(await rejection(load())).toBe(String(error));
+    },
+  ),
+);
+
 // Skip the roster check when the website is unreachable so offline commits can proceed.
 test(
   "every slug the website lists has a folder here",
@@ -89,7 +117,7 @@ test("the dev server retries a malformed or unreachable roster on the next reque
   const fetch = vi
     .fn<() => Promise<Response>>()
     .mockResolvedValueOnce(new Response("<!doctype html>"))
-    .mockRejectedValueOnce(new Error("unreachable"))
+    .mockRejectedValueOnce(new TypeError("unreachable"))
     .mockResolvedValueOnce(Response.json([person]));
   try {
     await stub(fetch, async () => {
@@ -112,7 +140,7 @@ test("a build asks an unreachable website once, not once per page", async () => 
     await stub(
       async () => {
         calls++;
-        throw new Error("unreachable");
+        throw new TypeError("unreachable");
       },
       async () => {
         expect(await roster()).toBeUndefined();

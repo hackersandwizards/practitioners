@@ -17,3 +17,9 @@ test("a pull request cannot add a test or lint config for the gate to run", () =
     "src/lib/photo-size.test.ts: not a bio, entry.json or image in a practitioner's folder",
   ]);
 });
+
+test("a malformed git diff record without a file mode throws rather than reporting undefined", () => {
+  expect(() => offences(`:000000\0${folder}/bio.md\0`)).toThrow(
+    `malformed git diff record for ${folder}/bio.md: :000000`,
+  );
+});

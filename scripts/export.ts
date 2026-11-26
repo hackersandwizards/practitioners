@@ -3,9 +3,9 @@
 // inside its own folder.
 import type { SchemaContext } from "astro:content";
 import { readdirSync } from "node:fs";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { Glob } from "bun";
-import { markdownToMdast } from "satteri";
+import { markdownToMdast, type MdastNode } from "satteri";
 import { z } from "zod";
 import { paragraphs, split } from "../src/lib/bio-text";
 import { missing } from "../src/lib/entry";
@@ -26,34 +26,37 @@ export const markdownAwaiting = new Set([
   "bastian-weinlich/bio.de.md *„Softwareentwicklung mit agentischer KI – Verstehen, anwenden und etablieren im professionellen Kontext“*",
 ]);
 
-type Node = {
-  type: string;
-  value?: string;
-  position: { start: { offset: number }; end: { offset: number } };
-  children?: Node[];
-};
 /** What the website renders of a bio (its src/data/practitioners.ts) is paragraphs of text and
  *  `[text](https://…)` or mailto links; anything else it prints as the characters typed, while this
  *  repository's page renders it. Returns each span outside that subset, as written. */
 export function markdownOutside(body: string) {
-  const source = (n: Node) => body.slice(n.position.start.offset, n.position.end.offset);
+  const source = (n: MdastNode) => {
+    const start = n.position?.start.offset;
+    const end = n.position?.end.offset;
+    if (start === undefined || end === undefined)
+      throw new Error(`mdast ${n.type} node has no source offsets`);
+    return body.slice(start, end);
+  };
   // An escape or entity parses to a text whose value differs from what the website prints; the
   // website joins a paragraph's lines with one space, as `paragraphs` does.
   const squash = (s: string) => s.replace(/\s+/g, " ");
-  const plain = (n: Node) =>
-    (n.type === "text" && squash(n.value!) === squash(source(n))) ||
+  const plain = (n: MdastNode) =>
+    (n.type === "text" && squash(n.value) === squash(source(n))) ||
     (n.type === "break" && !source(n).trim());
   // `[text](https://…)`, or a bare address the website prints as the same characters.
-  const link = (n: Node) =>
-    n.type === "link" &&
-    n.children!.length === 1 &&
-    plain(n.children![0]!) &&
-    (source(n) === n.children![0]!.value ||
-      /^\[[^\]]+\]\((https:\/\/|mailto:)[^)\s]+\)$/.test(source(n)));
-  return (markdownToMdast(body) as unknown as Node).children!.flatMap((block) =>
+  const link = (n: MdastNode) => {
+    if (n.type !== "link" || n.children.length !== 1) return false;
+    const [child] = n.children;
+    return (
+      plain(child) &&
+      ((child.type === "text" && source(n) === child.value) ||
+        /^\[[^\]]+\]\((https:\/\/|mailto:)[^)\s]+\)$/.test(source(n)))
+    );
+  };
+  return markdownToMdast(body).children.flatMap((block) =>
     block.type !== "paragraph"
       ? [source(block)]
-      : block.children!.filter((n) => !plain(n) && !link(n)).map(source),
+      : block.children.filter((n) => !plain(n) && !link(n)).map(source),
   );
 }
 
@@ -108,7 +111,7 @@ function entryFromBios(slug: string, bios: FolderBios): EntryJson {
 export async function generate(dir = base) {
   const files = new Map<string, string>();
   for (const bio of new Glob("*/bio.md").scanSync(dir)) {
-    const slug = bio.split("/")[0]!;
+    const slug = dirname(bio);
     const entry = entryFromBios(slug, await readEntryFolder(dir, slug, bio));
     files.set(`${dir}/${slug}/entry.json`, `${JSON.stringify(entry, null, 2)}\n`);
   }

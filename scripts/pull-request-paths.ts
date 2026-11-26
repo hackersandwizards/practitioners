@@ -11,8 +11,10 @@ export function offences(raw: string): string[] {
   const found: string[] = [];
   const folders = new Set<string>();
   for (let i = 0; i + 1 < fields.length; i += 2) {
-    const mode = fields[i]!.split(" ")[1]!;
-    const path = fields[i + 1]!;
+    const meta = fields[i];
+    const path = fields[i + 1];
+    const [, mode] = meta.split(" ");
+    if (!mode) throw new Error(`malformed git diff record for ${path}: ${meta}`);
     if (!allowed.test(path.replace(image, (ext) => ext.toLowerCase()))) {
       found.push(`${path}: not a bio, entry.json or image in a practitioner's folder`);
       continue;

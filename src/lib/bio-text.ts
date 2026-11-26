@@ -1,6 +1,8 @@
-export const split = (text: string) => {
+export const split = (text: string): { data: { photo?: string }; body: string } => {
   const lf = text.replace(/\r\n/g, "\n");
-  const [, frontmatter, body] = lf.match(/^(?:---\n(?:([\s\S]*?)\n)??---(?:\n|$))?([\s\S]*)$/)!;
+  const match = lf.match(/^---\n(?:([\s\S]*?)\n)??---(?:\n|$)([\s\S]*)$/);
+  if (!match) return { data: {}, body: lf };
+  const [, frontmatter, body] = match;
   return { data: (frontmatter ? Bun.YAML.parse(frontmatter) : {}) as { photo?: string }, body };
 };
 

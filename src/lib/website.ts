@@ -28,13 +28,17 @@ export const listing = (web: Map<string, Person> | undefined, slug: string) => {
   return { job: p?.role, description: p?.description, url: p?.url, listed: !web || !!p };
 };
 
+const isUnreachable = (error: unknown) =>
+  error instanceof TypeError || (error instanceof DOMException && error.name === "TimeoutError");
+
 export async function load(): Promise<Map<string, Person> | undefined> {
   let body: string;
   try {
     const res = await fetch(source, { signal: AbortSignal.timeout(10_000) });
     if (!res.ok && res.status !== 404 && res.status !== 410) return undefined;
     body = await res.text();
-  } catch {
+  } catch (error) {
+    if (!isUnreachable(error)) throw error;
     return undefined;
   }
   let json: unknown;

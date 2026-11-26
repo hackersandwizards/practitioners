@@ -17,12 +17,16 @@ const int = (s: string, min: number) => {
     throw new Error(`not a whole number >= ${min}: ${s}\n${usage}`);
   return Number(s);
 };
-const crop = values.crop?.split(",");
-if (crop && crop.length !== 3) throw new Error(`--crop takes x,y,side\n${usage}`);
+const parseCrop = (raw: string) => {
+  const [x, y, side, ...extra] = raw.split(",");
+  if (x === undefined || y === undefined || side === undefined || extra.length > 0)
+    throw new Error(`--crop takes x,y,side\n${usage}`);
+  return { x: int(x, 0), y: int(y, 0), side: int(side, 1) };
+};
 const [input, output] = positionals;
 if (!input || !output || positionals.length > 2) throw new Error(usage);
 const opts: Options = {
-  crop: crop && { x: int(crop[0]!, 0), y: int(crop[1]!, 0), side: int(crop[2]!, 1) },
+  crop: values.crop === undefined ? undefined : parseCrop(values.crop),
   size: values.size === undefined ? undefined : int(values.size, 1),
   retouch: values.retouch,
   sharpen: values.sharpen,

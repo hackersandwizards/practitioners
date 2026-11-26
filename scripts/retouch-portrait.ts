@@ -11,24 +11,25 @@
 import sharp from "sharp";
 
 const lumaThousandths = (rgb: Uint8Array, p: number) =>
-  299 * rgb[p * 3]! + 587 * rgb[p * 3 + 1]! + 114 * rgb[p * 3 + 2]!;
+  299 * rgb[p * 3] + 587 * rgb[p * 3 + 1] + 114 * rgb[p * 3 + 2];
 
 /** Gray-world gains at half strength, each within 5 % of neutral: a cast is pulled toward neutral
  *  without repainting a coloured wall behind the person. */
-export function gains(rgb: Uint8Array): number[] {
+export function gains(rgb: Uint8Array): [number, number, number] {
   let r = 0;
   let g = 0;
   let b = 0;
   for (let p = 0; p < rgb.length / 3; p++) {
     const y = lumaThousandths(rgb, p);
     if (y < 25_000 || y > 230_000) continue; // shadows and clipped highlights carry no cast
-    r += rgb[p * 3]!;
-    g += rgb[p * 3 + 1]!;
-    b += rgb[p * 3 + 2]!;
+    r += rgb[p * 3];
+    g += rgb[p * 3 + 1];
+    b += rgb[p * 3 + 2];
   }
   if (!r || !g || !b) return [1, 1, 1];
   const grey = (r + g + b) / 3;
-  return [r, g, b].map((s) => Math.min(1.05, Math.max(0.95, 1 + (grey / s - 1) / 2)));
+  const gain = (s: number) => Math.min(1.05, Math.max(0.95, 1 + (grey / s - 1) / 2));
+  return [gain(r), gain(g), gain(b)];
 }
 
 /** Identity below 0.75, then a shoulder that only lowers: 1.0 stays 1.0, the highlights between
@@ -59,7 +60,7 @@ function blur({ pixels, width, height }: ImagePlane, sigma: number) {
         for (let i = -r; i <= r; i++) {
           const xx = Math.min(width - 1, Math.max(0, x + i * dx));
           const yy = Math.min(height - 1, Math.max(0, y + i * dy));
-          v += k[i + r]! * a[yy * width + xx]!;
+          v += k[i + r] * a[yy * width + xx];
         }
         out[y * width + x] = v / sum;
       }
@@ -74,10 +75,10 @@ export function sharpen(rgb: Uint8Array, width: number, height: number) {
   const y = Float32Array.from({ length: width * height }, (_, p) => lumaThousandths(rgb, p) / 1000);
   const blurred = blur({ pixels: y, width, height }, 1.2);
   for (let p = 0; p < y.length; p++) {
-    const d = y[p]! - blurred[p]!;
+    const d = y[p] - blurred[p];
     if (Math.abs(d) <= 2) continue;
     for (let c = 0; c < 3; c++)
-      rgb[p * 3 + c] = Math.min(255, Math.max(0, Math.round(rgb[p * 3 + c]! + 0.7 * d)));
+      rgb[p * 3 + c] = Math.min(255, Math.max(0, Math.round(rgb[p * 3 + c] + 0.7 * d)));
   }
 }
 
@@ -103,8 +104,7 @@ export function portraitFrame(
 export function applyPortraitTreatment(rgb: Uint8Array) {
   const g = gains(rgb);
   const lut = tone();
-  for (let i = 0; i < rgb.length; i++)
-    rgb[i] = lut[Math.min(255, Math.round(rgb[i]! * g[i % 3]!))]!;
+  for (let i = 0; i < rgb.length; i++) rgb[i] = lut[Math.min(255, Math.round(rgb[i] * g[i % 3]))];
 }
 
 export async function retouch(input: string | Buffer, o: Options = {}): Promise<Buffer> {
