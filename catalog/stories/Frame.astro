@@ -26,8 +26,9 @@ const List = grid ? "ul" : "div";
         if (selector !== rule.selectorText)
           try {
             parent.insertRule(`${selector}{${rule.style.cssText}}`, i + 1);
-          } catch {
-            // A selector the swap made invalid, such as an attribute after a pseudo-element.
+          } catch (error) {
+            // A selector the swap made invalid, such as an attribute after ::part().
+            if (!(error instanceof DOMException) || error.name !== "SyntaxError") throw error;
           }
       }
       // A style rule holds nested rules too, such as `&:hover`.
@@ -38,14 +39,22 @@ const List = grid ? "ul" : "div";
   for (const box of document.querySelectorAll<HTMLElement>('[data-force-state="focus"]'))
     box.querySelector("a[href]")?.setAttribute("data-hw-focus", "");
   const hovered = [...document.querySelectorAll<HTMLElement>('[data-force-state="hover"]')];
-  if (hovered.length)
-    for (const sheet of document.styleSheets)
-      try {
-        mirror(sheet.cssRules, sheet);
-      } catch {
-        // A cross-origin sheet has no readable rules.
+  try {
+    if (hovered.length)
+      for (const sheet of document.styleSheets) {
+        let rules: CSSRuleList;
+        try {
+          rules = sheet.cssRules;
+        } catch (error) {
+          // A cross-origin sheet has no readable rules.
+          if (!(error instanceof DOMException) || error.name !== "SecurityError") throw error;
+          continue;
+        }
+        mirror(rules, sheet);
       }
-  for (const box of hovered)
-    for (let node = box.querySelector("a[href]"); node && node !== box; node = node.parentElement)
-      node.setAttribute("data-force", "hover");
+  } finally {
+    for (const box of hovered)
+      for (let node = box.querySelector("a[href]"); node && node !== box; node = node.parentElement)
+        node.setAttribute("data-force", "hover");
+  }
 </script>
