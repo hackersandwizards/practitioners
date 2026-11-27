@@ -9,7 +9,7 @@ A participant repository, a training repository without our `CLAUDE.md` at its r
 participants build in the training, carries no rules or skills of ours either. Its harness settings
 stay, and a sweep across every repository leaves it out and says so.
 
-The sync script, `~/.claude/scripts/sync-agent-config.sh`, says in its `GLOBAL_RULES` and `GLOBAL_SKILLS` arrays which files are mirrors, 
+The sync script, `~/.claude/scripts/sync-agent-config.sh`, says in its `GLOBAL_RULES` and `GLOBAL_SKILLS` arrays which files are mirrors,
 `FORKS` names the repo-and-skill pairs the hub does not own, and `OMITTED` those it leaves out. Check the file you are about to edit
 against all four, per file rather than once per task, and edit the hub copy. The next sync replaces a mirrored directory whole, so a repo-local file
 inside a mirrored skill directory goes too, and no check reports either loss.
