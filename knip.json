@@ -1,0 +1,4 @@
+{
+  "$schema": "https://unpkg.com/knip@6/schema.json",
+  "entry": ["scripts/export.ts!", "scripts/portrait-cli.ts!", "scripts/pull-request.ts!"]
+}
