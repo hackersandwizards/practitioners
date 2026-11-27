@@ -55,6 +55,15 @@ test("a page that answers in HTML fails naming the roster", () =>
     },
   ));
 
+test.each([404, 410])("HTTP %i rejects even a valid roster body", (status) =>
+  stub(
+    async () => Response.json([person], { status }),
+    async () => {
+      expect(await rejection(load())).toBe(`Error: ${source} returned HTTP ${status}`);
+    },
+  ),
+);
+
 test("a roster that is gone fails the build, an outage reads as unknown", async () => {
   await stub(
     async () => new Response("Not found", { status: 404 }),

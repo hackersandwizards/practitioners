@@ -1,8 +1,5 @@
 ---
-// A story's ground. `state` renders a state on the first link rather than describing it: focus is
-// brand's data-hw-focus, which every brand focus rule matches; for hover the script copies every
-// :hover rule with the pseudo-class swapped for [data-force] and marks the link and its ancestors.
-// The catalog's tile draws the data-hw-preview element alone.
+// The brand's focus selectors already match `data-hw-focus`, so only hover needs mirrored rules.
 interface Props {
   grid?: boolean;
   state?: "hover" | "focus";

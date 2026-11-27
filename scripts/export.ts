@@ -1,6 +1,4 @@
-// entry.json in each practitioner's folder, for sites that render practitioner pages without astro
-// (the website's profiles load in plain Node). One file per folder, so a protected name stays
-// inside its own folder.
+// The website loads each practitioner's JSON in plain Node, keeping protected names in their own folders.
 import type { SchemaContext } from "astro:content";
 import { readdirSync } from "node:fs";
 import { dirname, join } from "node:path";
@@ -62,7 +60,6 @@ export function markdownOutside(body: string) {
 
 type FolderBios = { english: string; german: string };
 
-/** Reads the bios from a regular-file-only folder, with empty text for an absent German bio. */
 async function readEntryFolder(dir: string, slug: string, bio: string): Promise<FolderBios> {
   // A link would read a file outside the folder into entry.json, or have the export write there.
   for (const f of readdirSync(`${dir}/${slug}`, { withFileTypes: true }))
@@ -73,7 +70,6 @@ async function readEntryFolder(dir: string, slug: string, bio: string): Promise<
   return { english, german };
 }
 
-/** Validates the frontmatter and bios in export order and builds the entry. */
 function entryFromBios(slug: string, bios: FolderBios): EntryJson {
   const { data, body } = split(bios.english);
   const parsed = schema.safeParse(data);
@@ -88,11 +84,9 @@ function entryFromBios(slug: string, bios: FolderBios): EntryJson {
     if (outside.length)
       throw new Error(`${slug}/${file}: the website prints this as typed: ${outside.join(" | ")}`);
   }
-  // What the page's "Still missing" box lists keeps an entry a draft.
   const lacks = missing({ id: slug, body, data: parsed.data }, german);
   if (parsed.data.status === "active" && lacks.length)
     throw new Error(`${slug}: active, but missing ${lacks.join(", ")}`);
-  // Only photo.webp is the portrait photo-size.test.ts measures; h&w converts an upload to it.
   if (data.photo && data.photo !== "./photo.webp")
     throw new Error(`${slug}: photo is ${data.photo}, not ./photo.webp`);
   const { photo: _, ...rest } = parsed.data;

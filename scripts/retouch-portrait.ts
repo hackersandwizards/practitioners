@@ -1,13 +1,4 @@
-// Turns a source photo into a square WebP master, never upscaled. By default it only crops,
-// resizes and encodes. Two optional treatments (CLAUDE.md says when to keep one):
-//   --retouch  white balance by channel gain and a tone curve whose highlight shoulder tames skin
-//              shine, at full resolution; never a local edit of the face
-//   --sharpen  sharp-2: an unsharp mask on luminance only (radius 1.2 px, amount 70 %, threshold 2)
-//              at the master size
-//
-// --crop is the square in source pixels, framed as the practitioner-bio skill says; without it a
-// non-square source is cut square by sharp's attention strategy. --size defaults to the crop's side,
-// capped at 1024 px. WebP q82.
+// The optional highlight roll-off softens skin shine across the whole image.
 import sharp from "sharp";
 
 const lumaThousandths = (rgb: Uint8Array, p: number) =>

@@ -35,7 +35,9 @@ export async function load(): Promise<Map<string, Person> | undefined> {
   let body: string;
   try {
     const res = await fetch(source, { signal: AbortSignal.timeout(10_000) });
-    if (!res.ok && res.status !== 404 && res.status !== 410) return undefined;
+    if (res.status === 404 || res.status === 410)
+      throw new Error(`${source} returned HTTP ${res.status}`);
+    if (!res.ok) return undefined;
     body = await res.text();
   } catch (error) {
     if (!isUnreachable(error)) throw error;

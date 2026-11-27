@@ -2,7 +2,6 @@ import { expect, test } from "vitest";
 import { defined } from "@hackersandwizards/scaffolding/defined";
 import { schema } from "../../scripts/export";
 
-/** CONTRIBUTING.md's example block, its link lines uncommented and their handles left unfilled. */
 const example = async () => {
   const text = await Bun.file("CONTRIBUTING.md").text();
   const [, body] = defined(

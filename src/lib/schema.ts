@@ -9,7 +9,6 @@ const link = z
   // CONTRIBUTING.md's example handles: an uncommented line left unfilled links a real account.
   .refine((u) => !/\b(your-name|ada-example)\b/i.test(u), "put your own address in");
 
-/** A short line in both languages the website prints, English and German side by side. */
 const localized = z.strictObject({
   en: z.string().min(1).max(120),
   de: z.string().min(1).max(120),
@@ -161,8 +160,6 @@ export const portraitMinimum = 918;
 
 const year = z.int().min(1960).max(new Date().getFullYear());
 
-/** A technology or tool as its maker spells it ("TypeScript", "Claude Code"), so the same name
- *  in two entries matches. */
 const skill = z.strictObject({
   name: z.string().min(1).max(40),
   depth: vocab(depths),
@@ -262,7 +259,6 @@ export const practitionerSchema = ({ image }: SchemaContext) =>
       photo: image().optional(),
       ...practitionerFields,
     })
-    // A seed may wait for its portrait; an entry the person approved may not.
     .refine((d) => d.status === "draft" || d.photo, { message: "an active entry needs a photo" })
     // The website labels staff by their title and a partner's trainer by their firm.
     .refine((d) => d.relation !== "staff" || d.job, { message: "staff need a job", path: ["job"] })
